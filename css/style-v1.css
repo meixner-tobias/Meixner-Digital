@@ -1197,8 +1197,15 @@ body, .nav, .svc-card, .proj-card, .faq-item, .form-card, .about-strip {
   
   
   .nav-drop-menu { display: none; }
-}
+  }
 
+  .blog-hero {
+    padding-top: 10px;
+  }
+
+  .blog-hero-inner {
+    text-align: center; /* auf Desktop wieder links, falls gewünscht */
+  }
 
 /* ═══════════════════════════════════════════════════
    RESPONSIVE — 560px
