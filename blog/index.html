@@ -1,27 +1,16 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('consent', 'default', {
-    'analytics_storage': 'denied', 'ad_storage': 'denied',
-    'ad_user_data': 'denied', 'ad_personalization': 'denied',
-    'functionality_storage': 'denied', 'security_storage': 'granted',
-    'wait_for_update': 500
-  });
-</script>
-<script>
-  if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-    var s = document.createElement('script'); s.type = 'text/javascript'; s.charset = 'UTF-8';
-    s.src = '//cdn.cookie-script.com/s/d261fb8134670358b6795a49b5d04574.js';
-    document.head.appendChild(s);
-  }
-</script>
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-5QLXDT4T');</script>
-
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','functionality_storage':'denied','security_storage':'granted','wait_for_update':500});</script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-5QLXDT4T');</script>
+  <!-- End Google Tag Manager -->
   <title>Blog - AEO, Server-Side Tracking & Performance Max | Tobias Meixner</title>
   <meta name="description" content="Faktenbasierte Artikel zu Answer Engine Optimization, Server-Side Tracking und Google Performance Max vs. Meta Advantage+. Praxiswissen von einem Freelancer der es selbst umsetzt.">
   <meta name="robots" content="index, follow">
@@ -48,88 +37,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=DM+Sans:wght@400;500&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style-v1.css">
+  <link rel="stylesheet" href="/css/style.css">
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon/favicon-96x96.png">
   <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg">
   <link rel="shortcut icon" href="/assets/favicon/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
   <link rel="manifest" href="/assets/favicon/site.webmanifest">
 
-  <style>
-    .blog-hero {
-      padding-top: var(--nav-h); background: var(--bg);
-      padding-bottom: clamp(48px, 6vw, 80px);
-      position: relative; overflow: hidden;
-    }
-    .blog-hero::before {
-      content: ''; position: absolute; top: -60px; right: -80px;
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(91,108,248,.08) 0%, transparent 70%);
-      filter: blur(60px); pointer-events: none;
-    }
-    .blog-hero-inner { padding-top: calc(var(--nav-h) + 40px); position: relative; z-index: 1; }
-
-    /* ── GRID ── */
-    .blog-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 24px; margin-top: clamp(32px, 4vw, 48px);
-    }
-    .blog-card {
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: var(--r-lg); overflow: hidden;
-      transition: transform .3s, box-shadow .3s, border-color .3s;
-      display: flex; flex-direction: column;
-      text-decoration: none; color: inherit;
-    }
-    .blog-card:hover { transform: translateY(-4px); box-shadow: var(--sh-lg); border-color: var(--indigo-mid); }
-
-    /* ── CARD IMAGE AREAS ── */
-    .blog-card-img {
-      width: 100%; height: 200px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; position: relative; overflow: hidden;
-    }
-    .blog-card-img-aeo     { background: linear-gradient(135deg, #0f0c29 0%, #302b63 100%); }
-    .blog-card-img-sst     { background: linear-gradient(135deg, #020617 0%, #0f3460 100%); }
-    .blog-card-img-pmax    { background: linear-gradient(135deg, #1a0a00 0%, #7c2d12 100%); }
-    .blog-card-img svg { color: rgba(255,255,255,.25); }
-
-    /* ── CARD BODY ── */
-    .blog-card-body { padding: 24px; display: flex; flex-direction: column; flex: 1; }
-    .blog-card-meta {
-      display: flex; align-items: center; gap: 10px;
-      font-size: .75rem; color: var(--muted); margin-bottom: 12px;
-    }
-    .blog-card-cat {
-      border-radius: 99px; padding: 3px 10px;
-      font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
-    }
-    .cat-marketing { background: rgba(139,92,246,.12); color: #7c3aed; }
-    .cat-tracking   { background: rgba(14,165,233,.12);  color: #0369a1; }
-    .cat-ads        { background: rgba(234,88,12,.12);   color: #c2410c; }
-
-    .blog-card-title {
-      font-family: var(--fd); font-size: clamp(.95rem, 1.8vw, 1.1rem);
-      font-weight: 800; color: var(--navy); line-height: 1.3;
-      letter-spacing: -.015em; margin-bottom: 10px;
-    }
-    .blog-card-excerpt { font-size: .875rem; color: var(--muted); line-height: 1.65; flex: 1; margin-bottom: 20px; }
-    .blog-card-link {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-family: var(--fd); font-size: .76rem; font-weight: 700;
-      color: var(--indigo); letter-spacing: .05em; text-transform: uppercase;
-      transition: gap .2s;
-    }
-    .blog-card:hover .blog-card-link { gap: 10px; }
-
-    /* ── DARK MODE ── */
-    [data-theme="dark"] .blog-card-img-aeo  { background: linear-gradient(135deg, #0f0c29 0%, #2d2a7a 100%); }
-    [data-theme="dark"] .blog-card-img-sst  { background: linear-gradient(135deg, #020617 0%, #0c2a52 100%); }
-    [data-theme="dark"] .blog-card-img-pmax { background: linear-gradient(135deg, #1a0a00 0%, #5a1f00 100%); }
-
-    @media (max-width: 1024px) { .blog-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 640px)  { .blog-grid { grid-template-columns: 1fr; } }
-  </style>
 
 <script type="application/ld+json">
 {
@@ -177,10 +91,14 @@
   ]
 }
 </script>
+<script src="/js/main.js"></script>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5QLXDT4T" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5QLXDT4T"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <nav class="nav" id="nav">
   <div class="nav-inner">
@@ -391,63 +309,5 @@
   </div>
 </footer>
 
-<script>
-const themeToggle = document.getElementById('themeToggle');
-const themeToggleMobile = document.getElementById('themeToggleMobile');
-const savedTheme = localStorage.getItem('theme');
-function updateThemeLabel() {
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  document.querySelectorAll('.theme-label').forEach(el => { el.textContent = isDark ? 'Light Mode' : 'Dark Mode'; });
-}
-if (savedTheme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-updateThemeLabel();
-function toggleTheme() {
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  if (isDark) { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('theme', 'light'); }
-  else { document.documentElement.setAttribute('data-theme', 'dark'); localStorage.setItem('theme', 'dark'); }
-  updateThemeLabel();
-}
-if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
-if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
-
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 12), { passive: true });
-const burger = document.getElementById('burger');
-const drawer = document.getElementById('drawer');
-function closeDrawer() { drawer.classList.remove('is-open'); burger.classList.remove('is-open'); burger.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
-burger.addEventListener('click', () => {
-  const open = !drawer.classList.contains('is-open');
-  drawer.classList.toggle('is-open',open); burger.classList.toggle('is-open',open);
-  burger.setAttribute('aria-expanded',String(open)); document.body.style.overflow=open?'hidden':'';
-  if (open) { const fl = drawer.querySelector('a'); if (fl) fl.focus(); }
-});
-drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
-document.addEventListener('click', e => { if (!nav.contains(e.target) && !drawer.contains(e.target)) closeDrawer(); });
-document.addEventListener('keydown', e => { if (e.key==='Escape') closeDrawer(); });
-const io = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.08 });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-/* ── Language Switcher ── */
-const langBtn = document.getElementById('langBtn');
-const langDropdown = document.getElementById('langDropdown');
-langBtn.addEventListener('click', function(e) {
-  e.stopPropagation();
-  const isOpen = langDropdown.classList.contains('is-open');
-  langDropdown.classList.toggle('is-open');
-  langBtn.classList.toggle('is-open');
-  langBtn.setAttribute('aria-expanded', String(!isOpen));
-});
-document.addEventListener('click', function() {
-  langDropdown.classList.remove('is-open');
-  langBtn.classList.remove('is-open');
-  langBtn.setAttribute('aria-expanded', 'false');
-});
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
-    langDropdown.classList.remove('is-open');
-    langBtn.classList.remove('is-open');
-  }
-});
-</script>
 </body>
 </html>

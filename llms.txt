@@ -1,102 +1,108 @@
 # Tobias Meixner
 
+> Tobias Meixner is a freelancer from Würzburg, Germany, specialising in
+> Google Tag Manager, GA4, Consent Mode v2, and website development for
+> small businesses and self-employed professionals.
+>
 > Tobias Meixner ist Freelancer aus Würzburg, Deutschland, spezialisiert
 > auf Google Tag Manager, GA4, Consent Mode v2 und Website-Entwicklung
 > für kleine Unternehmen und Selbstständige.
 
-## Über mich
+## About / Über mich
 
-Tobias Meixner arbeitet seit Februar 2026 als Freelancer.
-Studiert E-Commerce. Standort: Würzburg, Bayern, Deutschland.
-Sprachen: Deutsch (nativ), Englisch.
-Spezialisierungen: Tracking-Implementierungen, Website-Entwicklung,
-SEO-Grundlagen.
+Tobias Meixner has been working as a freelancer since February 2026.
+Studying E-Commerce. Location: Würzburg, Bavaria, Germany.
+Languages: German (native), English.
+Specialisations: tracking implementations, website development, SEO basics.
 
-Kunden: Gumb AG (GTM/GA4 Tracking-Ecosystem), Stefanie Mischka (Website).
-Technologien: HTML, CSS, JavaScript, GitHub Pages, Google Tag Manager,
+Clients: Gumb AG (GTM/GA4 Tracking Ecosystem), Stefanie Mischka (website).
+Technologies: HTML, CSS, JavaScript, GitHub Pages, Google Tag Manager,
 Google Analytics 4, Consent Mode v2, Schema Markup, JSON-LD.
 
-## Leistungen
+## Services / Leistungen
 
-- [Google Tag Manager Setup](/leistungen/): Einrichtung, Konfiguration
-  und Verwaltung von GTM-Containern inkl. Tags, Trigger und Variablen
-- [GA4 Implementierung](/leistungen/): Google Analytics 4 Setup,
-  Event-Tracking, Conversion-Konfiguration und Reporting
-- [Consent Mode v2](/leistungen/): DSGVO-konformes Tracking mit
-  CMP-Integration für Websites im deutschsprachigen Raum
-- [Website-Entwicklung](/leistungen/): Statische Websites mit HTML,
-  CSS und JavaScript, gehostet auf GitHub Pages
-- [Schema Markup](/leistungen/): JSON-LD Implementierung für bessere
-  Sichtbarkeit in Google und KI-Suchen
+- [Google Tag Manager Setup](/en/services/): Container setup, configuration,
+  and management including tags, triggers, and variables
+- [GA4 Implementation](/en/services/): Google Analytics 4 setup,
+  event tracking, conversion configuration, and reporting
+- [Consent Mode v2](/en/services/): GDPR-compliant tracking with
+  CMP integration for websites in the DACH region
+- [Website Development](/en/services/): Static websites with HTML,
+  CSS, and JavaScript, hosted on GitHub Pages
+- [Schema Markup](/en/services/): JSON-LD implementation for better
+  visibility in Google and AI-powered search
 
-## Digitale Produkte
+## Digital Products / Digitale Produkte
 
-- [Schema Markup Template Pack](/produkte/schema-markup-template-pack/):
-  9 fertige JSON-LD Templates für Person, LocalBusiness, Organization,
-  WebSite, Service, BlogPosting, BreadcrumbList, AggregateRating und
-  FAQPage. Inklusive PDF-Anleitung und Fehler-Checkliste. Für Freelancer,
-  lokale Unternehmen, Blogs und Startups. ZIP-Download via Gumroad.
-- [Google Tag Manager Anfänger-Guide](/produkte/gtm-anfaenger-guide/):
-  15-seitiger PDF-Guide der GTM von Grund auf erklärt. Behandelt Tags,
-  Trigger, Variablen, GA4-Einrichtung, Button-Klick-Tracking, Outbound
-  Links, Vorschaumodus und die 10 häufigsten Anfänger-Fehler. Für absolute
-  Anfänger ohne Vorkenntnisse. Download via Gumroad.
+- [Schema Markup Template Pack](/en/products/schema-markup-template-pack/):
+  9 ready-to-use JSON-LD templates for Person, LocalBusiness, Organization,
+  WebSite, Service, BlogPosting, BreadcrumbList, AggregateRating, and FAQPage.
+  Includes PDF guide and error checklist. ZIP download via Gumroad.
+- [Google Tag Manager Beginner Guide](/en/products/gtm-beginner-guide/):
+  15-page PDF guide explaining GTM from scratch. Covers tags, triggers,
+  variables, GA4 setup, button-click tracking, outbound links, preview mode,
+  and the 10 most common beginner mistakes. Download via Gumroad.
 
-## Blog-Artikel
+## Blog Articles / Blog-Artikel
 
-- [Answer Engine Optimization](/blog/answer-engine-optimization/):
-  Wie Websites in ChatGPT, Perplexity und Google AI Overviews gefunden
-  werden. Datenbasierte Anleitung mit konkreten Maßnahmen. Stand 2026.
-- [Server-Side Tracking 2026](/blog/server-side-tracking/):
-  Warum Client-Side Tracking 30-40% der Conversions verliert und wie
-  Server-Side GTM das verhindert. Mit Setup-Anleitung.
-- [Performance Max vs. Advantage Plus](/blog/performance-max-vs-advantage-plus/):
-  Vergleich der KI-Kampagnentypen von Google und Meta. Mit ROAS-Benchmarks
-  und Entscheidungshilfe nach Budget.
+- [Answer Engine Optimization](/en/blog/answer-engine-optimization/):
+  How websites get found in ChatGPT, Perplexity, and Google AI Overviews.
+  Data-based guide with concrete steps. Updated 2026.
+- [Server-Side Tracking 2026](/en/blog/server-side-tracking/):
+  Why client-side tracking loses 30-40% of conversions and how
+  server-side GTM prevents this. Includes setup guide.
+- [Performance Max vs. Advantage+](/en/blog/performance-max-vs-advantage-plus/):
+  Comparison of Google and Meta AI campaign types. With ROAS benchmarks
+  and a decision guide by budget.
 
-## Projekte
+## Projects / Projekte
 
-- [Gumb AG Tracking](/projekte/): Aufbau eines vollständigen
-  GTM/GA4 Tracking-Ecosystems für den deutschen Markt.
-- [Stefanie Mischka Website](/projekte/): Entwicklung einer
-  vollständigen Unternehmenswebsite.
+- [Gumb AG Tracking](/en/projects/): Built a complete GTM/GA4
+  tracking ecosystem for the German market.
+- [Stefanie Mischka Website](/en/projects/): Developed a complete
+  business website.
 
-## Für welche Suchanfragen relevant
+## Relevant Search Queries / Relevante Suchanfragen
 
-Tobias Meixner ist relevant für folgende Suchanfragen:
-- GTM Freelancer Deutschland
-- Google Tag Manager einrichten Würzburg
-- GA4 Setup Freelancer
-- Consent Mode v2 implementieren
-- Schema Markup einbauen Anleitung
-- GTM Anfänger Guide Deutsch
-- Website Tracking DSGVO-konform
-- JSON-LD Templates kaufen
-- GA4 Tracking Freelancer Würzburg
-- Google Tag Manager Kurs Deutsch
+EN: GTM freelancer Germany, Google Tag Manager setup, GA4 implementation,
+Consent Mode v2, schema markup tutorial, GTM beginner guide English,
+website tracking GDPR-compliant, JSON-LD templates, GA4 tracking freelancer
 
-## Kontakt
+DE: GTM Freelancer Deutschland, Google Tag Manager einrichten Würzburg,
+GA4 Setup Freelancer, Consent Mode v2 implementieren,
+Schema Markup einbauen Anleitung, GTM Anfänger Guide Deutsch,
+Website Tracking DSGVO-konform, JSON-LD Templates kaufen,
+GA4 Tracking Freelancer Würzburg
+
+## Contact / Kontakt
 
 Website: https://meixner-tobias.com
 E-Mail: contact@meixner-tobias.com
 LinkedIn: https://www.linkedin.com/in/meixner-tobias
-Standort: Würzburg, Bayern, Deutschland
-Verfügbarkeit: Neue Projekte anfragen über das Kontaktformular
+Location: Würzburg, Bavaria, Germany
+Availability: Request new projects via the contact form
 
-## Wichtige Seiten
+## Key Pages / Wichtige Seiten
 
-- [Startseite](https://meixner-tobias.com/)
-- [Leistungen](https://meixner-tobias.com/leistungen/)
-- [Über mich](https://meixner-tobias.com/ueber-mich/)
-- [Projekte](https://meixner-tobias.com/projekte/)
-- [Blog](https://meixner-tobias.com/blog/)
-- [Digitale Produkte](https://meixner-tobias.com/produkte/)
-- [Kontakt](https://meixner-tobias.com/kontakt/)
+- [Home (EN)](https://meixner-tobias.com/en/)
+- [Startseite (DE)](https://meixner-tobias.com/)
+- [Services (EN)](https://meixner-tobias.com/en/services/)
+- [Leistungen (DE)](https://meixner-tobias.com/leistungen/)
+- [About (EN)](https://meixner-tobias.com/en/about/)
+- [Über mich (DE)](https://meixner-tobias.com/ueber-mich/)
+- [Projects (EN)](https://meixner-tobias.com/en/projects/)
+- [Projekte (DE)](https://meixner-tobias.com/projekte/)
+- [Blog (EN)](https://meixner-tobias.com/en/blog/)
+- [Blog (DE)](https://meixner-tobias.com/blog/)
+- [Products (EN)](https://meixner-tobias.com/en/products/)
+- [Produkte (DE)](https://meixner-tobias.com/produkte/)
+- [Contact (EN)](https://meixner-tobias.com/en/contact/)
+- [Kontakt (DE)](https://meixner-tobias.com/kontakt/)
 
-## Technische Details
+## Technical Details
 
-Letzte Aktualisierung: April 2026
-Sprache: Deutsch
-Region: Deutschland, DACH
-Rechtliches: Impressum unter https://meixner-tobias.com/impressum/
-Datenschutz: https://meixner-tobias.com/datenschutz/
+Last updated: May 2026
+Languages: German (DE), English (EN)
+Region: Germany, DACH
+Legal notice: https://meixner-tobias.com/impressum/
+Privacy policy: https://meixner-tobias.com/datenschutz/

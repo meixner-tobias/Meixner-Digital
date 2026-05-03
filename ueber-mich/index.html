@@ -1,38 +1,16 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="de">
 <head>
-<!-- 1. Consent Mode v2 Defaults -->
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('consent', 'default', {
-    'analytics_storage':     'denied',
-    'ad_storage':            'denied',
-    'ad_user_data':          'denied',
-    'ad_personalization':    'denied',
-    'functionality_storage': 'denied',
-    'security_storage':      'granted',
-    'wait_for_update':       500
-  });
-</script>
-<script>
-  if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.charset = 'UTF-8';
-    script.src = '//cdn.cookie-script.com/s/d261fb8134670358b6795a49b5d04574.js';
-    document.head.appendChild(script);
-  }
-</script>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5QLXDT4T');</script>
-
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','functionality_storage':'denied','security_storage':'granted','wait_for_update':500});</script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-5QLXDT4T');</script>
+  <!-- End Google Tag Manager -->
   <title>Über mich - Tobias Meixner | Freelancer aus Würzburg</title>
   <meta name="description" content="21, aus der Nähe von Stuttgart, studiere E-Commerce in Würzburg. War alleine mit dem Motorrad auf Island, durch Südamerika - und baue jetzt Websites und Tracking-Setups für kleine Unternehmen.">
 
@@ -68,326 +46,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="preload" as="image" href="/assets/img/ueber-mich-roadtrip.jpg">
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="/css/style-v1.css">
+  <link rel="stylesheet" href="/css/style.css">
 
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon/favicon-96x96.png">
   <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg">
   <link rel="shortcut icon" href="/assets/favicon/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
   <link rel="manifest" href="/assets/favicon/site.webmanifest">
-
-  <style>
-
-    /* ── HERO ── */
-    .about-hero {
-      padding-top: var(--nav-h);
-      background: var(--bg);
-      padding-bottom: 0;
-      position: relative;
-      overflow: hidden;
-    }
-    .about-hero::before {
-      content: '';
-      position: absolute;
-      top: -60px; right: -80px;
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(91,108,248,.08) 0%, transparent 70%);
-      filter: blur(60px);
-      pointer-events: none;
-    }
-    .about-hero-inner {
-      display: grid;
-      grid-template-columns: 1fr 420px;
-      gap: clamp(40px, 6vw, 80px);
-      align-items: center;
-      padding-block: calc(var(--nav-h) + 40px) clamp(52px, 7vw, 80px);
-      position: relative; z-index: 1;
-    }
-    @media (max-width: 768px) {
-    .about-hero-inner {
-      padding-block: calc(var(--nav-h) - 25px) clamp(32px, 5vw, 52px);
-      }
-    }
-    .about-hero-badge {
-      display: inline-flex; align-items: center; gap: 7px;
-      background: var(--indigo-soft); border: 1px solid var(--indigo-mid);
-      color: var(--indigo); padding: 5px 14px 5px 10px;
-      border-radius: 99px; font-size: .73rem; font-weight: 700;
-      letter-spacing: .07em; text-transform: uppercase; margin-bottom: 22px;
-    }
-    .about-hero-title {
-      font-family: var(--fd);
-      font-size: clamp(2rem, 4.5vw, 3.2rem);
-      font-weight: 800; color: var(--navy);
-      line-height: 1.1; letter-spacing: -.025em;
-      margin-bottom: 20px;
-    }
-    .about-hero-title em { color: var(--indigo); font-style: normal; }
-
-    .about-hero-intro {
-      font-size: clamp(.95rem, 1.6vw, 1.1rem);
-      color: var(--muted); line-height: 1.8;
-      margin-bottom: 32px; max-width: 520px;
-    }
-    .about-hero-intro strong { color: var(--text); font-weight: 600; }
-
-    .about-facts {
-      display: flex; flex-wrap: wrap; gap: 10px;
-      margin-bottom: 36px;
-    }
-    .about-fact {
-      display: inline-flex; align-items: center; gap: 7px;
-      background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 99px; padding: 7px 14px;
-      font-size: .82rem; font-weight: 500; color: var(--text);
-    }
-    .about-fact svg { color: var(--indigo); flex-shrink: 0; }
-
-    /* Foto rechts */
-    .about-hero-img {
-      position: relative;
-    }
-    .about-hero-img img {
-      width: 100%; border-radius: var(--r-lg);
-      aspect-ratio: 4/5; object-fit: cover; object-position: top;
-      box-shadow: var(--sh-lg);
-    }
-    .about-hero-img-caption {
-      position: absolute; bottom: 16px; left: 16px; right: 16px;
-      background: rgba(13,27,42,.75);
-      backdrop-filter: blur(12px);
-      border-radius: var(--r);
-      padding: 12px 16px;
-      font-size: .8rem; color: rgba(255,255,255,.8);
-      font-style: italic;
-    }
-
-    /* ── STORY SECTION ── */
-    .story-section {
-      padding-block: clamp(56px, 8vw, 96px);
-      background: var(--navy);
-    }
-
-    .story-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(40px, 6vw, 80px);
-      align-items: start;
-    }
-
-    .story-label {
-      font-size: .72rem; font-weight: 700;
-      letter-spacing: .15em; text-transform: uppercase;
-      color: rgba(199,203,253,.85); margin-bottom: 12px;
-      display: block;
-    }
-    .story-title {
-      font-family: var(--fd);
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      font-weight: 800; color: #fff;
-      line-height: 1.2; letter-spacing: -.02em;
-      margin-bottom: 28px;
-    }
-    .story-title em { color: var(--indigo-mid); font-style: normal; }
-
-    .story-p {
-      font-size: clamp(.875rem, 1.4vw, 1rem);
-      color: rgba(255,255,255,.65);
-      line-height: 1.82; margin-bottom: 18px;
-    }
-    .story-p:last-of-type { margin-bottom: 0; }
-    .story-p strong { color: rgba(255,255,255,.9); font-weight: 600; }
-
-    /* Reise Karten */
-    .travel-cards {
-      display: flex; flex-direction: column; gap: 16px;
-    }
-    .travel-card {
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: var(--r-lg);
-      overflow: hidden;
-      transition: border-color .3s, background .3s;
-    }
-    .travel-card:hover {
-      border-color: rgba(199,203,253,.3);
-      background: rgba(255,255,255,.08);
-    }
-    .travel-card-img {
-      width: 100%; height: 200px;
-      object-fit: cover;
-      display: block;
-    }
-    .travel-card-img-placeholder {
-      width: 100%; height: 200px;
-      background: linear-gradient(135deg, rgba(91,108,248,.2), rgba(91,108,248,.05));
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column; gap: 8px;
-    }
-    .travel-card-img-placeholder svg { color: rgba(199,203,253,.4); }
-    .travel-card-img-placeholder span {
-      font-size: .75rem; color: rgba(255,255,255,.3);
-      font-style: italic;
-    }
-    .travel-card-body { padding: 20px; }
-    .travel-card-flag { font-size: 1.4rem; margin-bottom: 8px; }
-    .travel-card-title {
-      font-family: var(--fd); font-size: 1rem; font-weight: 700;
-      color: #fff; margin-bottom: 6px;
-    }
-    .travel-card-text {
-      font-size: .84rem; color: rgba(255,255,255,.55); line-height: 1.6;
-    }
-
-    /* ── PERSÖNLICH SECTION ── */
-    .personal-section {
-      padding-block: clamp(56px, 8vw, 96px);
-    }
-
-    .personal-grid {
-      display: grid;
-      grid-template-columns: 420px 1fr;
-      gap: clamp(40px, 6vw, 72px);
-      align-items: start;
-    }
-
-    .personal-img-wrap { position: relative; }
-    .personal-img {
-      width: 100%; border-radius: var(--r-lg);
-      box-shadow: var(--sh-lg);
-      aspect-ratio: 3/4; object-fit: cover;
-    }
-    .personal-img-wrap img {
-      border-radius: var(--r-lg);
-    }
-    .personal-img-placeholder {
-      width: 100%; border-radius: var(--r-lg);
-      aspect-ratio: 3/4;
-      background: var(--indigo-soft);
-      border: 2px dashed var(--indigo-mid);
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column; gap: 10px;
-    }
-    .personal-img-placeholder svg { color: var(--indigo-mid); }
-    .personal-img-placeholder span { font-size: .8rem; color: var(--muted); font-style: italic; }
-
-    .personal-intro {
-      font-size: clamp(.95rem, 1.5vw, 1.05rem);
-      color: var(--muted); line-height: 1.82;
-      margin-bottom: 32px;
-    }
-    .personal-intro strong { color: var(--text); font-weight: 600; }
-
-    /* Hobby Pills */
-    .hobby-list {
-      display: flex; flex-wrap: wrap; gap: 10px;
-      margin-bottom: 36px;
-    }
-    .hobby-pill {
-      display: inline-flex; align-items: center; gap: 7px;
-      background: var(--indigo-soft);
-      border: 1px solid var(--indigo-mid);
-      color: var(--indigo);
-      border-radius: 99px; padding: 8px 16px;
-      font-size: .84rem; font-weight: 600;
-    }
-
-    /* Quote */
-    .personal-quote {
-      background: var(--navy);
-      border-radius: var(--r-lg);
-      padding: 28px 32px;
-      position: relative;
-      margin-bottom: 32px;
-    }
-    .personal-quote::before {
-      content: '"';
-      position: absolute; top: -10px; left: 20px;
-      font-family: var(--fd); font-size: 5rem;
-      font-weight: 800; color: var(--indigo);
-      line-height: 1;
-    }
-    .personal-quote-text {
-      font-family: var(--fd);
-      font-size: clamp(1rem, 1.8vw, 1.2rem);
-      font-weight: 700; color: #fff;
-      line-height: 1.5; font-style: italic;
-    }
-    .personal-quote-author {
-      font-size: .8rem; color: rgba(255,255,255,.45);
-      margin-top: 12px;
-    }
-
-    /* ── WARUM FREELANCER ── */
-    .why-section {
-      background: var(--bg-card);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding-block: clamp(56px, 8vw, 80px);
-    }
-
-    .why-freelance-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 24px;
-      margin-top: clamp(32px, 4vw, 48px);
-    }
-
-    .why-freelance-card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--r-lg);
-      padding: 28px 24px;
-      transition: border-color .25s, box-shadow .25s, transform .3s;
-    }
-    .why-freelance-card:hover {
-      border-color: var(--indigo-mid);
-      box-shadow: var(--sh-md);
-      transform: translateY(-4px);
-    }
-    .why-freelance-icon {
-      width: 46px; height: 46px;
-      border-radius: 13px;
-      background: var(--indigo-soft);
-      display: grid; place-items: center;
-      color: var(--indigo);
-      margin-bottom: 16px;
-    }
-    .why-freelance-title {
-      font-family: var(--fd); font-size: 1rem; font-weight: 700;
-      color: var(--navy); margin-bottom: 8px;
-    }
-    .why-freelance-text {
-      font-size: .875rem; color: var(--muted); line-height: 1.7;
-    }
-
-    /* ── DARK MODE ── */
-    [data-theme="dark"] .about-hero { background: #111827; }
-    [data-theme="dark"] .about-fact { background: #1F2937; border-color: #374151; }
-    [data-theme="dark"] .why-section { background: #1F2937; border-color: #374151; }
-    [data-theme="dark"] .why-freelance-card { background: #111827; border-color: #374151; }
-    [data-theme="dark"] .personal-quote { background: #0D1B2A; }
-    [data-theme="dark"] .travel-card-img-placeholder { background: linear-gradient(135deg, rgba(91,108,248,.15), rgba(91,108,248,.03)); }
-    [data-theme="dark"] .personal-img-placeholder { background: rgba(91,108,248,.08); }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 1024px) {
-      .about-hero-inner { grid-template-columns: 1fr 360px; gap: 40px; }
-      .personal-grid { grid-template-columns: 340px 1fr; gap: 40px; }
-      .why-freelance-grid { grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-    }
-    @media (max-width: 768px) {
-      .about-hero-inner { grid-template-columns: 1fr; gap: 32px; }
-      .about-hero-img { order: -1; max-width: 320px; margin-inline: auto; }
-      .story-grid { grid-template-columns: 1fr; }
-      .personal-grid { grid-template-columns: 1fr; }
-      .personal-img-wrap { max-width: 320px; margin-inline: auto; }
-      .why-freelance-grid { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 560px) {
-      .why-freelance-grid { grid-template-columns: 1fr; }
-    }
-  </style>
 
 <script type="application/ld+json">
 {
@@ -421,14 +86,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 }
 </script>
 
+<script src="/js/main.js"></script>
 </head>
 
 <body>
 
 <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
 
+<!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5QLXDT4T"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <!-- NAVBAR -->
 <nav class="nav" id="nav">
@@ -528,9 +196,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </ul>
 </nav>
 
+<main id="main-content">
+
+
 
 <!-- HERO -->
-<section class="about-hero" id="main-content" aria-labelledby="about-hero-heading">
+<section class="about-hero" aria-labelledby="about-hero-heading">
   <div class="container">
     <div class="about-hero-inner">
 
@@ -566,7 +237,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             3 Kontinente bereist
           </span>
         </div>
-        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content: center;">
           <a href="/kontakt/" class="btn btn-primary">
             Projekt besprechen
             <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -768,6 +439,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 
+</main>
+
 <!-- FOOTER -->
 <footer>
   <div class="container">
@@ -790,111 +463,5 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 
-
-<script>
-/* ── Dark Mode ── */
-const themeToggle = document.getElementById('themeToggle');
-const themeToggleMobile = document.getElementById('themeToggleMobile');
-const savedTheme = localStorage.getItem('theme');
-
-function updateThemeLabel() {
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  document.querySelectorAll('.theme-label').forEach(el => {
-    el.textContent = isDark ? 'Light Mode' : 'Dark Mode';
-  });
-}
-
-if (savedTheme === 'dark') {
-  document.documentElement.setAttribute('data-theme', 'dark');
-}
-updateThemeLabel();
-
-function toggleTheme() {
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  if (isDark) {
-    document.documentElement.removeAttribute('data-theme');
-    localStorage.setItem('theme', 'light');
-  } else {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    localStorage.setItem('theme', 'dark');
-  }
-  updateThemeLabel();
-}
-
-if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
-if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
-
-/* ── Nav ── */
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 12), { passive: true });
-
-const burger = document.getElementById('burger');
-const drawer = document.getElementById('drawer');
-
-function closeDrawer() {
-  drawer.classList.remove('is-open');
-  burger.classList.remove('is-open');
-  burger.setAttribute('aria-expanded', 'false');
-  document.body.style.overflow = '';
-}
-burger.addEventListener('click', () => {
-  const open = !drawer.classList.contains('is-open');
-  drawer.classList.toggle('is-open', open);
-  burger.classList.toggle('is-open', open);
-  burger.setAttribute('aria-expanded', String(open));
-  document.body.style.overflow = open ? 'hidden' : '';
-  if (open) { const firstLink = drawer.querySelector('a'); if (firstLink) firstLink.focus(); }
-});
-drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
-document.addEventListener('click', e => { if (!nav.contains(e.target) && !drawer.contains(e.target)) closeDrawer(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
-
-/* ── Reveal ── */
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-}, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-</script>
-
-
-<!-- Lightbox -->
-<div id="lightbox" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,.92); cursor:zoom-out; align-items:center; justify-content:center; padding:20px;" onclick="this.style.display='none'">
-  <img id="lightbox-img" src="" alt="" style="max-width:90vw; max-height:90vh; border-radius:var(--r-lg); box-shadow:0 24px 80px rgba(0,0,0,.6);">
-</div>
-<script>
-  document.querySelectorAll('.lightbox-trigger').forEach(img => {
-    img.style.cursor = 'zoom-in';
-    img.addEventListener('click', () => {
-      const lb = document.getElementById('lightbox');
-      document.getElementById('lightbox-img').src = img.src;
-      document.getElementById('lightbox-img').alt = img.alt;
-      lb.style.display = 'flex';
-    });
-  });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') document.getElementById('lightbox').style.display = 'none'; });
-
-/* ── Language Switcher ── */
-const langBtn = document.getElementById('langBtn');
-const langDropdown = document.getElementById('langDropdown');
-langBtn.addEventListener('click', function(e) {
-  e.stopPropagation();
-  const isOpen = langDropdown.classList.contains('is-open');
-  langDropdown.classList.toggle('is-open');
-  langBtn.classList.toggle('is-open');
-  langBtn.setAttribute('aria-expanded', String(!isOpen));
-});
-document.addEventListener('click', function() {
-  langDropdown.classList.remove('is-open');
-  langBtn.classList.remove('is-open');
-  langBtn.setAttribute('aria-expanded', 'false');
-});
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
-    langDropdown.classList.remove('is-open');
-    langBtn.classList.remove('is-open');
-  }
-});
-
-</script>
 </body>
 </html>

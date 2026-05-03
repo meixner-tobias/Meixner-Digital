@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-# KI-Crawler explizit erlauben
+# AI crawlers — explicitly allowed
 User-agent: GPTBot
 Allow: /
 
@@ -26,16 +26,23 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-# Seiten ausschließen die nicht indexiert werden sollen
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# Pages excluded from indexing
 Disallow: /404.html
-
-# Sitemap
-
-Sitemap: https://meixner-tobias.com/sitemap.xml
-
-# LLM Context
-# LLM-context: https://meixner-tobias.com/llms.txt
-
 Disallow: /impressum/
 Disallow: /datenschutz/
 Disallow: /agb/
+Disallow: /en/legal/
+Disallow: /en/policy-privacy/
+Disallow: /en/terms-and-conditions/
+
+# Sitemap
+Sitemap: https://meixner-tobias.com/sitemap.xml
+
+# LLM context
+LLM-context: https://meixner-tobias.com/llms.txt

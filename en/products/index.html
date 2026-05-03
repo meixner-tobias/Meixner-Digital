@@ -1,36 +1,16 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('consent', 'default', {
-    'analytics_storage':     'denied',
-    'ad_storage':            'denied',
-    'ad_user_data':          'denied',
-    'ad_personalization':    'denied',
-    'functionality_storage': 'denied',
-    'security_storage':      'granted',
-    'wait_for_update':       500
-  });
-</script>
-<script>
-  if (window.location.hostname !== 'localhost' &&
-      window.location.hostname !== '127.0.0.1') {
-    var s = document.createElement('script');
-    s.type = 'text/javascript'; s.charset = 'UTF-8';
-    s.src = '//cdn.cookie-script.com/s/d261fb8134670358b6795a49b5d04574.js';
-    document.head.appendChild(s);
-  }
-</script>
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5QLXDT4T');</script>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','functionality_storage':'denied','security_storage':'granted','wait_for_update':500});</script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-5QLXDT4T');</script>
+  <!-- End Google Tag Manager -->
 <title>Digital Products - Templates, Guides & Tools | Tobias Meixner</title>
 <meta name="description" content="Ready-made templates, guides and tools for websites, SEO and tracking. Instant download, data-based, no agency overhead. By Tobias Meixner - freelancer from Würzburg.">
 <meta name="robots" content="index, follow">
@@ -57,7 +37,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style-v1.css">
+<link rel="stylesheet" href="/css/style.css">
 
 <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon/favicon-96x96.png">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg">
@@ -107,107 +87,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
 ]
 </script>
-
-<style>
-.hero-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 32px; margin-top: 32px; }
-.hstat { display: flex; flex-direction: column; align-items: center; gap: 2px; }
-.hstat-n { font-family: var(--fd); font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 800; color: var(--navy); line-height: 1; }
-.hstat-n em { color: var(--indigo); font-style: normal; }
-.hstat-l   { font-size: .78rem; color: var(--muted); font-weight: 500; }
-.hstat-sep { width: 1px; height: 36px; background: var(--border); align-self: center; }
-
-.filter-section { padding-top: clamp(40px, 5vw, 60px); padding-bottom: 0; }
-.filter-bar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.filter-btn { display: inline-flex; align-items: center; gap: 6px; font-size: .8rem; font-weight: 700; letter-spacing: .04em; padding: 7px 16px; border-radius: 99px; cursor: pointer; border: 1px solid var(--border); background: var(--bg-card); color: var(--muted); transition: all .2s; user-select: none; }
-.filter-btn:hover { border-color: var(--indigo-mid); color: var(--indigo); background: var(--indigo-soft); }
-.filter-btn.active { background: var(--indigo); border-color: var(--indigo); color: #fff; }
-.filter-btn .filter-count { background: rgba(255,255,255,.25); color: inherit; font-size: .7rem; font-weight: 700; padding: 1px 6px; border-radius: 99px; line-height: 1.4; }
-.filter-btn:not(.active) .filter-count { background: var(--indigo-soft); color: var(--indigo); }
-.filter-sep { width: 1px; height: 20px; background: var(--border); margin: 0 4px; flex-shrink: 0; }
-.filter-result-count { margin-left: auto; font-size: .8rem; color: var(--muted); font-weight: 500; }
-
-.products-section { padding-block: clamp(32px, 5vw, 56px); }
-.products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; }
-
-.product-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); overflow: hidden; transition: transform .3s, box-shadow .3s, border-color .3s; display: flex; flex-direction: column; position: relative; }
-.product-card:hover { transform: translateY(-4px); box-shadow: var(--sh-lg); border-color: var(--indigo-mid); }
-.product-card[data-category="hidden"] { display: none; }
-
-.product-cover { background: linear-gradient(145deg, #0d1117 0%, #0f1c35 100%); height: 200px; position: relative; overflow: hidden; display: flex; align-items: flex-end; padding: 20px 24px; flex-shrink: 0; }
-.product-cover::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 20%, rgba(91,108,248,.18) 0%, transparent 60%), radial-gradient(ellipse at 10% 80%, rgba(233,69,96,.12) 0%, transparent 50%); }
-.product-cover-grid { position: absolute; inset: 0; opacity: .06; background-image: linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px); background-size: 28px 28px; }
-.product-cover-content { position: relative; z-index: 2; width: 100%; display: flex; align-items: flex-end; justify-content: space-between; }
-.product-cover-title { font-family: var(--fd); font-size: .95rem; font-weight: 800; color: #fff; line-height: 1.25; max-width: 200px; }
-.product-cover-tags { display: flex; flex-direction: column; gap: 5px; align-items: flex-end; }
-.product-cover-tag { font-size: .65rem; font-weight: 700; letter-spacing: .06em; padding: 3px 9px; border-radius: 99px; background: rgba(255,255,255,.12); color: rgba(255,255,255,.8); border: 1px solid rgba(255,255,255,.15); white-space: nowrap; }
-.product-cover-tag.accent { background: rgba(233,69,96,.3); border-color: rgba(233,69,96,.4); color: #fca5a5; }
-
-.product-badge { position: absolute; top: 16px; left: 16px; z-index: 3; font-size: .67rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: 4px 10px; border-radius: 99px; background: var(--indigo); color: #fff; }
-.product-badge.badge-new { background: #059669; }
-
-.schema-pills { position: absolute; top: 16px; right: 16px; z-index: 3; display: flex; flex-wrap: wrap; gap: 4px; max-width: 180px; justify-content: flex-end; }
-.schema-pill { font-size: .6rem; font-weight: 700; padding: 2px 7px; border-radius: 99px; background: rgba(15,52,96,.7); color: rgba(199,210,254,.9); border: 1px solid rgba(91,108,248,.3); white-space: nowrap; }
-
-.product-body { padding: 24px 24px 20px; display: flex; flex-direction: column; flex: 1; }
-.product-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
-.product-category { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--indigo); background: var(--indigo-soft); padding: 3px 10px; border-radius: 99px; }
-.product-format { font-size: .72rem; color: var(--muted); font-weight: 500; }
-.product-title { font-family: var(--fd); font-size: 1.15rem; font-weight: 800; color: var(--navy); line-height: 1.2; letter-spacing: -.02em; margin-bottom: 10px; }
-.product-desc { font-size: .875rem; color: var(--muted); line-height: 1.7; margin-bottom: 18px; }
-
-.product-features { list-style: none; margin: 0 0 20px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
-.product-features li { display: flex; align-items: flex-start; gap: 8px; font-size: .83rem; color: var(--text); line-height: 1.45; }
-.feat-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--indigo); flex-shrink: 0; margin-top: 6px; }
-
-.product-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 20px; }
-.product-tag { font-size: .69rem; font-weight: 700; letter-spacing: .04em; color: var(--navy); background: var(--bg); border: 1px solid var(--border); padding: 3px 9px; border-radius: 99px; transition: border-color .2s, background .2s, color .2s; }
-.product-card:hover .product-tag { border-color: var(--indigo-mid); background: var(--indigo-soft); color: var(--indigo); }
-
-.product-footer { margin-top: auto; padding-top: 18px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.product-price { display: flex; flex-direction: column; gap: 1px; }
-.price-amount { font-family: var(--fd); font-size: 1.45rem; font-weight: 800; color: var(--navy); line-height: 1; }
-.price-amount em { color: var(--indigo); font-style: normal; font-size: .85em; }
-.price-note { font-size: .7rem; color: var(--muted); font-weight: 500; }
-.product-cta { display: inline-flex; align-items: center; gap: 7px; font-size: .85rem; font-weight: 700; padding: 10px 20px; border-radius: 99px; background: var(--indigo); color: #fff; text-decoration: none; transition: background .2s, transform .15s, box-shadow .2s; flex-shrink: 0; white-space: nowrap; }
-.product-cta:hover { background: #3d48a4; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(91,108,248,.3); }
-
-.products-empty { grid-column: 1 / -1; text-align: center; padding: 64px 24px; color: var(--muted); display: none; }
-.products-empty.visible { display: block; }
-.products-empty-icon { font-size: 2.5rem; margin-bottom: 16px; opacity: .4; }
-
-.why-section { padding-block: clamp(56px, 8vw, 80px); }
-.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: clamp(28px, 4vw, 44px); }
-.why-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r); padding: 24px 22px; transition: border-color .25s, box-shadow .25s; }
-.why-card:hover { border-color: var(--indigo-mid); box-shadow: var(--sh-md); }
-.why-icon { width: 42px; height: 42px; border-radius: 10px; background: var(--indigo-soft); display: grid; place-items: center; color: var(--indigo); margin-bottom: 14px; }
-.why-title { font-family: var(--fd); font-size: .9rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
-.why-desc  { font-size: .82rem; color: var(--muted); line-height: 1.65; }
-
-.stats-bar { background: var(--navy); padding-block: clamp(36px, 5vw, 52px); margin-block: clamp(40px, 6vw, 64px); border-radius: var(--r-lg); overflow: hidden; position: relative; }
-.stats-bar::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 50%, rgba(91,108,248,.25) 0%, transparent 60%); pointer-events: none; }
-.stats-bar-inner { position: relative; z-index: 1; display: flex; flex-wrap: wrap; justify-content: space-around; gap: 24px 16px; }
-.stat-item { text-align: center; }
-.stat-n { font-family: var(--fd); font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 800; color: #fff; line-height: 1; margin-bottom: 4px; }
-.stat-n em { color: #c7cbfd; font-style: normal; }
-.stat-l { font-size: .78rem; color: rgba(255,255,255,.55); font-weight: 500; }
-
-.own-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: clamp(22px, 3vw, 30px); transition: transform .3s, box-shadow .3s, border-color .3s; }
-.own-card:hover { transform: translateY(-4px); box-shadow: var(--sh-lg); border-color: var(--indigo-mid); }
-.own-icon  { width: 46px; height: 46px; border-radius: 12px; background: var(--indigo-soft); display: grid; place-items: center; margin-bottom: 16px; flex-shrink: 0; color: var(--indigo); }
-.own-title { font-family: var(--fd); font-size: .975rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
-.own-desc  { font-size: .875rem; color: var(--muted); line-height: 1.65; margin-bottom: 16px; }
-.own-tags  { display: flex; flex-wrap: wrap; gap: 5px; }
-.own-tag   { font-size: .69rem; font-weight: 700; letter-spacing: .04em; color: var(--indigo); background: var(--indigo-soft); padding: 3px 9px; border-radius: 99px; }
-
-@media (max-width: 1024px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 768px) { .products-grid { grid-template-columns: 1fr; } .why-grid { grid-template-columns: 1fr 1fr; } .hstat-sep { display: none; } .filter-result-count { display: none; } }
-@media (max-width: 560px) { .why-grid { grid-template-columns: 1fr; } .product-footer { flex-direction: column; align-items: flex-start; gap: 12px; } .product-cta { width: 100%; justify-content: center; } }
-</style>
+<script src="/js/main.js"></script>
 </head>
 <body>
 
 <a href="#main-content" class="skip-link">Skip to content</a>
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5QLXDT4T" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5QLXDT4T"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <!-- NAVBAR -->
 <nav class="nav" id="nav">
@@ -304,8 +192,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </ul>
 </nav>
 
+<main id="main-content">
+
+
 <!-- PAGE HERO -->
-<section class="page-hero" id="main-content" aria-labelledby="hero-heading">
+<section class="page-hero" aria-labelledby="hero-heading">
   <div class="container">
     <div class="page-hero-inner">
       <div class="page-hero-badge">
@@ -348,7 +239,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <!-- PRODUCT 1: Schema Markup Template Pack -->
       <article class="product-card reveal" data-category="seo" aria-label="Schema Markup Template Pack">
-        <a href="/produkte/schema-markup-template-pack/" class="product-cover" aria-label="Schema Markup Template Pack - view details" style="display:flex;text-decoration:none;">
+        <a href="/en/products/schema-markup-template-pack/" class="product-cover" aria-label="Schema Markup Template Pack - view details" style="display:flex;text-decoration:none;">
           <div class="product-cover-grid" aria-hidden="true"></div>
           <span class="product-badge badge-new" aria-label="New">New</span>
           <div class="schema-pills" aria-hidden="true">
@@ -370,7 +261,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <span class="product-category">SEO &amp; Schema</span>
             <span class="product-format">ZIP + PDF</span>
           </div>
-          <h2 class="product-title"><a href="/produkte/schema-markup-template-pack/" style="color:inherit;text-decoration:none;">Schema Markup Template Pack</a></h2>
+          <h2 class="product-title"><a href="/en/products/schema-markup-template-pack/" style="color:inherit;text-decoration:none;">Schema Markup Template Pack</a></h2>
           <p class="product-desc">9 ready-made JSON-LD templates for all common website types. Fill in the placeholders, paste into the &lt;head&gt;, validate - done. For freelancers, local businesses, blogs and startups.</p>
           <ul class="product-features" aria-label="What's included">
             <li><span class="feat-dot" aria-hidden="true"></span>9 individual JSON-LD templates (Person, LocalBusiness, Organization, WebSite, Service, BlogPosting, BreadcrumbList, AggregateRating, FAQPage)</li>
@@ -393,7 +284,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <div class="price-note">one-time · instant download</div>
             </div>
             <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-              <a href="/produkte/schema-markup-template-pack/" class="product-cta" style="background:var(--bg-card);color:var(--navy);border:1px solid var(--border);" aria-label="Schema Markup Template Pack - view details">Details <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+              <a href="/en/products/schema-markup-template-pack/" class="product-cta" style="background:var(--bg-card);color:var(--navy);border:1px solid var(--border);" aria-label="Schema Markup Template Pack - view details">Details <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
               <a href="https://tobiasmeixner.gumroad.com/l/schema-markup?wanted=true" target="_blank" rel="noopener" class="product-cta" aria-label="Buy Schema Markup Template Pack - opens Gumroad">Buy <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
             </div>
           </div>
@@ -402,7 +293,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       <!-- PRODUCT 2: GTM Beginner Guide -->
       <article class="product-card reveal" data-category="tracking" aria-label="Google Tag Manager - The Beginner's Guide">
-        <a href="/produkte/gtm-anfaenger-guide/" class="product-cover" aria-label="GTM Beginner's Guide - view details" style="display:flex;text-decoration:none;">
+        <a href="/en/products/gtm-beginner-guide/" class="product-cover" aria-label="GTM Beginner's Guide - view details" style="display:flex;text-decoration:none;">
           <div class="product-cover-grid" aria-hidden="true"></div>
           <span class="product-badge badge-new" aria-label="New">New</span>
           <div class="schema-pills" aria-hidden="true">
@@ -424,7 +315,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <span class="product-category">Tracking</span>
             <span class="product-format">PDF</span>
           </div>
-          <h2 class="product-title"><a href="/produkte/gtm-anfaenger-guide/" style="color:inherit;text-decoration:none;">Google Tag Manager - The Beginner's Guide</a></h2>
+          <h2 class="product-title"><a href="/en/products/gtm-beginner-guide/" style="color:inherit;text-decoration:none;">Google Tag Manager - The Beginner's Guide</a></h2>
           <p class="product-desc">From zero to your first working tag - no prior knowledge, no coding course needed. Set up GA4, track clicks, publish, avoid the 10 most common mistakes.</p>
           <ul class="product-features" aria-label="What's included">
             <li><span class="feat-dot" aria-hidden="true"></span>Tags, triggers &amp; variables - finally actually understood</li>
@@ -447,7 +338,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <div class="price-note">one-time · instant download</div>
             </div>
             <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-              <a href="/produkte/gtm-anfaenger-guide/" class="product-cta" style="background:var(--bg-card);color:var(--navy);border:1px solid var(--border);" aria-label="GTM Beginner's Guide - view details">Details <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+              <a href="/en/products/gtm-beginner-guide/" class="product-cta" style="background:var(--bg-card);color:var(--navy);border:1px solid var(--border);" aria-label="GTM Beginner's Guide - view details">Details <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
               <a href="https://tobiasmeixner.gumroad.com/l/gtm-guide?wanted=true" target="_blank" rel="noopener" class="product-cta" aria-label="Buy GTM Beginner's Guide - opens Gumroad">Buy <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
             </div>
           </div>
@@ -564,6 +455,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </div>
 </section>
 
+</main>
+
 <!-- FOOTER -->
 <footer>
   <div class="container">
@@ -571,10 +464,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <span class="footer-copy">© 2026 Tobias Meixner</span>
       <ul class="footer-links">
         <li><a href="/en/blog/">Blog</a></li>
-        <li><a href="/en/products/" aria-current="page">Products</a></li>
         <li><a href="/en/legal/">Legal notice</a></li>
         <li><a href="/en/policy-privacy/">Privacy policy</a></li>
-        <li><a href="/en/terms-and-conditions/">Terms</a></li>
+        <li><a href="/en/terms-and-conditions/">Terms and Conditions</a></li>
         <li><a href="#" onclick="CookieScript.instance.show(); return false;">Cookie settings</a></li>
         <li><a href="https://www.linkedin.com/in/meixner-tobias" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn</a></li>
       </ul>
@@ -582,93 +474,5 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </div>
 </footer>
 
-<script>
-const themeToggle       = document.getElementById('themeToggle');
-const themeToggleMobile = document.getElementById('themeToggleMobile');
-function updateThemeLabel() {
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  document.querySelectorAll('.theme-label').forEach(el => { el.textContent = isDark ? 'Light Mode' : 'Dark Mode'; });
-}
-if (localStorage.getItem('theme') === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
-updateThemeLabel();
-function toggleTheme() {
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  if (isDark) { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('theme', 'light'); }
-  else { document.documentElement.setAttribute('data-theme', 'dark'); localStorage.setItem('theme', 'dark'); }
-  updateThemeLabel();
-}
-if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
-if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
-
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 12), { passive: true });
-
-const burger = document.getElementById('burger');
-const drawer = document.getElementById('drawer');
-function closeDrawer() { drawer.classList.remove('is-open'); burger.classList.remove('is-open'); burger.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
-burger.addEventListener('click', () => {
-  const open = !drawer.classList.contains('is-open');
-  drawer.classList.toggle('is-open', open); burger.classList.toggle('is-open', open);
-  burger.setAttribute('aria-expanded', String(open)); document.body.style.overflow = open ? 'hidden' : '';
-  if (open) { const first = drawer.querySelector('a'); if (first) first.focus(); }
-});
-drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
-document.addEventListener('click', e => { if (!nav.contains(e.target) && !drawer.contains(e.target)) closeDrawer(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
-
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-}, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-/* Filter */
-(function() {
-  const btns    = document.querySelectorAll('.filter-btn');
-  const cards   = document.querySelectorAll('#products-grid [data-category]');
-  const empty   = document.getElementById('products-empty');
-  const counter = document.getElementById('result-count');
-
-  cards.forEach(card => { card.setAttribute('data-original-category', card.dataset.category); });
-
-  function applyFilter(filter) {
-    cards.forEach(card => {
-      const cat = card.getAttribute('data-original-category');
-      const show = filter === 'alle' || cat === filter;
-      card.dataset.category = show ? cat : 'hidden';
-    });
-    let visible = 0;
-    cards.forEach(card => { if (card.dataset.category !== 'hidden') visible++; });
-    const noun = visible === 1 ? 'product' : 'products';
-    counter.textContent = `${visible} ${noun}`;
-    empty.classList.toggle('visible', visible === 0);
-  }
-
-  btns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      btns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
-      btn.classList.add('active'); btn.setAttribute('aria-pressed','true');
-      applyFilter(btn.dataset.filter);
-    });
-  });
-})();
-
-const langBtn = document.getElementById('langBtn');
-const langDropdown = document.getElementById('langDropdown');
-langBtn.addEventListener('click', function(e) {
-  e.stopPropagation();
-  const isOpen = langDropdown.classList.contains('is-open');
-  langDropdown.classList.toggle('is-open');
-  langBtn.classList.toggle('is-open');
-  langBtn.setAttribute('aria-expanded', String(!isOpen));
-});
-document.addEventListener('click', function() {
-  langDropdown.classList.remove('is-open');
-  langBtn.classList.remove('is-open');
-  langBtn.setAttribute('aria-expanded', 'false');
-});
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') { langDropdown.classList.remove('is-open'); langBtn.classList.remove('is-open'); }
-});
-</script>
 </body>
 </html>
