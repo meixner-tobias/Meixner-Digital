@@ -348,6 +348,8 @@
     initContactForm();
   });
 
+
+// Formular senden & Validierung
 function initAddonBox() {
     var topic = document.getElementById('topic');
     var addonBox = document.getElementById('addonBox');
@@ -362,102 +364,94 @@ function initAddonBox() {
     updateAddonBox();
   }
 
-  function initContactForm() {
-    var form = document.getElementById('contactForm');
-    if (!form) return;
+function initContactForm() {
+  var form = document.getElementById('contactForm');
+  if (!form) return;
 
-    var submitBtn = document.getElementById('submitBtn');
-    var formErrorMsg = document.getElementById('formErrorMsg');
+  var submitBtn    = document.getElementById('submitBtn');
+  var formErrorMsg = document.getElementById('formErrorMsg');
 
-    form.addEventListener('submit', async function (e) {
-      e.preventDefault();
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
 
-      var name    = document.getElementById('name');
-      var email   = document.getElementById('email');
-      var topic   = document.getElementById('topic');
-      var message = document.getElementById('message');
-      var privacy = document.getElementById('privacy');
+    var name    = document.getElementById('name');
+    var email   = document.getElementById('email');
+    var topic   = document.getElementById('topic');
+    var message = document.getElementById('message');
+    var privacy = document.getElementById('privacy');
 
-      // Fehlermeldungen zurücksetzen
-      ['nameErr','emailErr','topicErr','messageErr'].forEach(function(id) {
-        document.getElementById(id).style.display = 'none';
-      });
-      formErrorMsg.style.display = 'none';
-
-      // Validierung
-      var valid = true;
-      if (!name.value.trim()) {
-        document.getElementById('nameErr').style.display = 'block'; valid = false;
-      }
-      if (!email.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-        document.getElementById('emailErr').style.display = 'block'; valid = false;
-      }
-      if (!topic.value) {
-        document.getElementById('topicErr').style.display = 'block'; valid = false;
-      }
-      if (!message.value.trim()) {
-        document.getElementById('messageErr').style.display = 'block'; valid = false;
-      }
-      if (!privacy.checked) {
-        formErrorMsg.style.display = 'block'; valid = false;
-      }
-      if (!valid) return;
-
-      // Absenden
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Wird gesendet …';
-
-      try {
-        var res = await fetch('https://kontakt-form.small-grass-e8fa.workers.dev', {
-          method: 'POST',
-          body: JSON.stringify({
-            name:           document.getElementById('name').value.trim(),
-            email:          document.getElementById('email').value.trim(),
-            phone:          document.getElementById('phone').value.trim(),
-            company:        document.getElementById('company').value.trim(),
-            topic:          document.getElementById('topic').value,
-            message:        document.getElementById('message').value.trim(),
-            addon_tracking: document.getElementById('addon_tracking_val').value
-          }),
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          }
-        });
-
-        if (res.ok) {
-          document.getElementById('formContent').style.display = 'none';
-          document.getElementById('formSuccess').style.display = 'flex';
-          
-          // Generate Lead Data Layer Event für GTM & GA4
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-            event:          'generate_lead',
-            lead_topic:     document.getElementById('topic').value,        // z.B. "website"
-            lead_topic_label: (function() {
-              var map = {
-                tracking:  'GTM & GA4 Setup',
-                website:   'Website erstellen',
-                betreuung: 'Sorglos-Betreuung',
-                other:     'Noch unklar'
-              };
-              return map[document.getElementById('topic').value] || '';
-            })(),
-            lead_addon:     document.getElementById('addon_tracking_val').value,  // "Ja" oder "Nein"
-            lead_has_company: document.getElementById('company').value.trim() !== '' ? 'yes' : 'no',
-            lead_has_phone:   document.getElementById('phone').value.trim()    !== '' ? 'yes' : 'no',
-          });
-        } else {
-          throw new Error('Server error');
-        }
-      } catch (err) {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Nachricht abschicken';
-        formErrorMsg.textContent = 'Etwas ist schiefgelaufen. Bitte versuche es erneut.';
-        formErrorMsg.style.display = 'block';
-      }
+    // Fehlermeldungen zurücksetzen
+    ['nameErr','emailErr','topicErr','messageErr'].forEach(function(id) {
+      document.getElementById(id).style.display = 'none';
     });
-  }
+    formErrorMsg.style.display = 'none';
+
+    // Validierung
+    var valid = true;
+    if (!name.value.trim())                               { document.getElementById('nameErr').style.display    = 'block'; valid = false; }
+    if (!email.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) { document.getElementById('emailErr').style.display   = 'block'; valid = false; }
+    if (!topic.value)                                     { document.getElementById('topicErr').style.display   = 'block'; valid = false; }
+    if (!message.value.trim())                            { document.getElementById('messageErr').style.display = 'block'; valid = false; }
+    if (!privacy.checked)                                 { formErrorMsg.style.display = 'block'; valid = false; }
+    if (!valid) return;
+
+    // Werte VOR fetch sichern
+    var topicValue   = topic.value;
+    var companyValue = document.getElementById('company').value.trim();
+    var phoneValue   = document.getElementById('phone').value.trim();
+    var addonValue   = document.getElementById('addon_tracking_val').value;
+    var topicMap     = {
+      tracking:  'GTM & GA4 Setup',
+      website:   'Website erstellen',
+      betreuung: 'Sorglos-Betreuung',
+      other:     'Noch unklar'
+    };
+
+    submitBtn.disabled    = true;
+    submitBtn.textContent = 'Wird gesendet …';
+
+    fetch('https://kontakt-form.small-grass-e8fa.workers.dev', {
+      method: 'POST',
+      body: JSON.stringify({
+        name:           name.value.trim(),
+        email:          email.value.trim(),
+        phone:          phoneValue,
+        company:        companyValue,
+        topic:          topicValue,
+        message:        message.value.trim(),
+        addon_tracking: addonValue
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept':       'application/json'
+      }
+    })
+    .then(function(res) {
+      if (res.ok) {
+        document.getElementById('formContent').style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'flex';
+
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event:            'generate_lead',
+          lead_topic:       topicValue,
+          lead_topic_label: topicMap[topicValue] || '',
+          lead_addon:       addonValue,
+          lead_has_company: companyValue !== '' ? 'yes' : 'no',
+          lead_has_phone:   phoneValue   !== '' ? 'yes' : 'no'
+        });
+      } else {
+        throw new Error('Server error');
+      }
+    })
+    .catch(function() {
+      submitBtn.disabled    = false;
+      submitBtn.textContent = 'Nachricht abschicken';
+      formErrorMsg.textContent = 'Etwas ist schiefgelaufen. Bitte versuche es erneut.';
+      formErrorMsg.style.display = 'block';
+    });
+  });
+}
 
 
 })();
