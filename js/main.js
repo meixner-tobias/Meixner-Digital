@@ -428,8 +428,25 @@ function initAddonBox() {
         if (res.ok) {
           document.getElementById('formContent').style.display = 'none';
           document.getElementById('formSuccess').style.display = 'flex';
+          
+          // Generate Lead Data Layer Event für GTM & GA4
           window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({ event: 'generate_lead' });
+          window.dataLayer.push({
+            event:          'generate_lead',
+            lead_topic:     document.getElementById('topic').value,        // z.B. "website"
+            lead_topic_label: (function() {
+              var map = {
+                tracking:  'GTM & GA4 Setup',
+                website:   'Website erstellen',
+                betreuung: 'Sorglos-Betreuung',
+                other:     'Noch unklar'
+              };
+              return map[document.getElementById('topic').value] || '';
+            })(),
+            lead_addon:     document.getElementById('addon_tracking_val').value,  // "Ja" oder "Nein"
+            lead_has_company: document.getElementById('company').value.trim() !== '' ? 'yes' : 'no',
+            lead_has_phone:   document.getElementById('phone').value.trim()    !== '' ? 'yes' : 'no',
+          });
         } else {
           throw new Error('Server error');
         }
