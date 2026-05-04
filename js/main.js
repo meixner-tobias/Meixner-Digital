@@ -428,6 +428,8 @@ function initAddonBox() {
         if (res.ok) {
           document.getElementById('formContent').style.display = 'none';
           document.getElementById('formSuccess').style.display = 'flex';
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: 'generate_lead' });
         } else {
           throw new Error('Server error');
         }
