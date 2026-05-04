@@ -344,5 +344,101 @@
     initCardTilt();
     initFaqAccordion();
     initHeroCanvas();
+    initAddonBox();
+    initContactForm();
   });
+
+function initAddonBox() {
+    var topic = document.getElementById('topic');
+    var addonBox = document.getElementById('addonBox');
+    if (!topic || !addonBox) return;
+
+    function updateAddonBox() {
+      addonBox.style.display = topic.value === 'website' ? 'block' : 'none';
+    }
+
+    topic.addEventListener('change', updateAddonBox);
+    window.addEventListener('pageshow', updateAddonBox);
+    updateAddonBox();
+  }
+
+  function initContactForm() {
+    var form = document.getElementById('contactForm');
+    if (!form) return;
+
+    var submitBtn = document.getElementById('submitBtn');
+    var formErrorMsg = document.getElementById('formErrorMsg');
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      var name    = document.getElementById('name');
+      var email   = document.getElementById('email');
+      var topic   = document.getElementById('topic');
+      var message = document.getElementById('message');
+      var privacy = document.getElementById('privacy');
+
+      // Fehlermeldungen zurücksetzen
+      ['nameErr','emailErr','topicErr','messageErr'].forEach(function(id) {
+        document.getElementById(id).style.display = 'none';
+      });
+      formErrorMsg.style.display = 'none';
+
+      // Validierung
+      var valid = true;
+      if (!name.value.trim()) {
+        document.getElementById('nameErr').style.display = 'block'; valid = false;
+      }
+      if (!email.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+        document.getElementById('emailErr').style.display = 'block'; valid = false;
+      }
+      if (!topic.value) {
+        document.getElementById('topicErr').style.display = 'block'; valid = false;
+      }
+      if (!message.value.trim()) {
+        document.getElementById('messageErr').style.display = 'block'; valid = false;
+      }
+      if (!privacy.checked) {
+        formErrorMsg.style.display = 'block'; valid = false;
+      }
+      if (!valid) return;
+
+      // Absenden
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Wird gesendet …';
+
+      try {
+        var res = await fetch('https://kontakt-form.small-grass-e8fa.workers.dev', {
+          method: 'POST',
+          body: JSON.stringify({
+            name:           document.getElementById('name').value.trim(),
+            email:          document.getElementById('email').value.trim(),
+            phone:          document.getElementById('phone').value.trim(),
+            company:        document.getElementById('company').value.trim(),
+            topic:          document.getElementById('topic').value,
+            message:        document.getElementById('message').value.trim(),
+            addon_tracking: document.getElementById('addon_tracking_val').value
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        });
+
+        if (res.ok) {
+          document.getElementById('formContent').style.display = 'none';
+          document.getElementById('formSuccess').style.display = 'flex';
+        } else {
+          throw new Error('Server error');
+        }
+      } catch (err) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Nachricht abschicken';
+        formErrorMsg.textContent = 'Etwas ist schiefgelaufen. Bitte versuche es erneut.';
+        formErrorMsg.style.display = 'block';
+      }
+    });
+  }
+
+
 })();

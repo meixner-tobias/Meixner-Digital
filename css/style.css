@@ -2508,7 +2508,7 @@ body:has(.contact-section) .page-hero-desc  { max-width: 500px; }
 .form-submit:hover    { background: var(--indigo); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(91,108,248,.35); }
 .form-submit:disabled { opacity: .6; cursor: not-allowed; transform: none; }
 
-.form-success  { display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: clamp(32px, 5vw, 56px) 24px; gap: 16px; }
+.form-success  { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: clamp(32px, 5vw, 56px) 24px; gap: 16px; }
 .success-icon  { width: 64px; height: 64px; border-radius: 50%; background: #ECFDF5; display: grid; place-items: center; }
 .success-icon svg { color: #10B981; }
 .success-title { font-family: var(--fd); font-size: 1.3rem; font-weight: 800; color: var(--navy); }
