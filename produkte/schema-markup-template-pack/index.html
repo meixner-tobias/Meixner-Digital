@@ -70,6 +70,7 @@
     "description": "9 fertige JSON-LD Templates für Person, LocalBusiness, Organization, WebSite, Service, BlogPosting, BreadcrumbList, AggregateRating und FAQPage. Inklusive 3 kombinierter Sets, 32-seitiger PDF-Anleitung und 20-Punkte Fehler-Checkliste. Für Freelancer, lokale Unternehmen, Blogs und Startups.",
     "url": "https://meixner-tobias.com/produkte/schema-markup-template-pack/",
     "sku": "schema-markup-v1",
+    "mpn": "schema-markup-v1",
     "category": "SEO Template",
     "brand": { "@type": "Brand", "name": "Tobias Meixner" },
     "author": { "@type": "Person", "name": "Tobias Meixner", "url": "https://meixner-tobias.com" },
@@ -80,7 +81,22 @@
       "priceCurrency": "EUR",
       "availability": "https://schema.org/InStock",
       "priceValidUntil": "2027-12-31",
-      "seller": { "@type": "Person", "name": "Tobias Meixner", "url": "https://meixner-tobias.com" }
+      "seller": { "@type": "Person", "name": "Tobias Meixner", "url": "https://meixner-tobias.com" },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "DE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+      },
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": { "@type": "MonetaryAmount", "value": "0", "currency": "EUR" },
+        "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "DE" },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": { "@type": "QuantitativeValue", "minValue": "0", "maxValue": "0", "unitCode": "DAY" },
+          "transitTime": { "@type": "QuantitativeValue", "minValue": "0", "maxValue": "0", "unitCode": "DAY" }
+        }
+      }
     },
     "isRelatedTo": [
       { "@type": "CreativeWork", "name": "Answer Engine Optimization Guide", "url": "https://meixner-tobias.com/blog/answer-engine-optimization/" }

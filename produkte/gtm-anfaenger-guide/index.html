@@ -70,6 +70,7 @@
     "description": "Von Null zum ersten funktionierenden Tag - ohne Vorkenntnisse, ohne Programmierkurs. Tags, Trigger, Variablen, GA4 einrichten, Button-Klicks und Outbound Links tracken, Debugging mit dem Vorschaumodus, Veröffentlichen und die 10 häufigsten GTM-Fehler.",
     "url": "https://meixner-tobias.com/produkte/gtm-anfaenger-guide/",
     "sku": "gtm-guide-v1",
+    "mpn": "gtm-guide-v1",
     "category": "Tracking Guide",
     "brand": { "@type": "Brand", "name": "Tobias Meixner" },
     "author": { "@type": "Person", "name": "Tobias Meixner", "url": "https://meixner-tobias.com" },
@@ -80,7 +81,22 @@
       "priceCurrency": "EUR",
       "availability": "https://schema.org/InStock",
       "priceValidUntil": "2027-12-31",
-      "seller": { "@type": "Person", "name": "Tobias Meixner", "url": "https://meixner-tobias.com" }
+      "seller": { "@type": "Person", "name": "Tobias Meixner", "url": "https://meixner-tobias.com" },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "DE",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+      },
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": { "@type": "MonetaryAmount", "value": "0", "currency": "EUR" },
+        "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "DE" },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": { "@type": "QuantitativeValue", "minValue": "0", "maxValue": "0", "unitCode": "DAY" },
+          "transitTime": { "@type": "QuantitativeValue", "minValue": "0", "maxValue": "0", "unitCode": "DAY" }
+        }
+      }
     },
     "isRelatedTo": [
       { "@type": "CreativeWork", "name": "Server-Side Tracking 2026", "url": "https://meixner-tobias.com/blog/server-side-tracking/" }
