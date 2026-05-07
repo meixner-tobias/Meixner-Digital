@@ -2529,9 +2529,10 @@ body:has(.contact-section) .page-hero-desc  { max-width: 500px; }
 .info-item-title { font-weight: 600; color: #fff; font-size: .84rem; }
 .info-item-sub   { font-size: .78rem; color: rgba(255,255,255,.5); }
 
-.avail-card     { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 22px 24px; display: flex; align-items: center; gap: 14px; }
-.avail-dot-wrap { width: 40px; height: 40px; border-radius: 50%; background: #ECFDF5; flex-shrink: 0; display: grid; place-items: center; }
-.avail-dot      { width: 12px; height: 12px; border-radius: 50%; background: #10B981; box-shadow: 0 0 0 3px rgba(16,185,129,.2); animation: pulse-green 2.5s ease-in-out infinite; }
+.avail-card { background: var(--bg-card); border: 1px solid rgba(16, 185, 129, 0.25); /* grüner Border-Akzent */ border-radius: var(--r-lg); padding: 22px 24px; display: flex; align-items: center; gap: 14px; box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.08), 0 4px 16px rgba(16, 185, 129, 0.06); /* subtiles grünes Glow */ }
+.avail-dot-wrap { width: 40px; height: 40px; border-radius: 50%; background: rgba(16, 185, 129, 0.12); /* dunkles Grün statt hellem Mint */ flex-shrink: 0; display: grid; place-items: center; }
+.avail-dot { width: 12px; height: 12px; border-radius: 50%; background: #10B981; box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25); animation: pulse-green 2.5s ease-in-out infinite;}
+
 @keyframes pulse-green {
   0%,100% { box-shadow: 0 0 0 3px rgba(16,185,129,.2); }
   50%      { box-shadow: 0 0 0 6px rgba(16,185,129,.08); }
