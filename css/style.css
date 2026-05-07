@@ -639,7 +639,14 @@ img { display: block; max-width: 100%; height: auto; }
 .lang-check       { color: var(--indigo); font-size: .8rem; font-weight: 700; }
 
 /* Mobile drawer language buttons */
-.drawer-lang-btn,
+
+.drawer-lang {
+  display: flex;
+  gap: 8px;
+  padding-top: 8px;
+}
+
+.drawer-lang .drawer-lang-btn,
 .drawer .drawer-lang-btn {
   display: flex !important;
   align-items: center !important;
@@ -655,7 +662,7 @@ img { display: block; max-width: 100%; height: auto; }
   border: 1.5px solid var(--border) !important;
   background: transparent !important;
   text-decoration: none !important;
-  border-bottom: none !important;
+  border-bottom: 1.5px solid var(--border) !important;
   -webkit-tap-highlight-color: transparent !important;
 }
 .drawer .drawer-lang-btn.active {
