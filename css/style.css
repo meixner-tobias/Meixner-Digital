@@ -1309,6 +1309,7 @@ textarea:focus-visible {
 .blog-card-img-aeo  { background: linear-gradient(135deg, #0f0c29 0%, #302b63 100%); }
 .blog-card-img-sst  { background: linear-gradient(135deg, #020617 0%, #0f3460 100%); }
 .blog-card-img-pmax { background: linear-gradient(135deg, #1a0a00 0%, #7c2d12 100%); }
+.blog-card-img-ai   { background: linear-gradient(135deg, #001a17 0%, #134e4a 100%); }
 .blog-card-img svg  { color: rgba(255,255,255,.25); }
 
 .blog-card-body { padding: 24px; display: flex; flex-direction: column; flex: 1; }
@@ -1498,6 +1499,19 @@ textarea:focus-visible {
   border-color: rgba(251,146,60,.2);
 }
 
+/* ── AI (KI-Texterstellung / Prompt Engineering) — Teal ── */
+.article-hero--ai {
+  background: linear-gradient(135deg, #001a17 0%, #042f2e 40%, #134e4a 100%);
+}
+.article-hero--ai::before { background: radial-gradient(circle, rgba(45,212,191,.2)  0%, transparent 70%); }
+.article-hero--ai::after  { background: radial-gradient(circle, rgba(16,185,129,.15) 0%, transparent 70%); }
+.article-hero--ai .article-title em { color: #5eead4; }
+.article-cat--ai { background: rgba(45,212,191,.2); color: #5eead4; border-color: rgba(45,212,191,.35); }
+.intro-box--ai {
+  background: linear-gradient(135deg, rgba(45,212,191,.07) 0%, rgba(16,185,129,.05) 100%);
+  border-color: rgba(45,212,191,.2);
+}
+
 
 /* ============================================================
    26. BLOG ARTICLES — COMPONENTS
@@ -1679,6 +1693,8 @@ textarea:focus-visible {
 /* ── Sources box (references at the bottom of the article) ── */
 .sources-box { background: var(--bg); border: 1px solid var(--border); border-radius: var(--r); padding: 16px 20px; margin-top: 40px; font-size: .78rem; color: var(--muted); line-height: 1.7; }
 .sources-box strong { color: var(--text); display: block; margin-bottom: 6px; }
+.sources-box a { color: var(--indigo); text-decoration: none; }
+.sources-box a:hover { text-decoration: underline; }
 
 
 /* ============================================================
@@ -1890,6 +1906,7 @@ textarea:focus-visible {
 [data-theme="dark"] .blog-card-img-aeo  { background: linear-gradient(135deg, #0f0c29 0%, #2d2a7a 100%); }
 [data-theme="dark"] .blog-card-img-sst  { background: linear-gradient(135deg, #020617 0%, #0c2a52 100%); }
 [data-theme="dark"] .blog-card-img-pmax { background: linear-gradient(135deg, #1a0a00 0%, #5a1f00 100%); }
+[data-theme="dark"] .blog-card-img-ai   { background: linear-gradient(135deg, #001a17 0%, #0d3b37 100%); }
 
 /* ── Blog articles ── */
 [data-theme="dark"] .article-content h2 { border-top-color: #374151; }
@@ -1921,6 +1938,7 @@ textarea:focus-visible {
 [data-theme="dark"] .intro-box--aeo  { background: rgba(2,132,199,.08); border-color: rgba(2,132,199,.2); }
 [data-theme="dark"] .intro-box--sst  { background: rgba(14,165,233,.07); border-color: rgba(14,165,233,.2); }
 [data-theme="dark"] .intro-box--pmax { background: rgba(251,146,60,.07);  border-color: rgba(251,146,60,.2); }
+[data-theme="dark"] .intro-box--ai   { background: rgba(45,212,191,.07);  border-color: rgba(45,212,191,.18); }
 [data-theme="dark"] .article-sidebar .author-card { background: #1F2937 !important; }
 [data-theme="dark"] .cta-card { background: #1F2937 !important; }
 

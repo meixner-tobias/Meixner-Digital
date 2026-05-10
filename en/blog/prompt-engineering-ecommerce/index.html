@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','functionality_storage':'denied','security_storage':'granted','wait_for_update':500});</script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-5QLXDT4T');</script>
+  <!-- End Google Tag Manager -->
+  <title>Prompt Engineering for E-Commerce 2026: 5 Strategies for Better AI Product Descriptions</title>
+  <meta name="description" content="Which prompt strategy delivers the best AI product descriptions? Zero-Shot, Few-Shot, Role Prompting, Constraint and Chain-of-Thought explained – with concrete examples, comparison table and a clear recommendation for online retailers.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://meixner-tobias.com/en/blog/prompt-engineering-ecommerce/">
+  <link rel="alternate" hreflang="de" href="https://meixner-tobias.com/blog/prompt-engineering-ecommerce/">
+  <link rel="alternate" hreflang="en" href="https://meixner-tobias.com/en/blog/prompt-engineering-ecommerce/">
+  <link rel="alternate" hreflang="x-default" href="https://meixner-tobias.com/en/blog/prompt-engineering-ecommerce/">
+
+  <meta property="og:type"                content="article">
+  <meta property="og:url"                 content="https://meixner-tobias.com/en/blog/prompt-engineering-ecommerce/">
+  <meta property="og:title"               content="Prompt Engineering for E-Commerce: 5 Strategies for Better AI Product Descriptions">
+  <meta property="og:description"         content="Zero-Shot, Few-Shot, Role Prompting, Constraint and Chain-of-Thought compared head-to-head – with concrete examples and a recommendation for which combination brings online retailers the most benefit.">
+  <meta property="og:image"               content="https://meixner-tobias.com/assets/img/og-image.jpg">
+  <meta property="og:image:width"         content="1200">
+  <meta property="og:image:height"        content="630">
+  <meta property="og:locale"              content="en_US">
+  <meta property="og:site_name"           content="Tobias Meixner">
+  <meta property="article:author"         content="Tobias Meixner">
+  <meta property="article:published_time" content="2026-05-10">
+  <meta name="twitter:card"               content="summary_large_image">
+  <meta name="twitter:title"              content="Prompt Engineering for E-Commerce: 5 Strategies for Better AI Product Descriptions">
+  <meta name="twitter:description"        content="Zero-Shot to Chain-of-Thought: which prompt strategy delivers the best product descriptions for online retailers? With comparison table and concrete examples.">
+  <meta name="twitter:image"              content="https://meixner-tobias.com/assets/img/og-image.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg">
+  <link rel="shortcut icon" href="/assets/favicon/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/favicon/site.webmanifest">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://meixner-tobias.com/en/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://meixner-tobias.com/en/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "Prompt Engineering E-Commerce", "item": "https://meixner-tobias.com/en/blog/prompt-engineering-ecommerce/" }
+      ]
+    },
+    {
+      "@type": "Article",
+      "@id": "https://meixner-tobias.com/en/blog/prompt-engineering-ecommerce/",
+      "headline": "Prompt Engineering for E-Commerce: 5 Strategies for Better AI Product Descriptions",
+      "description": "Which prompt strategy delivers the best AI product descriptions? Zero-Shot, Few-Shot, Role Prompting, Constraint and Chain-of-Thought explained – with concrete examples, comparison table and recommendation for online retailers. Based on current research (Chen et al., 2025; Sahoo et al., 2024; Brown et al., 2020).",
+      "url": "https://meixner-tobias.com/en/blog/prompt-engineering-ecommerce/",
+      "datePublished": "2026-05-10",
+      "dateModified": "2026-05-10",
+      "author": { "@type": "Person", "@id": "https://meixner-tobias.com/#person", "name": "Tobias Meixner" },
+      "publisher": { "@type": "Person", "@id": "https://meixner-tobias.com/#person" },
+      "image": "https://meixner-tobias.com/assets/img/og-image.jpg",
+      "inLanguage": "en-US",
+      "keywords": "Prompt Engineering E-Commerce, AI product descriptions, Zero-Shot Prompting, Few-Shot Prompting, Chain-of-Thought Prompting, Role Prompting, Constraint Prompting, LLM E-Commerce, ChatGPT product descriptions, AI copywriting retail",
+      "articleSection": "AI & E-Commerce",
+      "citation": [
+        {
+          "@type": "ScholarlyArticle",
+          "name": "Language Models are Few-Shot Learners",
+          "author": "Brown et al.",
+          "datePublished": "2020"
+        },
+        {
+          "@type": "ScholarlyArticle",
+          "name": "Unleashing the potential of prompt engineering for large language models",
+          "author": "Chen et al.",
+          "datePublished": "2025"
+        },
+        {
+          "@type": "ScholarlyArticle",
+          "name": "Chain-of-thought prompting elicits reasoning in large language models",
+          "author": "Wei et al.",
+          "datePublished": "2022"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://meixner-tobias.com/en/blog/prompt-engineering-ecommerce/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is prompt engineering in simple terms?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Prompt engineering is the methodical design of input texts to an AI language model in order to obtain more precise, relevant and useful outputs. The prompt is the only variable you can fully control without technical AI knowledge – and has a direct influence on the quality, style and accuracy of generated texts."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which prompt strategy is best for e-commerce product descriptions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No single strategy is universally superior. For professional e-commerce copywriting, a combination is recommended: Role Prompting (expert context), Few-Shot examples (brand voice), Constraint block (SEO requirements, length, tone) and a Chain-of-Thought step (content quality assurance). This combination is confirmed by Sahoo et al. (2024) as the most effective approach for complex tasks."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are hallucinations in AI texts and how do I avoid them?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hallucinations are content that AI language models generate that reads fluently and plausibly but is factually incorrect – for example invented dimensions, non-existent materials or false certifications. Chain-of-Thought Prompting, where the model must reason step by step, demonstrably reduces the hallucination risk (Wei et al., 2022; Chen et al., 2025)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use ChatGPT directly for product descriptions or do I need a special tool?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ChatGPT (GPT-4o), Claude or Gemini can be used directly for product descriptions – provided you use the right prompt strategies. Quality depends not on the tool but on the prompt formulation. Zero-Shot prompts produce generic texts without brand reference. A combination of Role, Few-Shot, Constraint and Chain-of-Thought produces brand-consistent, SEO-optimised and fact-based product texts."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<script src="/js/main.js"></script>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to content</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5QLXDT4T"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="/en/" aria-label="Tobias Meixner - Home" style="display:flex;align-items:center;padding-top:6px;">
+      <svg class="nav-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 230" role="img" aria-labelledby="logo-pe-en">
+        <title id="logo-pe-en">Tobias Meixner</title>
+        <g transform="translate(8 6)">
+          <circle class="logo-dot" cx="50" cy="108" r="18"/>
+          <line class="logo-stroke" x1="68" y1="62" x2="98" y2="118"/>
+          <line class="logo-stroke" x1="136" y1="62" x2="166" y2="118"/>
+          <text class="logo-t" x="208" y="136">eixner</text>
+        </g>
+      </svg>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/en/">Home</a></li>
+      <li><a href="/en/about/">About</a></li>
+      <li><a href="/en/services/">Services</a></li>
+      <li><a href="/en/projects/">Projects</a></li>
+      <li class="nav-dropdown">
+        <a href="/en/blog/" class="active">Blog</a>
+        <ul class="nav-drop-menu" role="menu">
+          <li role="none"><a href="/en/blog/answer-engine-optimization/" role="menuitem">Answer Engine Optimization</a></li>
+          <li role="none"><a href="/en/blog/performance-max-vs-advantage-plus/" role="menuitem">Performance Max vs. Advantage Plus</a></li>
+          <li role="none"><a href="/en/blog/server-side-tracking/" role="menuitem">Server-Side Tracking</a></li>
+          <li role="none"><a href="/en/blog/prompt-engineering-ecommerce/" role="menuitem" class="active">AI Copywriting for E-Commerce</a></li>
+        </ul>
+      </li>
+      <li><a href="/en/products/">Products</a></li>
+
+      <!-- LANGUAGE SWITCHER -->
+      <li class="lang-switch">
+        <button class="lang-btn" id="langBtn" aria-label="Choose language" aria-expanded="false">
+          <div class="flag-circle"><div class="flag-us"></div></div>
+          EN
+          <span class="lang-arrow">▾</span>
+        </button>
+        <div class="lang-dropdown" id="langDropdown" role="menu">
+          <a href="/blog/prompt-engineering-ecommerce/" class="lang-option" role="menuitem">
+            <div class="flag-lg"><div class="flag-de"></div></div>
+            <div class="lang-option-text">
+              <span class="lang-option-name">Deutsch</span>
+              <span class="lang-option-sub">Deutschland</span>
+            </div>
+          </a>
+          <a href="/en/blog/prompt-engineering-ecommerce/" class="lang-option active" role="menuitem">
+            <div class="flag-lg"><div class="flag-us"></div></div>
+            <div class="lang-option-text">
+              <span class="lang-option-name">English</span>
+              <span class="lang-option-sub">United States</span>
+            </div>
+            <span class="lang-check">✓</span>
+          </a>
+        </div>
+      </li>
+
+      <li><a href="/en/contact/" class="nav-cta">Get in touch</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <svg class="icon-sun" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      <svg class="icon-moon" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>
+    </button>
+    <button class="burger" id="burger" aria-label="Open navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<nav class="drawer" id="drawer" aria-label="Mobile Navigation">
+  <ul>
+    <li>
+      <div class="drawer-lang">
+        <a href="/blog/prompt-engineering-ecommerce/" class="drawer-lang-btn">
+          <div class="flag-circle"><div class="flag-de"></div></div>
+          Deutsch
+        </a>
+        <a href="/en/blog/prompt-engineering-ecommerce/" class="drawer-lang-btn active">
+          <div class="flag-circle"><div class="flag-us"></div></div>
+          English
+        </a>
+      </div>
+    </li>
+    <li><a href="/en/">Home <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+    <li><a href="/en/about/">About <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+    <li><a href="/en/services/">Services <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+    <li><a href="/en/projects/">Projects <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+    <li><a href="/en/blog/" class="active">Blog <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+    <li><a href="/en/products/">Products <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+    <li><a href="/en/contact/">Get in touch <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+    <li style="padding-top:16px;border-top:1px solid var(--border);display:flex;justify-content:center;">
+      <button class="theme-toggle" id="themeToggleMobile" aria-label="Toggle dark mode">
+        <svg class="icon-sun" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="icon-moon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>
+        <span class="theme-label">Dark Mode</span>
+      </button>
+    </li>
+  </ul>
+</nav>
+
+<main id="main-content">
+
+  <header class="article-hero article-hero--ai" aria-labelledby="article-heading">
+    <div class="container">
+      <div class="article-hero-inner">
+        <div class="article-cat article-cat--ai">
+          <svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2.5">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+            <path d="M2 17l10 5 10-5"/>
+            <path d="M2 12l10 5 10-5"/>
+          </svg>
+          AI &amp; E-Commerce
+        </div>
+        <h1 class="article-title" id="article-heading">
+          Prompt Engineering for E-Commerce:<br>
+          <em>5 Strategies for Better AI Product Descriptions</em> – and which one delivers most
+        </h1>
+        <p class="article-excerpt">
+          Which prompt delivers the best product description? Zero-Shot, Few-Shot,
+          Role Prompting, Constraint or Chain-of-Thought? The quality of AI-generated
+          texts depends not on the model – but on the prompt formulation.
+          This article explains all five strategies with concrete examples,
+          compares them head-to-head and gives a clear recommendation for online retailers.
+          Based on current peer-reviewed research.
+        </p>
+        <div class="article-meta-row">
+          <span><strong>Tobias Meixner</strong></span>
+          <div class="article-meta-div" aria-hidden="true"></div>
+          <span>May 10, 2026</span>
+          <div class="article-meta-div" aria-hidden="true"></div>
+          <span>12–14 min read</span>
+          <div class="article-meta-div" aria-hidden="true"></div>
+          <span>Fact-based · academic sources</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <nav aria-label="Breadcrumb"
+      style="background:var(--bg);border-bottom:1px solid var(--border);padding:12px 0;">
+    <div class="container">
+      <ol style="list-style:none;display:flex;align-items:center;flex-wrap:wrap;gap:6px;
+                margin:0;padding:0;">
+        <li style="display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--muted);">
+          <a href="/en/" style="color:var(--muted);text-decoration:none;">Home</a>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </li>
+        <li style="display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--muted);">
+          <a href="/en/blog/" style="color:var(--muted);text-decoration:none;">Blog</a>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </li>
+        <li style="font-size:.8rem;color:var(--navy);font-weight:600;"
+            aria-current="page">Prompt Engineering E-Commerce</li>
+      </ol>
+    </div>
+  </nav>
+
+
+  <div class="container">
+    <div class="article-body">
+      <article class="article-content" aria-label="Article content">
+
+        <div class="intro-box intro-box--ai">
+          <p>
+            <strong>Prompt engineering is the methodical design of input texts to an AI
+            language model, with the goal of generating more precise, relevant and
+            usable outputs.</strong> In e-commerce, the prompt formulation determines
+            whether an AI-generated product text is generic and off-brand – or
+            brand-consistent, SEO-optimised and sales-driving.
+          </p>
+          <p>
+            The core problem: online retailers with large catalogues – XXXLutz, for instance,
+            carries more than 700,000 items in its online shop (XXXLutz, 2025) –
+            can no longer scale high-quality product descriptions manually.
+            AI-assisted copywriting solves the scaling problem. But without the right
+            prompt strategy, every model produces generic output.
+          </p>
+          <p>
+            This article explains the five most important prompt strategies with concrete
+            e-commerce examples, shows their strengths and limitations in a direct comparison,
+            and gives a clear recommendation for which combination delivers most in practice.
+          </p>
+        </div>
+
+
+        <nav class="toc-box" aria-label="Table of contents">
+          <div class="toc-box-title">Table of Contents</div>
+          <ol>
+            <li><span>1</span><a href="#problem">The Scaling Problem in E-Commerce</a></li>
+            <li><span>2</span><a href="#what-are-llms">What Are LLMs and Why Is the Prompt Critical?</a></li>
+            <li><span>3</span><a href="#hallucinations">Hallucinations: The Most Important Risk</a></li>
+            <li><span>4</span><a href="#zero-shot">Strategy 1: Zero-Shot Prompting</a></li>
+            <li><span>5</span><a href="#few-shot">Strategy 2: Few-Shot Prompting</a></li>
+            <li><span>6</span><a href="#role">Strategy 3: Role Prompting</a></li>
+            <li><span>7</span><a href="#constraint">Strategy 4: Constraint Prompting</a></li>
+            <li><span>8</span><a href="#cot">Strategy 5: Chain-of-Thought Prompting</a></li>
+            <li><span>9</span><a href="#comparison">Direct Comparison of All Five Strategies</a></li>
+            <li><span>10</span><a href="#combination">The Recommended Combination</a></li>
+            <li><span>11</span><a href="#faq">FAQ</a></li>
+          </ol>
+        </nav>
+
+
+        <!-- 1 -->
+        <h2 id="problem">1. The Scaling Problem in E-Commerce</h2>
+        <p>Product descriptions are expensive. Every text must be SEO-ready, hit the right tone, contain technically accurate product data and be written to drive purchase intent. With small catalogues this is manageable manually. With large ones, it is not.</p>
+
+        <div class="stats-grid" role="list" aria-label="E-commerce scaling problem statistics">
+          <div class="stat-card" role="listitem">
+            <div class="stat-card-val">700,000+</div>
+            <div class="stat-card-label">Items in XXXLutz's online shop – creating high-quality, SEO-optimised texts for every product manually is simply not scalable</div>
+            <div class="stat-card-source">XXXLutz, 2025</div>
+          </div>
+          <div class="stat-card" role="listitem">
+            <div class="stat-card-val">3 Models</div>
+            <div class="stat-card-label">GPT-4o (OpenAI), Claude (Anthropic) and Gemini (Google) – the three most widely used LLMs for commercial copywriting</div>
+            <div class="stat-card-source">Chen et al., 2025</div>
+          </div>
+          <div class="stat-card" role="listitem">
+            <div class="stat-card-val">Token by Token</div>
+            <div class="stat-card-label">LLMs generate responses autoregressively – each output is a probability distribution over the next token, shaped by the prompt</div>
+            <div class="stat-card-source">Brown et al., 2020</div>
+          </div>
+          <div class="stat-card" role="listitem">
+            <div class="stat-card-val">1 Variable</div>
+            <div class="stat-card-label">The prompt is the only variable you can fully control without AI expertise – and it has a direct impact on quality, style and factual accuracy</div>
+            <div class="stat-card-source">Chen et al., 2025; Sahoo et al., 2024</div>
+          </div>
+        </div>
+
+        <p>Generative AI solves the scaling problem. But it does not automatically solve the quality problem. An LLM without targeted guidance produces broad, unspecific or even factually incorrect texts – which is business-critical for product descriptions. <strong>Guidance happens through the prompt. And through the strategy used to write it.</strong></p>
+
+
+        <!-- 2 -->
+        <h2 id="what-are-llms">2. What Are LLMs and Why Is the Prompt Critical?</h2>
+        <p>Large Language Models (LLMs) are neural networks based on the Transformer architecture – first described by Vaswani et al. (2017) in "Attention Is All You Need". They are trained on large text corpora: web content, books, academic articles, code (Brown et al., 2020).</p>
+        <p>During training, the model learns to predict the next token in a sequence. In doing so, it acquires statistical language patterns at a scale previously impossible. The result: an LLM such as GPT-4o, Claude or Gemini can produce texts in different styles, tones and for different purposes – from a technical data sheet to an emotional product story.</p>
+
+        <div class="fact-box">
+          <div class="fact-box-title">
+            <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Why is the prompt so critical?
+          </div>
+          <p>The quality of a generated response is determined by three factors: the prompt formulation, model hyperparameters and the diversity of training data (Chen et al., 2025). Of these three factors, the prompt is the only one you can directly influence in your workflow – without access to the model itself. Prompt engineering is therefore, according to Sahoo et al. (2024), not an optional extra skill but an indispensable technique for professional AI use.</p>
+        </div>
+
+
+        <!-- 3 -->
+        <h2 id="hallucinations">3. Hallucinations: The Most Important Risk for Product Texts</h2>
+        <p>Hallucinations are content that LLMs generate that reads fluently and plausibly but is factually incorrect or unsupported (Ji et al., 2023).</p>
+        <p>In e-commerce this is not an academic problem. Incorrectly stated product dimensions, non-existent material certificates or invented product features lead to:</p>
+        <ul>
+          <li>Higher return rates due to unmet expectations</li>
+          <li>Complaints and negative reviews</li>
+          <li>Legal risk from demonstrably false product claims</li>
+          <li>Lasting loss of trust among repeat customers</li>
+        </ul>
+        <p>A carefully constructed prompt can counteract this – for example through explicit verification instructions or through Chain-of-Thought techniques that force the model to develop assumptions step by step before drawing a conclusion (Chen et al., 2025).</p>
+
+        <div class="warn-box">
+          <div class="warn-box-title">
+            <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            The golden rule
+          </div>
+          <p>Always pass the verified product data to the model as context (dimensions, materials, weight, scope of delivery). Do not let the model invent product data – let it formulate exclusively on the basis of your input.</p>
+        </div>
+
+
+        <!-- 4 -->
+        <h2 id="zero-shot">4. Strategy 1: Zero-Shot Prompting</h2>
+        <p>Zero-Shot Prompting is the most basic form of LLM guidance. The model receives a task description but no examples. It relies entirely on the language knowledge acquired during training (Brown et al., 2020).</p>
+
+        <div class="approach-card">
+          <div class="approach-header">
+            <div class="approach-num" aria-hidden="true">0</div>
+            <div>
+              <div class="approach-title">Example: Zero-Shot Prompt</div>
+              <div class="approach-subtitle">Simplest approach – no preparation required</div>
+            </div>
+          </div>
+          <p style="font-style:italic;color:var(--muted);border-left:3px solid var(--border);padding-left:14px;margin:12px 0;">"Write a 100-word product description for a solid oak bookcase with four shelves, dimensions 180 × 80 × 30 cm, for an online furniture shop."</p>
+          <p>The model fills in the rest at its own discretion. It chooses a style, a tone, a structure – without a stylistic reference frame. The result is usable in many contexts, but has no relation to a specific brand voice.</p>
+          <div class="approach-tags">
+            <span class="approach-tag tag-pro">✓ Immediately ready to use</span>
+            <span class="approach-tag tag-pro">✓ No preparation effort</span>
+            <span class="approach-tag tag-pro">✓ Good for quick first drafts</span>
+            <span class="approach-tag tag-con">✗ No brand style reference</span>
+            <span class="approach-tag tag-con">✗ Broad, generic output</span>
+            <span class="approach-tag tag-con">✗ Not suited for professional content production</span>
+          </div>
+        </div>
+
+        <p>Sahoo et al. (2024) show that without precise task-specific guidance, no targeted model behaviour is triggered. General prompts lead to general answers – plausible, but optimal for no specific context. Zero-Shot works for tests and first drafts. For scalable, brand-consistent product texts, it is not enough.</p>
+
+
+        <!-- 5 -->
+        <h2 id="few-shot">5. Strategy 2: Few-Shot Prompting</h2>
+        <p>Few-Shot Prompting provides the model with several examples of input and desired output before the actual task. These examples act as in-context demonstrations: they guide style, structure and tone without retraining the model (Brown et al., 2020).</p>
+
+        <div class="approach-card">
+          <div class="approach-header">
+            <div class="approach-num" aria-hidden="true">2-5</div>
+            <div>
+              <div class="approach-title">Example: Few-Shot Prompt</div>
+              <div class="approach-subtitle">Brand voice as in-context demonstration</div>
+            </div>
+          </div>
+          <p style="font-style:italic;color:var(--muted);border-left:3px solid var(--border);padding-left:14px;margin:12px 0;">"Here are two examples of product descriptions in our style:<br><br>Product: OSLO solid wood desk, 140 × 70 cm, oiled oak<br>Text: Calm. Clear. Durable. The OSLO desk in oiled solid oak brings Scandinavian design into your daily life – with a surface that accepts the marks of life rather than hiding them. 140 × 70 cm, height-adjustable in 3 positions.<br><br>Product: FJORD shelf unit, 5 compartments, birch<br>Text: The FJORD shelf displays what you love. Five openly accessible compartments in untreated birchwood – for books, plants or anything that deserves to be seen.<br><br>Now write a description for: solid oak bookcase with four shelves, dimensions 180 × 80 × 30 cm."</p>
+          <div class="approach-tags">
+            <span class="approach-tag tag-pro">✓ Brand voice transferable</span>
+            <span class="approach-tag tag-pro">✓ Significant quality leap over Zero-Shot</span>
+            <span class="approach-tag tag-pro">✓ No model retraining needed</span>
+            <span class="approach-tag tag-con">✗ Effort to create examples</span>
+            <span class="approach-tag tag-con">✗ Too many examples unnecessarily burden the context</span>
+          </div>
+        </div>
+
+        <p>Brown et al. (2020) showed with GPT-3 that Few-Shot Prompting can compete with fine-tuned, task-specifically retrained models in certain task areas. That is the scientific basis for why this approach is so effective. <strong>For e-commerce this means: you can use a few manually created sample descriptions as reference and instruct the model to describe new products in that style.</strong></p>
+        <p>Caveat: Sahoo et al. (2024) point out that Few-Shot has no universal superiority. For simple tasks or powerful models, a well-constructed Zero-Shot prompt can deliver comparable results. And too many examples can unnecessarily burden context window memory.</p>
+
+
+        <!-- 6 -->
+        <h2 id="role">6. Strategy 3: Role Prompting</h2>
+        <p>Role Prompting assigns the model a specific expert role at the start of the prompt. This role assignment defines the response frame and demonstrably improves the contextual accuracy and task-specific precision of model outputs (Chen et al., 2025).</p>
+
+        <div class="approach-card">
+          <div class="approach-header">
+            <div class="approach-num" aria-hidden="true">R</div>
+            <div>
+              <div class="approach-title">Example: Role Prompt</div>
+              <div class="approach-subtitle">Expert context as response frame</div>
+            </div>
+          </div>
+          <p style="font-style:italic;color:var(--muted);border-left:3px solid var(--border);padding-left:14px;margin:12px 0;">"You are an experienced e-commerce copywriter with ten years of experience in the furniture industry. You write emotional, sales-driven product descriptions that satisfy search engine criteria while conveying the lifestyle behind a piece of furniture. You know the differences between wood types and use them deliberately. Write a product description for: solid oak bookcase, four shelves, 180 × 80 × 30 cm."</p>
+          <div class="approach-tags">
+            <span class="approach-tag tag-pro">✓ Focused, contextually precise output</span>
+            <span class="approach-tag tag-pro">✓ Improves specialist vocabulary and tone</span>
+            <span class="approach-tag tag-pro">✓ Combines well with Few-Shot</span>
+            <span class="approach-tag tag-con">✗ Role configuration is task-dependent</span>
+            <span class="approach-tag tag-con">✗ Insufficient alone for complete quality control</span>
+          </div>
+        </div>
+
+        <p>A more advanced form is ExpertPrompting described by Chen et al. (2025): here the model itself generates a detailed expert identity before solving the actual task. This demonstrably improves information depth for specific specialist topics. In practice: Role Prompting has its strongest effect in combination with Few-Shot examples and a Constraint block.</p>
+
+
+        <!-- 7 -->
+        <h2 id="constraint">7. Strategy 4: Constraint Prompting</h2>
+        <p>Constraint Prompting gives the model explicit restrictions and structural requirements. An overly general prompt confronts the model with a wide interpretation space and leads to generic outputs (Chen et al., 2025). Detailed and precise prompts reduce this ambiguity and enable task-specifically aligned outputs.</p>
+
+        <div class="approach-card">
+          <div class="approach-header">
+            <div class="approach-num" aria-hidden="true">C</div>
+            <div>
+              <div class="approach-title">Example: Constraint Prompt</div>
+              <div class="approach-subtitle">Precise output control through explicit requirements</div>
+            </div>
+          </div>
+          <p style="font-style:italic;color:var(--muted);border-left:3px solid var(--border);padding-left:14px;margin:12px 0;">"Write a product description for a solid oak bookcase (four shelves, 180 × 80 × 30 cm).<br><br>Requirements:<br>– Exactly 120 words<br>– Tone: modern and warm, no superlatives<br>– Mandatory keywords: solid wood, bookcase, oak, sustainable<br>– Target audience: families with children who value durable furniture<br>– Format: running text, one paragraph, no bullet points<br>– No invented product properties: stick to the data provided"</p>
+          <div class="approach-tags">
+            <span class="approach-tag tag-pro">✓ Precise output control</span>
+            <span class="approach-tag tag-pro">✓ SEO keywords directly integrable</span>
+            <span class="approach-tag tag-pro">✓ Target-audience-specific texts scalable</span>
+            <span class="approach-tag tag-con">✗ Prompt becomes complex with many requirements</span>
+            <span class="approach-tag tag-con">✗ Too many constraints can reduce text naturalness</span>
+          </div>
+        </div>
+
+        <p>The research by Wasilewski (2025) underlines the particular relevance of this approach: the targeted inclusion of customer-segment-specific information in prompt design enables e-commerce platforms to produce noticeably differentiated product descriptions for different customer groups. Product texts in the furniture sector must simultaneously ensure technical precision, emotional appeal and SEO relevance – all requirements that can be systematically mapped in a Constraint Prompt.</p>
+
+
+        <!-- 8 -->
+        <h2 id="cot">8. Strategy 5: Chain-of-Thought Prompting</h2>
+        <p>Chain-of-Thought (CoT) Prompting is the most advanced of the five strategies. The model is instructed to develop its reasoning step by step before formulating the final output. Wei et al. (2022) demonstrated in their foundational study that generating a chain of thought significantly improves the ability of LLMs to tackle complex reasoning tasks.</p>
+
+        <div class="approach-card">
+          <div class="approach-header">
+            <div class="approach-num" aria-hidden="true">→</div>
+            <div>
+              <div class="approach-title">Example: Chain-of-Thought Prompt</div>
+              <div class="approach-subtitle">Step-by-step reasoning for content quality assurance</div>
+            </div>
+          </div>
+          <p style="font-style:italic;color:var(--muted);border-left:3px solid var(--border);padding-left:14px;margin:12px 0;">"I will give you the following product data: solid oak bookcase, four shelves, 180 × 80 × 30 cm, solid wood, oiled, load capacity per shelf 30 kg.<br><br>Work step by step:<br>1. Analyse the core features of the product and identify which are relevant to buyers.<br>2. Determine the most likely primary target audience for this product.<br>3. Derive the three central purchase arguments.<br>4. On the basis of these steps, write a 120-word product description."</p>
+          <div class="approach-tags">
+            <span class="approach-tag tag-pro">✓ Significantly lower hallucination risk</span>
+            <span class="approach-tag tag-pro">✓ Transparent reasoning process – easier to verify</span>
+            <span class="approach-tag tag-pro">✓ Higher content consistency</span>
+            <span class="approach-tag tag-con">✗ Increased processing effort (more tokens)</span>
+            <span class="approach-tag tag-con">✗ Often unnecessarily complex for simple texts</span>
+          </div>
+        </div>
+
+        <p>The decisive advantage for e-commerce: the model does not produce output directly from a vague input, but on the basis of an explicitly developed intermediate context. This forces the model to make assumptions explicit before drawing conclusions – which demonstrably reduces hallucination risk (Chen et al., 2025). Sahoo et al. (2024) confirm this finding in their systematic review of advanced prompting techniques.</p>
+
+
+        <!-- 9 -->
+        <h2 id="comparison">9. Direct Comparison of All Five Strategies</h2>
+        <p>No strategy is universally superior. Each has its use case.</p>
+
+        <div class="table-wrap">
+          <table class="compare-table" aria-label="Comparison of five prompt strategies for e-commerce product texts">
+            <thead>
+              <tr><th>Strategy</th><th>Short description</th><th>Strength</th><th>Limitation</th><th>Best for</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Zero-Shot</strong></td>
+                <td>Task with no examples or requirements</td>
+                <td class="ok">Fast, no effort</td>
+                <td class="nok">Generic, no brand reference</td>
+                <td>First drafts, testing</td>
+              </tr>
+              <tr>
+                <td><strong>Few-Shot</strong></td>
+                <td>Provide 2–5 examples as reference</td>
+                <td class="ok">Brand voice transferable</td>
+                <td class="nok">Effort to create examples</td>
+                <td>Scaled content production with clear brand language</td>
+              </tr>
+              <tr>
+                <td><strong>Role Prompting</strong></td>
+                <td>Assign expert role at the start</td>
+                <td class="ok">Focused, contextually precise output</td>
+                <td class="nok">Role must be configured per task</td>
+                <td>Specialist texts with specific perspective</td>
+              </tr>
+              <tr>
+                <td><strong>Constraint Prompting</strong></td>
+                <td>Explicit requirements: length, SEO, tone, audience</td>
+                <td class="ok">Precise output control</td>
+                <td class="nok">Prompt becomes complex with many requirements</td>
+                <td>SEO-optimised texts, audience-specific variants</td>
+              </tr>
+              <tr>
+                <td><strong>Chain-of-Thought</strong></td>
+                <td>Model reasons step by step before writing</td>
+                <td class="ok">Lower hallucination risk</td>
+                <td class="nok">Increased token consumption</td>
+                <td>Complex products, high factual accuracy required</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p style="font-size:.8rem;color:var(--muted);margin-top:8px;">Table adapted from Chen et al. (2025); Sahoo et al. (2024)</p>
+
+        <p>Zero-Shot shines through immediate readiness but produces generic output without stylistic brand reference when context specificity is missing. Few-Shot and Role Prompting significantly improve output quality by giving the model an explicit reference frame – but require higher upfront effort. Constraint Prompting offers precise output control at the cost of growing prompt complexity. Chain-of-Thought reduces the risk of factual inaccuracies through structured intermediate reasoning, but brings increased processing effort.</p>
+
+
+        <!-- 10 -->
+        <h2 id="combination">10. The Recommended Combination</h2>
+        <p>Sahoo et al. (2024) show in their systematic review of more than thirty prompting techniques that combining multiple prompting techniques demonstrably improves LLM performance on complex tasks. For professional e-commerce copywriting, therefore, not a single strategy but their targeted combination is recommended.</p>
+
+        <div class="step-card">
+          <div class="step-num" aria-hidden="true">1</div>
+          <div class="step-content">
+            <h3>Role Prompt: Set the expert context</h3>
+            <p>Open every product text prompt with a clear role definition. Example: "You are an experienced e-commerce copywriter specialising in furniture and home. You write fact-based, emotional product descriptions that meet SEO requirements and speak to the target group's lifestyle."</p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num" aria-hidden="true">2</div>
+          <div class="step-content">
+            <h3>Few-Shot: Provide brand voice as reference</h3>
+            <p>Include 2–3 manually created sample texts from your catalogue. These in-context demonstrations transfer tone, sentence rhythm and structural preferences to all further outputs – without model retraining.</p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num" aria-hidden="true">3</div>
+          <div class="step-content">
+            <h3>Constraint block: Define technical requirements</h3>
+            <p>Specify the concrete requirements: word count, mandatory SEO keywords, target audience, format (running text or bullet points), which product data may be used. This block prevents the model from operating outside your requirements.</p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num" aria-hidden="true">4</div>
+          <div class="step-content">
+            <h3>Chain-of-Thought: Build in a quality assurance step</h3>
+            <p>Have the model first analyse the product features, determine the target group and derive the purchase arguments – before writing the actual text. This reduces hallucinations and ensures content consistency. Especially important for technically complex products with many specifications.</p>
+          </div>
+        </div>
+
+        <div class="fact-box">
+          <div class="fact-box-title">
+            <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            The most important ground rule
+          </div>
+          <p>Always give the model the verified product data as input (dimensions, materials, weight, scope of delivery, certifications). An LLM should formulate on the basis of your data – not invent product data. This is not a limitation: it is the only way to systematically avoid hallucinations in product texts.</p>
+        </div>
+
+        <p>A logical next step is deploying an AI agent: a system that breaks the task into sub-steps through targeted prompt orchestration, automatically feeds in product data and makes it all scalable (Chen et al., 2025). For online retailers with large catalogues, this is the next logical step after manual prompt optimisation.</p>
+
+
+        <!-- 11 FAQ -->
+        <h2 id="faq">11. FAQ: Key Questions About Prompt Engineering in E-Commerce</h2>
+
+        <div class="faq-list" role="list">
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" aria-expanded="false">
+              What is prompt engineering in simple terms?
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner">Prompt engineering is the methodical design of input texts to an AI language model in order to obtain more precise, relevant and usable outputs. The prompt is the only variable you can fully control without technical AI knowledge – and has a direct influence on quality, style and accuracy of generated texts. According to Sahoo et al. (2024), prompt engineering is not an optional extra skill but an indispensable technique for professional AI use.</div></div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" aria-expanded="false">
+              Which prompt strategy is best for e-commerce product descriptions?
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner">No single strategy is universally superior. For professional e-commerce copywriting, a combination is recommended: Role Prompting (expert context), Few-Shot examples (brand voice), Constraint block (SEO requirements, length, tone) and a Chain-of-Thought step (content quality assurance). This combination is confirmed by Sahoo et al. (2024) as the most effective approach for complex tasks.</div></div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" aria-expanded="false">
+              What are hallucinations in AI texts and how do I avoid them?
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner">Hallucinations are content that LLMs generate that reads fluently and plausibly but is factually incorrect – for example invented dimensions, non-existent material certificates or false product features (Ji et al., 2023). In e-commerce they lead to returns, legal risk and loss of trust. Two countermeasures: First, provide the model with all verified product data as context and explicitly prohibit inventing data. Second, use Chain-of-Thought Prompting – the step-by-step approach forces the model to make assumptions explicit before drawing a conclusion (Wei et al., 2022; Chen et al., 2025).</div></div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" aria-expanded="false">
+              Can I use ChatGPT directly for product descriptions or do I need a special tool?
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner">ChatGPT (GPT-4o), Claude or Gemini can be used directly for product descriptions – provided you use the right prompt strategies. Quality depends not on the tool but on the prompt formulation. Zero-Shot prompts produce generic texts without brand reference. A combination of Role, Few-Shot, Constraint and Chain-of-Thought produces brand-consistent, SEO-optimised and fact-based product texts.</div></div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" aria-expanded="false">
+              How many examples do I need for Few-Shot Prompting?
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner">Typically 2 to 5 examples are sufficient. Sahoo et al. (2024) point out that too many examples can unnecessarily burden the prompt context – especially with newer, more capable models that already generalise well from fewer demonstrations. Quality of examples beats quantity: choose two or three particularly good texts that represent your ideal brand tone.</div></div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" aria-expanded="false">
+              Can AI copywriting be fully automated?
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner">Technically yes – practically with a quality caveat. By deploying an AI agent that automatically reads in product data, orchestrates the prompt and feeds the output into editorial processes, copywriting can be fully scaled for large catalogues (Chen et al., 2025). The remaining manual element is quality control – especially for products where factual errors are critical. Full automation without human review is only advisable in e-commerce for non-critical, highly standardised products.</div></div>
+          </div>
+
+          <div class="faq-item" role="listitem">
+            <button class="faq-q" aria-expanded="false">
+              What is the difference between Zero-Shot and One-Shot Prompting?
+              <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner">Zero-Shot gives no examples – the model relies entirely on its pre-training. One-Shot gives exactly one example, Few-Shot gives several (typically 2–5). Brown et al. (2020) defined these categories in their GPT-3 study. In practice, most users skip One-Shot and work directly with Few-Shot, because a single example is often insufficient to produce the desired stylistic consistency.</div></div>
+          </div>
+
+        </div>
+
+
+        <!-- CONCLUSION -->
+        <h2 id="conclusion" style="scroll-margin-top:calc(var(--nav-h) + 24px);">
+          Conclusion: The Prompt Strategy Determines Text Quality – Not the Model
+        </h2>
+        <p>GPT-4o, Claude, Gemini – all three models can produce excellent e-commerce product texts. And all three can produce generic, off-brand or factually incorrect output on bad prompts. <strong>The variable is not the model. The variable is the prompt.</strong></p>
+        <p>Zero-Shot works for tests. Few-Shot transfers brand voice. Role Prompting sharpens the context. Constraint Prompting controls output format and SEO requirements. Chain-of-Thought reduces hallucinations. And the combination of all five is what separates professional AI-assisted copywriting from well-sounding noise.</p>
+        <p>For online retailers with large catalogues, this is no longer a future option. It is the current state of practice.</p>
+
+        <div class="fact-box">
+          <div class="fact-box-title">
+            <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Three steps to get started
+          </div>
+          <p>1. <strong>Collect sample descriptions:</strong> Find the three best manually written product texts in your catalogue – these are your Few-Shot examples for all further prompts</p>
+          <p>2. <strong>Build the combination prompt:</strong> Role → Few-Shot → Constraint → Chain-of-Thought. Test it on five different products from different categories</p>
+          <p>3. <strong>Set up quality checks:</strong> Always compare the generated product data (dimensions, material specifications) with verified source data. AI writes – you verify the facts</p>
+        </div>
+
+        <div class="sources-box" role="note" aria-label="Sources">
+          <strong>Sources</strong>
+          <div style="display:flex;flex-direction:column;gap:4px;margin-top:6px;">
+            <a href="https://proceedings.neurips.cc/paper_files/paper/2020/file/1457c0d6bfcb4967418bfb8ac142f64a-Paper.pdf" target="_blank" rel="noopener">Brown T. et al. (2020): Language Models are Few-Shot Learners. NeurIPS 33, 1877–1901</a>
+            <a href="https://doi.org/10.1016/j.patter.2025.101260" target="_blank" rel="noopener">Chen B. et al. (2025): Unleashing the potential of prompt engineering for large language models. Patterns, 6(6), 101260</a>
+            <a href="https://dl.acm.org/doi/epdf/10.1145/3571730" target="_blank" rel="noopener">Ji Z. et al. (2023): Survey of hallucination in natural language generation. ACM Computing Surveys, 55(12), Article 3571730</a>
+            <a href="https://arxiv.org/pdf/2402.07927" target="_blank" rel="noopener">Sahoo P. et al. (2024): A systematic survey of prompt engineering in large language models. arXiv:2402.07927</a>
+            <a href="https://arxiv.org/pdf/1706.03762" target="_blank" rel="noopener">Vaswani A. et al. (2017): Attention is all you need. NeurIPS 30, 5998–6008</a>
+            <a href="https://arxiv.org/pdf/2201.11903" target="_blank" rel="noopener">Wei J. et al. (2022): Chain-of-thought prompting elicits reasoning in large language models. NeurIPS 35, 24824–24837</a>
+            <a href="https://www.sciencedirect.com/science/article/abs/pii/S0920548925000418" target="_blank" rel="noopener">Wasilewski A. (2025): Harnessing generative AI for personalized E-commerce product descriptions. Computer Standards &amp; Interfaces, 94, 104012</a>
+            <a href="https://www.xxxlutz.de/" target="_blank" rel="noopener">XXXLutz (2025): xxxlutz.de</a>
+          </div>
+        </div>
+
+        <!-- AUTHOR -->
+        <div style="margin-top:clamp(40px,5vw,60px);padding-top:32px;border-top:1px solid var(--border);display:flex;align-items:flex-start;gap:16px;">
+          <picture>
+            <source srcset="/assets/img/Profilbild2.webp" type="image/webp">
+            <img src="/assets/img/Profilbild2.jpg" alt="Tobias Meixner" width="52" height="52" style="border-radius:50%;object-fit:cover;flex-shrink:0;" loading="lazy">
+          </picture>
+          <div>
+            <div style="font-family:var(--fd);font-size:.9rem;font-weight:700;color:var(--navy);margin-bottom:2px;">Tobias Meixner</div>
+            <div style="font-size:.8rem;color:var(--muted);margin-bottom:8px;">Freelancer for Tracking &amp; Websites · Würzburg</div>
+            <p style="font-size:.84rem;color:var(--muted);line-height:1.65;margin:0;">I build websites and digital foundations that work – from clean tracking to Schema Markup to the technical base for AI-assisted content processes. <a href="/en/contact/" style="color:var(--indigo);">Get in touch</a>.</p>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-card" style="margin-top:32px;background:var(--navy);border-radius:var(--r-lg);padding:28px 32px;">
+          <p style="font-family:var(--fd);font-size:1rem;font-weight:700;color:#fff;margin-bottom:8px;">Building a website or digital foundation?</p>
+          <p style="font-size:.875rem;color:rgba(255,255,255,.6);line-height:1.65;margin-bottom:20px;">From the technical base (GTM, GA4, Schema Markup) to a website that converts – I make it happen. All services on the <a href="/en/services/" style="color:#a5b4fc;">services page</a>.</p>
+          <a href="/en/contact/" class="btn btn-indigo btn-sm">Get in touch <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+
+        <div style="margin-top:24px;">
+          <a href="/en/blog/" style="display:inline-flex;align-items:center;gap:6px;font-size:.84rem;color:var(--muted);text-decoration:none;font-family:var(--fd);font-weight:600;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+            Back to Blog
+          </a>
+        </div>
+
+      </article>
+
+      <!-- SIDEBAR -->
+      <aside class="article-sidebar" aria-label="Table of contents">
+        <nav class="toc-card" aria-label="Jump to section">
+          <div class="toc-card-title">Contents</div>
+          <ul class="toc-links" role="list">
+            <li><a href="#problem">1. The Scaling Problem</a></li>
+            <li><a href="#what-are-llms">2. LLMs &amp; Prompt</a></li>
+            <li><a href="#hallucinations">3. Hallucinations</a></li>
+            <li><a href="#zero-shot">4. Zero-Shot</a></li>
+            <li><a href="#few-shot">5. Few-Shot</a></li>
+            <li><a href="#role">6. Role Prompting</a></li>
+            <li><a href="#constraint">7. Constraint Prompting</a></li>
+            <li><a href="#cot">8. Chain-of-Thought</a></li>
+            <li><a href="#comparison">9. Comparison</a></li>
+            <li><a href="#combination">10. The Combination</a></li>
+            <li><a href="#faq">11. FAQ</a></li>
+          </ul>
+        </nav>
+        <div class="author-card">
+          <picture>
+            <source srcset="/assets/img/Profilbild2.webp" type="image/webp">
+            <img src="/assets/img/Profilbild2.jpg" alt="Tobias Meixner" width="48" height="48" loading="lazy">
+          </picture>
+          <div class="author-name">Tobias Meixner</div>
+          <div class="author-role">Freelancer · Würzburg</div>
+          <p class="author-bio">Websites, tracking &amp; digital foundations – so AI and marketing build on clean data.</p>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-row">
+      <span class="footer-copy">© 2026 Tobias Meixner</span>
+      <ul class="footer-links">
+        <li><a href="/en/blog/">Blog</a></li>
+        <li><a href="/en/legal/">Legal Notice</a></li>
+        <li><a href="/en/policy-privacy/">Privacy Policy</a></li>
+        <li><a href="/en/terms-and-conditions/">Terms</a></li>
+        <li><a href="#" onclick="CookieScript.instance.show(); return false;">Cookie Settings</a></li>
+        <li><a href="https://www.linkedin.com/in/meixner-tobias" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

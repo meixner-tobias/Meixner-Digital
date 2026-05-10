@@ -164,7 +164,7 @@
     <xhtml:link rel="alternate" hreflang="de"        href="https://meixner-tobias.com/blog/"/>
     <xhtml:link rel="alternate" hreflang="en"        href="https://meixner-tobias.com/en/blog/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://meixner-tobias.com/en/blog/"/>
-    <lastmod>2026-05-03</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -173,7 +173,7 @@
     <xhtml:link rel="alternate" hreflang="de"        href="https://meixner-tobias.com/blog/"/>
     <xhtml:link rel="alternate" hreflang="en"        href="https://meixner-tobias.com/en/blog/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://meixner-tobias.com/en/blog/"/>
-    <lastmod>2026-05-03</lastmod>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -230,6 +230,24 @@
     <xhtml:link rel="alternate" hreflang="en"        href="https://meixner-tobias.com/en/blog/performance-max-vs-advantage-plus/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://meixner-tobias.com/en/blog/performance-max-vs-advantage-plus/"/>
     <lastmod>2026-04-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://meixner-tobias.com/blog/prompt-engineering-ecommerce/</loc>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://meixner-tobias.com/blog/prompt-engineering-ecommerce/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://meixner-tobias.com/en/blog/prompt-engineering-ecommerce/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://meixner-tobias.com/en/blog/prompt-engineering-ecommerce/"/>
+    <lastmod>2026-05-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://meixner-tobias.com/en/blog/prompt-engineering-ecommerce/</loc>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://meixner-tobias.com/blog/prompt-engineering-ecommerce/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://meixner-tobias.com/en/blog/prompt-engineering-ecommerce/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://meixner-tobias.com/en/blog/prompt-engineering-ecommerce/"/>
+    <lastmod>2026-05-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

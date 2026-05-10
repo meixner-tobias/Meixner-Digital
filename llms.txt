@@ -54,6 +54,11 @@ Google Analytics 4, Consent Mode v2, Schema Markup, JSON-LD.
 - [Performance Max vs. Advantage+](/en/blog/performance-max-vs-advantage-plus/):
   Comparison of Google and Meta AI campaign types. With ROAS benchmarks
   and a decision guide by budget.
+- [Prompt Engineering for E-Commerce](/en/blog/prompt-engineering-ecommerce/):
+  Five prompt strategies (Zero-Shot, Few-Shot, Role Prompting, Constraint,
+  Chain-of-Thought) for better AI-generated product descriptions. With
+  comparison table and recommended combination. Based on peer-reviewed research
+  (Chen et al. 2025; Sahoo et al. 2024; Brown et al. 2020).
 
 ## Projects / Projekte
 
