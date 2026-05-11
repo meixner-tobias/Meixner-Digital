@@ -1536,6 +1536,7 @@ textarea:focus-visible {
 .toc-box li span { font-size: .75rem; font-weight: 800; color: var(--indigo-dark); flex-shrink: 0; margin-top: 2px; min-width: 16px; }
 .toc-box a { font-size: .84rem; color: var(--muted); text-decoration: none; line-height: 1.4; transition: color .2s; }
 .toc-box a:hover { color: var(--indigo-dark); }
+@media (min-width: 769px) { .toc-box { display: none; } }
 
 /* ── Stat cards (big number with label, in a grid) ── */
 .stats-grid   { display: grid; grid-template-columns: 1fr 1fr;         gap: 12px; margin: 24px 0; }
@@ -1921,6 +1922,7 @@ textarea:focus-visible {
 [data-theme="dark"] .step-content h3 { color: #F1F5F9; }
 [data-theme="dark"] .approach-card  { background: #1F2937; border-color: #374151; }
 [data-theme="dark"] .approach-title { color: #F1F5F9; }
+[data-theme="dark"] .approach-num   { background: #334155; }
 [data-theme="dark"] .platform-card  { background: #1F2937; border-color: #374151; }
 [data-theme="dark"] .platform-card h3 { color: #F1F5F9; }
 [data-theme="dark"] .budget-card    { background: #1F2937; border-color: #374151; }

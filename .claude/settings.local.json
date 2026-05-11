@@ -3,7 +3,8 @@
     "allow": [
       "Bash(python3 -c ' *)",
       "Bash(python3)",
-      "Bash(python -c ' *)"
+      "Bash(python -c ' *)",
+      "Bash(git -C \"h:\\\\Meine Ablage\\\\Meixner-Digital\\\\Meixner-Website\" status --short)"
     ]
   }
 }
