@@ -276,19 +276,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="topic">Womit kann ich helfen? <span class="req">*</span></label>
-              <div class="select-wrap">
-                <select class="form-select" id="topic" name="topic"
-                        required aria-required="true" aria-describedby="topicErr">
-                  <option value="" disabled selected>Bitte auswählen …</option>
-                  <option value="tracking">GTM &amp; GA4 Setup</option>
-                  <option value="website">Website erstellen</option>
-                  <option value="betreuung">Sorglos-Betreuung</option>
-                  <option value="other">Noch unklar - einfach melden</option>
-                </select>
+              <span class="form-label" id="topicLabel">Womit kann ich helfen? <span class="req">*</span> <span class="form-label-hint">(mehrere m&#246;glich)</span></span>
+              <div class="topic-checks" role="group" aria-labelledby="topicLabel" aria-describedby="topicErr">
+                <label class="topic-check">
+                  <input type="checkbox" name="topic" value="tracking">
+                  <span class="topic-check-text">GTM &amp; GA4 Setup</span>
+                </label>
+                <label class="topic-check">
+                  <input type="checkbox" name="topic" value="website">
+                  <span class="topic-check-text">Website erstellen</span>
+                </label>
+                <label class="topic-check">
+                  <input type="checkbox" name="topic" value="betreuung">
+                  <span class="topic-check-text">Sorglos-Betreuung</span>
+                </label>
+                <label class="topic-check">
+                  <input type="checkbox" name="topic" value="other">
+                  <span class="topic-check-text">Noch unklar - einfach melden</span>
+                </label>
               </div>
-
-              <span class="field-error" id="topicErr" role="alert">Bitte w&#228;hle ein Thema aus.</span>
+              <span class="field-error" id="topicErr" role="alert">Bitte w&#228;hle mindestens eine Leistung aus.</span>
             </div>
             <input type="hidden" id="addon_tracking_val" name="addon_tracking" value="Nein">
             <div id="addonBox" style="display:none; margin-top:12px; background:var(--indigo-soft); border:1px solid var(--indigo-mid); border-radius:var(--r); padding:14px 16px;">

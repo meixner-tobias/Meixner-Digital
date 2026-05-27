@@ -1847,6 +1847,11 @@ textarea:focus-visible {
 [data-theme="dark"] .form-input,
 [data-theme="dark"] .form-select,
 [data-theme="dark"] .form-textarea { background: #111827; border-color: #374151; color: #F1F5F9; }
+[data-theme="dark"] .topic-check { background: #111827; border-color: #374151; }
+[data-theme="dark"] .topic-check:hover { background: #1a2535; border-color: var(--indigo-mid); }
+[data-theme="dark"] .topic-check-text { color: #F1F5F9; }
+[data-theme="dark"] .topic-check:has(input:checked) { background: #1a2535; border-color: var(--indigo-mid); }
+[data-theme="dark"] .topic-check:has(input:checked) .topic-check-text { color: #7DD3FA; }
 [data-theme="dark"] .form-input::placeholder,
 [data-theme="dark"] .form-textarea::placeholder { color: #6B7280; }
 [data-theme="dark"] .form-input:focus,
@@ -2672,6 +2677,36 @@ body:has(.contact-section) .page-hero-desc  { max-width: 500px; }
   border-top: 6px solid var(--muted); pointer-events: none;
 }
 .form-select { padding-right: 36px; cursor: pointer; }
+
+/* ── Topic Multi-Select (Karten-Style Checkboxen) ── */
+.topic-checks { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+.topic-check {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r);
+  cursor: pointer;
+  transition: border-color .18s ease, background .18s ease;
+}
+.topic-check:hover { border-color: var(--indigo-mid); background: var(--indigo-soft); }
+.topic-check input[type="checkbox"] {
+  width: 18px; height: 18px; flex-shrink: 0; margin: 0;
+  accent-color: var(--indigo-dark); cursor: pointer;
+}
+.topic-check-text {
+  font-size: .92rem; color: var(--text); font-weight: 500; line-height: 1.4;
+}
+.topic-check:has(input:checked) {
+  border-color: var(--indigo-dark); background: var(--indigo-soft);
+}
+.topic-check:has(input:checked) .topic-check-text {
+  color: var(--indigo-dark); font-weight: 700;
+}
+.form-label-hint {
+  font-weight: 400; font-size: .72rem; color: var(--muted);
+  margin-left: 4px; letter-spacing: 0; text-transform: none;
+}
 
 .form-check { display: flex; align-items: flex-start; gap: 10px; margin-top: 18px; margin-bottom: 22px; }
 .form-check input[type="checkbox"] { width: 17px; height: 17px; flex-shrink: 0; margin-top: 2px; accent-color: var(--indigo-dark); cursor: pointer; }

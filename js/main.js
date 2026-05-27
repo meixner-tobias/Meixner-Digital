@@ -351,36 +351,50 @@
 
 // Formular senden & Validierung
 function initAddonBox() {
-    var topic = document.getElementById('topic');
-    var addonBox = document.getElementById('addonBox');
-    var addonBoxTracking = document.getElementById('addonBoxTracking');
+    var topicBoxes        = document.querySelectorAll('input[name="topic"]');
+    var addonBox          = document.getElementById('addonBox');
+    var addonBoxTracking  = document.getElementById('addonBoxTracking');
     var addonBoxBetreuung = document.getElementById('addonBoxBetreuung');
-    var modulesVal = document.getElementById('addon_modules_val');
-    var tierVal    = document.getElementById('addon_tier_val');
-    if (!topic) return;
+    var modulesVal        = document.getElementById('addon_modules_val');
+    var tierVal           = document.getElementById('addon_tier_val');
+    if (!topicBoxes.length) return;
+
+    function getCheckedTopics() {
+      var arr = [];
+      topicBoxes.forEach(function(cb) { if (cb.checked) arr.push(cb.value); });
+      return arr;
+    }
 
     function updateAddonBox() {
-      if (addonBox)          addonBox.style.display          = topic.value === 'website'   ? 'block' : 'none';
-      if (addonBoxTracking)  addonBoxTracking.style.display  = topic.value === 'tracking'  ? 'block' : 'none';
-      if (addonBoxBetreuung) addonBoxBetreuung.style.display = topic.value === 'betreuung' ? 'block' : 'none';
+      var topics = getCheckedTopics();
+      if (addonBox)          addonBox.style.display          = topics.indexOf('website')   !== -1 ? 'block' : 'none';
+      if (addonBoxTracking)  addonBoxTracking.style.display  = topics.indexOf('tracking')  !== -1 ? 'block' : 'none';
+      if (addonBoxBetreuung) addonBoxBetreuung.style.display = topics.indexOf('betreuung') !== -1 ? 'block' : 'none';
 
-      // Module zurücksetzen, wenn das Thema nicht (mehr) Tracking ist
-      if (modulesVal && topic.value !== 'tracking') {
+      // Module zurücksetzen, wenn Tracking nicht (mehr) ausgewählt
+      if (modulesVal && topics.indexOf('tracking') === -1) {
         modulesVal.value = '';
         document.querySelectorAll('input[name="module"]').forEach(function(cb) { cb.checked = false; });
       }
 
       // Sorglos-Tier synchronisieren bzw. zurücksetzen
       if (tierVal) {
-        if (topic.value === 'betreuung') {
+        if (topics.indexOf('betreuung') !== -1) {
           var checkedTier = document.querySelector('input[name="tier"]:checked');
           tierVal.value = checkedTier ? checkedTier.value : 'unsure';
         } else {
           tierVal.value = '';
-          // Default-Auswahl ("unsure") wiederherstellen
           var unsureRadio = document.querySelector('input[name="tier"][value="unsure"]');
           if (unsureRadio) unsureRadio.checked = true;
         }
+      }
+
+      // Tracking-Add-on (Website-Karte) zurücksetzen, wenn Website nicht (mehr) gewählt
+      if (topics.indexOf('website') === -1) {
+        var addonTrackingCb  = document.getElementById('addon_tracking');
+        var addonTrackingVal = document.getElementById('addon_tracking_val');
+        if (addonTrackingCb)  addonTrackingCb.checked = false;
+        if (addonTrackingVal) addonTrackingVal.value = 'Nein';
       }
     }
 
@@ -404,7 +418,25 @@ function initAddonBox() {
       });
     }
 
-    topic.addEventListener('change', updateAddonBox);
+    // Topic-Checkboxen: Mutual Exclusion für "other" + Update-Trigger
+    topicBoxes.forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        if (this.checked) {
+          if (this.value === 'other') {
+            // "Noch unklar" alleine → andere unchecken
+            topicBoxes.forEach(function(other) {
+              if (other.value !== 'other') other.checked = false;
+            });
+          } else {
+            // Konkrete Leistung gewählt → "Noch unklar" unchecken
+            var otherCb = document.querySelector('input[name="topic"][value="other"]');
+            if (otherCb) otherCb.checked = false;
+          }
+        }
+        updateAddonBox();
+      });
+    });
+
     window.addEventListener('pageshow', updateAddonBox);
     updateAddonBox();
   }
@@ -419,11 +451,11 @@ function initContactForm() {
   form.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    var name    = document.getElementById('name');
-    var email   = document.getElementById('email');
-    var topic   = document.getElementById('topic');
-    var message = document.getElementById('message');
-    var privacy = document.getElementById('privacy');
+    var name       = document.getElementById('name');
+    var email      = document.getElementById('email');
+    var message    = document.getElementById('message');
+    var privacy    = document.getElementById('privacy');
+    var topicBoxes = document.querySelectorAll('input[name="topic"]');
 
     // Fehlermeldungen zurücksetzen
     ['nameErr','emailErr','topicErr','messageErr'].forEach(function(id) {
@@ -431,17 +463,21 @@ function initContactForm() {
     });
     formErrorMsg.style.display = 'none';
 
+    // Topic-Auswahl einsammeln
+    var checkedTopics = [];
+    topicBoxes.forEach(function(cb) { if (cb.checked) checkedTopics.push(cb.value); });
+
     // Validierung
     var valid = true;
     if (!name.value.trim())                               { document.getElementById('nameErr').style.display    = 'block'; valid = false; }
     if (!email.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) { document.getElementById('emailErr').style.display   = 'block'; valid = false; }
-    if (!topic.value)                                     { document.getElementById('topicErr').style.display   = 'block'; valid = false; }
+    if (checkedTopics.length === 0)                       { document.getElementById('topicErr').style.display   = 'block'; valid = false; }
     if (!message.value.trim())                            { document.getElementById('messageErr').style.display = 'block'; valid = false; }
     if (!privacy.checked)                                 { formErrorMsg.style.display = 'block'; valid = false; }
     if (!valid) return;
 
     // Werte VOR fetch sichern
-    var topicValue   = topic.value;
+    var topicValue   = checkedTopics.join(',');  // z.B. "tracking,website"
     var companyValue = document.getElementById('company').value.trim();
     var phoneValue   = document.getElementById('phone').value.trim();
     var addonValue   = document.getElementById('addon_tracking_val').value;
@@ -455,6 +491,7 @@ function initContactForm() {
       betreuung: 'Sorglos-Betreuung',
       other:     'Noch unklar'
     };
+    var topicLabel = checkedTopics.map(function(t) { return topicMap[t] || t; }).join(', ');
 
     submitBtn.disabled    = true;
     submitBtn.textContent = 'Wird gesendet …';
@@ -485,7 +522,7 @@ function initContactForm() {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
           event:            'generate_lead',
-          lead_topic:       topicMap[topicValue] || '',
+          lead_topic:       topicLabel,
           lead_addon:       addonValue,
           lead_modules:     modulesValue,
           lead_tier:        tierValue,

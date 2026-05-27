@@ -233,17 +233,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="topic">How can I help? <span class="req">*</span></label>
-              <div class="select-wrap">
-                <select class="form-select" id="topic" name="topic" required aria-required="true" aria-describedby="topicErr">
-                  <option value="" disabled selected>Please select …</option>
-                  <option value="tracking">GTM &amp; GA4 Setup</option>
-                  <option value="website">Website development</option>
-                  <option value="betreuung">Care-free package</option>
-                  <option value="other">Not sure yet - just get in touch</option>
-                </select>
+              <span class="form-label" id="topicLabel">How can I help? <span class="req">*</span> <span class="form-label-hint">(multiple possible)</span></span>
+              <div class="topic-checks" role="group" aria-labelledby="topicLabel" aria-describedby="topicErr">
+                <label class="topic-check">
+                  <input type="checkbox" name="topic" value="tracking">
+                  <span class="topic-check-text">GTM &amp; GA4 Setup</span>
+                </label>
+                <label class="topic-check">
+                  <input type="checkbox" name="topic" value="website">
+                  <span class="topic-check-text">Website development</span>
+                </label>
+                <label class="topic-check">
+                  <input type="checkbox" name="topic" value="betreuung">
+                  <span class="topic-check-text">Care-free package</span>
+                </label>
+                <label class="topic-check">
+                  <input type="checkbox" name="topic" value="other">
+                  <span class="topic-check-text">Not sure yet - just get in touch</span>
+                </label>
               </div>
-              <span class="field-error" id="topicErr" role="alert">Please select a topic.</span>
+              <span class="field-error" id="topicErr" role="alert">Please select at least one service.</span>
             </div>
 
             <input type="hidden" id="addon_tracking_val" name="addon_tracking" value="No">
