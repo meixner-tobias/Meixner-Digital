@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0D1B2A" media="(prefers-color-scheme: dark)">
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','functionality_storage':'denied','security_storage':'granted','wait_for_update':500});</script>
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -34,7 +36,8 @@
 <link rel="alternate" hreflang="en" href="https://meixner-tobias.com/en/products/">
 <link rel="alternate" hreflang="x-default" href="https://meixner-tobias.com/en/products/">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css">
@@ -154,7 +157,8 @@
 ]
 </script>
 
-<script src="/js/main.js"></script>
+<script src="/js/main.js" defer></script>
+  <link rel="alternate" type="application/rss+xml" title="Tobias Meixner - Blog (EN)" href="https://meixner-tobias.com/en/blog/feed.xml">
 </head>
 <body>
 
@@ -189,6 +193,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li role="none"><a href="/en/blog/answer-engine-optimization/" role="menuitem">Answer Engine Optimization</a></li>
           <li role="none"><a href="/en/blog/performance-max-vs-advantage-plus/" role="menuitem">Performance Max vs. Advantage Plus</a></li>
           <li role="none"><a href="/en/blog/server-side-tracking/" role="menuitem">Server-Side Tracking</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/en/blog/stape-io-setup/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Stape.io setup</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/en/blog/meta-capi-server-side-gtm/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Meta CAPI via sGTM</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/en/blog/google-ads-enhanced-conversions/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Google Ads Enhanced Conv.</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/en/blog/bypassing-safari-itp/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Bypassing Safari ITP</a></li>
           <li role="none"><a href="/en/blog/prompt-engineering-ecommerce/" role="menuitem">AI Copywriting for E-Commerce</a></li>
         </ul>
       </li>
@@ -528,6 +536,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- FOOTER -->
 <footer>
   <div class="container">
+    <div class="footer-cluster" style="display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid var(--border);font-size:.82rem;">
+      <span style="font-family:var(--fd);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);">Server-Side Tracking Cluster:</span>
+      <a href="/en/blog/server-side-tracking/" style="color:var(--muted);text-decoration:none;">Pillar</a>
+      <a href="/en/blog/stape-io-setup/" style="color:var(--muted);text-decoration:none;">Stape.io Setup</a>
+      <a href="/en/blog/meta-capi-server-side-gtm/" style="color:var(--muted);text-decoration:none;">Meta CAPI via sGTM</a>
+      <a href="/en/blog/google-ads-enhanced-conversions/" style="color:var(--muted);text-decoration:none;">Google Ads Enhanced Conv.</a>
+      <a href="/en/blog/bypassing-safari-itp/" style="color:var(--muted);text-decoration:none;">Bypassing Safari ITP</a>
+    </div>
     <div class="footer-row">
       <span class="footer-copy">© 2026 Tobias Meixner</span>
       <ul class="footer-links">

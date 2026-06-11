@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0D1B2A" media="(prefers-color-scheme: dark)">
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','functionality_storage':'denied','security_storage':'granted','wait_for_update':500});</script>
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -40,6 +42,7 @@
   <link rel="alternate" hreflang="en" href="https://meixner-tobias.com/en/about/">
   <link rel="alternate" hreflang="x-default" href="https://meixner-tobias.com/en/about/">
 
+  <link rel="preconnect" href="https://www.googletagmanager.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=DM+Sans:wght@400;500&display=swap">
@@ -69,24 +72,80 @@
       "@type": "Person",
       "@id": "https://meixner-tobias.com/#person",
       "name": "Tobias Meixner",
-      "jobTitle": "Tracking-Spezialist &amp; Web-Freelancer",
+      "givenName": "Tobias",
+      "familyName": "Meixner",
+      "jobTitle": "Tracking-Spezialist & Web-Freelancer",
+      "description": "Tobias Meixner ist Tracking-Spezialist und Web-Freelancer aus Würzburg. Schwerpunkt: Google Tag Manager, GA4, Server-Side Tracking via Stape.io, Consent Mode v2 (DSGVO-konform) und CRM-Anbindung für deutsche KMU und B2B-SaaS. Plus schlanke Website-Umsetzung auf Template-Basis.",
       "url": "https://meixner-tobias.com",
       "email": "contact@meixner-tobias.com",
       "telephone": "+4915225308491",
       "image": "https://meixner-tobias.com/assets/img/Profilbild2.jpg",
+      "nationality": "DE",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Würzburg",
         "addressRegion": "Bayern",
         "addressCountry": "DE"
       },
-      "sameAs": ["https://www.linkedin.com/in/meixner-tobias"]
+      "sameAs": [
+        "https://www.linkedin.com/in/meixner-tobias",
+        "https://twitter.com/MeixnerTobias04"
+      ],
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Technische Hochschule Würzburg-Schweinfurt",
+        "alternateName": "THWS",
+        "url": "https://www.thws.de/"
+      },
+      "knowsLanguage": [
+        { "@type": "Language", "name": "German",  "alternateName": "de" },
+        { "@type": "Language", "name": "English", "alternateName": "en" }
+      ],
+      "knowsAbout": [
+        { "@type": "Thing", "name": "Google Tag Manager" },
+        { "@type": "Thing", "name": "Google Analytics 4", "sameAs": "https://de.wikipedia.org/wiki/Google_Analytics" },
+        { "@type": "Thing", "name": "Server-Side Tracking" },
+        { "@type": "Thing", "name": "Stape.io" },
+        { "@type": "Thing", "name": "Google Consent Mode v2" },
+        { "@type": "Thing", "name": "Datenschutz-Grundverordnung", "sameAs": "https://de.wikipedia.org/wiki/Datenschutz-Grundverordnung" },
+        { "@type": "Thing", "name": "Cross-Domain Tracking" },
+        { "@type": "Thing", "name": "CRM-Anbindung (HubSpot, Pipedrive)" },
+        { "@type": "Thing", "name": "Google Ads Conversion Tracking" },
+        { "@type": "Thing", "name": "Enhanced Conversions" },
+        { "@type": "Thing", "name": "Schema.org JSON-LD", "sameAs": "https://schema.org" },
+        { "@type": "Thing", "name": "Generative Engine Optimization" },
+        { "@type": "Thing", "name": "Answer Engine Optimization" },
+        { "@type": "Thing", "name": "Web Analytics", "sameAs": "https://de.wikipedia.org/wiki/Web_Analytics" },
+        { "@type": "Thing", "name": "E-Commerce", "sameAs": "https://de.wikipedia.org/wiki/E-Commerce" }
+      ],
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Freelance Tracking-Spezialist & Web-Developer",
+        "occupationLocation": {
+          "@type": "City",
+          "name": "Würzburg",
+          "addressCountry": "DE"
+        },
+        "skills": "Google Tag Manager, Google Analytics 4, Server-Side Tracking (Stape.io), Consent Mode v2, DSGVO-konformes Tracking, HubSpot CRM-Anbindung, Cross-Domain Tracking, Schema.org JSON-LD, HTML, CSS, JavaScript, Cloudflare Workers"
+      },
+      "hasCredential": {
+        "@type": "EducationalOccupationalCredential",
+        "name": "Google Ads Search Certification",
+        "credentialCategory": "certification",
+        "recognizedBy": {
+          "@type": "Organization",
+          "name": "Google",
+          "url": "https://skillshop.exceedlms.com/"
+        },
+        "url": "https://skillshop.credential.net/7c7f49fe-c3ff-481c-b22b-fb7470d94dd5"
+      }
     }
   ]
 }
 </script>
 
-<script src="/js/main.js"></script>
+<script src="/js/main.js" defer></script>
+  <link rel="alternate" type="application/rss+xml" title="Tobias Meixner - Blog (DE)" href="https://meixner-tobias.com/blog/feed.xml">
 </head>
 
 <body>
@@ -123,6 +182,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li role="none"><a href="/blog/answer-engine-optimization/" role="menuitem">Answer Engine Optimization</a></li>
           <li role="none"><a href="/blog/performance-max-vs-advantage-plus/" role="menuitem">Performance Max vs. Advantage Plus</a></li>
           <li role="none"><a href="/blog/server-side-tracking/" role="menuitem">Server-Side Tracking</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/blog/stape-io-einrichten/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Stape.io einrichten</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/blog/meta-capi-server-side-gtm/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Meta CAPI via sGTM</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/blog/google-ads-enhanced-conversions/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Google Ads Enhanced Conv.</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/blog/safari-itp-umgehen/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Safari ITP umgehen</a></li>
           <li role="none"><a href="/blog/prompt-engineering-ecommerce/" role="menuitem">KI-Texterstellung E-Commerce</a></li>
         </ul>
       </li>
@@ -248,7 +311,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
 
       <div class="about-hero-img">
-        <img src="/assets/img/ueber-mich-drone-iceland.jpg" alt="Tobias Meixner auf Island - mitten in der Mondlandschaft von Námafjall" class="lightbox-trigger">
+        <img src="/assets/img/ueber-mich-drone-iceland.jpg" loading="lazy" alt="Tobias Meixner auf Island - mitten in der Mondlandschaft von Námafjall" class="lightbox-trigger" width="1887" height="2273">
         <div class="about-hero-img-caption">
           „Das Beste an meinem Job? Ich kann ihn von überall machen."
         </div>
@@ -305,7 +368,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="travel-cards">
 
         <div class="travel-card">
-          <img src="/assets/img/ueber-mich-iceland.jpg" alt="Tobias Meixner auf Island - Motorradreise durch die Westfjorde" class="lightbox-trigger">
+          <img src="/assets/img/ueber-mich-iceland.jpg" loading="lazy" alt="Tobias Meixner auf Island - Motorradreise durch die Westfjorde" class="lightbox-trigger" width="5472" height="3648">
           <div class="travel-card-body">
             <div class="travel-card-flag" aria-hidden="true">🇮🇸</div>
             <div class="travel-card-title">Island - alleine mit dem Motorrad</div>
@@ -314,7 +377,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <div class="travel-card">
-          <img src="/assets/img/ueber-mich-southamerica.jpg" alt="Tobias Meixner in Südamerika - Salzwüste Uyuni, Bolivien" class="lightbox-trigger">
+          <img src="/assets/img/ueber-mich-southamerica.jpg" loading="lazy" alt="Tobias Meixner in Südamerika - Salzwüste Uyuni, Bolivien" class="lightbox-trigger" width="3024" height="2691">
           <div class="travel-card-body">
             <div class="travel-card-flag" aria-hidden="true">🌎</div>
             <div class="travel-card-title">Südamerika - zwei Monate, drei Länder</div>
@@ -334,7 +397,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="personal-grid">
 
       <div class="personal-img-wrap">
-        <img src="/assets/img/ueber-mich-mallorca.jpg" alt="Tobias Meixner - Freelancer und wanderer aus Würzburg" class="lightbox-trigger">
+        <img src="/assets/img/ueber-mich-mallorca.jpg" loading="lazy" alt="Tobias Meixner - Freelancer und wanderer aus Würzburg" class="lightbox-trigger" width="3024" height="4032">
       </div>
 
       <div class="personal-content">
@@ -445,6 +508,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- FOOTER -->
 <footer>
   <div class="container">
+    <div class="footer-cluster" style="display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid var(--border);font-size:.82rem;">
+      <span style="font-family:var(--fd);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);">Cluster Server-Side Tracking:</span>
+      <a href="/blog/server-side-tracking/" style="color:var(--muted);text-decoration:none;">Pillar</a>
+      <a href="/blog/stape-io-einrichten/" style="color:var(--muted);text-decoration:none;">Stape.io einrichten</a>
+      <a href="/blog/meta-capi-server-side-gtm/" style="color:var(--muted);text-decoration:none;">Meta CAPI via sGTM</a>
+      <a href="/blog/google-ads-enhanced-conversions/" style="color:var(--muted);text-decoration:none;">Google Ads Enhanced Conv.</a>
+      <a href="/blog/safari-itp-umgehen/" style="color:var(--muted);text-decoration:none;">Safari ITP umgehen</a>
+    </div>
     <div class="footer-row">
       <span class="footer-copy">© 2026 Tobias Meixner</span>
       <ul class="footer-links">

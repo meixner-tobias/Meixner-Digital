@@ -525,6 +525,17 @@ img { display: block; max-width: 100%; height: auto; }
 .nav-drop-menu a::after { display: none !important; }
 .nav-drop-menu a.active { background: var(--indigo-soft); color: var(--indigo-dark) !important; font-weight: 700; }
 
+/* Cluster-Item im Dropdown (Stape unter Server-Side) */
+.nav-drop-cluster a {
+  padding-left: 22px;
+  font-size: .78rem;
+  color: var(--muted);
+}
+.nav-drop-arrow {
+  display: inline-block; margin-right: 4px;
+  color: #0ea5e9; font-weight: 700;
+}
+
 
 /* ============================================================
    9. LANGUAGE SWITCHER
@@ -1451,6 +1462,117 @@ textarea:focus-visible {
 .author-role { font-size: .78rem; color: rgba(255,255,255,.5); margin-bottom: 12px; }
 .author-bio  { font-size: .8rem; color: rgba(255,255,255,.6); line-height: 1.65; }
 
+/* ── Blog-Section-Heads (Cluster vs Standalone Gruppierung) ── */
+.blog-section-head {
+  margin-bottom: 28px;
+  max-width: 720px;
+}
+.blog-section-head--later { margin-top: 64px; }
+.blog-section-tag {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--fd); font-size: .7rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .14em;
+  margin-bottom: 10px;
+}
+.blog-section-tag svg { flex-shrink: 0; }
+.blog-section-tag--cluster {
+  color: #0ea5e9;
+}
+.blog-section-tag--cluster svg { color: #0ea5e9; }
+.blog-section-tag--single {
+  color: var(--muted);
+}
+.blog-section-title {
+  font-family: var(--fd); font-size: clamp(1.35rem, 2.4vw, 1.7rem);
+  font-weight: 800; color: var(--navy); letter-spacing: -.01em;
+  margin: 0 0 8px; line-height: 1.2;
+}
+.blog-section-desc {
+  font-size: .92rem; color: var(--muted); line-height: 1.55;
+  margin: 0;
+}
+[data-theme="dark"] .blog-section-title { color: #F1F5F9; }
+[data-theme="dark"] .blog-section-tag--single { color: rgba(255,255,255,.55); }
+
+/* ── Cluster-Card (sidebar) — zeigt Cluster-Zugehörigkeit ── */
+.cluster-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid #7dd3fc;
+  border-radius: var(--r-lg);
+  padding: 20px 20px 18px;
+  margin-bottom: 16px;
+}
+.cluster-card-label {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--fd); font-size: .68rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .12em;
+  color: #0ea5e9; margin-bottom: 12px;
+}
+.cluster-card-label svg { color: #0ea5e9; }
+.cluster-card-pillar {
+  display: block; text-decoration: none;
+  background: rgba(14,165,233,.08);
+  border: 1px solid rgba(14,165,233,.2);
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 14px;
+  transition: background .18s ease, border-color .18s ease;
+}
+.cluster-card-pillar:hover {
+  background: rgba(14,165,233,.14); border-color: rgba(14,165,233,.35);
+}
+.cluster-card-pillar-tag {
+  display: inline-block;
+  font-family: var(--fd); font-size: .62rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .1em;
+  color: #0369a1; background: rgba(14,165,233,.2);
+  padding: 2px 6px; border-radius: 4px; margin-bottom: 4px;
+}
+.cluster-card-pillar-title {
+  display: block; font-size: .82rem; font-weight: 700;
+  color: var(--navy); line-height: 1.4; margin-top: 4px;
+}
+.cluster-card-list-title {
+  font-family: var(--fd); font-size: .68rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .1em;
+  color: var(--muted); margin-bottom: 8px;
+}
+.cluster-card-list {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.cluster-card-item {
+  display: flex; align-items: flex-start; gap: 7px;
+  font-size: .78rem; color: var(--text); line-height: 1.4;
+}
+.cluster-card-marker {
+  color: var(--muted); font-weight: 700; flex-shrink: 0;
+}
+.cluster-card-item--current {
+  color: var(--navy); font-weight: 600;
+}
+.cluster-card-item--current .cluster-card-marker { color: #0ea5e9; }
+.cluster-card-item--soon { color: var(--muted); }
+.cluster-card-here {
+  display: inline-block;
+  font-size: .68rem; font-weight: 700;
+  color: #0369a1; background: rgba(14,165,233,.15);
+  padding: 1px 6px; border-radius: 4px;
+  margin-left: 4px;
+}
+.cluster-card-soon-tag {
+  display: inline-block;
+  font-size: .65rem; font-weight: 600; font-style: italic;
+  color: rgba(0,0,0,.45);
+  margin-left: 2px;
+}
+
+[data-theme="dark"] .cluster-card { background: #1F2937; border-color: #374151; }
+[data-theme="dark"] .cluster-card-pillar-title { color: #F1F5F9; }
+[data-theme="dark"] .cluster-card-item--current { color: #F1F5F9; }
+[data-theme="dark"] .cluster-card-soon-tag { color: rgba(255,255,255,.45); }
+
 
 /* ============================================================
    25. BLOG ARTICLES — THEMES
@@ -2025,7 +2147,9 @@ textarea:focus-visible {
 
   /* Articles */
   .article-body    { grid-template-columns: 1fr; }
-  .article-sidebar { display: none; }
+  .article-sidebar { position: static; margin-top: 8px; }
+  .article-sidebar .toc-card { display: none; }
+  .article-sidebar .cluster-card { margin-bottom: 20px; }
   .toc-box ol      { grid-template-columns: 1fr; }
   .concept-split   { grid-template-columns: 1fr; }
   .platform-split  { grid-template-columns: 1fr; }

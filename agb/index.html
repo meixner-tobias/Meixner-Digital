@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0D1B2A" media="(prefers-color-scheme: dark)">
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','functionality_storage':'denied','security_storage':'granted','wait_for_update':500});</script>
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -30,6 +32,7 @@
   <link rel="alternate" hreflang="en" href="https://meixner-tobias.com/en/terms-and-conditions/">
   <link rel="alternate" hreflang="x-default" href="https://meixner-tobias.com/en/terms-and-conditions/">
 
+  <link rel="preconnect" href="https://www.googletagmanager.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=DM+Sans:wght@400;500&display=swap">
@@ -54,7 +57,8 @@
 }
 </script>
 
-<script src="/js/main.js"></script>
+<script src="/js/main.js" defer></script>
+  <link rel="alternate" type="application/rss+xml" title="Tobias Meixner - Blog (DE)" href="https://meixner-tobias.com/blog/feed.xml">
 </head>
 
 <body>
@@ -92,6 +96,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li role="none"><a href="/blog/answer-engine-optimization/" role="menuitem">Answer Engine Optimization</a></li>
           <li role="none"><a href="/blog/performance-max-vs-advantage-plus/" role="menuitem">Performance Max vs. Advantage Plus</a></li>
           <li role="none"><a href="/blog/server-side-tracking/" role="menuitem">Server-Side Tracking</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/blog/stape-io-einrichten/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Stape.io einrichten</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/blog/meta-capi-server-side-gtm/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Meta CAPI via sGTM</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/blog/google-ads-enhanced-conversions/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Google Ads Enhanced Conv.</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/blog/safari-itp-umgehen/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Safari ITP umgehen</a></li>
           <li role="none"><a href="/blog/prompt-engineering-ecommerce/" role="menuitem">KI-Texterstellung E-Commerce</a></li>
         </ul>
       </li>
@@ -329,6 +337,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </main>
 <footer>
   <div class="container">
+    <div class="footer-cluster" style="display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid var(--border);font-size:.82rem;">
+      <span style="font-family:var(--fd);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);">Cluster Server-Side Tracking:</span>
+      <a href="/blog/server-side-tracking/" style="color:var(--muted);text-decoration:none;">Pillar</a>
+      <a href="/blog/stape-io-einrichten/" style="color:var(--muted);text-decoration:none;">Stape.io einrichten</a>
+      <a href="/blog/meta-capi-server-side-gtm/" style="color:var(--muted);text-decoration:none;">Meta CAPI via sGTM</a>
+      <a href="/blog/google-ads-enhanced-conversions/" style="color:var(--muted);text-decoration:none;">Google Ads Enhanced Conv.</a>
+      <a href="/blog/safari-itp-umgehen/" style="color:var(--muted);text-decoration:none;">Safari ITP umgehen</a>
+    </div>
     <div class="footer-row">
       <span class="footer-copy">&#169; 2026 Tobias Meixner</span>
       <ul class="footer-links">

@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0D1B2A" media="(prefers-color-scheme: dark)">
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','functionality_storage':'denied','security_storage':'granted','wait_for_update':500});</script>
   
   <!-- Google Tag Manager -->
@@ -35,6 +37,7 @@
   <link rel="alternate" hreflang="en" href="https://meixner-tobias.com/en/">
   <link rel="alternate" hreflang="x-default" href="https://meixner-tobias.com/en/">
   
+  <link rel="preconnect" href="https://www.googletagmanager.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
@@ -67,12 +70,21 @@
       "url": "https://meixner-tobias.com",
       "name": "Tobias Meixner",
       "inLanguage": "de-DE",
-      "publisher": { "@id": "https://meixner-tobias.com/#person" }
+      "publisher": { "@id": "https://meixner-tobias.com/#person" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://www.google.com/search?q=site%3Ameixner-tobias.com+{search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
     }
   ]
 }
 </script>
-<script src="/js/main.js"></script>
+<script src="/js/main.js" defer></script>
+  <link rel="alternate" type="application/rss+xml" title="Tobias Meixner - Blog (DE)" href="https://meixner-tobias.com/blog/feed.xml">
 </head>
 
 <body>
@@ -108,6 +120,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li role="none"><a href="/blog/answer-engine-optimization/" role="menuitem">Answer Engine Optimization</a></li>
           <li role="none"><a href="/blog/performance-max-vs-advantage-plus/" role="menuitem">Performance Max vs. Advantage Plus</a></li>
           <li role="none"><a href="/blog/server-side-tracking/" role="menuitem">Server-Side Tracking</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/blog/stape-io-einrichten/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Stape.io einrichten</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/blog/meta-capi-server-side-gtm/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Meta CAPI via sGTM</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/blog/google-ads-enhanced-conversions/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Google Ads Enhanced Conv.</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/blog/safari-itp-umgehen/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Safari ITP umgehen</a></li>
           <li role="none"><a href="/blog/prompt-engineering-ecommerce/" role="menuitem">KI-Texterstellung E-Commerce</a></li>
         </ul>
       </li>
@@ -206,7 +222,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="trust">
           <div class="trust-chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Gumb AG - GTM &amp; GA4</div>
           <div class="trust-div" aria-hidden="true"></div>
-          <div class="trust-chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><a href="https://skillshop.credential.net/7c7f49fe-c3ff-481c-b22b-fb7470d94dd5" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:inherit;"><img src="/assets/img/badge.webp" alt="Google Ads zertifiziert" width="24" height="24" style="object-fit:contain;">Google Ads zertifiziert</a></div>
+          <div class="trust-chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg><a href="https://skillshop.credential.net/7c7f49fe-c3ff-481c-b22b-fb7470d94dd5" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:inherit;"><img src="/assets/img/badge.webp" loading="lazy" alt="Google Ads zertifiziert" width="24" height="24" style="object-fit:contain;">Google Ads zertifiziert</a></div>
           <div class="trust-div" aria-hidden="true"></div>
           <div class="trust-chip"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Antwort innerhalb 24h</div>
         </div>
@@ -422,6 +438,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- FOOTER -->
 <footer>
   <div class="container">
+    <div class="footer-cluster" style="display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid var(--border);font-size:.82rem;">
+      <span style="font-family:var(--fd);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);">Cluster Server-Side Tracking:</span>
+      <a href="/blog/server-side-tracking/" style="color:var(--muted);text-decoration:none;">Pillar</a>
+      <a href="/blog/stape-io-einrichten/" style="color:var(--muted);text-decoration:none;">Stape.io einrichten</a>
+      <a href="/blog/meta-capi-server-side-gtm/" style="color:var(--muted);text-decoration:none;">Meta CAPI via sGTM</a>
+      <a href="/blog/google-ads-enhanced-conversions/" style="color:var(--muted);text-decoration:none;">Google Ads Enhanced Conv.</a>
+      <a href="/blog/safari-itp-umgehen/" style="color:var(--muted);text-decoration:none;">Safari ITP umgehen</a>
+    </div>
     <div class="footer-row">
       <span class="footer-copy">© 2026 Tobias Meixner</span>
       <ul class="footer-links">
