@@ -2,34 +2,69 @@ User-agent: *
 Allow: /
 
 # AI crawlers — explicitly allowed
+# OpenAI
 User-agent: GPTBot
 Allow: /
 
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic
 User-agent: ClaudeBot
 Allow: /
 
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# Perplexity
 User-agent: PerplexityBot
 Allow: /
 
+User-agent: Perplexity-User
+Allow: /
+
+# Google (Search + AI/Gemini training opt-in)
 User-agent: GoogleBot
 Allow: /
 
 User-agent: Googlebot-Image
 Allow: /
 
-User-agent: anthropic-ai
+User-agent: Google-Extended
 Allow: /
 
-User-agent: OAI-SearchBot
-Allow: /
-
+# Apple Intelligence
 User-agent: Applebot-Extended
 Allow: /
 
+# Meta AI
 User-agent: Meta-ExternalAgent
 Allow: /
 
+# ByteDance (Doubao, Toutiao Search)
 User-agent: Bytespider
+Allow: /
+
+# Amazon (Alexa, Rufus)
+User-agent: Amazonbot
+Allow: /
+
+# Cohere
+User-agent: cohere-ai
+Allow: /
+
+# Diffbot
+User-agent: Diffbot
+Allow: /
+
+# Common Crawl (training data for many LLMs)
+User-agent: CCBot
 Allow: /
 
 # Pages excluded from indexing

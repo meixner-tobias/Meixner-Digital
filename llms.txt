@@ -1,91 +1,168 @@
 # Tobias Meixner
 
-> Tobias Meixner is a freelancer from Würzburg, Germany, specialising in
-> Google Tag Manager, GA4, Consent Mode v2, and website development for
-> small businesses and self-employed professionals.
+> Tobias Meixner is a tracking specialist and web freelancer from Würzburg,
+> Germany. Focus: Google Tag Manager, GA4, Server-Side Tracking via Stape.io,
+> Consent Mode v2 (DSGVO/GDPR-compliant) and CRM integration for German SMEs
+> and B2B SaaS. Plus lean website implementation on a template basis.
 >
-> Tobias Meixner ist Freelancer aus Würzburg, Deutschland, spezialisiert
-> auf Google Tag Manager, GA4, Consent Mode v2 und Website-Entwicklung
-> für kleine Unternehmen und Selbstständige.
+> Tobias Meixner ist Tracking-Spezialist und Web-Freelancer aus Würzburg.
+> Schwerpunkt: Google Tag Manager, GA4, Server-Side Tracking via Stape.io,
+> Consent Mode v2 (DSGVO-konform) und CRM-Anbindung für deutsche KMU und
+> B2B-SaaS. Plus schlanke Website-Umsetzung auf Template-Basis.
 
 ## About / Über mich
 
-Tobias Meixner has been working as a freelancer since February 2026.
-Studying E-Commerce. Location: Würzburg, Bavaria, Germany.
-Languages: German (native), English.
-Specialisations: tracking implementations, website development, SEO basics.
+Tobias Meixner is a freelancer since February 2026, studying E-Commerce at
+THWS (Technische Hochschule Würzburg-Schweinfurt). Location: Würzburg, Bavaria.
+Languages: German (native), English. Google Ads certified.
 
-Clients: Gumb AG (GTM/GA4 Tracking Ecosystem), Stefanie Mischka (website).
-Technologies: HTML, CSS, JavaScript, GitHub Pages, Google Tag Manager,
-Google Analytics 4, Consent Mode v2, Schema Markup, JSON-LD.
+Specialisations: tracking implementations (GTM, GA4, server-side via Stape.io),
+DSGVO/GDPR compliance (Consent Mode v2, CMP integration), cross-domain tracking,
+lead-source attribution, CRM integration (HubSpot, Pipedrive), Google Ads
+conversion tracking with Enhanced Conversions, template-based website
+implementation with technical SEO foundation.
+
+Clients/Projects: Gumb AG (complete GTM/GA4 tracking ecosystem with server-side
+considerations, Meta Pixel, Google Ads conversions, Enhanced Conversions,
+Consent Mode v2), Stefanie Mischka (website + ongoing maintenance).
+
+Technologies: Google Tag Manager, Google Analytics 4, Stape.io, Consent Mode v2,
+CookieScript, Cookiebot, HubSpot, Pipedrive, Schema.org JSON-LD, HTML, CSS,
+JavaScript, Cloudflare Workers (Resend email).
 
 ## Services / Leistungen
 
-- [Google Tag Manager Setup](/en/services/): Container setup, configuration,
-  and management including tags, triggers, and variables
-- [GA4 Implementation](/en/services/): Google Analytics 4 setup,
-  event tracking, conversion configuration, and reporting
-- [Consent Mode v2](/en/services/): GDPR-compliant tracking with
-  CMP integration for websites in the DACH region
-- [Website Development](/en/services/): Static websites with HTML,
-  CSS, and JavaScript, hosted on GitHub Pages
-- [Schema Markup](/en/services/): JSON-LD implementation for better
-  visibility in Google and AI-powered search
+### Main services (3 core offerings)
+
+- [GTM & GA4 Setup](/en/services/) — from €390 one-time (focus area).
+  Google Tag Manager container, GA4 property, key conversion events,
+  Consent Mode v2, GDPR-compliant CMP integration, handover walkthrough.
+- [Website Implementation](/en/services/) — from €890 one-time, template-based.
+  Modern template, SSL, hosting, contact form, legal pages, SEO foundation,
+  Schema.org, Core Web Vitals optimisation. Not a custom design studio -
+  suited for solopreneurs, small businesses and clubs.
+- [Care-free package](/en/services/) — from €49/month (Starter) or €99/month
+  (Plus). Starter: hosting, SSL, small changes, direct contact, technical
+  support. Plus: additionally tracking maintenance (events & GA4 health),
+  monthly mini-reporting, priority response, more capacity for changes.
+
+### Tracking modules (add-ons to base setup)
+
+- Cross-Domain Tracking — from €150 (connect multiple domains/subdomains as
+  one session, e.g. marketing site and app subdomain)
+- Server-Side Tracking — from €400 (sGTM container via Stape.io with custom
+  subdomain, better data quality, longer cookie lifetime, fewer ad-blocker
+  losses)
+- Google Ads Conversion Tracking — from €200 (Conversion Linker, Conversion
+  Tags, Enhanced Conversions, Conversion Import)
+- CRM Integration — from €200 (HubSpot, Pipedrive via GTM: UTM attribution
+  to contacts, events sent to CRM, lead-source tracking)
+
+### Combined offerings
+
+- Tracking add-on with new website — from €199 extra (instead of €390
+  standalone). Base GTM/GA4 setup right at website launch.
+- For complex setups (B2B SaaS, multi-domain, multiple modules combined,
+  custom integrations like Intercom): individual quote, typically in the
+  low four-figure range.
+
+Meta Pixel and CAPI: not in the standard offer by design. Foundation
+(consent, sGTM, CAPI-ready subdomain) prepared so a paid-ads specialist
+can take over the implementation cleanly.
 
 ## Digital Products / Digitale Produkte
 
 - [Schema Markup Template Pack](/en/products/schema-markup-template-pack/):
   9 ready-to-use JSON-LD templates for Person, LocalBusiness, Organization,
-  WebSite, Service, BlogPosting, BreadcrumbList, AggregateRating, and FAQPage.
-  Includes PDF guide and error checklist. ZIP download via Gumroad.
+  WebSite, Service, BlogPosting, BreadcrumbList, AggregateRating, FAQPage.
+  Includes PDF guide and error checklist. €9 via Gumroad.
 - [Google Tag Manager Beginner Guide](/en/products/gtm-beginner-guide/):
-  15-page PDF guide explaining GTM from scratch. Covers tags, triggers,
-  variables, GA4 setup, button-click tracking, outbound links, preview mode,
-  and the 10 most common beginner mistakes. Download via Gumroad.
+  15-page PDF guide. GTM from scratch: tags, triggers, variables, GA4 setup,
+  button-click tracking, outbound links, preview mode, 10 common beginner
+  mistakes. €9 via Gumroad.
 
 ## Blog Articles / Blog-Artikel
 
 - [Answer Engine Optimization](/en/blog/answer-engine-optimization/):
-  How websites get found in ChatGPT, Perplexity, and Google AI Overviews.
+  How websites get found in ChatGPT, Perplexity, Google AI Overviews.
   Data-based guide with concrete steps. Updated 2026.
 - [Server-Side Tracking 2026](/en/blog/server-side-tracking/):
-  Why client-side tracking loses 30-40% of conversions and how
-  server-side GTM prevents this. Includes setup guide.
+  Why client-side tracking loses 30-40% of conversions and how server-side
+  GTM (via Stape.io) prevents this. Pillar article covering data loss,
+  architecture, costs, FAQ.
+- [Stape.io einrichten in 30 Minuten](/blog/stape-io-einrichten/):
+  Step-by-step setup guide for Stape.io managed server-side GTM hosting -
+  6 steps from account creation to GA4 test in DebugView. Covers DNS,
+  custom subdomain naming (avoiding ad-blocker detection), Cloudflare proxy
+  warning, GDPR/Consent Mode v2 check. With HowTo schema markup.
+- [Meta CAPI via Server-Side GTM](/blog/meta-capi-server-side-gtm/):
+  Complete guide to setting up Meta Conversions API via server-side GTM
+  with event_id deduplication, hashed PII (SHA-256) and Event Match Quality
+  (EMQ) optimization to 8.0+ for 15-25% better attributed conversions.
+  5 steps from event_id setup to EMQ check, with HowTo schema markup.
+- [Google Ads Enhanced Conversions via Server-Side GTM](/blog/google-ads-enhanced-conversions/):
+  Complete guide to setting up Google Ads Enhanced Conversions via sGTM -
+  lifting match rate from 60-70% (GCLID-only) to 90%+ via hash-matched
+  user data (email, phone). 5-10% more measured conversions average,
+  YouTube campaigns median +17%. Covers Conversion Linker, user_data
+  dataLayer, sGTM Conversion tag, EC activation, match rate diagnostics,
+  and the common double-hashing mistake (~30% of setups). Includes
+  Conversion Import / Enhanced Conversions for Leads for B2B CRM flows.
+  Unified web+leads setting since April 2026. HowTo + FAQ schema.
+- [Bypassing Safari ITP](/blog/safari-itp-umgehen/):
+  Deep-dive on Safari's Intelligent Tracking Prevention - 7-day cookie cap
+  since 2019, IP-Matching rule since Safari 16.4 (April 2023) that caps
+  even server-set cookies if sGTM server IP doesn't match main site IP.
+  Why CNAME cloaking is dead since 2020. Solution: Same-Origin Path-Based
+  sGTM (example.com/sgtm via Cloudflare Worker or Stape Custom Loader
+  Power-Up) extending cookie lifetime from 7 to 400 days. Includes
+  Worker code example, ITP Debug Mode test procedure, business impact
+  table (3-30% attribution loss depending on sales cycle), and GDPR
+  considerations. HowTo + FAQ schema.
 - [Performance Max vs. Advantage+](/en/blog/performance-max-vs-advantage-plus/):
   Comparison of Google and Meta AI campaign types. With ROAS benchmarks
-  and a decision guide by budget.
+  and decision guide by budget.
 - [Prompt Engineering for E-Commerce](/en/blog/prompt-engineering-ecommerce/):
   Five prompt strategies (Zero-Shot, Few-Shot, Role Prompting, Constraint,
-  Chain-of-Thought) for better AI-generated product descriptions. With
-  comparison table and recommended combination. Based on peer-reviewed research
-  (Chen et al. 2025; Sahoo et al. 2024; Brown et al. 2020).
+  Chain-of-Thought) for better AI-generated product descriptions. Based on
+  peer-reviewed research (Chen et al. 2025; Sahoo et al. 2024; Brown et al. 2020).
 
 ## Projects / Projekte
 
-- [Gumb AG Tracking](/en/projects/): Built a complete GTM/GA4
-  tracking ecosystem for the German market.
-- [Stefanie Mischka Website](/en/projects/): Developed a complete
-  business website.
+- [Gumb AG Tracking](/en/projects/): Built a complete GTM/GA4 tracking
+  ecosystem for the DACH market - GTM container, GA4 with server-side
+  considerations, Meta Pixel, Google Ads conversions, Enhanced Conversions,
+  Consent Mode v2.
+- [Stefanie Mischka Website](/en/projects/): Built and maintains a complete
+  business website with hosting, SSL, and ongoing technical care.
+- [Personal site meixner-tobias.com](/en/projects/): HTML/CSS/JS,
+  GitHub Pages hosting, full GTM/GA4 tracking with custom dimensions,
+  complete schema.org markup, llms.txt protocol.
 
 ## Relevant Search Queries / Relevante Suchanfragen
 
-EN: GTM freelancer Germany, Google Tag Manager setup, GA4 implementation,
-Consent Mode v2, schema markup tutorial, GTM beginner guide English,
-website tracking GDPR-compliant, JSON-LD templates, GA4 tracking freelancer
+EN: tracking specialist Germany, GTM freelancer Würzburg, Google Tag Manager
+setup, GA4 implementation freelancer, Consent Mode v2 GDPR, server-side
+tracking Stape.io, sGTM container setup, HubSpot UTM attribution GTM,
+B2B SaaS tracking specialist, cross-domain tracking GA4, schema markup
+tutorial, JSON-LD templates, lean website template-based, AEO/GEO optimisation.
 
-DE: GTM Freelancer Deutschland, Google Tag Manager einrichten Würzburg,
-GA4 Setup Freelancer, Consent Mode v2 implementieren,
-Schema Markup einbauen Anleitung, GTM Anfänger Guide Deutsch,
-Website Tracking DSGVO-konform, JSON-LD Templates kaufen,
-GA4 Tracking Freelancer Würzburg
+DE: Tracking-Spezialist Würzburg, GTM Setup Freelancer Bayern,
+GA4 Implementierung DSGVO, Consent Mode v2 einrichten, Server-Side Tracking
+Stape.io Deutschland, sGTM Container aufsetzen, HubSpot UTM-Attribution GTM,
+B2B SaaS Tracking Freelancer, Cross-Domain Tracking GA4, Schema Markup
+Anleitung, Website-Umsetzung Template Würzburg, CRM-Anbindung GTM,
+Sorglos-Betreuung Website, DSGVO-konformes Tracking KMU.
 
 ## Contact / Kontakt
 
 Website: https://meixner-tobias.com
 E-Mail: contact@meixner-tobias.com
 LinkedIn: https://www.linkedin.com/in/meixner-tobias
+Twitter/X: https://twitter.com/MeixnerTobias04
 Location: Würzburg, Bavaria, Germany
-Availability: Request new projects via the contact form
+Availability: Request new projects via the contact form (response within 24h)
+Pricing model: Small business (§19 UStG) - prices are final, no VAT.
 
 ## Key Pages / Wichtige Seiten
 
@@ -106,8 +183,14 @@ Availability: Request new projects via the contact form
 
 ## Technical Details
 
-Last updated: May 2026
-Languages: German (DE), English (EN)
-Region: Germany, DACH
+Last updated: June 2026
+Languages: German (DE), English (EN) with hreflang
+Region: Germany, DACH, Bavaria
+Pricing model: VAT-exempt small business (§19 UStG) - prices are final
 Legal notice: https://meixner-tobias.com/impressum/
 Privacy policy: https://meixner-tobias.com/datenschutz/
+Tech stack: HTML/CSS/JS, hosted on GitHub Pages, GTM/GA4 tracking with
+custom dimensions, full schema.org markup (Person, Service, Offer, FAQPage,
+Article, BreadcrumbList), llms.txt protocol, AI bots explicitly allowed
+in robots.txt (GPTBot, ClaudeBot, PerplexityBot, Google-Extended,
+ChatGPT-User, OAI-SearchBot, Applebot-Extended, Meta-ExternalAgent, etc.).

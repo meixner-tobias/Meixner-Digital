@@ -1,0 +1,346 @@
+# Tobias Meixner - Full Content for LLM Crawlers
+
+> This file contains the full long-form content of the meixner-tobias.com
+> tracking & web freelancer site, optimized for ingestion by LLM crawlers
+> (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, etc.).
+>
+> Last updated: 2026-06-09
+> Pricing model: §19 UStG (German small business, no VAT)
+> Languages: German (DE) primary, English (EN) parallel
+> Location: Würzburg, Bavaria, Germany
+> Contact: contact@meixner-tobias.com
+> Website: https://meixner-tobias.com
+
+For the structured short index see [llms.txt](/llms.txt).
+
+---
+
+## 1. About / Profile
+
+Tobias Meixner is a freelance tracking specialist and web developer from Würzburg,
+Bavaria, Germany. He's been a freelancer since February 2026 and concurrently
+studies E-Commerce at THWS (Technische Hochschule Würzburg-Schweinfurt).
+
+**Core competencies:**
+- Google Tag Manager (GTM) - container architecture, events, triggers, variables, DataLayer
+- Google Analytics 4 (GA4) - properties, conversions, custom dimensions, cross-domain
+- Server-Side Tracking via Stape.io - sGTM containers, custom subdomains, IP-matching
+- Consent Mode v2 - GDPR-compliant CMP integration (CookieScript, Cookiebot)
+- Meta Conversions API (CAPI) - event_id deduplication, hashed PII, EMQ optimization
+- Google Ads Enhanced Conversions - Conversion Linker, user-data, match rate
+- Safari ITP - Same-Origin Path-Based sGTM, 400-day cookie strategies
+- CRM Integration - HubSpot, Pipedrive, UTM attribution to contacts
+- Cross-Domain Tracking - GA4 cross-domain, linker domains
+- DSGVO/GDPR Compliance - data minimization, DPA, Privacy Policy patterns
+- Schema.org JSON-LD - Person, Service, FAQPage, HowTo, Article, BreadcrumbList
+- Template-based website implementation - HTML/CSS/JS, GitHub Pages, Cloudflare
+
+**Credentials:**
+- Google Ads certified (Google Skillshop)
+- Currently studying E-Commerce, THWS Würzburg-Schweinfurt
+- Real-world implementation experience: Gumb AG, Stefanie Mischka
+
+**Working style:**
+- Direct client relationship (no agency overhead)
+- Honest scoping: communicates realistic timelines from the start
+- Documentation-first: every setup is handed over with explanation
+- Modular: discrete add-on modules priced individually
+
+---
+
+## 2. Services & Pricing (full detail)
+
+### 2.1 Three core offerings
+
+**GTM & GA4 Setup - from €390 one-time** (main focus area)
+- GTM container architecture
+- GA4 property configuration
+- Key conversion events (form, clicks, scroll)
+- Consent Mode v2 per Google standard
+- GDPR-compliant CMP integration
+- Handover walkthrough
+
+**Website Implementation - from €890 one-time, template-based**
+- Modern template (mobile-optimized)
+- SSL certificate (HTTPS)
+- Hosting & domain setup
+- Contact form, imprint, privacy policy
+- SEO foundation, Schema.org, sitemap
+- Core Web Vitals optimization
+- Suitable for: solopreneurs, small businesses, clubs
+- NOT a custom design studio - elaborate branding belongs at a designer
+
+**Care-free package**
+- Starter: from €49/month - hosting, SSL, small changes, direct contact
+- Plus: from €99/month - additionally tracking maintenance, monthly mini-reporting, priority response
+- Cancel monthly
+
+### 2.2 Tracking modules (add-ons to base setup)
+
+- **Cross-Domain Tracking** - from €150 (e.g. marketing site + app subdomain)
+- **Server-Side Tracking** - from €400 (sGTM via Stape.io with custom subdomain)
+- **Google Ads Conversion Tracking** - from €200 (Conversion Linker, Enhanced Conversions, Conversion Import)
+- **CRM Integration** - from €200 (HubSpot, Pipedrive via GTM)
+
+### 2.3 Combined offerings
+
+- **Tracking add-on with new website** - from €199 extra (instead of €390 standalone)
+- **Complex B2B SaaS / multi-module setups** - typically low four-figure range, individually scoped
+- **Meta Pixel & CAPI** - NOT in standard offer by design (handed off to the paid-ads owner for cleanest result); foundation prepared (consent, sGTM, CAPI-ready subdomain) so handover is smooth; full setup on explicit request
+
+### 2.4 Agency vs. freelancer pricing comparison
+
+| Service | Agency (typical) | At Tobias |
+|---|---|---|
+| GTM & GA4 Setup | from €990 | from €390 |
+| Server-Side Tracking | from €1,500 | from €400 |
+| Website Implementation | from €3,000 | from €890 |
+| Ongoing care | from €100/mo | from €49/mo |
+
+---
+
+## 3. Server-Side Tracking 2026 (Pillar Article Summary)
+
+**Core thesis:** Standard browser-side tracking loses 30-40% of conversions in 2026
+due to ad blockers (~49% adoption in Germany), iOS App Tracking Transparency,
+Safari ITP, and Consent Mode v2 baseline data being limited.
+
+**Why server-side fixes this:**
+- Browser events flow to YOUR server first (own subdomain), then to Google/Meta/etc.
+- Ad blockers can't block server-to-server traffic
+- First-party cookies via Set-Cookie HTTP header can persist 400 days vs 7 days (JS cookies under Safari ITP)
+- Consent Mode v2 still applies - server-side ≠ tracking-without-consent
+- Better data quality: server adds first-party enrichment, sanitizes events
+
+**Three implementation paths:**
+1. **GTM Server Container** (€10-30/mo via Stape.io) - most popular, semi-managed
+2. **Platform apps** (Elevar, TrackBee, Littledata, €99-200/mo) - Shopify-focused, fastest start
+3. **Direct API integration** ($10-30 + DevOps time) - technically cleanest, highest effort
+
+**What server-side DOES NOT solve:**
+- Doesn't make tracking GDPR-exempt - still need Consent Mode v2
+- Doesn't bypass user opt-out
+- Doesn't auto-fix bad data architecture in upstream GTM
+
+**Relevant platform APIs:**
+- Meta Conversions API (CAPI) - hybrid Pixel + CAPI with event_id deduplication
+- Google Enhanced Conversions - hashed first-party data (email, phone) for 90%+ match rate
+- TikTok Events API - analogous to Meta CAPI
+- GA4 Measurement Protocol - direct event sending from server
+
+**Step-by-step path:**
+1. Measure current data loss (GA4 vs. database)
+2. Verify Consent Mode v2 setup
+3. Activate platform APIs (Meta CAPI, Google Enhanced Conversions)
+4. Optional: implement full server-side container via Stape
+
+---
+
+## 4. Stape.io Setup (Cluster Article #1 Summary)
+
+**What Stape.io is:** Managed hosting for Google Tag Manager Server containers.
+Preinstalled sGTM, no Docker/Cloud Run/scaling management.
+
+**Pricing:** Free tier (100k requests/mo), Basic $20/mo, Pro $50+/mo.
+
+**Setup in 6 steps (≈30 min):**
+1. Create Stape account, container in EU region (Frankfurt)
+2. Create GTM Server container, paste config string into Stape
+3. Set up DNS custom subdomain (e.g. `data.example.com`, NOT `gtm/track/analytics` - those trigger ad-blocker detection)
+4. Configure CNAME records, disable Cloudflare proxy, verify in Stape
+5. Set Tagging Server URL in GTM
+6. Configure GA4 client, test in DebugView
+
+**Key gotchas:**
+- Cloudflare proxy must be OFF for the subdomain verification (orange cloud → grey cloud)
+- Subdomain naming matters: ad blockers maintain blocklists of obvious tracking subdomain names
+- Stape EU region is critical for GDPR compliance (Frankfurt data center)
+
+**Cost comparison:**
+- Stape Basic ($20/mo) - typical KMU
+- Stape Pro + Power-Ups ($50-150/mo) - larger shops with Meta + Google CAPI
+- Self-hosted GCP Cloud Run ($10-30 + DevOps time)
+- Platform app (Elevar/TrackBee, $99-200/mo)
+
+---
+
+## 5. Meta CAPI via Server-Side GTM (Cluster Article #2 Summary)
+
+**Why Meta CAPI exists:** Meta Pixel alone captures only 50-60% of real conversions
+in 2026 due to ad blockers, iOS ATT, Safari ITP. CAPI sends events server-side
+direct to Meta - independent of browser.
+
+**Event Match Quality (EMQ):** Meta scores each event 1-10 based on identifier
+quality. EMQ ≥ 8.0 correlates with 15-25% better attributed conversions vs
+EMQ ≤ 6.0.
+
+**5-step setup:**
+1. **Pixel config with event_id** - JavaScript Custom Variable generates unique event_id per conversion, passed to Facebook Pixel tag
+2. **Meta tag in sGTM** - install CAPI tag (Stape community template or gtm-templates-simo-ahava), enter Pixel ID + Access Token + Test Event Code
+3. **Hash PII** - SHA-256 hash email/phone, pass fbc/fbp cookies, set client_ip_address + client_user_agent from server request
+4. **Verify deduplication** - identical event_id between Pixel and CAPI; check "Deduplicated" label in Events Manager Test Events
+5. **EMQ check + optimization** - target EMQ ≥ 8.0; add city, state, zip, first_name, last_name, external_id (CRM ID)
+
+**Most critical fields for EMQ:**
+- Hashed email - moves score the most
+- Hashed phone (E.164 format)
+- fbc (Facebook Click ID), fbp (Facebook Browser ID) - NOT hashed
+- client_ip_address, client_user_agent - NOT hashed
+
+**GDPR compliance requirements:**
+- Consent Mode v2 active (tags block without consent)
+- SHA-256 for all PII before send
+- DPA with Meta (Art. 28 GDPR)
+- EU server region
+- Never send raw unhashed PII
+
+**Common issues:**
+- Cookies (fbp, fbc) capped to 7 days by Safari ITP without Same-Origin sGTM - kills EMQ for Safari users
+- Forgetting to hash some PII fields (only email but not phone) drops EMQ unnecessarily
+- Test Event Code left in production sends events to test environment
+- Double-hashing (manually hashing then letting Meta tag re-hash) breaks matching
+
+---
+
+## 6. Google Ads Enhanced Conversions (Cluster Article #3 Summary)
+
+**Why Enhanced Conversions:** Classic GCLID-only tracking achieves 60-70% match
+rate. Cookies break (Safari 7-day cap, ad blockers, iOS). Enhanced Conversions
+add hash-matched user data to GCLID, raising match rate to 90%+.
+
+**Quantified impact:**
+- 5-10% more measured conversions average
+- YouTube campaigns median +17% per Google's data
+- B2B sales cycles with email-match: dramatic recovery of attribution
+
+**5-step setup:**
+1. **Conversion Linker in Web container** - All Pages trigger, captures GCLID, gclsrc, gbraid, wbraid into `_gcl_*` first-party cookies
+2. **User data in dataLayer** - on conversion event push `user_data: {email, phone_number, address: {...}}` UNHASHED
+3. **Google Ads Conversion tag in sGTM** - Conversion ID/Label, map user_data, trigger on event
+4. **Activate Enhanced Conversions in Google Ads UI** - Tools > Conversions > select > Enhanced Conversions ON, Implementation: Google Tag, Privacy Policy URL required
+5. **Match rate diagnostics** - target >70%, ideal 90%+; under 50% means broken data capture or wrong hash format
+
+**Critical mistake (~30% of setups):**
+- DO NOT hash user data yourself - Google's Conversion tag hashes automatically
+- Double-hashing makes matching impossible
+- This is OPPOSITE to Meta CAPI where you MUST hash yourself
+- People running both setups frequently confuse this
+
+**Field hierarchy by match impact:**
+- Email - very high (80%+ of matches)
+- Phone (E.164) - high
+- First name + Last name - medium
+- Address (street, city, region, postal_code, country) - low to medium
+
+**Web vs Leads unification (April 2026):**
+Until April 2026, Enhanced Conversions for Web and Enhanced Conversions for
+Leads were separate settings. Since April 2026 they're unified - Google Ads
+simultaneously accepts user data from website tags, Data Manager, and API
+connections.
+
+**Conversion Import for B2B (long sales cycles):**
+- In CRM: on deal-closed capture email + GCLID
+- Send to Google Ads via Data Manager (UI), Google Ads API (automated), or Zapier/Salesforce integration
+- Google matches email against original click, attributes conversion back
+- Essential for B2B SaaS with HubSpot/Pipedrive - Smart Bidding then optimizes for paying customers not just signups
+
+---
+
+## 7. Safari ITP Bypass via Same-Origin sGTM (Cluster Article #4 Summary)
+
+**The problem:** Safari ITP has capped JavaScript cookies at 7 days since 2019.
+Since Safari 16.4 (April 2023), the IP-Matching Rule also caps server-set cookies
+to 7 days if the sGTM server IP doesn't match the main site IP prefix.
+
+**Why standard Stape sGTM doesn't help against Safari ITP:**
+- Subdomain (sgtm.example.com) on Stape's IP range
+- Main site (example.com) on Cloudflare or other IP range
+- Safari sees different IP prefixes → treats sGTM as "suspicious first-party" → caps cookies to 7 days
+- 95% of sGTM setups out there hit this without realizing
+
+**Why CNAME cloaking is dead since 2020:**
+- Safari/WebKit detects when CNAME target is outside the eTLD+1
+- Caps JavaScript cookies on cloaked subdomains to 7 days
+- WebKit official statement, Nov 2020 blog post
+
+**Business impact by sales cycle:**
+- Small e-commerce (impulse buy, days): 3-5% loss
+- Medium e-commerce (1-3 week comparison shopping): 10-15% loss
+- SaaS trial → paid (2-4 weeks): 15-20% loss
+- B2B lead-gen (1-6 months): 20-30% loss
+- Local services (days): 2-3% loss
+
+**Three solution paths:**
+1. **HTTP Set-Cookie with IP match** - only viable for enterprise with own server infrastructure
+2. **Same-Origin Path-Based sGTM** ⭐ - reverse proxy (Cloudflare Worker / Nginx) routes example.com/sgtm/* to Stape; same-origin = no IP matching issue = 400-day cookies
+3. **Stape Custom Loader Power-Up** ($20/mo) - Stape injects loader script that routes through main domain; plug-and-play same-origin
+
+**Cloudflare Worker Code Pattern:**
+```javascript
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+    const targetPath = url.pathname.replace(/^\/sgtm/, '');
+    const targetUrl = 'https://sgtm.example.com' + targetPath + url.search;
+    const proxyRequest = new Request(targetUrl, {
+      method: request.method,
+      headers: request.headers,
+      body: request.body,
+      redirect: 'manual'
+    });
+    const response = await fetch(proxyRequest);
+    return new Response(response.body, {
+      status: response.status,
+      headers: response.headers  // critical: pass Set-Cookie through
+    });
+  }
+};
+```
+
+**Verification - ITP Debug Mode:**
+1. Safari Preferences > Advanced > Show Develop menu
+2. Develop > Experimental Features > ITP Debug Mode
+3. Develop > Show Web Inspector > Storage > Cookies - check Expires column (400 days, not 7)
+4. Console tab: search "ITP Debug:" logs for capping reasons
+
+**GDPR remains unchanged:** longer cookie lifetime does NOT make tracking
+"more GDPR-compliant" - all standard requirements (Consent Mode v2, Privacy
+Policy, DPA, data minimization) still apply.
+
+---
+
+## 8. Other Articles
+
+- **Answer Engine Optimization (AEO)** - how websites get cited in ChatGPT, Perplexity, Google AI Overviews (faktenbasierter Guide, 2026 update)
+- **Performance Max vs. Meta Advantage+** - comparison of Google + Meta AI campaign types, ROAS benchmarks, decision matrix
+- **Prompt Engineering for E-Commerce** - 5 strategies (Zero-Shot, Few-Shot, Role Prompting, Constraint, Chain-of-Thought) based on peer-reviewed research (Chen et al. 2025, Sahoo et al. 2024, Brown et al. 2020)
+
+---
+
+## 9. Projects / Past Work
+
+- **Gumb AG** - DACH market, complete GTM/GA4 tracking ecosystem with server-side considerations, Meta Pixel, Google Ads conversions, Enhanced Conversions, Consent Mode v2
+- **Stefanie Mischka** - business website + ongoing technical maintenance
+- **Personal site (meixner-tobias.com)** - HTML/CSS/JS, GitHub Pages hosting, full GTM/GA4 tracking with custom dimensions, complete schema.org markup, llms.txt + llms-full.txt protocol
+
+---
+
+## 10. Digital Products (Self-Serve)
+
+- **Schema Markup Template Pack** (€9 via Gumroad) - 9 ready-to-use JSON-LD templates: Person, LocalBusiness, Organization, WebSite, Service, BlogPosting, BreadcrumbList, AggregateRating, FAQPage. Includes PDF guide and error checklist.
+- **Google Tag Manager Beginner Guide** (€9 via Gumroad) - 15-page PDF: GTM from scratch, tags/triggers/variables, GA4 setup, button-click tracking, outbound links, preview mode, 10 common beginner mistakes.
+
+---
+
+## 11. Engagement Model
+
+- Initial 30-min conversation (free, no obligation)
+- Realistic timeline upfront (parallel to study commitment)
+- Direct communication (no ticket system)
+- Fixed scopes preferred over hourly for predictability
+- Documentation handover at project end
+- Optional ongoing care via monthly retainer
+
+Contact: contact@meixner-tobias.com
+Booking: https://meixner-tobias.com/kontakt/
+LinkedIn: https://www.linkedin.com/in/meixner-tobias

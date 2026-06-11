@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Tobias Meixner - Blog</title>
+    <link>https://meixner-tobias.com/blog/</link>
+    <description>Faktenbasierte Artikel zu Server-Side Tracking, GTM, GA4, Consent Mode v2, Answer Engine Optimization und Performance Marketing. Praxiswissen von einem Tracking-Freelancer aus Würzburg.</description>
+    <language>de-DE</language>
+    <atom:link href="https://meixner-tobias.com/blog/feed.xml" rel="self" type="application/rss+xml"/>
+    <lastBuildDate>Mon, 09 Jun 2026 00:00:00 +0200</lastBuildDate>
+    <managingEditor>contact@meixner-tobias.com (Tobias Meixner)</managingEditor>
+    <webMaster>contact@meixner-tobias.com (Tobias Meixner)</webMaster>
+    <generator>Tobias Meixner Static Site</generator>
+    <copyright>© 2026 Tobias Meixner</copyright>
+    <image>
+      <url>https://meixner-tobias.com/assets/img/og-image.jpg</url>
+      <title>Tobias Meixner - Blog</title>
+      <link>https://meixner-tobias.com/blog/</link>
+    </image>
+
+    <item>
+      <title>Safari ITP umgehen: Same-Origin sGTM für 400-Tage-Cookies 2026</title>
+      <link>https://meixner-tobias.com/blog/safari-itp-umgehen/</link>
+      <guid isPermaLink="true">https://meixner-tobias.com/blog/safari-itp-umgehen/</guid>
+      <pubDate>Mon, 09 Jun 2026 00:00:00 +0200</pubDate>
+      <dc:creator>Tobias Meixner</dc:creator>
+      <category>Tracking</category>
+      <category>Server-Side Tracking</category>
+      <description>Safari ITP kappt Cookies auf 7 Tage - seit Safari 16.4 auch server-seitig gesetzte. Komplette Anleitung zu Same-Origin Path-Based sGTM mit Cloudflare Worker, IP-Matching-Rule und warum CNAME-Cloaking nicht funktioniert.</description>
+    </item>
+
+    <item>
+      <title>Google Ads Enhanced Conversions via Server-Side GTM: Komplette Anleitung für +90% Match-Rate 2026</title>
+      <link>https://meixner-tobias.com/blog/google-ads-enhanced-conversions/</link>
+      <guid isPermaLink="true">https://meixner-tobias.com/blog/google-ads-enhanced-conversions/</guid>
+      <pubDate>Mon, 09 Jun 2026 00:00:00 +0200</pubDate>
+      <dc:creator>Tobias Meixner</dc:creator>
+      <category>Tracking</category>
+      <category>Google Ads</category>
+      <description>Enhanced Conversions via Server-Side GTM einrichten - Match-Rate von 60-70 % auf über 90 %, +5-10 % gemessene Conversions, YouTube +17 %. 5 Schritte mit Conversion Linker, User-Daten-Pipeline und Match-Rate-Check. Plus der häufigste Hashing-Fehler.</description>
+    </item>
+
+    <item>
+      <title>Meta CAPI via Server-Side GTM: Komplette Anleitung für maximale Event Match Quality 2026</title>
+      <link>https://meixner-tobias.com/blog/meta-capi-server-side-gtm/</link>
+      <guid isPermaLink="true">https://meixner-tobias.com/blog/meta-capi-server-side-gtm/</guid>
+      <pubDate>Mon, 09 Jun 2026 00:00:00 +0200</pubDate>
+      <dc:creator>Tobias Meixner</dc:creator>
+      <category>Tracking</category>
+      <category>Meta CAPI</category>
+      <description>Meta Conversions API über Server-Side GTM einrichten - Deduplication via event_id, hashed PII, EMQ-Optimierung auf 8.0+ für 15-25% bessere attribuierte Conversions. 5 Schritte mit Stape, Test Events und DSGVO-Check.</description>
+    </item>
+
+    <item>
+      <title>Stape.io einrichten in 30 Minuten: Schritt-für-Schritt-Anleitung 2026</title>
+      <link>https://meixner-tobias.com/blog/stape-io-einrichten/</link>
+      <guid isPermaLink="true">https://meixner-tobias.com/blog/stape-io-einrichten/</guid>
+      <pubDate>Sun, 08 Jun 2026 00:00:00 +0200</pubDate>
+      <dc:creator>Tobias Meixner</dc:creator>
+      <category>Tracking</category>
+      <category>Stape.io</category>
+      <description>Wie du Stape.io für Server-Side Tracking mit eigener Subdomain einrichtest - in 30 Minuten. Komplette Anleitung mit DNS, GTM Server-Container, Cloudflare-Hinweisen und DSGVO-Check.</description>
+    </item>
+
+    <item>
+      <title>Prompt Engineering im E-Commerce: 5 Strategien für bessere KI-Produkttexte</title>
+      <link>https://meixner-tobias.com/blog/prompt-engineering-ecommerce/</link>
+      <guid isPermaLink="true">https://meixner-tobias.com/blog/prompt-engineering-ecommerce/</guid>
+      <pubDate>Sun, 10 May 2026 00:00:00 +0200</pubDate>
+      <dc:creator>Tobias Meixner</dc:creator>
+      <category>KI</category>
+      <category>E-Commerce</category>
+      <description>Fünf Prompt-Strategien (Zero-Shot, Few-Shot, Role Prompting, Constraint, Chain-of-Thought) für bessere KI-generierte Produkttexte. Basiert auf peer-reviewed Forschung (Chen et al. 2025; Sahoo et al. 2024; Brown et al. 2020).</description>
+    </item>
+
+    <item>
+      <title>Server-Side Tracking 2026: Warum du gerade 30-40 % deiner Conversion-Daten verlierst</title>
+      <link>https://meixner-tobias.com/blog/server-side-tracking/</link>
+      <guid isPermaLink="true">https://meixner-tobias.com/blog/server-side-tracking/</guid>
+      <pubDate>Sun, 19 Apr 2026 00:00:00 +0200</pubDate>
+      <dc:creator>Tobias Meixner</dc:creator>
+      <category>Tracking</category>
+      <category>Server-Side Tracking</category>
+      <description>Server-Side Tracking erfasst Conversion-Ereignisse auf einem eigenen Server statt im Browser - unabhängig von Ad-Blockern, iOS 14.5 und Safari ITP. Standard-Tracking verliert 30-40 % aller Conversions. Drei Implementierungsansätze und Schritt-für-Schritt-Setup.</description>
+    </item>
+
+    <item>
+      <title>Performance Max vs. Meta Advantage+: Welche KI-Kampagne gewinnt 2026?</title>
+      <link>https://meixner-tobias.com/blog/performance-max-vs-advantage-plus/</link>
+      <guid isPermaLink="true">https://meixner-tobias.com/blog/performance-max-vs-advantage-plus/</guid>
+      <pubDate>Sun, 19 Apr 2026 00:00:00 +0200</pubDate>
+      <dc:creator>Tobias Meixner</dc:creator>
+      <category>Paid Ads</category>
+      <description>Vergleich von Google Performance Max und Meta Advantage+ - die beiden KI-gesteuerten Kampagnentypen. Mit ROAS-Benchmarks und Entscheidungshilfe nach Budget.</description>
+    </item>
+
+    <item>
+      <title>Answer Engine Optimization (AEO): So wirst du 2026 in ChatGPT &amp; Co. gefunden</title>
+      <link>https://meixner-tobias.com/blog/answer-engine-optimization/</link>
+      <guid isPermaLink="true">https://meixner-tobias.com/blog/answer-engine-optimization/</guid>
+      <pubDate>Sun, 19 Apr 2026 00:00:00 +0200</pubDate>
+      <dc:creator>Tobias Meixner</dc:creator>
+      <category>SEO</category>
+      <category>AEO</category>
+      <description>Wie Websites in ChatGPT, Perplexity, Google AI Overviews gefunden werden. Faktenbasierter Guide mit konkreten Schritten - Schema, llms.txt, E-E-A-T-Signale, Citation-Quality.</description>
+    </item>
+  </channel>
+</rss>
