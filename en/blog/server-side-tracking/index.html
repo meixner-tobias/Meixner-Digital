@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0D1B2A" media="(prefers-color-scheme: dark)">
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','functionality_storage':'denied','security_storage':'granted','wait_for_update':500});</script>
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -23,7 +25,7 @@
   <meta property="og:url"                 content="https://meixner-tobias.com/en/blog/server-side-tracking/">
   <meta property="og:title"               content="Server-Side Tracking 2026: The Complete Guide for Small Businesses &amp; Startups">
   <meta property="og:description"         content="Server-side tracking captures conversions on your own server instead of in the browser. Standard tracking loses 30-40%. With architecture options, costs and setup guidance.">
-  <meta property="og:image"               content="https://meixner-tobias.com/assets/img/og-image.jpg">
+  <meta property="og:image"               content="https://meixner-tobias.com/assets/img/og/server-side-tracking-en.png">
   <meta property="og:image:width"         content="1200">
   <meta property="og:image:height"        content="630">
   <meta property="og:locale"              content="en_US">
@@ -34,8 +36,9 @@
   <meta name="twitter:card"               content="summary_large_image">
   <meta name="twitter:title"              content="Server-Side Tracking 2026: The Complete Guide">
   <meta name="twitter:description"        content="Server-side tracking bypasses ad blockers and iOS restrictions. Standard tracking loses 30-40% of conversions. Setup, costs and APIs explained.">
-  <meta name="twitter:image"              content="https://meixner-tobias.com/assets/img/og-image.jpg">
+  <meta name="twitter:image"              content="https://meixner-tobias.com/assets/img/og/server-side-tracking-en.png">
 
+  <link rel="preconnect" href="https://www.googletagmanager.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=DM+Sans:wght@400;500&display=swap">
@@ -69,10 +72,14 @@
       "dateModified": "2026-05-02",
       "author": { "@type": "Person", "@id": "https://meixner-tobias.com/#person", "name": "Tobias Meixner" },
       "publisher": { "@type": "Person", "@id": "https://meixner-tobias.com/#person" },
-      "image": "https://meixner-tobias.com/assets/img/og-image.jpg",
+      "image": "https://meixner-tobias.com/assets/img/og/server-side-tracking-en.png",
       "inLanguage": "en-US",
       "keywords": "server-side tracking, server side tracking setup, first-party data strategy, Consent Mode v2, GA4 server side, Meta Conversions API, GDPR tracking, GTM server container, tracking data loss",
-      "articleSection": "Tracking"
+      "articleSection": "Tracking",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [".intro-box", ".article-excerpt", ".fact-box", ".faq-a"]
+      }
     },
     {
       "@type": "FAQPage",
@@ -86,7 +93,8 @@
   ]
 }
 </script>
-<script src="/js/main.js"></script>
+<script src="/js/main.js" defer></script>
+  <link rel="alternate" type="application/rss+xml" title="Tobias Meixner - Blog (EN)" href="https://meixner-tobias.com/en/blog/feed.xml">
 </head>
 <body>
 <a href="#main-content" class="skip-link">Skip to content</a>
@@ -119,6 +127,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li role="none"><a href="/en/blog/answer-engine-optimization/" role="menuitem">Answer Engine Optimization</a></li>
           <li role="none"><a href="/en/blog/performance-max-vs-advantage-plus/" role="menuitem">Performance Max vs. Advantage Plus</a></li>
           <li role="none"><a href="/en/blog/server-side-tracking/" role="menuitem" class="active">Server-Side Tracking</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/en/blog/stape-io-setup/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Stape.io setup</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/en/blog/meta-capi-server-side-gtm/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Meta CAPI via sGTM</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/en/blog/google-ads-enhanced-conversions/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Google Ads Enhanced Conv.</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/en/blog/bypassing-safari-itp/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Bypassing Safari ITP</a></li>
           <li role="none"><a href="/en/blog/prompt-engineering-ecommerce/" role="menuitem">AI Copywriting for E-Commerce</a></li>
         </ul>
       </li>
@@ -366,7 +378,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <h3>What server-side tracking bypasses</h3>
         <ul>
           <li><strong>Ad blockers</strong> - they block client-side scripts in the browser; server-to-server communication is invisible to them</li>
-          <li><strong>Safari ITP</strong> - JavaScript cookies are limited to 7 days (24 hours with tracking parameters such as fbclid/gclid); with correctly configured SST on same-origin infrastructure, first-party cookies can last up to 400 days</li>
+          <li><strong><a href="/en/blog/bypassing-safari-itp/">Safari ITP</a></strong> - JavaScript cookies are limited to 7 days (24 hours with tracking parameters such as fbclid/gclid); with correctly configured SST on same-origin infrastructure, first-party cookies can last up to 400 days - <a href="/en/blog/bypassing-safari-itp/">here's exactly how that works</a></li>
           <li><strong>iOS App Tracking Transparency (ATT)</strong> - ATT regulates app tracking via IDFA; for web-based tracking, SST helps by removing dependence on the browser pixel and sending conversion data server-side to platform APIs</li>
           <li><strong>Slow internet or missing JavaScript in the browser</strong> - the server does not wait for the client</li>
         </ul>
@@ -476,7 +488,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
           </div>
           <p>You run a Google Tag Manager server container on a cloud server, configured behind your own subdomain such as <code style="background:rgba(0,0,0,.06);padding:2px 6px;border-radius:4px;font-size:.85em;">metrics.yourdomain.com</code>. Your browser sends events to your own server instead of directly to Google or Meta. The server receives, processes and forwards them to the respective platform APIs. Because requests come from your own domain, they are treated as first-party requests.</p>
-          <p>For hosting, a managed service such as <strong>Stape</strong> is recommended - the most popular solution for GTM server-side hosting. Stape starts free (up to 10,000 requests/month) and costs around $20/month for typical small and medium-sized websites. The alternative, Google Cloud Run directly, costs at least around $120/month.</p>
+          <p>For hosting, a managed service such as <strong>Stape</strong> is recommended - the most popular solution for GTM server-side hosting. Stape starts free (up to 10,000 requests/month) and costs around $20/month for typical small and medium-sized websites. The alternative, Google Cloud Run directly, costs at least around $120/month. <strong>Detailed setup guide:</strong> <a href="/en/blog/stape-io-setup/">How to set up Stape.io in 30 minutes - step by step</a>.</p>
           <div class="approach-tags">
             <span class="approach-tag tag-pro">&#10003; Flexible configuration</span>
             <span class="approach-tag tag-pro">&#10003; Broad tool support</span>
@@ -555,7 +567,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <h2 id="apis">9. Which platform APIs are relevant for server-side tracking?</h2>
 
         <h3>Meta Conversions API (CAPI)</h3>
-        <p>The most direct solution against data loss in Meta campaigns. You send conversion events from the server to Meta - independent of what happens in the user's browser.</p>
+        <p>The most direct solution against data loss in Meta campaigns. You send conversion events from the server to Meta - independent of what happens in the user's browser. <strong>Complete guide with event_id deduplication, hashed PII and EMQ optimization:</strong> <a href="/en/blog/meta-capi-server-side-gtm/">Setting up Meta CAPI via Server-Side GTM</a>.</p>
         <p><strong>Most important parameters:</strong>
           <code style="background:rgba(0,0,0,.06);padding:2px 5px;border-radius:4px;font-size:.84em;">event_name</code>,
           <code style="background:rgba(0,0,0,.06);padding:2px 5px;border-radius:4px;font-size:.84em;">event_time</code>,
@@ -567,10 +579,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p><strong>Deduplication:</strong> In a hybrid setup (pixel + CAPI at the same time), both <code style="background:rgba(0,0,0,.06);padding:2px 5px;border-radius:4px;font-size:.84em;">event_id</code> and <code style="background:rgba(0,0,0,.06);padding:2px 5px;border-radius:4px;font-size:.84em;">event_name</code> must be identical in pixel and CAPI. Meta uses this to detect duplicate events within 48 hours and count them only once.</p>
 
         <h3>Google Enhanced Conversions</h3>
-        <p>You transmit hashed first-party data (SHA-256 hash of the email address, phone number or address) together with conversion data. Google matches these hashes with signed-in Google accounts - even if no cookie is present. This is especially effective for B2B campaigns and e-commerce with customer login.</p>
+        <p>You transmit hashed first-party data (SHA-256 hash of the email address, phone number or address) together with conversion data. Google matches these hashes with signed-in Google accounts - even if no cookie is present. This is especially effective for B2B campaigns and e-commerce with customer login. <strong>Lift match rate from 60-70% to 90%+:</strong> <a href="/en/blog/google-ads-enhanced-conversions/">Setting up Google Ads Enhanced Conversions via sGTM</a>.</p>
 
         <h3>TikTok Events API</h3>
-        <p>Works similarly to Meta CAPI. For businesses running TikTok Ads, the direct server connection is the only way to get reliable conversion data because the TikTok Pixel is restricted on iOS devices by Safari ITP and App Tracking Transparency.</p>
+        <p>Works similarly to <a href="/en/blog/meta-capi-server-side-gtm/">Meta CAPI</a>. For businesses running TikTok Ads, the direct server connection is the only way to get reliable conversion data because the TikTok Pixel is restricted on iOS devices by <a href="/en/blog/bypassing-safari-itp/">Safari ITP</a> and App Tracking Transparency.</p>
 
         <h3>GA4 Measurement Protocol</h3>
         <p>Enables direct sending of events to Google Analytics 4 from the server. Ideal for offline conversions, backend events or events that do not occur in a browser context.</p>
@@ -599,8 +611,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="step-num" aria-hidden="true">3</div>
           <div class="step-content">
             <h3>Activate platform APIs</h3>
-            <p><strong>Meta CAPI:</strong> Meta Business Manager &rarr; Events Manager &rarr; Your data source &rarr; Settings &rarr; Activate Conversions API &rarr; Choose implementation path.</p>
-            <p><strong>Google Enhanced Conversions:</strong> In Google Ads &rarr; Goals &rarr; Settings &rarr; Activate Enhanced Conversions &rarr; Configure event tagging via GTM.</p>
+            <p><strong><a href="/en/blog/meta-capi-server-side-gtm/">Meta CAPI</a>:</strong> Meta Business Manager &rarr; Events Manager &rarr; Your data source &rarr; Settings &rarr; Activate Conversions API &rarr; Choose implementation path.</p>
+            <p><strong><a href="/en/blog/google-ads-enhanced-conversions/">Google Enhanced Conversions</a>:</strong> In Google Ads &rarr; Goals &rarr; Settings &rarr; Activate Enhanced Conversions &rarr; Configure event tagging via GTM.</p>
           </div>
         </div>
 
@@ -609,7 +621,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="step-content">
             <h3>Set up the server container or choose a tool</h3>
             <p><strong>Option A - Shopify:</strong> install Elevar or TrackBee, enter API keys, follow the setup. No own server required.</p>
-            <p><strong>Option B - custom website / WordPress:</strong> deploy GTM server container on Stape or Google Cloud Run, set up subdomain (for example <code style="background:rgba(0,0,0,.06);padding:2px 5px;border-radius:4px;font-size:.84em;">t.yourdomain.com</code>), reconfigure client-side GTM tags, set up server-side tags for GA4, Meta CAPI and Google Ads.</p>
+            <p><strong>Option B - custom website / WordPress:</strong> deploy GTM server container on <a href="/en/blog/stape-io-setup/">Stape (step-by-step guide)</a> or Google Cloud Run, set up subdomain (for example <code style="background:rgba(0,0,0,.06);padding:2px 5px;border-radius:4px;font-size:.84em;">t.yourdomain.com</code>), reconfigure client-side GTM tags, set up server-side tags for GA4, Meta CAPI and Google Ads.</p>
           </div>
         </div>
 
@@ -855,6 +867,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <li><a href="#faq">13. FAQ</a></li>
           </ul>
         </nav>
+        <!-- Cluster-Card: shows pillar status + links to cluster articles -->
+        <div class="cluster-card" role="complementary" aria-label="Cluster overview">
+          <div class="cluster-card-label">
+            <svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            Cluster: Server-Side Tracking
+          </div>
+          <div class="cluster-card-pillar" style="cursor:default;">
+            <span class="cluster-card-pillar-tag">Pillar</span>
+            <span class="cluster-card-pillar-title">Server-Side Tracking 2026 - Overview <span class="cluster-card-here">(you are here)</span></span>
+          </div>
+          <div class="cluster-card-list-title">More in the cluster</div>
+          <ul class="cluster-card-list">
+            <li class="cluster-card-item">
+              <span class="cluster-card-marker" aria-hidden="true">&rarr;</span>
+              <a href="/en/blog/stape-io-setup/" style="color:inherit;text-decoration:none;">Stape.io setup - step by step</a>
+            </li>
+            <li class="cluster-card-item">
+              <span class="cluster-card-marker" aria-hidden="true">&rarr;</span>
+              <a href="/en/blog/meta-capi-server-side-gtm/" style="color:inherit;text-decoration:none;">Meta CAPI via server-side GTM</a>
+            </li>
+            <li class="cluster-card-item">
+              <span class="cluster-card-marker" aria-hidden="true">&rarr;</span>
+              <a href="/en/blog/google-ads-enhanced-conversions/" style="color:inherit;text-decoration:none;">Google Ads Enhanced Conversions</a>
+            </li>
+            <li class="cluster-card-item">
+              <span class="cluster-card-marker" aria-hidden="true">&rarr;</span>
+              <a href="/en/blog/bypassing-safari-itp/" style="color:inherit;text-decoration:none;">Bypassing Safari ITP</a>
+            </li>
+          </ul>
+        </div>
+
         <div class="author-card">
           <picture>
             <source srcset="/assets/img/ueber-mich-roadtrip.jpg" type="image/jpeg">
@@ -873,6 +916,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- FOOTER -->
 <footer>
   <div class="container">
+    <div class="footer-cluster" style="display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid var(--border);font-size:.82rem;">
+      <span style="font-family:var(--fd);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);">Server-Side Tracking Cluster:</span>
+      <a href="/en/blog/server-side-tracking/" style="color:var(--muted);text-decoration:none;">Pillar</a>
+      <a href="/en/blog/stape-io-setup/" style="color:var(--muted);text-decoration:none;">Stape.io Setup</a>
+      <a href="/en/blog/meta-capi-server-side-gtm/" style="color:var(--muted);text-decoration:none;">Meta CAPI via sGTM</a>
+      <a href="/en/blog/google-ads-enhanced-conversions/" style="color:var(--muted);text-decoration:none;">Google Ads Enhanced Conv.</a>
+      <a href="/en/blog/bypassing-safari-itp/" style="color:var(--muted);text-decoration:none;">Bypassing Safari ITP</a>
+    </div>
     <div class="footer-row">
       <span class="footer-copy">© 2026 Tobias Meixner</span>
       <ul class="footer-links">

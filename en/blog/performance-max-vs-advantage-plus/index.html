@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0D1B2A" media="(prefers-color-scheme: dark)">
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','functionality_storage':'denied','security_storage':'granted','wait_for_update':500});</script>
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -23,7 +25,7 @@
   <meta property="og:url" content="https://meixner-tobias.com/en/blog/performance-max-vs-advantage-plus/">
   <meta property="og:title" content="Google Performance Max vs. Meta Advantage+ 2026 - The Honest Comparison">
   <meta property="og:description" content="Performance Max vs. Meta Advantage+: Intent Capture vs. Demand Creation. With ROAS benchmarks, minimum budgets and budget setups for small businesses.">
-  <meta property="og:image" content="https://meixner-tobias.com/assets/img/og-image.jpg">
+  <meta property="og:image" content="https://meixner-tobias.com/assets/img/og/pmax-en.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:locale" content="en_US">
@@ -33,8 +35,9 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Performance Max vs. Meta Advantage+ 2026 - The Honest Comparison">
   <meta name="twitter:description" content="Performance Max captures search intent. Meta Advantage+ creates demand. ROAS benchmarks, minimum budgets and a clear recommendation for which platform when.">
-  <meta name="twitter:image" content="https://meixner-tobias.com/assets/img/og-image.jpg">
+  <meta name="twitter:image" content="https://meixner-tobias.com/assets/img/og/pmax-en.png">
 
+  <link rel="preconnect" href="https://www.googletagmanager.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
@@ -66,13 +69,18 @@
       "dateModified": "2026-04-29",
       "author": { "@type": "Person", "@id": "https://meixner-tobias.com/#person", "name": "Tobias Meixner" },
       "publisher": { "@type": "Person", "@id": "https://meixner-tobias.com/#person" },
-      "image": "https://meixner-tobias.com/assets/img/og-image.jpg",
-      "inLanguage": "en-US"
+      "image": "https://meixner-tobias.com/assets/img/og/pmax-en.png",
+      "inLanguage": "en-US",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [".intro-box", ".article-excerpt", ".fact-box", ".faq-a"]
+      }
     }
   ]
 }
 </script>
-<script src="/js/main.js"></script>
+<script src="/js/main.js" defer></script>
+  <link rel="alternate" type="application/rss+xml" title="Tobias Meixner - Blog (EN)" href="https://meixner-tobias.com/en/blog/feed.xml">
 </head>
 <body>
 <a href="#main-content" class="skip-link">Skip to content</a>
@@ -105,6 +113,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li role="none"><a href="/en/blog/answer-engine-optimization/" role="menuitem">Answer Engine Optimization</a></li>
           <li role="none"><a href="/en/blog/performance-max-vs-advantage-plus/" role="menuitem" class="active">Performance Max vs. Advantage+</a></li>
           <li role="none"><a href="/en/blog/server-side-tracking/" role="menuitem">Server-Side Tracking</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/en/blog/stape-io-setup/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Stape.io setup</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/en/blog/meta-capi-server-side-gtm/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Meta CAPI via sGTM</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/en/blog/google-ads-enhanced-conversions/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Google Ads Enhanced Conv.</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/en/blog/bypassing-safari-itp/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Bypassing Safari ITP</a></li>
           <li role="none"><a href="/en/blog/prompt-engineering-ecommerce/" role="menuitem">AI Copywriting for E-Commerce</a></li>
         </ul>
       </li>
@@ -610,6 +622,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- FOOTER -->
 <footer>
   <div class="container">
+    <div class="footer-cluster" style="display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid var(--border);font-size:.82rem;">
+      <span style="font-family:var(--fd);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);">Server-Side Tracking Cluster:</span>
+      <a href="/en/blog/server-side-tracking/" style="color:var(--muted);text-decoration:none;">Pillar</a>
+      <a href="/en/blog/stape-io-setup/" style="color:var(--muted);text-decoration:none;">Stape.io Setup</a>
+      <a href="/en/blog/meta-capi-server-side-gtm/" style="color:var(--muted);text-decoration:none;">Meta CAPI via sGTM</a>
+      <a href="/en/blog/google-ads-enhanced-conversions/" style="color:var(--muted);text-decoration:none;">Google Ads Enhanced Conv.</a>
+      <a href="/en/blog/bypassing-safari-itp/" style="color:var(--muted);text-decoration:none;">Bypassing Safari ITP</a>
+    </div>
     <div class="footer-row">
       <span class="footer-copy">© 2026 Tobias Meixner</span>
       <ul class="footer-links">

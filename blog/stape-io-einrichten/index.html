@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0D1B2A" media="(prefers-color-scheme: dark)">
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','functionality_storage':'denied','security_storage':'granted','wait_for_update':500});</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5QLXDT4T');</script>
+<!-- End Google Tag Manager -->
+<title>Stape.io einrichten in 30 Minuten: Schritt-für-Schritt-Anleitung 2026 | Tobias Meixner</title>
+<meta name="description" content="Wie du Stape.io für Server-Side Tracking mit eigener Subdomain einrichtest - in 30 Minuten. Komplette Anleitung mit DNS, GTM Server-Container, Cloudflare-Hinweisen und DSGVO-Check.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://meixner-tobias.com/blog/stape-io-einrichten/">
+<link rel="alternate" hreflang="de" href="https://meixner-tobias.com/blog/stape-io-einrichten/">
+<link rel="alternate" hreflang="en" href="https://meixner-tobias.com/en/blog/stape-io-setup/">
+<link rel="alternate" hreflang="x-default" href="https://meixner-tobias.com/en/blog/stape-io-setup/">
+
+<meta property="og:type"        content="article">
+<meta property="og:url"         content="https://meixner-tobias.com/blog/stape-io-einrichten/">
+<meta property="og:title"       content="Stape.io einrichten in 30 Minuten: Schritt-für-Schritt-Anleitung 2026">
+<meta property="og:description" content="Server-Side Tracking mit Stape.io aufsetzen - DNS, Subdomain, GTM Server-Container, DSGVO-Check. Komplette Anleitung in 6 Schritten.">
+<meta property="og:image"       content="https://meixner-tobias.com/assets/img/og/stape-io-einrichten.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale"      content="de_DE">
+<meta property="og:site_name"   content="Tobias Meixner">
+<meta property="article:published_time" content="2026-06-08T00:00:00+02:00">
+<meta property="article:modified_time"  content="2026-06-08T00:00:00+02:00">
+<meta property="article:author"         content="Tobias Meixner">
+<meta property="article:section"        content="Tracking">
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:site"        content="@MeixnerTobias04">
+<meta name="twitter:title"       content="Stape.io einrichten in 30 Minuten: Anleitung 2026">
+<meta name="twitter:description" content="Server-Side Tracking mit Stape.io - DNS, Subdomain, GTM-Container, DSGVO-Check. 6 Schritte.">
+<meta name="twitter:image"       content="https://meixner-tobias.com/assets/img/og/stape-io-einrichten.png">
+
+<link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon/favicon-96x96.png">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg">
+<link rel="shortcut icon" href="/assets/favicon/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://meixner-tobias.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://meixner-tobias.com/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "Stape.io einrichten", "item": "https://meixner-tobias.com/blog/stape-io-einrichten/" }
+      ]
+    },
+    {
+      "@type": "Article",
+      "@id": "https://meixner-tobias.com/blog/stape-io-einrichten/",
+      "headline": "Stape.io einrichten in 30 Minuten: Schritt-für-Schritt-Anleitung 2026",
+      "description": "Wie du Stape.io für Server-Side Tracking mit eigener Subdomain einrichtest - in 30 Minuten. Komplette Anleitung mit DNS, GTM Server-Container, Cloudflare-Hinweisen und DSGVO-Check.",
+      "url": "https://meixner-tobias.com/blog/stape-io-einrichten/",
+      "datePublished": "2026-06-08",
+      "dateModified": "2026-06-08",
+      "author": { "@type": "Person", "@id": "https://meixner-tobias.com/#person", "name": "Tobias Meixner" },
+      "publisher": { "@type": "Person", "@id": "https://meixner-tobias.com/#person" },
+      "image": "https://meixner-tobias.com/assets/img/og/stape-io-einrichten.png",
+      "inLanguage": "de-DE",
+      "keywords": "Stape.io einrichten, Stape setup, Server-Side GTM Anleitung, sGTM Subdomain, Stape DNS, Server-Container GTM, Stape Cloudflare, Server-Side Tracking DSGVO",
+      "articleSection": "Tracking",
+      "isPartOf": { "@id": "https://meixner-tobias.com/blog/server-side-tracking/" },
+      "mentions": [
+        { "@type": "Thing", "name": "Stape.io" },
+        { "@type": "Thing", "name": "Google Tag Manager" },
+        { "@type": "Thing", "name": "Server-Side Tagging" },
+        { "@type": "Thing", "name": "Google Analytics 4" },
+        { "@type": "Thing", "name": "Google Consent Mode v2" },
+        { "@type": "Thing", "name": "Cloudflare" },
+        { "@type": "Thing", "name": "DNS CNAME Record" }
+      ],
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [".intro-box", ".article-excerpt", ".fact-box", ".faq-a"]
+      }
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://meixner-tobias.com/blog/stape-io-einrichten/#howto",
+      "name": "Stape.io einrichten in 30 Minuten",
+      "description": "Komplette Anleitung zum Einrichten von Stape.io für Server-Side Tracking mit eigener Subdomain.",
+      "totalTime": "PT30M",
+      "estimatedCost": { "@type": "MonetaryAmount", "currency": "USD", "value": "0" },
+      "tool": [
+        { "@type": "HowToTool", "name": "Stape.io Account" },
+        { "@type": "HowToTool", "name": "Google Tag Manager Account" },
+        { "@type": "HowToTool", "name": "Eigene Domain mit DNS-Zugriff" }
+      ],
+      "step": [
+        { "@type": "HowToStep", "position": 1, "name": "Stape-Account anlegen & Container erstellen", "text": "Account auf stape.io anlegen, Container mit EU-Region (Frankfurt) erstellen, Free Tier oder Basic Plan wählen." },
+        { "@type": "HowToStep", "position": 2, "name": "GTM Server-Container in Google Tag Manager anlegen", "text": "In GTM Admin neuen Container vom Typ Server erstellen, manuelle Bereitstellung wählen, Container-Konfigurations-String kopieren und in Stape einfügen." },
+        { "@type": "HowToStep", "position": 3, "name": "DNS Custom Subdomain einrichten", "text": "Neutrale Subdomain wählen (z.B. data.deinunternehmen.de, nicht gtm/track/analytics), CNAME-Records bei DNS-Provider eintragen, bei Cloudflare Proxy ausschalten, in Stape verifizieren." },
+        { "@type": "HowToStep", "position": 4, "name": "Tagging Server URL in GTM hinterlegen", "text": "Im GTM Server-Container unter Admin > Container Settings die Tagging Server URL auf deine verifizierte Subdomain setzen." },
+        { "@type": "HowToStep", "position": 5, "name": "GA4-Client einrichten + Test im DebugView", "text": "Im Server-Container GA4-Client hinzufügen, im Web-Container server_container_url im GA4-Tag setzen, im GA4 DebugView verifizieren dass Events über die eigene Subdomain laufen." },
+        { "@type": "HowToStep", "position": 6, "name": "DSGVO + Consent Mode v2 Check", "text": "Consent Mode v2 aktiv halten, GeoIP-Anonymisierung in Stape aktivieren, Daten-Minimierung beachten (SHA-256 für E-Mails), EU-Server-Region bestätigen." }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://meixner-tobias.com/blog/stape-io-einrichten/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "Was kostet Stape.io wirklich?", "acceptedAnswer": { "@type": "Answer", "text": "Stape bietet einen Free Tier mit 100.000 Requests pro Monat - für kleine Sites mit etwa 5.000 bis 8.000 Besuchern monatlich ausreichend. Der Basic-Plan kostet ca. 20 USD/Monat für bis zu 1 Million Requests - typisch für KMU mit Newsletter, Demos und mittlerem Traffic. Pro-Plan und Power-Ups bewegen sich bei 50-150 USD/Monat für größere Setups." } },
+        { "@type": "Question", "name": "Brauche ich Cloud-Engineering-Wissen für Stape.io?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Stape verwaltet den Server für dich. Du brauchst GTM-Kenntnisse und Zugriff auf die DNS-Verwaltung deiner Domain. Docker, Kubernetes oder Google Cloud Console werden nicht benötigt - das übernimmt Stape im Hintergrund." } },
+        { "@type": "Question", "name": "Ist Stape.io DSGVO-konform?", "acceptedAnswer": { "@type": "Answer", "text": "Stape bietet EU-Server-Regionen (Frankfurt) - damit lassen sich personenbezogene Daten in der EU verarbeiten. DSGVO-Konformität hängt aber von der Implementierung ab: Consent Mode v2 muss aktiv sein, GeoIP-Anonymisierung sollte aktiviert werden, ein AVV mit Stape muss geschlossen werden und Daten-Minimierung (SHA-256 für E-Mails, IP-Truncation) ist Pflicht." } },
+        { "@type": "Question", "name": "Was passiert wenn der Stape-Server ausfällt?", "acceptedAnswer": { "@type": "Answer", "text": "Stape garantiert 99,9 % Uptime. Bei einem temporären Ausfall werden Tracking-Events nicht erfasst - deine Website selbst läuft aber normal weiter, weil der Server-Container nur für die Tracking-Datenverarbeitung zuständig ist. Es gibt keinen Impact auf die Besucher-Experience." } },
+        { "@type": "Question", "name": "Kann ich später von Stape zu Self-Hosted wechseln?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Der GTM Server-Container selbst ist portabel - du kannst denselben Container-Konfigurations-String später auf einer eigenen Google Cloud Run Instanz oder bei einem anderen Hoster wie Addingwell oder Taggrs nutzen. Die DNS-Subdomain müsstest du dann neu konfigurieren, der GTM-Container bleibt aber identisch." } },
+        { "@type": "Question", "name": "Was wenn ich Cloudflare für meine DNS nutze?", "acceptedAnswer": { "@type": "Answer", "text": "Funktioniert problemlos. Wichtig ist nur: Den Proxy-Status (die orange Wolke) für die Stape-Subdomain auf 'DNS only' (graue Wolke) stellen. Wenn der Cloudflare-Proxy aktiv ist, kann Stape die Domain nicht verifizieren, weil die Anfragen über Cloudflare geroutet werden statt direkt zu Stape." } }
+      ]
+    }
+  ]
+}
+</script>
+<script src="/js/main.js" defer></script>
+  <link rel="alternate" type="application/rss+xml" title="Tobias Meixner - Blog (DE)" href="https://meixner-tobias.com/blog/feed.xml">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Zum Inhalt springen</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5QLXDT4T"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="/" aria-label="Tobias Meixner - Startseite" style="display:flex;align-items:center;padding-top:6px;">
+      <svg class="nav-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 230" role="img" aria-labelledby="logo-stape">
+        <title id="logo-stape">Tobias Meixner</title>
+        <g transform="translate(8 6)">
+          <circle class="logo-dot" cx="50" cy="108" r="18"/>
+          <line class="logo-stroke" x1="68" y1="62" x2="98" y2="118"/>
+          <line class="logo-stroke" x1="136" y1="62" x2="166" y2="118"/>
+          <text class="logo-t" x="208" y="136">eixner</text>
+        </g>
+      </svg>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/ueber-mich/">Über mich</a></li>
+      <li><a href="/leistungen/">Leistungen</a></li>
+      <li><a href="/projekte/">Projekte</a></li>
+      <li class="nav-dropdown">
+        <a href="/blog/" class="active">Blog</a>
+        <ul class="nav-drop-menu" role="menu">
+          <li role="none"><a href="/blog/answer-engine-optimization/" role="menuitem">Answer Engine Optimization</a></li>
+          <li role="none"><a href="/blog/performance-max-vs-advantage-plus/" role="menuitem">Performance Max vs. Advantage Plus</a></li>
+          <li role="none"><a href="/blog/server-side-tracking/" role="menuitem">Server-Side Tracking</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/blog/stape-io-einrichten/" role="menuitem" class="active"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Stape.io einrichten</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/blog/meta-capi-server-side-gtm/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Meta CAPI via sGTM</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/blog/google-ads-enhanced-conversions/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Google Ads Enhanced Conv.</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/blog/safari-itp-umgehen/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Safari ITP umgehen</a></li>
+          <li role="none"><a href="/blog/prompt-engineering-ecommerce/" role="menuitem">KI-Texterstellung E-Commerce</a></li>
+        </ul>
+      </li>
+      <li><a href="/produkte/">Produkte</a></li>
+      <li class="lang-switch">
+        <button class="lang-btn" id="langBtn" aria-label="Sprache wählen" aria-expanded="false">
+          <div class="flag-circle"><div class="flag-de"></div></div>
+          DE
+          <span class="lang-arrow">▾</span>
+        </button>
+        <div class="lang-dropdown" id="langDropdown" role="menu">
+          <a href="/blog/stape-io-einrichten/" class="lang-option active" role="menuitem">
+            <div class="flag-lg"><div class="flag-de"></div></div>
+            <div class="lang-option-text">
+              <span class="lang-option-name">Deutsch</span>
+              <span class="lang-option-sub">Deutschland</span>
+            </div>
+            <span class="lang-check">✓</span>
+          </a>
+          <a href="/en/blog/stape-io-setup/" class="lang-option" role="menuitem">
+            <div class="flag-lg"><div class="flag-us"></div></div>
+            <div class="lang-option-text">
+              <span class="lang-option-name">English</span>
+              <span class="lang-option-sub">United States</span>
+            </div>
+          </a>
+        </div>
+      </li>
+      <li><a href="/kontakt/" class="nav-cta">Kontakt aufnehmen</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Dark Mode umschalten">
+      <svg class="icon-sun" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      <svg class="icon-moon" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>
+    </button>
+    <button class="burger" id="burger" aria-label="Navigation öffnen" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main id="main-content">
+  <header class="article-hero article-hero--sst" aria-labelledby="article-heading">
+    <div class="container">
+      <div class="article-hero-inner">
+        <div class="article-cat article-cat--sst">
+          <svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2.5">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+          Tracking · Tutorial
+        </div>
+        <h1 class="article-title" id="article-heading">
+          Stape.io einrichten in 30 Minuten:<br>
+          <em>Schritt-für-Schritt-Anleitung</em> für Server-Side Tracking 2026
+        </h1>
+        <p class="article-excerpt">
+          Stape.io ist ein managed Hosting-Anbieter für Server-Side Google Tag Manager (sGTM).
+          Statt einen eigenen Cloud-Server zu betreiben, mietest du bei Stape einen vorkonfigurierten
+          sGTM-Container inklusive Custom Subdomain. Diese Anleitung führt dich in 30 Minuten durch
+          die sechs Setup-Schritte - mit allen DNS-Stolperfallen, Cloudflare-Hinweisen und einem
+          DSGVO-Check am Ende. Stape bietet einen Free Tier mit 100.000 Requests pro Monat.
+        </p>
+        <div class="article-meta-row">
+          <span><strong>Tobias Meixner</strong></span>
+          <div class="article-meta-div" aria-hidden="true"></div>
+          <span>8. Juni 2026</span>
+          <div class="article-meta-div" aria-hidden="true"></div>
+          <span>10 Minuten Lesezeit</span>
+          <div class="article-meta-div" aria-hidden="true"></div>
+          <span>Cluster: Server-Side Tracking</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav aria-label="Breadcrumb"
+      style="background:var(--bg);border-bottom:1px solid var(--border);padding:12px 0;">
+    <div class="container">
+      <ol style="list-style:none;display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:0;padding:0;">
+        <li style="display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--muted);">
+          <a href="/" style="color:var(--muted);text-decoration:none;">Home</a>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </li>
+        <li style="display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--muted);">
+          <a href="/blog/" style="color:var(--muted);text-decoration:none;">Blog</a>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </li>
+        <li style="font-size:.8rem;color:var(--navy);font-weight:600;" aria-current="page">Stape.io einrichten</li>
+      </ol>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="article-body">
+      <article class="article-content" aria-label="Artikelinhalt">
+
+        <div class="intro-box intro-box--sst">
+          <p>
+            <strong>Stape.io ist ein managed Hosting-Anbieter für Server-Side Google Tag Manager (sGTM).</strong>
+            Statt einen eigenen Cloud-Server zu betreiben, mietest du bei Stape einen vorkonfigurierten sGTM-Container
+            inklusive Custom Subdomain mit eigenem DNS-Setup. Diese Anleitung führt dich in 30 Minuten durch die
+            sechs Setup-Schritte - mit allen Stolperfallen die im DNS-Setup lauern.
+          </p>
+          <p>
+            Voraussetzungen: ein bestehender GTM-Web-Container, eine eigene Domain mit DNS-Zugriff und 30 Minuten Zeit.
+            Stape bietet einen <strong>Free Tier mit 100.000 Requests pro Monat</strong> - für kleine KMU-Setups
+            ausreichend. Typischer Basic-Plan: ca. 20 USD/Monat.
+          </p>
+          <p>
+            Falls du noch unsicher bist, <em>ob</em> Server-Side für dich überhaupt Sinn macht, lies erst den
+            <a href="/blog/server-side-tracking/">Pillar-Artikel zu Server-Side Tracking</a> - dort steht die
+            Datenverlust-Mathematik (30-40 % bei Standard-Tracking) und der Cost-Benefit für deutsche KMU.
+          </p>
+        </div>
+
+        <nav class="toc-box" aria-label="Inhaltsverzeichnis">
+          <div class="toc-box-title">Inhaltsverzeichnis</div>
+          <ol>
+            <li><span>1</span><a href="#was-ist-stape">Was Stape.io ist (und wann sich's lohnt)</a></li>
+            <li><span>2</span><a href="#voraussetzungen">Voraussetzungen</a></li>
+            <li><span>3</span><a href="#schritt-1">Schritt 1: Stape-Account &amp; Container</a></li>
+            <li><span>4</span><a href="#schritt-2">Schritt 2: GTM Server-Container anlegen</a></li>
+            <li><span>5</span><a href="#schritt-3">Schritt 3: DNS Custom Subdomain</a></li>
+            <li><span>6</span><a href="#schritt-4">Schritt 4: Tagging Server URL setzen</a></li>
+            <li><span>7</span><a href="#schritt-5">Schritt 5: GA4-Client + Test</a></li>
+            <li><span>8</span><a href="#schritt-6">Schritt 6: DSGVO &amp; Consent Mode v2</a></li>
+            <li><span>9</span><a href="#probleme">Häufige Probleme &amp; Lösungen</a></li>
+            <li><span>10</span><a href="#kosten">Was kostet das realistisch?</a></li>
+            <li><span>11</span><a href="#naechste-schritte">Nächste Schritte</a></li>
+            <li><span>12</span><a href="#faq">FAQ</a></li>
+          </ol>
+        </nav>
+
+        <!-- 1 -->
+        <h2 id="was-ist-stape">1. Was Stape.io ist (und wann sich's lohnt)</h2>
+        <p>
+          Stape.io ist ein managed Hosting-Provider speziell für Google Tag Manager Server-Container (sGTM).
+          Du bekommst einen vorinstallierten Server, kümmerst dich nicht um Docker, Cloud Run, Skalierung oder
+          System-Updates. Im Stape-Dashboard klickst du zusammen was du brauchst - der Rest läuft im Hintergrund.
+        </p>
+
+        <h3>Alternativen zu Stape</h3>
+        <ul>
+          <li><strong>Google Cloud Run (self-hosted)</strong> - die offizielle Google-Anleitung. Reine Server-Kosten ca. $10-30/Monat, aber DevOps-Wissen nötig (Docker, GCP-Konsole, Skalierungs-Regeln).</li>
+          <li><strong>Plattform-Apps wie Elevar oder TrackBee</strong> - auf Shopify fokussiert, $99-200/Monat, sehr starkes UI für E-Commerce.</li>
+          <li><strong>Andere managed Hosts</strong> wie Taggrs oder Addingwell - vergleichbar zu Stape, leicht andere Feature-Sets.</li>
+        </ul>
+
+        <h3>Wann Stape sinnvoll ist</h3>
+        <ul>
+          <li>Du willst sGTM, hast aber keine DevOps-Erfahrung</li>
+          <li>Du brauchst eine eigene Subdomain (für längere Cookie-Lifetime &amp; Ad-Blocker-Schutz)</li>
+          <li>Du willst ein skalierbares Setup ohne Server-Wartung</li>
+          <li>Du bist außerhalb von Shopify (für reine Shopify-Stores sind Elevar/TrackBee oft schneller)</li>
+        </ul>
+
+        <!-- 2 -->
+        <h2 id="voraussetzungen">2. Voraussetzungen</h2>
+        <ul>
+          <li>✓ Bestehender <strong>GTM-Web-Container</strong> mit aktivem GA4-Tag</li>
+          <li>✓ <strong>Eigene Domain</strong> (z.B. <code>deinunternehmen.de</code>) mit Zugriff zur DNS-Verwaltung (Cloudflare, IONOS, GoDaddy, Strato, Netlify, etc.)</li>
+          <li>✓ <strong>Stape-Account</strong> - kostenlos im Free Tier</li>
+          <li>✓ <strong>Google-Account</strong> mit GTM-Zugriff (Edit-Rechte)</li>
+          <li>✓ <strong>30 Minuten Zeit</strong> + 2-3 Stunden Wartezeit für DNS-Propagation</li>
+        </ul>
+        <p>Du brauchst <strong>kein</strong> Cloud-Engineering-Wissen, keine Docker-Erfahrung und keine Kreditkarte (für den Free Tier).</p>
+
+        <!-- 3 -->
+        <h2 id="schritt-1">3. Schritt 1: Stape-Account &amp; Container (ca. 5 Min)</h2>
+        <ol>
+          <li>Gehe auf <a href="https://stape.io" target="_blank" rel="noopener">stape.io</a> → <em>Sign up</em> → mit Google oder E-Mail anmelden.</li>
+          <li>Im Dashboard auf <strong>„Create Container"</strong> klicken.</li>
+          <li>Wähle eine Region. <strong>Wichtig:</strong> Die geographisch nächste Region zu deinen Nutzern wählen - für deutsche/EU-Nutzer entweder <strong>Germany (Frankfurt)</strong> oder <strong>EU</strong>. Das spart Latenz UND ist DSGVO-relevant (Daten-Lokalisierung in der EU).</li>
+          <li>Plan wählen: Free Tier (100.000 Requests/Monat) reicht für die meisten KMU-Setups; Basic-Plan $20/Monat für mehr Traffic plus Power-Ups.</li>
+        </ol>
+
+        <div class="fact-box">
+          <strong>Was ist ein „Request"?</strong>
+          Jeder Hit der bei deinem sGTM ankommt (Pageview, Event, Conversion etc.) zählt als 1 Request.
+          Eine kleine Website mit 5.000 Besuchern/Monat braucht typischerweise 30-60k Requests.
+          Ein mittlerer Shop schnell 200k+.
+        </div>
+
+        <!-- 4 -->
+        <h2 id="schritt-2">4. Schritt 2: GTM Server-Container in Google Tag Manager anlegen (ca. 5 Min)</h2>
+        <ol>
+          <li>In Google Tag Manager: <strong>Admin → Container hinzufügen</strong>.</li>
+          <li>Container-Name vergeben: z.B. <em>„Server Container"</em>.</li>
+          <li>Container-Typ: <strong>„Server"</strong> wählen.</li>
+          <li>Server-Setup: <strong>„Manuell selbst bereitstellen"</strong> wählen - NICHT die automatische GCP-Bereitstellung. Die kostet Geld und ist für unser Stape-Setup unnötig.</li>
+          <li>GTM zeigt dir jetzt den <strong>Container-Konfigurations-String</strong> - einen langen kodierten Text. <strong>Kopiere ihn</strong> in die Zwischenablage.</li>
+          <li>Zurück im Stape-Dashboard: <em>Container Config einfügen</em> → Speichern.</li>
+        </ol>
+        <p>Stape erkennt automatisch, dass du einen Container konfigurieren willst, und richtet die Server-Routing-Tabelle ein. Offizielle Google-Dokumentation: <a href="https://developers.google.com/tag-platform/tag-manager/server-side/manual-setup-guide" target="_blank" rel="noopener">Google Manual Setup Guide</a>.</p>
+
+        <!-- 5 -->
+        <h2 id="schritt-3">5. Schritt 3: DNS Custom Subdomain einrichten (10 Min + Wartezeit)</h2>
+        <p>Dies ist der kritischste Schritt - hier scheitern die meisten Setups.</p>
+
+        <h3>5.1 Subdomain klug wählen</h3>
+        <p>
+          Vermeide offensichtliche Begriffe wie <code>gtm.deinunternehmen.de</code>, <code>track.deinunternehmen.de</code>,
+          <code>analytics.deinunternehmen.de</code> oder <code>stape.deinunternehmen.de</code>. Ad-Blocker und Browser-
+          Privacy-Listen erkennen diese sofort und blocken Requests.
+        </p>
+        <p>
+          <strong>Empfehlung:</strong> Neutrale Subdomains wie <code>data.deinunternehmen.de</code>,
+          <code>metrics.deinunternehmen.de</code>, <code>sgtm.deinunternehmen.de</code> oder
+          eigene Buchstabenkombinationen wie <code>ms.deinunternehmen.de</code>.
+        </p>
+
+        <h3>5.2 In Stape: Custom Subdomain hinzufügen</h3>
+        <p>
+          Im Stape-Dashboard: Container öffnen → <strong>„Custom Domain"</strong> → gewünschten Subdomain-Namen eingeben
+          (z.B. <code>data.deinunternehmen.de</code>). Stape generiert dir die DNS-Records, die du eintragen musst -
+          typischerweise ein oder zwei CNAME-Records.
+        </p>
+
+        <h3>5.3 DNS-Records bei deinem Provider eintragen</h3>
+        <p>
+          Login bei deinem DNS-Provider (Cloudflare, IONOS, GoDaddy, Strato, etc.) → DNS-Verwaltung deiner Domain
+          → CNAME-Record(s) anlegen entsprechend den Vorgaben aus Stape.
+        </p>
+        <div class="warn-box">
+          <strong>Cloudflare-Warnung:</strong>
+          Den Proxy-Status (orange Wolke) auf <strong>DNS only (graue Wolke)</strong> stellen.
+          Wenn der Cloudflare-Proxy aktiv ist, kann Stape die Domain nicht verifizieren -
+          die Anfragen werden über Cloudflare geroutet, statt direkt zu Stape.
+        </div>
+
+        <h3>5.4 Verifizierung anstoßen</h3>
+        <p>
+          Zurück im Stape-Dashboard: <strong>„Verify"</strong> klicken. Wartezeit typisch 2-3 Stunden,
+          in Extremfällen bis zu 72 Stunden. Stape pingt deine DNS-Records, bis sie korrekt antworten.
+          Du kannst die Propagation mit <a href="https://dnschecker.org" target="_blank" rel="noopener">dnschecker.org</a> prüfen.
+        </p>
+
+        <!-- 6 -->
+        <h2 id="schritt-4">6. Schritt 4: Tagging Server URL in GTM hinterlegen (2 Min)</h2>
+        <p>Sobald Stape grünes Licht gibt:</p>
+        <ol>
+          <li>GTM Server-Container öffnen → <strong>Admin → Container Settings</strong>.</li>
+          <li><strong>Tagging Server URL:</strong> <code>https://data.deinunternehmen.de</code> (deine verifizierte Subdomain).</li>
+          <li><strong>Speichern.</strong></li>
+        </ol>
+        <p>Damit weiß GTM: Alle Events, die an diese URL gehen, soll der Server-Container verarbeiten.</p>
+
+        <!-- 7 -->
+        <h2 id="schritt-5">7. Schritt 5: GA4-Client einrichten + Test im DebugView (5 Min)</h2>
+        <p>Damit GA4 über Server-Side läuft:</p>
+
+        <h3>7.1 Im GTM Server-Container</h3>
+        <ul>
+          <li><strong>Clients</strong> → <strong>„Neu"</strong> → <strong>„GA4"</strong> wählen → Speichern.</li>
+          <li>Damit kann der Server-Container GA4-Anfragen empfangen und an die GA4-Property weiterleiten.</li>
+        </ul>
+
+        <h3>7.2 Im GTM Web-Container</h3>
+        <ul>
+          <li>Bestehenden GA4-Konfigurations-Tag öffnen.</li>
+          <li>Unter <strong>„Felder, die gesetzt werden sollen"</strong>: neuer Eintrag <code>server_container_url</code> = <code>https://data.deinunternehmen.de</code>.</li>
+          <li>Speichern + Container veröffentlichen.</li>
+        </ul>
+
+        <h3>7.3 Test im GA4 DebugView</h3>
+        <ul>
+          <li>GA4 öffnen → <strong>Admin → DebugView</strong>.</li>
+          <li>Deine Site im Chrome aufrufen (mit aktiviertem GTM Preview-Mode).</li>
+          <li>Im DebugView sollten Events erscheinen UND der Request-Path sollte <code>data.deinunternehmen.de</code> enthalten, NICHT <code>www.googletagmanager.com</code>.</li>
+        </ul>
+        <p>Wenn das so ist: <strong>Server-Side läuft.</strong> 🎉</p>
+
+        <!-- 8 -->
+        <h2 id="schritt-6">8. Schritt 6: DSGVO + Consent Mode v2 (3 Min)</h2>
+        <p>
+          Server-Side macht Tracking <strong>nicht automatisch DSGVO-konform</strong> - die Rechtsgrundlage
+          muss weiterhin existieren. Pflicht-Einstellungen für ein sauberes Setup:
+        </p>
+        <ul>
+          <li>✓ <strong>Consent Mode v2</strong> muss im Web-Container aktiv sein und Tags blocken, solange keine Einwilligung vorliegt. Seit März 2024 für EU-Werbetreibende Pflicht.</li>
+          <li>✓ <strong>GeoIP-Anonymisierung</strong> in Stape aktivieren (Settings → „Anonymize IP").</li>
+          <li>✓ <strong>Daten-Minimierung</strong> nach Art. 5(1)(c) DSGVO: Sende nur was du brauchst. Roh-E-Mails NIEMALS unhashed - immer SHA-256.</li>
+          <li>✓ <strong>EU-Region</strong> für deinen Stape-Server wählen (siehe Schritt 1).</li>
+          <li>✓ <strong>AVV mit Stape</strong> abschließen (Auftragsverarbeitungs-Vertrag nach Art. 28 DSGVO).</li>
+        </ul>
+        <p>
+          Mehr Details zu Consent Mode v2 im
+          <a href="/blog/server-side-tracking/#consent-mode">Pillar-Artikel zu Server-Side Tracking</a>
+          (Sektion „Consent Mode v2 Implementierung").
+        </p>
+
+        <!-- 9 -->
+        <h2 id="probleme">9. Häufige Probleme &amp; Lösungen</h2>
+        <div class="table-wrap"><table class="compare-table">
+          <thead>
+            <tr><th>Problem</th><th>Lösung</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>„Verifying" bleibt hängen</strong></td><td>DNS-Propagation noch nicht durch. Warte 6-24h, prüfe mit dnschecker.org.</td></tr>
+            <tr><td><strong>Cloudflare: Verifizierung schlägt fehl</strong></td><td>Proxy (orange Wolke) auf „DNS only" (graue Wolke) stellen.</td></tr>
+            <tr><td><strong>Subdomain wird vom Ad-Blocker geblockt</strong></td><td>Generischeren Namen wählen (NICHT <code>gtm</code>, <code>track</code>, <code>analytics</code>).</td></tr>
+            <tr><td><strong>GA4 DebugView zeigt keine Events</strong></td><td>Web-Container nicht veröffentlicht? <code>server_container_url</code> falsch geschrieben? Cache leeren und neu laden.</td></tr>
+            <tr><td><strong>Cookies werden nicht gesetzt</strong></td><td>Same-Site-Attribut prüfen. Server-set Cookies brauchen <code>SameSite=Lax</code>.</td></tr>
+            <tr><td><strong>Preview-Mode funktioniert nicht</strong></td><td>Im Server-Container „Preview" drücken, dann im Web-Container ebenfalls. Beide Preview-Modi müssen parallel laufen.</td></tr>
+          </tbody>
+        </table></div>
+
+        <!-- 10 -->
+        <h2 id="kosten">10. Was kostet das realistisch?</h2>
+        <p>Die Free Tier deckt kleine Sites zuverlässig ab. Hochgerechnet sieht der Cost-Vergleich so aus:</p>
+        <div class="table-wrap"><table class="compare-table">
+          <thead>
+            <tr><th>Setup</th><th>Monatliche Kosten</th><th>Wann passend</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Stape Free Tier</td><td>$0</td><td>&lt;100k Requests/Mt. (≈ 8.000 Besucher)</td></tr>
+            <tr><td>Stape Basic</td><td>$20</td><td>Bis 1 Mio. Requests, KMU mit Newsletter/Demos</td></tr>
+            <tr><td>Stape Pro + Power-Ups</td><td>$50-150</td><td>Größere Shops, CAPI für Meta + Google</td></tr>
+            <tr><td>Self-hosted GCP Cloud Run</td><td>$10-30 + DevOps-Zeit</td><td>Wenn du das DevOps-Wissen hast</td></tr>
+            <tr><td>Plattform-App (Elevar/TrackBee)</td><td>$99-200</td><td>Shopify-Fokus, schnellster Start</td></tr>
+          </tbody>
+        </table></div>
+        <p>
+          Realistisch für die meisten deutschen KMU: <strong>Stape Basic ($20/Monat, ca. €19)</strong>,
+          kombiniert mit einer einmaligen Setup-Investition. Wenn du es lieber abgibst, baue ich
+          Server-Side-Setups als <a href="/leistungen/">Modul ab 400 €</a> (Stape-Account auf deinen Namen,
+          du behältst Kontrolle).
+        </p>
+
+        <!-- 11 -->
+        <h2 id="naechste-schritte">11. Nächste Schritte</h2>
+        <p>Sobald dein Server läuft, kannst du tiefer einsteigen. Sinnvolle Folge-Themen:</p>
+        <ul>
+          <li><strong><a href="/blog/meta-capi-server-side-gtm/">Meta CAPI über server-side GTM</a></strong> - Conversion-Daten direkt vom Server an Meta, deutlich höhere Match-Quote (in einem Stape-Case +93 % für Atasun Optik)</li>
+          <li><strong><a href="/blog/google-ads-enhanced-conversions/">Google Ads Enhanced Conversions</a></strong> mit server-side - Match-Rate von 60-70 % auf 90 %+</li>
+          <li><strong><a href="/blog/safari-itp-umgehen/">Safari ITP umgehen</a></strong> durch Same-Origin Path-Based sGTM, Cookies von 7 auf 400 Tage Lifetime</li>
+          <li><strong>Cross-Domain Tracking</strong> zwischen mehreren Subdomains (z.B. Marketing-Site ↔ App)</li>
+        </ul>
+        <p>
+          Den vollständigen Hintergrund - warum Server-Side, was es löst, was es NICHT löst - findest du im
+          <a href="/blog/server-side-tracking/">Pillar-Artikel zu Server-Side Tracking</a>.
+          Wenn du das Setup lieber komplett abgeben willst:
+          <a href="/leistungen/">Server-Side Tracking Modul ab 400 €</a> oder direkt
+          <a href="/kontakt/">Kontakt aufnehmen</a>.
+        </p>
+
+        <!-- 12 -->
+        <h2 id="faq">12. FAQ</h2>
+
+        <h3>Was kostet Stape.io wirklich?</h3>
+        <p>
+          Stape bietet einen Free Tier mit 100.000 Requests pro Monat - für kleine Sites mit etwa
+          5.000 bis 8.000 Besuchern monatlich ausreichend. Der Basic-Plan kostet ca. 20 USD/Monat für
+          bis zu 1 Million Requests - typisch für KMU mit Newsletter, Demos und mittlerem Traffic.
+          Pro-Plan und Power-Ups bewegen sich bei 50-150 USD/Monat für größere Setups.
+        </p>
+
+        <h3>Brauche ich Cloud-Engineering-Wissen für Stape.io?</h3>
+        <p>
+          Nein. Stape verwaltet den Server für dich. Du brauchst GTM-Kenntnisse und Zugriff auf die
+          DNS-Verwaltung deiner Domain. Docker, Kubernetes oder Google Cloud Console werden nicht benötigt -
+          das übernimmt Stape im Hintergrund.
+        </p>
+
+        <h3>Ist Stape.io DSGVO-konform?</h3>
+        <p>
+          Stape bietet EU-Server-Regionen (Frankfurt) - damit lassen sich personenbezogene Daten in der EU
+          verarbeiten. DSGVO-Konformität hängt aber von der Implementierung ab: Consent Mode v2 muss aktiv sein,
+          GeoIP-Anonymisierung sollte aktiviert werden, ein AVV mit Stape muss geschlossen werden und
+          Daten-Minimierung (SHA-256 für E-Mails, IP-Truncation) ist Pflicht.
+        </p>
+
+        <h3>Was passiert wenn der Stape-Server ausfällt?</h3>
+        <p>
+          Stape garantiert 99,9 % Uptime. Bei einem temporären Ausfall werden Tracking-Events nicht erfasst -
+          deine Website selbst läuft aber normal weiter, weil der Server-Container nur für die
+          Tracking-Datenverarbeitung zuständig ist. Es gibt keinen Impact auf die Besucher-Experience.
+        </p>
+
+        <h3>Kann ich später von Stape zu Self-Hosted wechseln?</h3>
+        <p>
+          Ja. Der GTM Server-Container selbst ist portabel - du kannst denselben Container-Konfigurations-String
+          später auf einer eigenen Google Cloud Run Instanz oder bei einem anderen Hoster wie Addingwell oder
+          Taggrs nutzen. Die DNS-Subdomain müsstest du dann neu konfigurieren, der GTM-Container bleibt
+          aber identisch.
+        </p>
+
+        <h3>Was wenn ich Cloudflare für meine DNS nutze?</h3>
+        <p>
+          Funktioniert problemlos. Wichtig ist nur: Den Proxy-Status (die orange Wolke) für die Stape-Subdomain
+          auf „DNS only" (graue Wolke) stellen. Wenn der Cloudflare-Proxy aktiv ist, kann Stape die Domain nicht
+          verifizieren, weil die Anfragen über Cloudflare geroutet werden statt direkt zu Stape.
+        </p>
+
+        <!-- Sources box -->
+        <aside class="sources-box" aria-label="Quellen">
+          <div class="sources-box-title">Quellen &amp; weiterführende Links</div>
+          <ul>
+            <li>Stape.io offizielle Dokumentation: <a href="https://stape.io/helpdesk/documentation/custom-domain-setup" target="_blank" rel="noopener">Custom Domain Setup</a></li>
+            <li>Stape.io DNS-Konfiguration: <a href="https://stape.io/blog/dns-configuration-for-custom-domain" target="_blank" rel="noopener">DNS configuration for custom domain</a></li>
+            <li>Google Tag Manager Server-Side: <a href="https://developers.google.com/tag-platform/tag-manager/server-side" target="_blank" rel="noopener">Google Developers</a></li>
+            <li>Google Manual Setup Guide: <a href="https://developers.google.com/tag-platform/tag-manager/server-side/manual-setup-guide" target="_blank" rel="noopener">Manual setup guide</a></li>
+            <li>DNS-Propagation prüfen: <a href="https://dnschecker.org" target="_blank" rel="noopener">dnschecker.org</a></li>
+            <li>Stape Case Studies (Conversion-Uplift): <a href="https://stape.io/blog/category/case-studies" target="_blank" rel="noopener">Stape Case Studies</a></li>
+          </ul>
+        </aside>
+
+        <!-- CTA -->
+        <div class="cta-card" style="margin-top:32px;background:var(--navy);border-radius:var(--r-lg);padding:28px 32px;">
+          <p style="font-family:var(--fd);font-size:1rem;font-weight:700;color:#fff;margin-bottom:8px;">Lieber abgeben als selber machen?</p>
+          <p style="font-size:.875rem;color:rgba(255,255,255,.6);line-height:1.65;margin-bottom:20px;">Ich richte dir Stape.io komplett ein - Account auf deinen Namen, Subdomain konfiguriert, GA4 verkabelt, DSGVO-sauber, mit Handover-Call. Server-Side Tracking als <a href="/leistungen/" style="color:#a5b4fc;">Modul ab 400 €</a>.</p>
+          <a href="/kontakt/" class="btn btn-indigo btn-sm">Server-Side Setup anfragen <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+
+        <div style="margin-top:24px;">
+          <a href="/blog/" style="display:inline-flex;align-items:center;gap:6px;font-size:.84rem;color:var(--muted);text-decoration:none;font-family:var(--fd);font-weight:600;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+            Zurück zum Blog
+          </a>
+        </div>
+
+      </article>
+
+      <!-- SIDEBAR -->
+      <aside class="article-sidebar" aria-label="Inhaltsverzeichnis und Cluster-Übersicht">
+        <nav class="toc-card" aria-label="Springe zu Abschnitt">
+          <div class="toc-card-title">Inhalt</div>
+          <ul class="toc-links" role="list">
+            <li><a href="#was-ist-stape">1. Was Stape.io ist</a></li>
+            <li><a href="#voraussetzungen">2. Voraussetzungen</a></li>
+            <li><a href="#schritt-1">3. Schritt 1: Account</a></li>
+            <li><a href="#schritt-2">4. Schritt 2: GTM-Container</a></li>
+            <li><a href="#schritt-3">5. Schritt 3: DNS Subdomain</a></li>
+            <li><a href="#schritt-4">6. Schritt 4: Tagging URL</a></li>
+            <li><a href="#schritt-5">7. Schritt 5: GA4 + Test</a></li>
+            <li><a href="#schritt-6">8. Schritt 6: DSGVO-Check</a></li>
+            <li><a href="#probleme">9. Häufige Probleme</a></li>
+            <li><a href="#kosten">10. Kosten</a></li>
+            <li><a href="#naechste-schritte">11. Nächste Schritte</a></li>
+            <li><a href="#faq">12. FAQ</a></li>
+          </ul>
+        </nav>
+
+        <!-- Cluster-Card: zeigt Pillar-Zugehörigkeit -->
+        <div class="cluster-card" role="complementary" aria-label="Cluster-Übersicht">
+          <div class="cluster-card-label">
+            <svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            Teil des Clusters
+          </div>
+          <a href="/blog/server-side-tracking/" class="cluster-card-pillar">
+            <span class="cluster-card-pillar-tag">Pillar</span>
+            <span class="cluster-card-pillar-title">Server-Side Tracking 2026 - Komplette Übersicht</span>
+          </a>
+          <div class="cluster-card-list-title">Weitere im Cluster</div>
+          <ul class="cluster-card-list">
+            <li class="cluster-card-item cluster-card-item--current">
+              <span class="cluster-card-marker" aria-hidden="true">→</span>
+              Stape.io einrichten <span class="cluster-card-here">(du bist hier)</span>
+            </li>
+            <li class="cluster-card-item">
+              <span class="cluster-card-marker" aria-hidden="true">→</span>
+              <a href="/blog/meta-capi-server-side-gtm/" style="color:inherit;text-decoration:none;">Meta CAPI via server-side GTM</a>
+            </li>
+            <li class="cluster-card-item">
+              <span class="cluster-card-marker" aria-hidden="true">→</span>
+              <a href="/blog/google-ads-enhanced-conversions/" style="color:inherit;text-decoration:none;">Google Ads Enhanced Conversions</a>
+            </li>
+            <li class="cluster-card-item">
+              <span class="cluster-card-marker" aria-hidden="true">&rarr;</span>
+              <a href="/blog/safari-itp-umgehen/" style="color:inherit;text-decoration:none;">Safari ITP umgehen</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="author-card">
+          <picture>
+            <source srcset="/assets/img/ueber-mich-roadtrip.jpg" type="image/jpeg">
+            <img src="/assets/img/ueber-mich-roadtrip.jpg" alt="Tobias Meixner" width="48" height="48" loading="lazy">
+          </picture>
+          <div class="author-name">Tobias Meixner</div>
+          <div class="author-role">Freelancer · Würzburg</div>
+          <p class="author-bio">Tracking-Spezialist - GTM, GA4, Server-Side Tracking via Stape.io, DSGVO-konform.</p>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-cluster" style="display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid var(--border);font-size:.82rem;">
+      <span style="font-family:var(--fd);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);">Cluster Server-Side Tracking:</span>
+      <a href="/blog/server-side-tracking/" style="color:var(--muted);text-decoration:none;">Pillar</a>
+      <a href="/blog/stape-io-einrichten/" style="color:var(--muted);text-decoration:none;">Stape.io einrichten</a>
+      <a href="/blog/meta-capi-server-side-gtm/" style="color:var(--muted);text-decoration:none;">Meta CAPI via sGTM</a>
+      <a href="/blog/google-ads-enhanced-conversions/" style="color:var(--muted);text-decoration:none;">Google Ads Enhanced Conv.</a>
+      <a href="/blog/safari-itp-umgehen/" style="color:var(--muted);text-decoration:none;">Safari ITP umgehen</a>
+    </div>
+    <div class="footer-row">
+      <span class="footer-copy">© 2026 Tobias Meixner</span>
+      <ul class="footer-links">
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/impressum/">Impressum</a></li>
+        <li><a href="/datenschutz/">Datenschutz</a></li>
+        <li><a href="/agb/">AGB</a></li>
+        <li><a href="#" onclick="CookieScript.instance.show(); return false;">Cookie-Einstellungen</a></li>
+        <li><a href="https://www.linkedin.com/in/meixner-tobias" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

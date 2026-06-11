@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0D1B2A" media="(prefers-color-scheme: dark)">
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','functionality_storage':'denied','security_storage':'granted','wait_for_update':500});</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5QLXDT4T');</script>
+<!-- End Google Tag Manager -->
+<title>Meta CAPI via Server-Side GTM: Complete Guide for Maximum Event Match Quality 2026 | Tobias Meixner</title>
+<meta name="description" content="How to set up Meta Conversions API via Server-Side GTM - event_id deduplication, hashed PII, EMQ optimization to 8.0+. Complete guide with Stape, Test Events and GDPR check.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://meixner-tobias.com/en/blog/meta-capi-server-side-gtm/">
+<link rel="alternate" hreflang="de" href="https://meixner-tobias.com/blog/meta-capi-server-side-gtm/">
+<link rel="alternate" hreflang="en" href="https://meixner-tobias.com/en/blog/meta-capi-server-side-gtm/">
+<link rel="alternate" hreflang="x-default" href="https://meixner-tobias.com/en/blog/meta-capi-server-side-gtm/">
+
+<meta property="og:type"        content="article">
+<meta property="og:url"         content="https://meixner-tobias.com/en/blog/meta-capi-server-side-gtm/">
+<meta property="og:title"       content="Meta CAPI via Server-Side GTM: Complete Guide 2026">
+<meta property="og:description" content="Meta Conversions API via sGTM - event_id deduplication, hashed PII, EMQ to 8.0+. Complete step-by-step guide.">
+<meta property="og:image"       content="https://meixner-tobias.com/assets/img/og/meta-capi-en.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale"      content="en_US">
+<meta property="og:site_name"   content="Tobias Meixner">
+<meta property="article:published_time" content="2026-06-09T00:00:00+02:00">
+<meta property="article:modified_time"  content="2026-06-09T00:00:00+02:00">
+<meta property="article:author"         content="Tobias Meixner">
+<meta property="article:section"        content="Tracking">
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:site"        content="@MeixnerTobias04">
+<meta name="twitter:title"       content="Meta CAPI via Server-Side GTM: Guide 2026">
+<meta name="twitter:description" content="Meta Conversions API via sGTM - deduplication, hashed PII, EMQ optimization. 5 steps.">
+<meta name="twitter:image"       content="https://meixner-tobias.com/assets/img/og/meta-capi-en.png">
+
+<link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon/favicon-96x96.png">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg">
+<link rel="shortcut icon" href="/assets/favicon/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://meixner-tobias.com/en/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://meixner-tobias.com/en/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "Meta CAPI via Server-Side GTM", "item": "https://meixner-tobias.com/en/blog/meta-capi-server-side-gtm/" }
+      ]
+    },
+    {
+      "@type": "Article",
+      "@id": "https://meixner-tobias.com/en/blog/meta-capi-server-side-gtm/",
+      "headline": "Meta CAPI via Server-Side GTM: Complete Guide for Maximum Event Match Quality 2026",
+      "description": "How to set up Meta Conversions API via Server-Side GTM - event_id deduplication, hashed PII, EMQ optimization to 8.0+. Complete guide with Stape, Test Events and GDPR check.",
+      "url": "https://meixner-tobias.com/en/blog/meta-capi-server-side-gtm/",
+      "datePublished": "2026-06-09",
+      "dateModified": "2026-06-09",
+      "author": { "@type": "Person", "@id": "https://meixner-tobias.com/#person", "name": "Tobias Meixner" },
+      "publisher": { "@type": "Person", "@id": "https://meixner-tobias.com/#person" },
+      "image": "https://meixner-tobias.com/assets/img/og/meta-capi-en.png",
+      "inLanguage": "en-US",
+      "keywords": "Meta CAPI, Meta Conversions API, Server-Side GTM, sGTM, Event Match Quality, EMQ, event_id deduplication, hashed PII, Facebook Pixel, Stape.io, GDPR tracking",
+      "articleSection": "Tracking",
+      "isPartOf": { "@id": "https://meixner-tobias.com/en/blog/server-side-tracking/" },
+      "mentions": [
+        { "@type": "Thing", "name": "Meta Conversions API" },
+        { "@type": "Thing", "name": "Server-Side Google Tag Manager" },
+        { "@type": "Thing", "name": "Event Match Quality" },
+        { "@type": "Thing", "name": "Facebook Pixel" },
+        { "@type": "Thing", "name": "Stape.io" },
+        { "@type": "Thing", "name": "SHA-256" },
+        { "@type": "Thing", "name": "General Data Protection Regulation", "sameAs": "https://en.wikipedia.org/wiki/General_Data_Protection_Regulation" }
+      ],
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [".intro-box", ".article-excerpt", ".fact-box", ".faq-a"]
+      }
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://meixner-tobias.com/en/blog/meta-capi-server-side-gtm/#howto",
+      "name": "How to set up Meta CAPI via Server-Side GTM",
+      "description": "Complete guide to setting up Meta Conversions API via Server-Side Google Tag Manager with event_id deduplication.",
+      "totalTime": "PT45M",
+      "tool": [
+        { "@type": "HowToTool", "name": "Stape.io Server Container (live)" },
+        { "@type": "HowToTool", "name": "Meta Business Manager with Pixel" },
+        { "@type": "HowToTool", "name": "Meta CAPI Access Token" }
+      ],
+      "step": [
+        { "@type": "HowToStep", "position": 1, "name": "Pixel configuration in Web container with event_id", "text": "Create event_id variable via custom JavaScript in Web container, attach it to the Facebook Pixel tag. event_id must be unique per conversion." },
+        { "@type": "HowToStep", "position": 2, "name": "Meta tag in sGTM container", "text": "Install Facebook Conversions API tag (Stape community template or Simo Ahava's GitHub template). Configure Pixel ID, Access Token and Test Event Code." },
+        { "@type": "HowToStep", "position": 3, "name": "Hash user data", "text": "Hash email and phone with SHA-256, pass fbc and fbp cookies, include client_ip_address and client_user_agent from server request. Never send raw PII." },
+        { "@type": "HowToStep", "position": 4, "name": "Verify event_id deduplication", "text": "Pixel and CAPI must send identical event_id per conversion. Check 'Deduplicated' label in Events Manager Test Events." },
+        { "@type": "HowToStep", "position": 5, "name": "Check EMQ score in Events Manager", "text": "Open Diagnostics tab in Events Manager and check Event Match Quality score. Target: 8.0+. Add more identifiers (city, zip, external_id) if score is low." }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://meixner-tobias.com/en/blog/meta-capi-server-side-gtm/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "What is the difference between Pixel and CAPI?", "acceptedAnswer": { "@type": "Answer", "text": "The Meta Pixel fires client-side in the user's browser - it is blocked or limited by ad blockers, iOS ATT and Safari ITP. CAPI (Conversions API) is server-side: your server sends conversion data directly to Meta. Best practice is not 'Pixel OR CAPI' but both in parallel with event_id deduplication. Pixel delivers browser signals (fbp, fbc), CAPI provides data safety when browser tracking fails." } },
+        { "@type": "Question", "name": "What is Event Match Quality (EMQ)?", "acceptedAnswer": { "@type": "Answer", "text": "EMQ is a score from 1 to 10 in Meta Events Manager that measures how well Meta can match your server events to user profiles. A score of 6.0 means roughly 60% match rate, 9.0 corresponds to about 90%. In 2026, advertisers with EMQ above 8.0 see measurably 15-25% better attributed conversion rates. Hashed email moves the score most." } },
+        { "@type": "Question", "name": "How does event_id deduplication work?", "acceptedAnswer": { "@type": "Answer", "text": "For Meta to recognize that a Pixel event and a CAPI event are the same conversion, both must send identical event_id. Same event name (e.g. Purchase), same event_id, similar timestamps. In Events Manager Test Events a 'Deduplicated' label appears - that is the signal it works. Without deduplication conversions are counted twice and bidding optimizes on inflated data." } },
+        { "@type": "Question", "name": "Do I need CAPI if Meta Pixel works?", "acceptedAnswer": { "@type": "Answer", "text": "Yes - in 2026 more than ever. The Pixel alone captures only 50-60% of real conversions due to ad blockers (49% usage in Germany), iOS ATT and Safari ITP. CAPI fills this gap server-side. Without CAPI, Meta Advantage+ optimizes on a distorted picture and you pay for performance you can't see." } },
+        { "@type": "Question", "name": "Is CAPI GDPR-compliant?", "acceptedAnswer": { "@type": "Answer", "text": "When implemented correctly: yes. Requirements are Consent Mode v2 (tags blocked without consent), data minimization (only what you need), SHA-256 for all PII (email, phone, name), DPA with Meta (Data Processing Agreement under Art. 28 GDPR) and EU server region. Sending raw unhashed data is not permitted - always hash." } },
+        { "@type": "Question", "name": "What data should be in every CAPI event?", "acceptedAnswer": { "@type": "Answer", "text": "Required for high EMQ: hashed email, hashed phone, fbc (Facebook Click ID), fbp (Facebook Browser ID), client_ip_address, client_user_agent. Optional but EMQ-boosting: city, state, zip, country, first_name, last_name, external_id (Customer ID from your CRM). Hashed email alone moves the EMQ score most - if you can only add one field, that's the one." } }
+      ]
+    }
+  ]
+}
+</script>
+<script src="/js/main.js" defer></script>
+  <link rel="alternate" type="application/rss+xml" title="Tobias Meixner - Blog (EN)" href="https://meixner-tobias.com/en/blog/feed.xml">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to content</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5QLXDT4T"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="/en/" aria-label="Tobias Meixner - Home" style="display:flex;align-items:center;padding-top:6px;">
+      <svg class="nav-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 230" role="img" aria-labelledby="logo-capi-en">
+        <title id="logo-capi-en">Tobias Meixner</title>
+        <g transform="translate(8 6)">
+          <circle class="logo-dot" cx="50" cy="108" r="18"/>
+          <line class="logo-stroke" x1="68" y1="62" x2="98" y2="118"/>
+          <line class="logo-stroke" x1="136" y1="62" x2="166" y2="118"/>
+          <text class="logo-t" x="208" y="136">eixner</text>
+        </g>
+      </svg>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/en/">Home</a></li>
+      <li><a href="/en/about/">About</a></li>
+      <li><a href="/en/services/">Services</a></li>
+      <li><a href="/en/projects/">Projects</a></li>
+      <li class="nav-dropdown">
+        <a href="/en/blog/" class="active">Blog</a>
+        <ul class="nav-drop-menu" role="menu">
+          <li role="none"><a href="/en/blog/answer-engine-optimization/" role="menuitem">Answer Engine Optimization</a></li>
+          <li role="none"><a href="/en/blog/performance-max-vs-advantage-plus/" role="menuitem">Performance Max vs. Advantage Plus</a></li>
+          <li role="none"><a href="/en/blog/server-side-tracking/" role="menuitem">Server-Side Tracking</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/en/blog/stape-io-setup/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Stape.io setup</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/en/blog/meta-capi-server-side-gtm/" role="menuitem" class="active"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Meta CAPI via sGTM</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/en/blog/google-ads-enhanced-conversions/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Google Ads Enhanced Conv.</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/en/blog/bypassing-safari-itp/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Bypassing Safari ITP</a></li>
+          <li role="none"><a href="/en/blog/prompt-engineering-ecommerce/" role="menuitem">AI Copywriting for E-Commerce</a></li>
+        </ul>
+      </li>
+      <li><a href="/en/products/">Products</a></li>
+      <li class="lang-switch">
+        <button class="lang-btn" id="langBtn" aria-label="Choose language" aria-expanded="false">
+          <div class="flag-circle"><div class="flag-us"></div></div>
+          EN
+          <span class="lang-arrow">&#x25BE;</span>
+        </button>
+        <div class="lang-dropdown" id="langDropdown" role="menu">
+          <a href="/blog/meta-capi-server-side-gtm/" class="lang-option" role="menuitem">
+            <div class="flag-lg"><div class="flag-de"></div></div>
+            <div class="lang-option-text">
+              <span class="lang-option-name">Deutsch</span>
+              <span class="lang-option-sub">Deutschland</span>
+            </div>
+          </a>
+          <a href="/en/blog/meta-capi-server-side-gtm/" class="lang-option active" role="menuitem">
+            <div class="flag-lg"><div class="flag-us"></div></div>
+            <div class="lang-option-text">
+              <span class="lang-option-name">English</span>
+              <span class="lang-option-sub">United States</span>
+            </div>
+            <span class="lang-check">&#10003;</span>
+          </a>
+        </div>
+      </li>
+      <li><a href="/en/contact/" class="nav-cta">Get in touch</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <svg class="icon-sun" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      <svg class="icon-moon" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>
+    </button>
+    <button class="burger" id="burger" aria-label="Open navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main id="main-content">
+  <header class="article-hero article-hero--sst" aria-labelledby="article-heading">
+    <div class="container">
+      <div class="article-hero-inner">
+        <div class="article-cat article-cat--sst">
+          <svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2.5">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+          Tracking &middot; Tutorial
+        </div>
+        <h1 class="article-title" id="article-heading">
+          Meta CAPI via Server-Side GTM:<br>
+          <em>Complete Guide</em> for Maximum Event Match Quality 2026
+        </h1>
+        <p class="article-excerpt">
+          Meta Pixel alone captures only 50-60% of real conversions in 2026 - the rest is lost
+          to ad blockers, iOS ATT and Safari ITP. The Conversions API (CAPI) fills the gap
+          server-side. Advertisers with Event Match Quality (EMQ) above 8.0 see measurably
+          15-25% better attributed conversion rates. This guide walks step by step through a
+          clean CAPI setup via Server-Side GTM: Pixel + CAPI in parallel with event_id
+          deduplication, hashed PII, EMQ optimization and GDPR check.
+        </p>
+        <div class="article-meta-row">
+          <span><strong>Tobias Meixner</strong></span>
+          <div class="article-meta-div" aria-hidden="true"></div>
+          <span>June 9, 2026</span>
+          <div class="article-meta-div" aria-hidden="true"></div>
+          <span>12 minute read</span>
+          <div class="article-meta-div" aria-hidden="true"></div>
+          <span>Cluster: Server-Side Tracking</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav aria-label="Breadcrumb"
+      style="background:var(--bg);border-bottom:1px solid var(--border);padding:12px 0;">
+    <div class="container">
+      <ol style="list-style:none;display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:0;padding:0;">
+        <li style="display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--muted);">
+          <a href="/en/" style="color:var(--muted);text-decoration:none;">Home</a>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </li>
+        <li style="display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--muted);">
+          <a href="/en/blog/" style="color:var(--muted);text-decoration:none;">Blog</a>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </li>
+        <li style="font-size:.8rem;color:var(--navy);font-weight:600;" aria-current="page">Meta CAPI via sGTM</li>
+      </ol>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="article-body">
+      <article class="article-content" aria-label="Article content">
+
+        <div class="intro-box intro-box--sst">
+          <p>
+            <strong>Meta Pixel alone captures only 50-60% of real conversions in 2026.</strong>
+            The rest is blocked by ad blockers (around 49% usage in Germany), iOS App Tracking
+            Transparency and Safari Intelligent Tracking Prevention. The solution is Meta's
+            <strong>Conversions API (CAPI)</strong>: a server-side data stream parallel to the Pixel,
+            with event_id deduplication so nothing is counted twice.
+          </p>
+          <p>
+            This guide walks through the clean setup via Server-Side GTM in five steps:
+            Pixel configuration with event_id, CAPI tag in the server container, hash PII correctly
+            (SHA-256), verify deduplication and optimize EMQ score to 8.0+.
+            In 2026, advertisers with EMQ above 8.0 see measurably 15-25% better attributed
+            conversion rates.
+          </p>
+          <p>
+            <strong>Prerequisite:</strong> Server-Side GTM container is already running.
+            If not: walk through the <a href="/en/blog/stape-io-setup/">Stape.io setup guide</a> first (30 minutes).
+            For the background on why server-side: the
+            <a href="/en/blog/server-side-tracking/">pillar article on Server-Side Tracking</a>.
+          </p>
+        </div>
+
+        <nav class="toc-box" aria-label="Table of contents">
+          <div class="toc-box-title">Table of contents</div>
+          <ol>
+            <li><span>1</span><a href="#what-is-capi">What Meta CAPI is (Pixel vs CAPI)</a></li>
+            <li><span>2</span><a href="#emq">Understanding EMQ - the 1-10 score</a></li>
+            <li><span>3</span><a href="#prerequisites">Prerequisites</a></li>
+            <li><span>4</span><a href="#step-1">Step 1: Pixel + event_id in Web container</a></li>
+            <li><span>5</span><a href="#step-2">Step 2: Meta tag in sGTM container</a></li>
+            <li><span>6</span><a href="#step-3">Step 3: Hash user data (PII)</a></li>
+            <li><span>7</span><a href="#step-4">Step 4: Verify deduplication</a></li>
+            <li><span>8</span><a href="#step-5">Step 5: Check EMQ + optimize</a></li>
+            <li><span>9</span><a href="#emq-optimize">Push EMQ to 8.0+</a></li>
+            <li><span>10</span><a href="#issues">Common issues &amp; fixes</a></li>
+            <li><span>11</span><a href="#gdpr">GDPR + data minimization</a></li>
+            <li><span>12</span><a href="#faq">FAQ</a></li>
+          </ol>
+        </nav>
+
+        <h2 id="what-is-capi">1. What Meta CAPI is (Pixel vs CAPI)</h2>
+        <p>
+          The <strong>Meta Pixel</strong> is client-side: a JavaScript snippet in your user's browser that
+          reports conversions to Meta. Worked for years - but in 2026 has big gaps: ad blockers filter it
+          out, iOS ATT limits cross-app tracking, Safari ITP caps cookies at 7 days. On average advertisers
+          lose 30-40% of real conversion data with Pixel-only tracking.
+        </p>
+        <p>
+          The <strong>Conversions API (CAPI)</strong> is the server variant. Instead of the browser, your
+          server reports the conversion directly to Meta - independent of the browser. Best practice in 2026
+          is NOT "Pixel or CAPI" but <strong>both in parallel</strong>: Pixel delivers browser signals
+          (fbp, fbc cookie IDs, user-agent), CAPI delivers data safety when Pixel is blocked. To prevent
+          double counting, Pixel and CAPI share a common <strong>event_id deduplication</strong>.
+        </p>
+
+        <h3>Why Server-Side GTM and not just Pixel + CAPI directly?</h3>
+        <p>
+          You can fire Pixel + CAPI in parallel from the Web container directly. But: if the Web container
+          gets blocked by an ad blocker, BOTH go down - Pixel AND CAPI. With Server-Side GTM the CAPI tag
+          runs on your server (own subdomain), completely independent of browser JavaScript. That is the
+          decisive advantage.
+        </p>
+
+        <h2 id="emq">2. Understanding EMQ - the 1-10 score</h2>
+        <p>
+          <strong>Event Match Quality (EMQ)</strong> is Meta's internal scoring metric in Events Manager.
+          A score from 1 to 10 measuring how well Meta can match your incoming events to user profiles.
+        </p>
+
+        <div class="fact-box">
+          <strong>EMQ scale (simplified):</strong><br>
+          - Score 6.0 = roughly 60% of sent events are matched<br>
+          - Score 8.0 = roughly 80% match rate<br>
+          - Score 9.0+ = roughly 90%+ match rate<br>
+          <br>
+          <strong>Advertisers with EMQ &gt; 8.0 see measurably 15-25% better attributed conversion rates
+          in 2026</strong> compared to advertisers with EMQ &lt; 6.0.
+        </div>
+
+        <p>
+          What affects the score? The number and quality of user identifiers per event.
+          <strong>Hashed email moves the score most</strong> - more than any other field.
+          After that: hashed phone, fbc (Facebook Click ID), fbp (Facebook Browser ID),
+          client_ip_address, client_user_agent. Additional boosters: city, state, zip, first_name,
+          last_name, external_id.
+        </p>
+        <p>
+          <strong>Important about fbp / fbc on Safari:</strong> these cookies get deleted by Safari ITP
+          after 7 days in a standard subdomain sGTM setup - which tears down your EMQ score for Safari
+          users. To avoid this: <a href="/en/blog/bypassing-safari-itp/">bypass Safari ITP with Same-Origin
+          sGTM</a> (cookie lifetime goes from 7 to 400 days).
+        </p>
+
+        <h2 id="prerequisites">3. Prerequisites</h2>
+        <ul>
+          <li>&#10003; <strong>Server-Side GTM container running</strong> with own subdomain (e.g. <code>data.yourdomain.com</code>). If not yet: <a href="/en/blog/stape-io-setup/">Stape setup guide</a>.</li>
+          <li>&#10003; <strong>Meta Business Manager access</strong> with Editor rights</li>
+          <li>&#10003; <strong>Pixel ID</strong> from Events Manager</li>
+          <li>&#10003; <strong>CAPI Access Token</strong> from Events Manager (Settings &rarr; Conversions API &rarr; Generate Access Token)</li>
+          <li>&#10003; <strong>Test Event Code</strong> for the validation phase (Events Manager &rarr; Test Events &rarr; browser test code)</li>
+          <li>&#10003; <strong>Consent Mode v2</strong> already configured in Web container</li>
+        </ul>
+
+        <h2 id="step-1">4. Step 1: Pixel + event_id in Web container (10 min)</h2>
+        <p>
+          The foundation of deduplication: Pixel and CAPI must send the same <code>event_id</code> per
+          conversion. Best practice: <strong>generate once in the Web container</strong>, then pass to
+          both streams (Pixel client-side + sGTM routing for CAPI).
+        </p>
+
+        <h3>4.1 Create event_id variable in Web container</h3>
+        <p>Variable type: <em>Custom JavaScript</em>. Code:</p>
+        <div class="code-wrap" role="region" aria-label="dataLayer Push">
+          <div class="code-header">
+            <div class="code-header-dots" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+            <span>dataLayer Push</span>
+          </div>
+          <pre><code>function() {
+  // event_id = timestamp + random suffix (collision-safe)
+  return Date.now() + '-' + Math.random().toString(36).substring(2, 11);
+}</code></pre>
+        </div>
+        <p>Save as <code>js-eventId</code>.</p>
+
+        <h3>4.2 Configure Pixel tag</h3>
+        <p>In your existing Facebook Pixel tag (for Purchase, Lead etc.):</p>
+        <ul>
+          <li>Event Parameter: <code>eventID</code> &rarr; Value: <code>{{js-eventId}}</code></li>
+          <li>Important: <strong>NOT</strong> as "event_id" - the Pixel tag expects the field as <code>eventID</code> (camelCase).</li>
+        </ul>
+
+        <h3>4.3 Configure server-routing tag</h3>
+        <p>
+          So the same event_id reaches the server: GA4 Event Tag (or another trigger tag routing to the
+          server) configured with Field-to-Set <code>event_id</code> = <code>{{js-eventId}}</code>.
+        </p>
+        <p>Publish the Web container.</p>
+
+        <h2 id="step-2">5. Step 2: Meta tag in sGTM container (15 min)</h2>
+        <p>
+          You need a <strong>Facebook Conversions API Tag</strong> in the server container. Several
+          templates available - recommended: the community template by <em>gtm-templates-simo-ahava</em>
+          or the official Stape template (available free in the Stape Power-Up Marketplace).
+        </p>
+
+        <h3>5.1 Install template</h3>
+        <ul>
+          <li>sGTM container &rarr; Templates &rarr; <em>Search Gallery</em></li>
+          <li>Install "Facebook Conversions API Tag" (by Stape or Simo Ahava)</li>
+        </ul>
+
+        <h3>5.2 Configure tag</h3>
+        <ul>
+          <li><strong>Pixel ID:</strong> from Events Manager</li>
+          <li><strong>API Access Token:</strong> from Events Manager &rarr; Conversions API</li>
+          <li><strong>Test Event Code:</strong> for the test phase (e.g. <code>TEST12345</code>)</li>
+          <li><strong>Event Name:</strong> dynamic via variable (e.g. <code>{{Event}}</code>)</li>
+          <li><strong>Event ID:</strong> <code>{{event_id from event data}}</code> - comes from Web container routing</li>
+          <li><strong>User Data:</strong> configured in Step 3</li>
+        </ul>
+
+        <h3>5.3 Set trigger</h3>
+        <p>
+          Custom Event trigger in the server container reacting to events from the Web container
+          (Pageview, Purchase, Lead etc.).
+        </p>
+
+        <h2 id="step-3">6. Step 3: Hash user data (PII) (10 min)</h2>
+        <p>
+          <strong>Never send raw PII (email, phone, name) to Meta.</strong> GDPR requirement and Meta
+          requires it too: all PII must be SHA-256 hashed.
+        </p>
+        <div class="warn-box" style="margin-top:14px;">
+          <strong>Watch out for the Google Ads difference:</strong> with Meta CAPI you must hash yourself - with <a href="/en/blog/google-ads-enhanced-conversions/">Google Ads Enhanced Conversions</a> however, you send plaintext and Google's tag hashes itself. People running both setups frequently get this wrong - it's the most common configuration mistake.
+        </div>
+
+        <h3>6.1 Hashing strategy</h3>
+        <p>Three options for where hashing happens:</p>
+        <ol>
+          <li><strong>In the browser (Web container, before dataLayer push):</strong> safest variant - raw PII never leaves the browser. Hash with e.g. SubtleCrypto API.</li>
+          <li><strong>In the server container:</strong> the CAPI tag itself hashes automatically if unhashed PII comes in. Practical, but raw PII briefly sits in sGTM memory.</li>
+          <li><strong>On the server application (backend):</strong> for server events without browser (e.g. CRM events) - hashing in backend before sending to sGTM.</li>
+        </ol>
+
+        <h3>6.2 Which fields to map?</h3>
+        <div class="table-wrap"><table class="compare-table">
+          <thead>
+            <tr><th>Field</th><th>Hash?</th><th>EMQ impact</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>em</code> (Email)</td><td>SHA-256</td><td>&#x2B50; very high</td></tr>
+            <tr><td><code>ph</code> (Phone, E.164)</td><td>SHA-256</td><td>high</td></tr>
+            <tr><td><code>fn</code> (First name)</td><td>SHA-256, lowercase</td><td>medium</td></tr>
+            <tr><td><code>ln</code> (Last name)</td><td>SHA-256, lowercase</td><td>medium</td></tr>
+            <tr><td><code>ct</code> (City)</td><td>SHA-256, lowercase</td><td>medium</td></tr>
+            <tr><td><code>zp</code> (ZIP)</td><td>SHA-256</td><td>medium</td></tr>
+            <tr><td><code>country</code></td><td>SHA-256, lowercase ISO2</td><td>low</td></tr>
+            <tr><td><code>external_id</code></td><td>SHA-256</td><td>medium - high (CRM match)</td></tr>
+            <tr><td><code>fbc</code>, <code>fbp</code></td><td>do NOT hash</td><td>high (cookie match)</td></tr>
+            <tr><td><code>client_ip_address</code></td><td>do NOT hash</td><td>low - medium</td></tr>
+            <tr><td><code>client_user_agent</code></td><td>do NOT hash</td><td>low - medium</td></tr>
+          </tbody>
+        </table></div>
+
+        <h2 id="step-4">7. Step 4: Verify deduplication (5 min)</h2>
+        <p>
+          Now the critical test: does Meta recognize that Pixel event and CAPI event are the same conversion?
+        </p>
+
+        <ol>
+          <li>Open Events Manager &rarr; select Pixel &rarr; <strong>Test Events</strong> tab</li>
+          <li>Append Test Event Code to URL (or it's already set in the tag)</li>
+          <li>Trigger a test conversion (test purchase, test lead etc.)</li>
+          <li>In Test Events both events should appear:
+            <ul>
+              <li>Browser event (Pixel) with browser icon</li>
+              <li>Server event (CAPI) with server icon</li>
+            </ul>
+          </li>
+          <li>If deduplication works: <strong>"Deduplicated" label</strong> appears - that is the signal.</li>
+        </ol>
+
+        <div class="warn-box">
+          <strong>Important:</strong> if the Deduplication label is missing, check the event_id value on both sides.
+          Common mistakes: event_id is generated in the Web container but not passed to the server container,
+          or different event names (Pixel sends "Purchase", server sends "purchase" - case-sensitive).
+        </div>
+
+        <h2 id="step-5">8. Step 5: Check EMQ score (3 min)</h2>
+        <p>
+          EMQ is often low after setup (3.0-5.0) because tests send few fields. You'll see the real EMQ only
+          with real traffic, about 24-48 hours after going live.
+        </p>
+        <ol>
+          <li>Events Manager &rarr; select Pixel &rarr; <strong>Diagnostics</strong> tab</li>
+          <li>View "Event Match Quality" per event</li>
+          <li>Target: <strong>8.0 or higher</strong></li>
+        </ol>
+
+        <h2 id="emq-optimize">9. Push EMQ score to 8.0+</h2>
+        <p>If EMQ is below 7.0, optimize in this order:</p>
+        <ol>
+          <li><strong>Include hashed email on EVERY event</strong> - moves the score most</li>
+          <li><strong>fbp and fbc cookies</strong> from browser to server event (should happen automatically via sGTM - verify)</li>
+          <li><strong>client_ip_address</strong> and <strong>client_user_agent</strong> sent from HTTP headers</li>
+          <li>If available: add <strong>hashed phone</strong></li>
+          <li>If available: <strong>external_id</strong> (CRM customer ID) for recurring customers</li>
+          <li>Geographic data (city, zip, state) only if you ALREADY have them - don't ask for them extra</li>
+        </ol>
+
+        <h2 id="issues">10. Common issues &amp; fixes</h2>
+        <div class="table-wrap"><table class="compare-table">
+          <thead>
+            <tr><th>Problem</th><th>Fix</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>No "Deduplicated" label</strong></td><td>Compare event_id values. Pixel uses <code>eventID</code> (camelCase), CAPI uses <code>event_id</code> (snake_case) - different spellings, same value.</td></tr>
+            <tr><td><strong>Conversions double up in Ads Manager</strong></td><td>Deduplication isn't working. Check Test Events tool.</td></tr>
+            <tr><td><strong>EMQ stays below 5.0</strong></td><td>Too few identifiers. Send at minimum hashed email + fbp/fbc.</td></tr>
+            <tr><td><strong>"InvalidEvent" in Test Events tab</strong></td><td>Required fields missing: <code>event_name</code>, <code>event_time</code>, <code>action_source</code>, at least 1 User Data field.</td></tr>
+            <tr><td><strong>Pixel fires, CAPI doesn't</strong></td><td>Turn on Server container Preview mode. Check in server container if the event arrives + which tag fires.</td></tr>
+            <tr><td><strong>CAPI tag missing from sGTM template gallery</strong></td><td>Activate Stape Power-Up "Facebook Conversions API Tag" or import from <a href="https://github.com/gtm-templates-simo-ahava/facebook-conversions-api" target="_blank" rel="noopener">Simo Ahava's GitHub</a>.</td></tr>
+          </tbody>
+        </table></div>
+
+        <h2 id="gdpr">11. GDPR + data minimization</h2>
+        <p>Meta CAPI is GDPR-compliant <em>if</em> implemented correctly. Minimum standards:</p>
+        <ul>
+          <li>&#10003; <strong>Consent Mode v2</strong> active: no CAPI event without consent</li>
+          <li>&#10003; <strong>SHA-256 for all PII</strong>: email, phone, name, city - never raw</li>
+          <li>&#10003; <strong>Data minimization</strong> (Art. 5(1)(c) GDPR): only what you need. external_id only if you already have it.</li>
+          <li>&#10003; <strong>DPA with Meta</strong>: Data Processing Agreement under Art. 28 GDPR</li>
+          <li>&#10003; <strong>Privacy policy</strong> mentions CAPI usage and Meta as data recipient</li>
+          <li>&#10003; <strong>EU region for your Stape server</strong> (Frankfurt) - data stays in EU before going to Meta</li>
+        </ul>
+
+        <h2 id="faq">12. FAQ</h2>
+
+        <h3>What is the difference between Pixel and CAPI?</h3>
+        <p>
+          The Meta Pixel fires client-side in the browser - it is blocked or limited by ad blockers,
+          iOS ATT and Safari ITP. CAPI is server-side: your server sends conversion data directly to Meta.
+          Best practice is not "Pixel OR CAPI" but both in parallel with event_id deduplication. Pixel
+          delivers browser signals (fbp, fbc), CAPI provides data safety when browser tracking fails.
+        </p>
+
+        <h3>What is Event Match Quality (EMQ)?</h3>
+        <p>
+          EMQ is a score from 1 to 10 in Meta Events Manager that measures how well Meta can match your
+          server events to user profiles. A score of 6.0 means roughly 60% match rate, 9.0 corresponds to
+          about 90%. In 2026, advertisers with EMQ above 8.0 see measurably 15-25% better attributed
+          conversion rates. Hashed email moves the score most.
+        </p>
+
+        <h3>How does event_id deduplication work?</h3>
+        <p>
+          For Meta to recognize that a Pixel event and a CAPI event are the same conversion, both must
+          send identical event_id. Same event name (e.g. Purchase), same event_id, similar timestamps.
+          In Events Manager Test Events a "Deduplicated" label appears - that is the signal it works.
+          Without deduplication conversions are counted twice and bidding optimizes on inflated data.
+        </p>
+
+        <h3>Do I need CAPI if Meta Pixel works?</h3>
+        <p>
+          Yes - in 2026 more than ever. The Pixel alone captures only 50-60% of real conversions due to
+          ad blockers (49% usage in Germany), iOS ATT and Safari ITP. CAPI fills this gap server-side.
+          Without CAPI, Meta Advantage+ optimizes on a distorted picture and you pay for performance you
+          can't see.
+        </p>
+
+        <h3>Is CAPI GDPR-compliant?</h3>
+        <p>
+          When implemented correctly: yes. Requirements are Consent Mode v2 (tags blocked without consent),
+          data minimization (only what you need), SHA-256 for all PII (email, phone, name), DPA with Meta
+          and EU server region. Sending raw unhashed data is not permitted - always hash.
+        </p>
+
+        <h3>What data should be in every CAPI event?</h3>
+        <p>
+          Required for high EMQ: hashed email, hashed phone, fbc (Facebook Click ID), fbp (Facebook
+          Browser ID), client_ip_address, client_user_agent. Optional but EMQ-boosting: city, state, zip,
+          country, first_name, last_name, external_id (Customer ID from your CRM). Hashed email alone
+          moves the EMQ score most - if you can only add one field, that's the one.
+        </p>
+
+        <!-- Sources box -->
+        <aside class="sources-box" aria-label="Sources">
+          <div class="sources-box-title">Sources &amp; further reading</div>
+          <ul>
+            <li>Meta official docs: <a href="https://developers.facebook.com/docs/marketing-api/conversions-api/" target="_blank" rel="noopener">Conversions API Overview</a></li>
+            <li>Meta deduplication guide: <a href="https://developers.facebook.com/docs/marketing-api/conversions-api/deduplicate-pixel-and-server-events/" target="_blank" rel="noopener">Handling Duplicate Pixel and Conversions API Events</a></li>
+            <li>Stape CAPI setup guide: <a href="https://stape.io/blog/how-to-set-up-facebook-conversion-api" target="_blank" rel="noopener">Facebook Conversions API - Extended Setup Guide</a></li>
+            <li>Simo Ahava CAPI template: <a href="https://github.com/gtm-templates-simo-ahava/facebook-conversions-api" target="_blank" rel="noopener">GitHub community template</a></li>
+            <li>Meta Events Manager: <a href="https://www.facebook.com/events_manager" target="_blank" rel="noopener">Events Manager login</a></li>
+          </ul>
+        </aside>
+
+        <!-- CTA -->
+        <div class="cta-card" style="margin-top:32px;background:var(--navy);border-radius:var(--r-lg);padding:28px 32px;">
+          <p style="font-family:var(--fd);font-size:1rem;font-weight:700;color:#fff;margin-bottom:8px;">Want CAPI set up cleanly?</p>
+          <p style="font-size:.875rem;color:rgba(255,255,255,.6);line-height:1.65;margin-bottom:20px;">I'll set up Meta CAPI via sGTM for you end-to-end - with event_id deduplication, PII hashing and EMQ optimization to 8.0+. Part of the <a href="/en/services/" style="color:#a5b4fc;">Server-Side Tracking module from &euro;400</a> or as a standalone add-on.</p>
+          <a href="/en/contact/" class="btn btn-indigo btn-sm">Request CAPI setup <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+
+        <div style="margin-top:24px;">
+          <a href="/en/blog/" style="display:inline-flex;align-items:center;gap:6px;font-size:.84rem;color:var(--muted);text-decoration:none;font-family:var(--fd);font-weight:600;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+            Back to blog
+          </a>
+        </div>
+
+      </article>
+
+      <!-- SIDEBAR -->
+      <aside class="article-sidebar" aria-label="Table of contents and cluster overview">
+        <nav class="toc-card" aria-label="Jump to section">
+          <div class="toc-card-title">Contents</div>
+          <ul class="toc-links" role="list">
+            <li><a href="#what-is-capi">1. Pixel vs CAPI</a></li>
+            <li><a href="#emq">2. Understanding EMQ</a></li>
+            <li><a href="#prerequisites">3. Prerequisites</a></li>
+            <li><a href="#step-1">4. Step 1: event_id</a></li>
+            <li><a href="#step-2">5. Step 2: CAPI tag</a></li>
+            <li><a href="#step-3">6. Step 3: Hash PII</a></li>
+            <li><a href="#step-4">7. Step 4: Dedup test</a></li>
+            <li><a href="#step-5">8. Step 5: Check EMQ</a></li>
+            <li><a href="#emq-optimize">9. EMQ optimization</a></li>
+            <li><a href="#issues">10. Issues</a></li>
+            <li><a href="#gdpr">11. GDPR</a></li>
+            <li><a href="#faq">12. FAQ</a></li>
+          </ul>
+        </nav>
+
+        <!-- Cluster-Card -->
+        <div class="cluster-card" role="complementary" aria-label="Cluster overview">
+          <div class="cluster-card-label">
+            <svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            Part of the cluster
+          </div>
+          <a href="/en/blog/server-side-tracking/" class="cluster-card-pillar">
+            <span class="cluster-card-pillar-tag">Pillar</span>
+            <span class="cluster-card-pillar-title">Server-Side Tracking 2026 - Complete overview</span>
+          </a>
+          <div class="cluster-card-list-title">More in the cluster</div>
+          <ul class="cluster-card-list">
+            <li class="cluster-card-item">
+              <span class="cluster-card-marker" aria-hidden="true">&rarr;</span>
+              <a href="/en/blog/stape-io-setup/" style="color:inherit;text-decoration:none;">Stape.io setup (prerequisite)</a>
+            </li>
+            <li class="cluster-card-item cluster-card-item--current">
+              <span class="cluster-card-marker" aria-hidden="true">&rarr;</span>
+              Meta CAPI via sGTM <span class="cluster-card-here">(you are here)</span>
+            </li>
+            <li class="cluster-card-item">
+              <span class="cluster-card-marker" aria-hidden="true">&rarr;</span>
+              <a href="/en/blog/google-ads-enhanced-conversions/" style="color:inherit;text-decoration:none;">Google Ads Enhanced Conversions</a>
+            </li>
+            <li class="cluster-card-item">
+              <span class="cluster-card-marker" aria-hidden="true">&rarr;</span>
+              <a href="/en/blog/bypassing-safari-itp/" style="color:inherit;text-decoration:none;">Bypassing Safari ITP</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="author-card">
+          <picture>
+            <source srcset="/assets/img/ueber-mich-roadtrip.jpg" type="image/jpeg">
+            <img src="/assets/img/ueber-mich-roadtrip.jpg" alt="Tobias Meixner" width="48" height="48" loading="lazy">
+          </picture>
+          <div class="author-name">Tobias Meixner</div>
+          <div class="author-role">Freelancer &middot; Wuerzburg</div>
+          <p class="author-bio">Tracking specialist - GTM, GA4, server-side tracking via Stape.io, Meta CAPI, GDPR-compliant.</p>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-cluster" style="display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid var(--border);font-size:.82rem;">
+      <span style="font-family:var(--fd);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);">Server-Side Tracking Cluster:</span>
+      <a href="/en/blog/server-side-tracking/" style="color:var(--muted);text-decoration:none;">Pillar</a>
+      <a href="/en/blog/stape-io-setup/" style="color:var(--muted);text-decoration:none;">Stape.io Setup</a>
+      <a href="/en/blog/meta-capi-server-side-gtm/" style="color:var(--muted);text-decoration:none;">Meta CAPI via sGTM</a>
+      <a href="/en/blog/google-ads-enhanced-conversions/" style="color:var(--muted);text-decoration:none;">Google Ads Enhanced Conv.</a>
+      <a href="/en/blog/bypassing-safari-itp/" style="color:var(--muted);text-decoration:none;">Bypassing Safari ITP</a>
+    </div>
+    <div class="footer-row">
+      <span class="footer-copy">&copy; 2026 Tobias Meixner</span>
+      <ul class="footer-links">
+        <li><a href="/en/blog/">Blog</a></li>
+        <li><a href="/en/legal/">Legal notice</a></li>
+        <li><a href="/en/policy-privacy/">Privacy policy</a></li>
+        <li><a href="/en/terms-and-conditions/">Terms</a></li>
+        <li><a href="#" onclick="CookieScript.instance.show(); return false;">Cookie settings</a></li>
+        <li><a href="https://www.linkedin.com/in/meixner-tobias" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

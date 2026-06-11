@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0D1B2A" media="(prefers-color-scheme: dark)">
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','functionality_storage':'denied','security_storage':'granted','wait_for_update':500});</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5QLXDT4T');</script>
+<!-- End Google Tag Manager -->
+<title>Bypassing Safari ITP: Same-Origin sGTM for 400-Day Cookies in 2026 | Tobias Meixner</title>
+<meta name="description" content="Safari ITP caps cookies at 7 days - even server-set ones. Complete guide: Same-Origin Path-Based sGTM, IP-Matching Rule (Safari 16.4) and why CNAME cloaking is dead.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://meixner-tobias.com/en/blog/bypassing-safari-itp/">
+<link rel="alternate" hreflang="de" href="https://meixner-tobias.com/blog/safari-itp-umgehen/">
+<link rel="alternate" hreflang="en" href="https://meixner-tobias.com/en/blog/bypassing-safari-itp/">
+<link rel="alternate" hreflang="x-default" href="https://meixner-tobias.com/en/blog/bypassing-safari-itp/">
+
+<meta property="og:type"        content="article">
+<meta property="og:url"         content="https://meixner-tobias.com/en/blog/bypassing-safari-itp/">
+<meta property="og:title"       content="Bypassing Safari ITP: Same-Origin sGTM for 400-Day Cookies in 2026">
+<meta property="og:description" content="Safari ITP caps cookies at 7 days. How Same-Origin Path-Based sGTM, IP-Matching and correct cookie setting solve it.">
+<meta property="og:image"       content="https://meixner-tobias.com/assets/img/og/safari-itp-en.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale"      content="en_US">
+<meta property="og:site_name"   content="Tobias Meixner">
+<meta property="article:published_time" content="2026-06-09T00:00:00+02:00">
+<meta property="article:modified_time"  content="2026-06-09T00:00:00+02:00">
+<meta property="article:author"         content="Tobias Meixner">
+<meta property="article:section"        content="Tracking">
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:site"        content="@MeixnerTobias04">
+<meta name="twitter:title"       content="Bypassing Safari ITP: Same-Origin sGTM 2026">
+<meta name="twitter:description" content="Cookie lifetime from 7 days to 400 days - via Same-Origin Path-Based sGTM and IP-matching.">
+<meta name="twitter:image"       content="https://meixner-tobias.com/assets/img/og/safari-itp-en.png">
+
+<link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon/favicon-96x96.png">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg">
+<link rel="shortcut icon" href="/assets/favicon/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://meixner-tobias.com/en/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://meixner-tobias.com/en/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "Bypassing Safari ITP", "item": "https://meixner-tobias.com/en/blog/bypassing-safari-itp/" }
+      ]
+    },
+    {
+      "@type": "Article",
+      "@id": "https://meixner-tobias.com/en/blog/bypassing-safari-itp/",
+      "headline": "Bypassing Safari ITP: Same-Origin sGTM for 400-Day Cookies in 2026",
+      "description": "Safari ITP caps cookies at 7 days - even server-set ones. Complete guide: Same-Origin Path-Based sGTM, IP-Matching Rule (Safari 16.4) and why CNAME cloaking is dead.",
+      "url": "https://meixner-tobias.com/en/blog/bypassing-safari-itp/",
+      "datePublished": "2026-06-09",
+      "dateModified": "2026-06-09",
+      "author": { "@type": "Person", "@id": "https://meixner-tobias.com/#person", "name": "Tobias Meixner" },
+      "publisher": { "@type": "Person", "@id": "https://meixner-tobias.com/#person" },
+      "image": "https://meixner-tobias.com/assets/img/og/safari-itp-en.png",
+      "inLanguage": "en-US",
+      "keywords": "Safari ITP, Intelligent Tracking Prevention, 7-day cookie cap, Same-Origin sGTM, Path-Based sGTM, CNAME Cloaking, Safari 16.4 IP-Matching, Set-Cookie HTTP, Stape Custom Loader, first-party cookies",
+      "articleSection": "Tracking",
+      "isPartOf": { "@id": "https://meixner-tobias.com/en/blog/server-side-tracking/" },
+      "mentions": [
+        { "@type": "Thing", "name": "Safari Intelligent Tracking Prevention" },
+        { "@type": "Thing", "name": "WebKit", "sameAs": "https://en.wikipedia.org/wiki/WebKit" },
+        { "@type": "Thing", "name": "Server-Side Google Tag Manager" },
+        { "@type": "Thing", "name": "First-Party Cookies" },
+        { "@type": "Thing", "name": "CNAME Cloaking" },
+        { "@type": "Thing", "name": "Stape.io" }
+      ],
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [".intro-box", ".article-excerpt", ".fact-box", ".faq-a"]
+      }
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://meixner-tobias.com/en/blog/bypassing-safari-itp/#howto",
+      "name": "Bypassing Safari ITP with Same-Origin sGTM",
+      "description": "Guide to building an ITP-resistant server-side GTM setup with same-origin path and 400-day cookie lifetime.",
+      "totalTime": "PT60M",
+      "tool": [
+        { "@type": "HowToTool", "name": "Stape.io or Google Cloud Run account" },
+        { "@type": "HowToTool", "name": "Cloudflare Worker / Reverse Proxy" },
+        { "@type": "HowToTool", "name": "Web server access" }
+      ],
+      "step": [
+        { "@type": "HowToStep", "position": 1, "name": "Diagnose: what Safari currently caps", "text": "Enable ITP Debug Mode in Safari (Develop menu > Intelligent Tracking Prevention Debug Mode). Console shows which cookies are capped and why." },
+        { "@type": "HowToStep", "position": 2, "name": "Set up Same-Origin Path-Based sGTM", "text": "Host sGTM not on subdomain (sgtm.example.com), but on path (example.com/sgtm) via reverse proxy (Cloudflare Worker, Nginx, or Stape Custom Loader Power-Up)." },
+        { "@type": "HowToStep", "position": 3, "name": "Set up reverse proxy", "text": "Write Cloudflare Worker that forwards /sgtm/* to Stape endpoint, or Nginx location block. Pass through response headers, especially Set-Cookie." },
+        { "@type": "HowToStep", "position": 4, "name": "Switch sGTM variables to path endpoint", "text": "In Web container change Tagging Server URL from 'https://sgtm.example.com' to 'https://example.com/sgtm'. Test GA4 tag to verify events arrive." },
+        { "@type": "HowToStep", "position": 5, "name": "Verify cookie lifetime", "text": "In Safari test browser under DevTools > Storage > Cookies check cookie expiration. Should now show 400 days (or cookie TTL) instead of 7 days." }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://meixner-tobias.com/en/blog/bypassing-safari-itp/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "What exactly is Safari ITP?", "acceptedAnswer": { "@type": "Answer", "text": "Intelligent Tracking Prevention is Apple's anti-tracking mechanism in Safari (since 2017). Since 2019, ITP caps all JavaScript-set cookies at a maximum of 7 days. Since Safari 16.4 (April 2023), it also caps server-set cookies if the server IP does not match the main-site IP prefix. Result: attribution data disappears after a week - which destroys performance bidding." } },
+        { "@type": "Question", "name": "Why doesn't normal server-side GTM automatically help against ITP?", "acceptedAnswer": { "@type": "Answer", "text": "If your sGTM container runs on a subdomain (e.g. sgtm.example.com via Stape) and the IP prefix of the Stape servers does not match the IP prefix of your main server, Safari 16.4+ still treats it as 'suspicious' and caps cookies at 7 days. Most Stape setups hit this problem - the solution is Same-Origin Path-Based setup." } },
+        { "@type": "Question", "name": "What is CNAME cloaking and why doesn't it work anymore?", "acceptedAnswer": { "@type": "Answer", "text": "CNAME cloaking was an old technique: have a subdomain (track.example.com) point via CNAME to a third-party server so it appears first-party. Safari/WebKit has detected this since 2020 and caps all JavaScript cookies on such subdomains at 7 days. CNAME cloaking is functionally dead today - don't use it." } },
+        { "@type": "Question", "name": "What's the solution against Safari ITP?", "acceptedAnswer": { "@type": "Answer", "text": "Same-Origin Path-Based sGTM: instead of subdomain sgtm.example.com, sGTM runs under example.com/sgtm/ via a reverse proxy (Cloudflare Worker, Nginx, or Stape Custom Loader Power-Up). Being same-origin, there are no IP-matching issues and cookies can be set for up to 400 days. Google explicitly recommends this setup." } },
+        { "@type": "Question", "name": "How much difference does it really make?", "acceptedAnswer": { "@type": "Answer", "text": "Safari market share in Germany is ~17-20% desktop, ~30% mobile. With the 7-day cookie cap, all Safari users disappear from attribution as soon as they wait a week between click and conversion. With B2B sales cycles (weeks to months), that's 15-25% of attribution lost. With 400-day cookies via Same-Origin sGTM, attribution is preserved." } },
+        { "@type": "Question", "name": "Is Same-Origin sGTM GDPR-compliant?", "acceptedAnswer": { "@type": "Answer", "text": "Yes - GDPR compliance does not depend on technical cookie lifetime, but on Consent Mode v2, correct privacy policy, DPA with providers and data minimization. Same-Origin Path-Based sGTM doesn't change these obligations - on the contrary, the first-party nature makes data ownership clearer for the advertiser." } }
+      ]
+    }
+  ]
+}
+</script>
+<script src="/js/main.js" defer></script>
+  <link rel="alternate" type="application/rss+xml" title="Tobias Meixner - Blog (EN)" href="https://meixner-tobias.com/en/blog/feed.xml">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to content</a>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5QLXDT4T"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="/en/" aria-label="Tobias Meixner - Home" style="display:flex;align-items:center;padding-top:6px;">
+      <svg class="nav-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 230" role="img" aria-labelledby="logo-itp-en">
+        <title id="logo-itp-en">Tobias Meixner</title>
+        <g transform="translate(8 6)">
+          <circle class="logo-dot" cx="50" cy="108" r="18"/>
+          <line class="logo-stroke" x1="68" y1="62" x2="98" y2="118"/>
+          <line class="logo-stroke" x1="136" y1="62" x2="166" y2="118"/>
+          <text class="logo-t" x="208" y="136">eixner</text>
+        </g>
+      </svg>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/en/">Home</a></li>
+      <li><a href="/en/about/">About</a></li>
+      <li><a href="/en/services/">Services</a></li>
+      <li><a href="/en/projects/">Projects</a></li>
+      <li class="nav-dropdown">
+        <a href="/en/blog/" class="active">Blog</a>
+        <ul class="nav-drop-menu" role="menu">
+          <li role="none"><a href="/en/blog/answer-engine-optimization/" role="menuitem">Answer Engine Optimization</a></li>
+          <li role="none"><a href="/en/blog/performance-max-vs-advantage-plus/" role="menuitem">Performance Max vs. Advantage Plus</a></li>
+          <li role="none"><a href="/en/blog/server-side-tracking/" role="menuitem">Server-Side Tracking</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/en/blog/stape-io-setup/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Stape.io setup</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/en/blog/meta-capi-server-side-gtm/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Meta CAPI via sGTM</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/en/blog/google-ads-enhanced-conversions/" role="menuitem"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Google Ads Enhanced Conv.</a></li>
+          <li role="none" class="nav-drop-cluster"><a href="/en/blog/bypassing-safari-itp/" role="menuitem" class="active"><span class="nav-drop-arrow" aria-hidden="true">&#8627;</span> Bypassing Safari ITP</a></li>
+          <li role="none"><a href="/en/blog/prompt-engineering-ecommerce/" role="menuitem">AI Text Creation E-Commerce</a></li>
+        </ul>
+      </li>
+      <li><a href="/en/products/">Products</a></li>
+      <li class="lang-switch">
+        <button class="lang-btn" id="langBtn" aria-label="Select language" aria-expanded="false">
+          <div class="flag-circle"><div class="flag-us"></div></div>
+          EN
+          <span class="lang-arrow">&#x25BE;</span>
+        </button>
+        <div class="lang-dropdown" id="langDropdown" role="menu">
+          <a href="/blog/safari-itp-umgehen/" class="lang-option" role="menuitem">
+            <div class="flag-lg"><div class="flag-de"></div></div>
+            <div class="lang-option-text">
+              <span class="lang-option-name">Deutsch</span>
+              <span class="lang-option-sub">Deutschland</span>
+            </div>
+          </a>
+          <a href="/en/blog/bypassing-safari-itp/" class="lang-option active" role="menuitem">
+            <div class="flag-lg"><div class="flag-us"></div></div>
+            <div class="lang-option-text">
+              <span class="lang-option-name">English</span>
+              <span class="lang-option-sub">United States</span>
+            </div>
+            <span class="lang-check">&#10003;</span>
+          </a>
+        </div>
+      </li>
+      <li><a href="/en/contact/" class="nav-cta">Get in touch</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <svg class="icon-sun" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      <svg class="icon-moon" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>
+    </button>
+    <button class="burger" id="burger" aria-label="Open navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main id="main-content">
+  <header class="article-hero article-hero--sst" aria-labelledby="article-heading">
+    <div class="container">
+      <div class="article-hero-inner">
+        <div class="article-cat article-cat--sst">
+          <svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2.5">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+          Tracking &middot; Deep-Dive
+        </div>
+        <h1 class="article-title" id="article-heading">
+          Bypassing Safari ITP:<br>
+          <em>Same-Origin sGTM</em> for 400-Day Cookies in 2026
+        </h1>
+        <p class="article-excerpt">
+          Safari ITP caps JavaScript cookies at 7 days - and since Safari 16.4, even
+          server-set cookies if the IP doesn't match your main site. Result: attribution
+          disappears after a week - with Safari market share of ~20% desktop and ~30% mobile,
+          you can lose 15-25% of conversion data. Solution: Same-Origin Path-Based sGTM
+          (example.com/sgtm instead of sgtm.example.com) via reverse proxy. This guide
+          explains the problem in detail, why CNAME cloaking doesn't work anymore, and how
+          to build a setup via Cloudflare Worker or Stape Custom Loader Power-Up that's
+          immune to ITP.
+        </p>
+        <div class="article-meta-row">
+          <span><strong>Tobias Meixner</strong></span>
+          <div class="article-meta-div" aria-hidden="true"></div>
+          <span>June 9, 2026</span>
+          <div class="article-meta-div" aria-hidden="true"></div>
+          <span>12 min read</span>
+          <div class="article-meta-div" aria-hidden="true"></div>
+          <span>Cluster: Server-Side Tracking</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav aria-label="Breadcrumb"
+      style="background:var(--bg);border-bottom:1px solid var(--border);padding:12px 0;">
+    <div class="container">
+      <ol style="list-style:none;display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:0;padding:0;">
+        <li style="display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--muted);">
+          <a href="/en/" style="color:var(--muted);text-decoration:none;">Home</a>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </li>
+        <li style="display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--muted);">
+          <a href="/en/blog/" style="color:var(--muted);text-decoration:none;">Blog</a>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </li>
+        <li style="font-size:.8rem;color:var(--navy);font-weight:600;" aria-current="page">Bypassing Safari ITP</li>
+      </ol>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="article-body">
+      <article class="article-content" aria-label="Article content">
+
+        <div class="intro-box intro-box--sst">
+          <p>
+            <strong>Safari ITP has been killing cookies after 7 days since 2019.</strong>
+            Since Safari 16.4 (April 2023), this cap also applies to server-set cookies - if
+            the IP prefix of the tracking server does not match the main domain server. Most
+            standard setups (Stape subdomain, GTM on Google Cloud) hit exactly this problem
+            without realizing.
+          </p>
+          <p>
+            With Safari market share of ~17-20% desktop and ~30% mobile, this means: 15-25%
+            of attribution lost as soon as click and conversion are more than a week apart.
+            Fatal for B2B sales cycles, painful for long e-commerce funnels.
+          </p>
+          <p>
+            <strong>The solution:</strong> Same-Origin Path-Based sGTM (example.com/sgtm/
+            instead of sgtm.example.com) via reverse proxy. Being same-origin, the IP-matching
+            problem disappears and cookies are allowed to live up to 400 days. This article
+            shows the WHY and the HOW - including a Cloudflare Worker example and a test in
+            Safari ITP Debug Mode.
+          </p>
+          <p>
+            <strong>Prerequisite:</strong> sGTM container already running (e.g. via
+            <a href="/en/blog/stape-io-setup/">Stape</a>). Background on server-side in the
+            <a href="/en/blog/server-side-tracking/">Pillar article</a>.
+          </p>
+        </div>
+
+        <nav class="toc-box" aria-label="Table of contents">
+          <div class="toc-box-title">Table of contents</div>
+          <ol>
+            <li><span>1</span><a href="#what-itp-does">What ITP actually does</a></li>
+            <li><span>2</span><a href="#history">History 2017-2026</a></li>
+            <li><span>3</span><a href="#cookie-capping">The cookie capping problem</a></li>
+            <li><span>4</span><a href="#ip-matching">Safari 16.4 IP-Matching Rule</a></li>
+            <li><span>5</span><a href="#cname-dead">Why CNAME cloaking is dead</a></li>
+            <li><span>6</span><a href="#impact">How much it actually costs</a></li>
+            <li><span>7</span><a href="#solutions">The three solution paths</a></li>
+            <li><span>8</span><a href="#same-origin-setup">Same-Origin sGTM via Cloudflare Worker</a></li>
+            <li><span>9</span><a href="#stape-power-up">Alternative: Stape Custom Loader Power-Up</a></li>
+            <li><span>10</span><a href="#test">Test in Safari ITP Debug Mode</a></li>
+            <li><span>11</span><a href="#gdpr">GDPR remains unchanged</a></li>
+            <li><span>12</span><a href="#faq">FAQ</a></li>
+          </ol>
+        </nav>
+
+        <h2 id="what-itp-does">1. What ITP actually does</h2>
+        <p>
+          <strong>Intelligent Tracking Prevention</strong> is Apple's anti-tracking mechanism
+          in Safari. Lives in the WebKit browser engine, so Safari macOS, Safari iOS, every
+          iPhone browser (Chrome on iPhone uses WebKit, not Blink). ITP classifies domains
+          by user behavior as „tracking" or „non-tracking" and treats cookies on tracking
+          domains more restrictively.
+        </p>
+        <p>Three central mechanisms:</p>
+        <ul>
+          <li><strong>7-day cap for JavaScript cookies</strong> (all cookies set via <code>document.cookie</code>)</li>
+          <li><strong>24-hour cap for cross-site trackers</strong> (cookies deleted after 24h if domain classified as tracker)</li>
+          <li><strong>IP-matching rule</strong> (Safari 16.4+): server-set cookies only get full lifetime if IP matches main site</li>
+        </ul>
+
+        <h2 id="history">2. History 2017-2026</h2>
+        <div class="table-wrap"><table class="compare-table">
+          <thead>
+            <tr><th>Year</th><th>Safari version</th><th>What was added</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>2017</td><td>Safari 11</td><td>ITP 1.0: third-party cookies 24h cap, then deleted after 30 days</td></tr>
+            <tr><td>2018</td><td>Safari 12</td><td>ITP 2.0: stronger tracker detection, Storage API restrictions</td></tr>
+            <tr><td>2019</td><td>Safari 13</td><td>ITP 2.1-2.3: 7-day cap for JavaScript cookies (all, not just trackers)</td></tr>
+            <tr><td>2020</td><td>Safari 14</td><td>CNAME cloaking detection: CNAME subdomains treated as trackers</td></tr>
+            <tr><td>2021</td><td>Safari 15</td><td>Improved bounce-tracking detection</td></tr>
+            <tr><td>2023</td><td>Safari 16.4</td><td><strong>IP-Matching rule:</strong> server-set cookies only get full TTL if IP prefix matches</td></tr>
+            <tr><td>2025+</td><td>Safari 18+</td><td>Strengthened fingerprinting detection, Hidden IP via Private Relay</td></tr>
+          </tbody>
+        </table></div>
+
+        <h2 id="cookie-capping">3. The cookie capping problem in detail</h2>
+        <p>
+          Normal Google Ads conversion tracking works like this: user clicks ad, GCLID is
+          written to a cookie (<code>_gcl_aw</code>), cookie lives 90 days, user returns in
+          3 weeks and converts, GCLID is sent, conversion is attributed.
+        </p>
+        <p>
+          <strong>With Safari ITP:</strong> user clicks ad, GCLID is written to cookie via
+          JavaScript, cookie is capped to 7 days by ITP, user returns in 3 weeks - cookie
+          is gone, GCLID gone, conversion not attributed. From Google's view it looks as
+          if the user came „organically."
+        </p>
+
+        <div class="fact-box">
+          <strong>Why exactly 7 days?</strong><br>
+          Apple's argument: typical browsing sessions don't span over a week, legitimate
+          login cookies can be refreshed by user re-login within 7 days. Tracking cookies,
+          however, need long lifetimes - ergo: shorter cap = more private. From a tracking
+          perspective: B2B sales cycles and longer e-commerce funnels break.
+        </div>
+
+        <h2 id="ip-matching">4. Safari 16.4 IP-Matching Rule (what many overlook)</h2>
+        <p>
+          Until Safari 16.4 (April 2023), there was a clear workaround: <strong>set cookies
+          via HTTP Set-Cookie header from the server</strong> instead of via JavaScript.
+          Server-set cookies were exempt from the 7-day cap and lived up to 400 days
+          (browser default).
+        </p>
+        <p>
+          <strong>Since Safari 16.4</strong>, this has been restricted: server-set cookies
+          only live their full lifetime if the <strong>server's IP address (or at least the
+          /16 subnet prefix) matches the main domain's IP prefix</strong>. If not, the cookie
+          still gets capped to 7 days.
+        </p>
+        <p>
+          Practical example: your website runs on Cloudflare (<code>104.21.x.x</code>), your
+          sGTM on Stape EU (<code>34.107.x.x</code>). Safari sees: two different IP prefixes
+          → treats sGTM cookies as „suspicious first-party" → caps to 7 days, even if you
+          correctly set them via Set-Cookie HTTP header.
+        </p>
+
+        <div class="warn-box">
+          <strong>The uncomfortable truth:</strong><br>
+          If your sGTM runs on Stape, Google Cloud Run, AWS, or any other third-party provider
+          - which 95% of all sGTM setups out there do - the IP-matching rule kicks in and
+          Safari still caps to 7 days. Standard subdomain sGTM does NOT help Safari users
+          against ITP. That's the uncomfortable truth behind „we use Stape, we have
+          server-side tracking" - it solves browser restrictions, but Safari cookies don't.
+        </div>
+
+        <h2 id="cname-dead">5. Why CNAME cloaking is dead today</h2>
+        <p>
+          An old workaround technique was <strong>CNAME cloaking</strong>: create a subdomain
+          (<code>track.example.com</code>), point it via DNS CNAME to the tracking provider's
+          server (e.g. <code>track.example.com</code> → <code>customer.adobe.com</code>).
+          From the browser's perspective the subdomain is first-party, but Adobe is actually
+          tracking.
+        </p>
+        <p>
+          <strong>Safari/WebKit detects CNAME cloaking since 2020.</strong> Mechanism: Safari
+          performs a DNS lookup, checks if the CNAME target is outside the eTLD+1 (i.e.
+          „outside the registrable domain"), and if yes → treats as tracker, caps JavaScript
+          cookies to 7 days. CNAME cloaking is functionally dead today.
+        </p>
+        <div class="fact-box">
+          <strong>WebKit Official Statement</strong> (Nov 2020 Blog Post):<br>
+          „A new feature in Intelligent Tracking Prevention (ITP) has shipped: a cap of seven
+          days of storage for all script-writeable storage, including cookies set via
+          document.cookie, on third-party CNAME-cloaked first-party subresources."
+        </div>
+
+        <h2 id="impact">6. How much it actually costs</h2>
+        <p>Real impact by business model:</p>
+        <div class="table-wrap"><table class="compare-table">
+          <thead>
+            <tr><th>Business model</th><th>Typical conversion path</th><th>Safari loss without fix</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Small e-commerce (impulse buy)</td><td>Click &rarr; purchase within days</td><td>3-5%</td></tr>
+            <tr><td>Medium e-commerce (comparison shopping)</td><td>Click &rarr; purchase within 1-3 weeks</td><td>10-15%</td></tr>
+            <tr><td>SaaS trial &rarr; paid</td><td>Sign-up &rarr; conversion in 2-4 weeks</td><td>15-20%</td></tr>
+            <tr><td>B2B lead-gen</td><td>Inquiry &rarr; closed deal in 1-6 months</td><td>20-30%</td></tr>
+            <tr><td>Local services (short sales)</td><td>Inquiry &rarr; call within days</td><td>2-3%</td></tr>
+          </tbody>
+        </table></div>
+        <p>
+          Loss = Safari market share × share of users who convert after 7+ days. Safari share
+          Germany: ~17% desktop, ~30% mobile. In mobile-first commerce disproportionately
+          painful.
+        </p>
+        <p>
+          <strong>What this means for your conversion tools:</strong> with
+          <a href="/en/blog/meta-capi-server-side-gtm/">Meta CAPI</a> the fbc and fbp cookies
+          get capped - your EMQ score drops for Safari users. With
+          <a href="/en/blog/google-ads-enhanced-conversions/">Google Ads Enhanced Conversions</a>
+          the GCLID cookie only lives 7 days - conversions without an email match get
+          unattributed after a week. Same-Origin sGTM rescues both tools at once.
+        </p>
+
+        <h2 id="solutions">7. The three solution paths</h2>
+        <p>Three technical options, depending on setup complexity:</p>
+        <div class="table-wrap"><table class="compare-table">
+          <thead>
+            <tr><th>Solution</th><th>Effort</th><th>Cookie lifetime</th><th>Suitable for</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>HTTP Set-Cookie with IP match</td><td>High (infrastructure migration)</td><td>Up to 400 days - if IP matches</td><td>Only enterprise with own server</td></tr>
+            <tr><td><strong>Same-Origin Path-Based sGTM</strong></td><td>Medium (reverse proxy)</td><td>400 days</td><td><strong>Most setups</strong></td></tr>
+            <tr><td>Stape Custom Loader Power-Up</td><td>Low (plug-and-play)</td><td>400 days</td><td>Stape customers without DevOps resources</td></tr>
+          </tbody>
+        </table></div>
+
+        <h2 id="same-origin-setup">8. Same-Origin sGTM via Cloudflare Worker</h2>
+        <p>Concrete setup for most cases - Cloudflare site fronts Stape sGTM:</p>
+        <ol>
+          <li><strong>Create Cloudflare Worker:</strong> Dashboard &rarr; Workers &amp; Pages &rarr; Create Worker</li>
+          <li><strong>Write Worker code</strong> (see below)</li>
+          <li><strong>Bind route:</strong> <code>example.com/sgtm/*</code> &rarr; Worker</li>
+          <li><strong>Change sGTM tagging URL</strong> in Web container from <code>https://sgtm.example.com</code> to <code>https://example.com/sgtm</code></li>
+          <li><strong>Publish container</strong> + live test</li>
+        </ol>
+
+        <div class="code-wrap" role="region" aria-label="Cloudflare Worker for same-origin sGTM">
+          <div class="code-header">
+            <div class="code-header-dots" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+            <span>Cloudflare Worker - sgtm-proxy.js</span>
+          </div>
+          <pre><code>export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+    // Strip /sgtm prefix, forward to Stape endpoint
+    const targetPath = url.pathname.replace(/^\/sgtm/, '');
+    const targetUrl = 'https://sgtm.example.com' + targetPath + url.search;
+
+    // Rebuild request with original method, headers, body
+    const proxyRequest = new Request(targetUrl, {
+      method: request.method,
+      headers: request.headers,
+      body: request.body,
+      redirect: 'manual'
+    });
+
+    const response = await fetch(proxyRequest);
+
+    // Pass through Set-Cookie headers (critical!)
+    // Cloudflare merges them automatically
+    return new Response(response.body, {
+      status: response.status,
+      headers: response.headers
+    });
+  }
+};</code></pre>
+        </div>
+
+        <p>
+          <strong>What happens here:</strong> Cloudflare receives requests at
+          <code>example.com/sgtm/*</code>, proxies them to Stape, returns the response
+          including Set-Cookie headers. From the browser's perspective: all requests land
+          on <code>example.com</code> - same domain, same IP range, no IP-matching problem,
+          cookies live 400 days.
+        </p>
+
+        <h2 id="stape-power-up">9. Alternative: Stape Custom Loader Power-Up</h2>
+        <p>
+          If you don't want to build a Cloudflare Worker, Stape offers the <strong>Custom
+          Loader Power-Up</strong> (~$20/month extra). It injects a small loader script into
+          your main domain that routes all sGTM requests through your main domain.
+          Functionally the same result as the Worker approach, but Stape handles the
+          infrastructure for you.
+        </p>
+        <ol>
+          <li>Stape dashboard &rarr; your container &rarr; Power-Ups</li>
+          <li>Activate <strong>Custom Loader</strong></li>
+          <li>Stape generates code snippet - place this BEFORE the GTM script on your website</li>
+          <li>Switch sub-domain to same-origin path in container settings</li>
+          <li>Test in Safari ITP Debug Mode</li>
+        </ol>
+
+        <h2 id="test">10. Test in Safari ITP Debug Mode</h2>
+        <p>How to verify your cookies are no longer capped:</p>
+        <ol>
+          <li>Open Safari &rarr; <strong>Preferences &rarr; Advanced</strong> &rarr; enable „Show Develop menu"</li>
+          <li>Menubar &rarr; <strong>Develop &rarr; Experimental Features &rarr; ITP Debug Mode</strong> enable</li>
+          <li>Visit website &rarr; <strong>Develop &rarr; Show Web Inspector &rarr; Storage &rarr; Cookies</strong></li>
+          <li>For each cookie check the <strong>Expires</strong> column - should be 400 days in the future, not 7 days</li>
+          <li>Console tab search for <code>ITP Debug:</code> logs - shows why a cookie was capped</li>
+        </ol>
+
+        <div class="fact-box">
+          <strong>What you want to see in console:</strong><br>
+          For each sGTM cookie should say: „Cookie set via Set-Cookie header from first-party
+          context, full lifetime granted." If instead „capped to 7 days due to network-level
+          criteria" - then the problem is still IP-matching.
+        </div>
+
+        <h2 id="gdpr">11. GDPR remains unchanged</h2>
+        <p>The same-origin solution doesn't change your GDPR obligations:</p>
+        <ul>
+          <li>&#10003; <strong>Consent Mode v2</strong> active: cookies only fire with consent</li>
+          <li>&#10003; <strong>Privacy Policy</strong> mentions all tracking cookies, even if set as first-party</li>
+          <li>&#10003; <strong>DPA with Stape/Cloudflare</strong>: Data Processing Agreement under Art. 28 GDPR</li>
+          <li>&#10003; <strong>Data minimization</strong>: 400-day cookie only for data you actually need (e.g. GCLID, session-ID)</li>
+        </ul>
+        <p>
+          Important: longer cookie lifetime does NOT make tracking „more GDPR-compliant" - you
+          still have to meet all GDPR requirements. It just makes it technically functional
+          for Safari users.
+        </p>
+
+        <h2 id="faq">12. FAQ</h2>
+
+        <h3>What exactly is Safari ITP?</h3>
+        <p>
+          Intelligent Tracking Prevention is Apple's anti-tracking mechanism in Safari (since
+          2017). Since 2019, ITP caps all JavaScript-set cookies at a maximum of 7 days.
+          Since Safari 16.4 (April 2023), it also caps server-set cookies if the server IP
+          does not match the main-site IP prefix. Result: attribution data disappears after
+          a week - which destroys performance bidding.
+        </p>
+
+        <h3>Why doesn't normal server-side GTM automatically help against ITP?</h3>
+        <p>
+          If your sGTM container runs on a subdomain (e.g. <code>sgtm.example.com</code> via
+          Stape) and the IP prefix of the Stape servers does not match the IP prefix of your
+          main server, Safari 16.4+ still treats it as „suspicious" and caps cookies at 7
+          days. Most Stape setups hit this problem - the solution is Same-Origin Path-Based
+          setup.
+        </p>
+
+        <h3>What is CNAME cloaking and why doesn't it work anymore?</h3>
+        <p>
+          CNAME cloaking was an old technique: have a subdomain (<code>track.example.com</code>)
+          point via CNAME to a third-party server so it appears first-party. Safari/WebKit
+          has detected this since 2020 and caps all JavaScript cookies on such subdomains
+          at 7 days. CNAME cloaking is functionally dead today - don't use it.
+        </p>
+
+        <h3>What's the solution against Safari ITP?</h3>
+        <p>
+          Same-Origin Path-Based sGTM: instead of subdomain <code>sgtm.example.com</code>,
+          sGTM runs under <code>example.com/sgtm/</code> via a reverse proxy (Cloudflare
+          Worker, Nginx, or Stape Custom Loader Power-Up). Being same-origin, there are no
+          IP-matching issues and cookies can be set for up to 400 days. Google explicitly
+          recommends this setup.
+        </p>
+
+        <h3>How much difference does it really make?</h3>
+        <p>
+          Safari market share in Germany is ~17-20% desktop, ~30% mobile. With the 7-day
+          cookie cap, all Safari users disappear from attribution as soon as they wait a
+          week between click and conversion. With B2B sales cycles (weeks to months), that's
+          15-25% of attribution lost. With 400-day cookies via Same-Origin sGTM, attribution
+          is preserved.
+        </p>
+
+        <h3>Is Same-Origin sGTM GDPR-compliant?</h3>
+        <p>
+          Yes - GDPR compliance does not depend on technical cookie lifetime, but on Consent
+          Mode v2, correct privacy policy, DPA with providers and data minimization.
+          Same-Origin Path-Based sGTM doesn't change these obligations - on the contrary,
+          the first-party nature makes data ownership clearer for the advertiser.
+        </p>
+
+        <aside class="sources-box" aria-label="Sources">
+          <div class="sources-box-title">Sources &amp; further reading</div>
+          <ul>
+            <li>WebKit official: <a href="https://webkit.org/blog/11338/cname-cloaking-and-bounce-tracking-defense/" target="_blank" rel="noopener">CNAME Cloaking and Bounce Tracking Defense</a></li>
+            <li>Simo Ahava: <a href="https://www.simoahava.com/privacy/itp-debug-mode-in-safari/" target="_blank" rel="noopener">ITP Debug Mode in Safari</a></li>
+            <li>Stape knowledge base: <a href="https://stape.io/blog/safari-itp" target="_blank" rel="noopener">Safari ITP - Everything You Need to Know</a></li>
+            <li>Google docs: <a href="https://developers.google.com/tag-platform/tag-manager/server-side/custom-domain-setup" target="_blank" rel="noopener">Custom domain for Server-Side Tag Manager</a></li>
+            <li>Apple WebKit blog archive: <a href="https://webkit.org/tracking-prevention/" target="_blank" rel="noopener">Tracking Prevention in WebKit</a></li>
+          </ul>
+        </aside>
+
+        <div class="cta-card" style="margin-top:32px;background:var(--navy);border-radius:var(--r-lg);padding:28px 32px;">
+          <p style="font-family:var(--fd);font-size:1rem;font-weight:700;color:#fff;margin-bottom:8px;">Want same-origin sGTM set up for your site?</p>
+          <p style="font-size:.875rem;color:rgba(255,255,255,.6);line-height:1.65;margin-bottom:20px;">I migrate your Stape setup to Same-Origin Path-Based via Cloudflare Worker or Stape Custom Loader. Cookie lifetime goes from 7 to 400 days, Safari attribution is saved. As <a href="/en/services/" style="color:#a5b4fc;">server-side module from €400</a>.</p>
+          <a href="/en/contact/" class="btn btn-indigo btn-sm">Request migration <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+
+        <div style="margin-top:24px;">
+          <a href="/en/blog/" style="display:inline-flex;align-items:center;gap:6px;font-size:.84rem;color:var(--muted);text-decoration:none;font-family:var(--fd);font-weight:600;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+            Back to blog
+          </a>
+        </div>
+
+      </article>
+
+      <aside class="article-sidebar" aria-label="Table of contents and cluster overview">
+        <nav class="toc-card" aria-label="Jump to section">
+          <div class="toc-card-title">Contents</div>
+          <ul class="toc-links" role="list">
+            <li><a href="#what-itp-does">1. What ITP does</a></li>
+            <li><a href="#history">2. History</a></li>
+            <li><a href="#cookie-capping">3. Cookie capping</a></li>
+            <li><a href="#ip-matching">4. IP-Matching rule</a></li>
+            <li><a href="#cname-dead">5. CNAME dead</a></li>
+            <li><a href="#impact">6. Real loss</a></li>
+            <li><a href="#solutions">7. Solutions</a></li>
+            <li><a href="#same-origin-setup">8. Cloudflare Worker setup</a></li>
+            <li><a href="#stape-power-up">9. Stape Custom Loader</a></li>
+            <li><a href="#test">10. ITP Debug Mode test</a></li>
+            <li><a href="#gdpr">11. GDPR</a></li>
+            <li><a href="#faq">12. FAQ</a></li>
+          </ul>
+        </nav>
+
+        <div class="cluster-card" role="complementary" aria-label="Cluster overview">
+          <div class="cluster-card-label">
+            <svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            Part of cluster
+          </div>
+          <a href="/en/blog/server-side-tracking/" class="cluster-card-pillar">
+            <span class="cluster-card-pillar-tag">Pillar</span>
+            <span class="cluster-card-pillar-title">Server-Side Tracking 2026 - Complete Overview</span>
+          </a>
+          <div class="cluster-card-list-title">More in cluster</div>
+          <ul class="cluster-card-list">
+            <li class="cluster-card-item">
+              <span class="cluster-card-marker" aria-hidden="true">&rarr;</span>
+              <a href="/en/blog/stape-io-setup/" style="color:inherit;text-decoration:none;">Stape.io setup (prerequisite)</a>
+            </li>
+            <li class="cluster-card-item">
+              <span class="cluster-card-marker" aria-hidden="true">&rarr;</span>
+              <a href="/en/blog/meta-capi-server-side-gtm/" style="color:inherit;text-decoration:none;">Meta CAPI via server-side GTM</a>
+            </li>
+            <li class="cluster-card-item">
+              <span class="cluster-card-marker" aria-hidden="true">&rarr;</span>
+              <a href="/en/blog/google-ads-enhanced-conversions/" style="color:inherit;text-decoration:none;">Google Ads Enhanced Conversions</a>
+            </li>
+            <li class="cluster-card-item cluster-card-item--current">
+              <span class="cluster-card-marker" aria-hidden="true">&rarr;</span>
+              Bypassing Safari ITP <span class="cluster-card-here">(you are here)</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="author-card">
+          <picture>
+            <source srcset="/assets/img/ueber-mich-roadtrip.jpg" type="image/jpeg">
+            <img src="/assets/img/ueber-mich-roadtrip.jpg" alt="Tobias Meixner" width="48" height="48" loading="lazy">
+          </picture>
+          <div class="author-name">Tobias Meixner</div>
+          <div class="author-role">Freelancer &middot; Würzburg</div>
+          <p class="author-bio">Tracking specialist - GTM, GA4, server-side via Stape.io, Meta CAPI, Google Ads Enhanced Conversions, ITP-resistant setups, GDPR-compliant.</p>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-cluster" style="display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid var(--border);font-size:.82rem;">
+      <span style="font-family:var(--fd);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);">Server-Side Tracking Cluster:</span>
+      <a href="/en/blog/server-side-tracking/" style="color:var(--muted);text-decoration:none;">Pillar</a>
+      <a href="/en/blog/stape-io-setup/" style="color:var(--muted);text-decoration:none;">Stape.io Setup</a>
+      <a href="/en/blog/meta-capi-server-side-gtm/" style="color:var(--muted);text-decoration:none;">Meta CAPI via sGTM</a>
+      <a href="/en/blog/google-ads-enhanced-conversions/" style="color:var(--muted);text-decoration:none;">Google Ads Enhanced Conv.</a>
+      <a href="/en/blog/bypassing-safari-itp/" style="color:var(--muted);text-decoration:none;">Bypassing Safari ITP</a>
+    </div>
+    <div class="footer-row">
+      <span class="footer-copy">© 2026 Tobias Meixner</span>
+      <ul class="footer-links">
+        <li><a href="/en/blog/">Blog</a></li>
+        <li><a href="/en/imprint/">Imprint</a></li>
+        <li><a href="/en/privacy/">Privacy</a></li>
+        <li><a href="/en/terms/">Terms</a></li>
+        <li><a href="#" onclick="CookieScript.instance.show(); return false;">Cookie settings</a></li>
+        <li><a href="https://www.linkedin.com/in/meixner-tobias" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
