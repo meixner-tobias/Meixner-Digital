@@ -2594,6 +2594,49 @@ textarea:focus-visible {
 
 [data-theme="dark"] .svc-scope { border-top-color: rgba(255,255,255,.05); }
 
+/* ── Erweiterungen-Sektion (Tracking-Module ohne Preise) ── */
+.svc-extensions {
+  margin-top: clamp(28px, 4vw, 40px);
+  padding-block: clamp(28px, 4vw, 40px);
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+.svc-extensions-head { text-align: center; max-width: 720px; margin: 0 auto clamp(24px, 3vw, 32px); }
+.svc-extensions-title {
+  font-family: var(--fd); font-size: clamp(1.3rem, 2.4vw, 1.6rem);
+  font-weight: 800; color: #fff; margin: 8px 0 12px;
+}
+.svc-extensions-sub { color: rgba(255,255,255,.62); font-size: .92rem; line-height: 1.7; }
+.svc-extensions-sub strong { color: #c7d2fe; }
+.svc-extensions-list {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+.svc-extensions-list li {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: var(--r);
+  padding: 18px 20px;
+  font-size: .87rem; line-height: 1.6;
+  color: rgba(255,255,255,.78);
+}
+.svc-extensions-list li strong {
+  display: block;
+  font-family: var(--fd);
+  font-size: .98rem;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.svc-extensions-note {
+  margin-top: clamp(20px, 3vw, 28px);
+  text-align: center;
+  font-size: .85rem; color: rgba(255,255,255,.55);
+}
+
+@media (max-width: 760px) {
+  .svc-extensions-list { grid-template-columns: 1fr; }
+}
+
 .svc-includes {
   background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
   border-radius: var(--r); padding: clamp(24px, 3vw, 32px) clamp(20px, 2.5vw, 28px);

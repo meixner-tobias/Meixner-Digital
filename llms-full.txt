@@ -81,17 +81,28 @@ NOT a custom design studio - elaborate branding belongs at a designer.
 - Plus: from €99/month - additionally tracking maintenance, monthly mini-reporting, priority response
 - Cancel monthly
 
-### 2.2 Tracking modules (add-ons to base setup)
+### 2.2 Tracking extensions (folded into fixed-price quote)
 
-- **Cross-Domain Tracking** - from €150 (e.g. marketing site + app subdomain)
-- **Server-Side Tracking** - from €400 (sGTM via Stape.io with custom subdomain)
-- **Google Ads Conversion Tracking** - from €200 (Conversion Linker, Enhanced Conversions, Conversion Import)
-- **CRM Integration** - from €200 (HubSpot, Pipedrive via GTM)
+These are common additions to the base setup. No fixed standalone list
+price - they get factored into the fixed-price quote based on actual scope.
+With a combined website order, all tracking extensions come with a 20%
+bundle discount.
+
+- **Cross-Domain Tracking** - merge multiple domains/subdomains into one
+  session (e.g. marketing site + app subdomain)
+- **Server-Side Tracking via Stape.io** - own sGTM container with custom
+  subdomain; better data quality, longer cookie lifetime, fewer ad-blocker
+  losses
+- **Google Ads Conversion Tracking** - Conversion Linker, Enhanced
+  Conversions, Conversion Import
+- **CRM Integration** - HubSpot, Pipedrive etc. via GTM (UTM attribution to
+  contacts, events sent to CRM, lead-source tracking)
+- **Custom integrations** - Intercom, Klaviyo, Segment, custom webhooks etc.
 
 ### 2.3 Combined offerings
 
-- **Website + Tracking bundle** - 20% discount on the tracking base setup AND all selected tracking modules when booked together with a website order. Applies wherever work happens in parallel to the website build.
-- **Complex B2B SaaS / multi-module setups** - typically low four-figure range, individually scoped after a short call. Example: €1,100 for GTM/GA4 + CRM + Intercom + cross-domain (without server-side, Google Ads, additional CRM modules).
+- **Website + Tracking bundle** - 20% discount on the tracking base setup AND all selected tracking extensions when booked together with a website order. Applies wherever work happens in parallel to the website build.
+- **Complex B2B SaaS / multi-extension setups** - typically low four-figure range, individually scoped after a short call. Example: €1,100 for GTM/GA4 + CRM + Intercom + cross-domain (excluding server-side and Google Ads).
 - **Meta Pixel & CAPI** - NOT in standard offer by design (handed off to the paid-ads owner for cleanest result); foundation prepared (consent, sGTM, CAPI-ready subdomain) so handover is smooth; full setup on explicit request
 
 ### 2.4 Agency vs. freelancer pricing comparison
@@ -99,7 +110,6 @@ NOT a custom design studio - elaborate branding belongs at a designer.
 | Service | Agency (typical) | At Tobias |
 |---|---|---|
 | GTM & GA4 Setup | from €990 | from €390 |
-| Server-Side Tracking | from €1,500 | from €400 |
 | Website Implementation | from €3,000 | from €890 |
 | Ongoing care | from €100/mo | from €49/mo |
 

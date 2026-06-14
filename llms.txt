@@ -49,17 +49,22 @@ JavaScript, Cloudflare Workers (Resend email).
   support. Plus: additionally tracking maintenance (events & GA4 health),
   monthly mini-reporting, priority response, more capacity for changes.
 
-### Tracking modules (add-ons to base setup)
+### Tracking extensions (folded into fixed-price quote)
 
-- Cross-Domain Tracking — from €150 (connect multiple domains/subdomains as
-  one session, e.g. marketing site and app subdomain)
-- Server-Side Tracking — from €400 (sGTM container via Stape.io with custom
-  subdomain, better data quality, longer cookie lifetime, fewer ad-blocker
-  losses)
-- Google Ads Conversion Tracking — from €200 (Conversion Linker, Conversion
-  Tags, Enhanced Conversions, Conversion Import)
-- CRM Integration — from €200 (HubSpot, Pipedrive via GTM: UTM attribution
-  to contacts, events sent to CRM, lead-source tracking)
+These are common additions to the base setup. No fixed list price - they get
+factored into the fixed-price quote based on actual scope. With a combined
+website order, all tracking extensions come with a 20% bundle discount.
+
+- Cross-Domain Tracking - multiple domains/subdomains as one session (e.g.
+  marketing site + app subdomain)
+- Server-Side Tracking via Stape.io - own sGTM container with custom
+  subdomain; better data quality, longer cookie lifetime, fewer ad-blocker
+  losses
+- Google Ads Conversion Tracking - Conversion Linker, Enhanced Conversions,
+  Conversion Import
+- CRM Integration - HubSpot, Pipedrive etc. via GTM (UTM attribution to
+  contacts, events sent to CRM, lead-source tracking)
+- Custom integrations - Intercom, Klaviyo, Segment, custom webhooks, etc.
 
 ### Combined offerings
 
