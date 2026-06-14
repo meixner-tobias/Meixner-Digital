@@ -559,10 +559,20 @@
       var companyValue = document.getElementById("company").value.trim();
       var phoneValue = document.getElementById("phone").value.trim();
       var addonValue = document.getElementById("addon_tracking_val").value;
-      var modulesValEl = document.getElementById("addon_modules_val");
-      var modulesValue = modulesValEl ? modulesValEl.value : "";
       var tierValEl = document.getElementById("addon_tier_val");
       var tierValue = tierValEl ? tierValEl.value : "";
+
+      // Tracking-Tier aus Radio-Buttons (z.B. "Standard (800-1.200 €)")
+      var trackingTierEl = document.querySelector('input[name="tracking_tier"]:checked');
+      var trackingTierValue = trackingTierEl ? trackingTierEl.value : "";
+      // Kurzform für GA4 + Reports: "Standard (800-1.200 €)" -> "Standard"
+      var trackingTierShortValue = trackingTierValue ? trackingTierValue.split(" (")[0] : "Noch unsicher";
+
+      // Tracking-Extensions Freitext
+      var extensionsEl = document.getElementById("tracking_extensions");
+      var extensionsValue = extensionsEl ? extensionsEl.value.trim() : "";
+      var extensionsTextFilled = extensionsValue.length > 0;
+
       var topicMap = {
         tracking: "GTM & GA4 Setup",
         website: "Website erstellen",
@@ -588,7 +598,8 @@
           topic: topicValue,
           message: message.value.trim(),
           addon_tracking: addonValue,
-          addon_modules: modulesValue,
+          tracking_tier: trackingTierValue,
+          tracking_extensions: extensionsValue,
           addon_tier: tierValue,
         }),
         headers: {
