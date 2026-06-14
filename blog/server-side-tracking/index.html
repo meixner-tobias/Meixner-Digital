@@ -192,7 +192,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <li><a href="/ueber-mich/">Über mich <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
     <li><a href="/leistungen/">Leistungen <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
     <li><a href="/projekte/">Projekte <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
-    <li><a href="/blog/" class="active">Blog <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+    <li>
+      <details class="drawer-accordion">
+        <summary>Blog <svg class="drawer-accordion-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <ul class="drawer-submenu">
+          <li><a href="/blog/" class="drawer-submenu-all">Alle Blog-Artikel ansehen <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+          <li><a href="/blog/answer-engine-optimization/">Answer Engine Optimization</a></li>
+          <li><a href="/blog/performance-max-vs-advantage-plus/">Performance Max vs. Advantage+</a></li>
+          <li><a href="/blog/server-side-tracking/">Server-Side Tracking</a></li>
+          <li class="drawer-cluster"><a href="/blog/stape-io-einrichten/">Stape.io einrichten</a></li>
+          <li class="drawer-cluster"><a href="/blog/meta-capi-server-side-gtm/">Meta CAPI via sGTM</a></li>
+          <li class="drawer-cluster"><a href="/blog/google-ads-enhanced-conversions/">Google Ads Enhanced Conv.</a></li>
+          <li class="drawer-cluster"><a href="/blog/safari-itp-umgehen/">Safari ITP umgehen</a></li>
+          <li><a href="/blog/prompt-engineering-ecommerce/">KI-Texterstellung E-Commerce</a></li>
+        </ul>
+      </details>
+    </li>
     <li><a href="/produkte/">Produkte <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
     <li><a href="/kontakt/">Kontakt aufnehmen <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
     <li style="padding-top:16px;border-top:1px solid var(--border);display:flex;justify-content:center;">
@@ -408,7 +423,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <h3>Was Server-Side Tracking umgeht</h3>
         <ul>
           <li><strong>Ad-Blocker</strong> - blockieren nur client-seitige Scripts im Browser; Server-zu-Server-Kommunikation ist unsichtbar für sie</li>
-          <li><strong><a href="/blog/safari-itp-umgehen/">Safari ITP</a></strong> - JavaScript-Cookies sind auf 7 Tage begrenzt (24 Stunden bei Tracking-Parametern wie fbclid/gclid); mit korrekt konfiguriertem SST (Same-Origin-Infrastruktur) können First-Party-Cookies bis zu 400 Tage überleben - <a href="/blog/safari-itp-umgehen/">wie das genau funktioniert</a></li>
+          <li><strong><a href="/blog/safari-itp-umgehen/">Safari ITP</a></strong> - JavaScript-Cookies sind auf 7 Tage begrenzt (24 Stunden bei Tracking-Parametern wie fbclid/gclid); mit korrekt konfiguriertem SST (Same-Origin-Infrastruktur) können First-Party-Cookies bis zu 400 Tage überleben</li>
           <li><strong>iOS App Tracking Transparency (ATT)</strong> - ATT reguliert App-Tracking via IDFA; bei web-basiertem Tracking hilft SST, indem es die Abhängigkeit vom Browser-Pixel eliminiert und Conversion-Daten direkt server-seitig an die Plattform-APIs überträgt</li>
           <li><strong>Langsames Internet oder fehlendes JavaScript im Browser</strong> - der Server wartet nicht auf den Client</li>
         </ul>

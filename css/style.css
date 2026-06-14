@@ -434,6 +434,66 @@ img { display: block; max-width: 100%; height: auto; }
 .drawer li:last-child a { border-bottom: none; }
 .drawer a svg         { color: var(--indigo-dark); flex-shrink: 0; }
 
+/* ── Drawer Blog accordion (native details/summary) ── */
+.drawer details { width: 100%; }
+.drawer details > summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--fd);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--navy);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+.drawer details > summary::-webkit-details-marker,
+.drawer details > summary::marker { display: none; content: ''; }
+.drawer-accordion-chevron {
+  color: var(--indigo-dark);
+  flex-shrink: 0;
+  transition: transform .22s ease;
+}
+.drawer details[open] > summary { border-bottom-color: transparent; }
+.drawer details[open] .drawer-accordion-chevron { transform: rotate(180deg); }
+.drawer details[open] > summary { color: var(--indigo-dark); }
+.drawer-submenu {
+  list-style: none;
+  padding: 4px 0 10px 14px;
+  margin: 0;
+  border-bottom: 1px solid var(--border);
+  border-left: 2px solid var(--indigo-mid);
+  margin-left: 4px;
+}
+.drawer-submenu li { padding: 0; }
+.drawer-submenu a {
+  padding: 11px 0 11px 12px;
+  font-weight: 500;
+  font-size: .92rem;
+  border-bottom: none;
+  color: var(--navy);
+}
+.drawer-submenu-all {
+  color: var(--indigo-dark) !important;
+  font-weight: 700 !important;
+  font-size: .82rem !important;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.drawer-cluster a::before {
+  content: '↳';
+  display: inline-block;
+  margin-right: 8px;
+  color: var(--muted);
+  font-weight: 400;
+}
+[data-theme="dark"] .drawer details > summary { color: var(--text); }
+[data-theme="dark"] .drawer-submenu a { color: var(--text); }
+
 /* Dark Mode toggle row inside mobile drawer */
 .drawer .theme-toggle {
   height: 34px; width: auto;

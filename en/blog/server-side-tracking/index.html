@@ -189,7 +189,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <li><a href="/en/about/">About <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
     <li><a href="/en/services/">Services <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
     <li><a href="/en/projects/">Projects <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
-    <li><a href="/en/blog/" class="active">Blog <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+    <li>
+      <details class="drawer-accordion">
+        <summary>Blog <svg class="drawer-accordion-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <ul class="drawer-submenu">
+          <li><a href="/en/blog/" class="drawer-submenu-all">View all articles <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+          <li><a href="/en/blog/answer-engine-optimization/">Answer Engine Optimization</a></li>
+          <li><a href="/en/blog/performance-max-vs-advantage-plus/">Performance Max vs. Advantage Plus</a></li>
+          <li><a href="/en/blog/server-side-tracking/">Server-Side Tracking</a></li>
+          <li class="drawer-cluster"><a href="/en/blog/stape-io-setup/">Stape.io setup</a></li>
+          <li class="drawer-cluster"><a href="/en/blog/meta-capi-server-side-gtm/">Meta CAPI via sGTM</a></li>
+          <li class="drawer-cluster"><a href="/en/blog/google-ads-enhanced-conversions/">Google Ads Enhanced Conv.</a></li>
+          <li class="drawer-cluster"><a href="/en/blog/bypassing-safari-itp/">Bypassing Safari ITP</a></li>
+          <li><a href="/en/blog/prompt-engineering-ecommerce/">AI Text Creation E-Commerce</a></li>
+        </ul>
+      </details>
+    </li>
     <li><a href="/en/products/">Products <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
     <li><a href="/en/contact/">Get in touch <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
     <li style="padding-top:16px;border-top:1px solid var(--border);display:flex;justify-content:center;">
@@ -378,7 +393,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <h3>What server-side tracking bypasses</h3>
         <ul>
           <li><strong>Ad blockers</strong> - they block client-side scripts in the browser; server-to-server communication is invisible to them</li>
-          <li><strong><a href="/en/blog/bypassing-safari-itp/">Safari ITP</a></strong> - JavaScript cookies are limited to 7 days (24 hours with tracking parameters such as fbclid/gclid); with correctly configured SST on same-origin infrastructure, first-party cookies can last up to 400 days - <a href="/en/blog/bypassing-safari-itp/">here's exactly how that works</a></li>
+          <li><strong><a href="/en/blog/bypassing-safari-itp/">Safari ITP</a></strong> - JavaScript cookies are limited to 7 days (24 hours with tracking parameters such as fbclid/gclid); with correctly configured SST on same-origin infrastructure, first-party cookies can last up to 400 days</li>
           <li><strong>iOS App Tracking Transparency (ATT)</strong> - ATT regulates app tracking via IDFA; for web-based tracking, SST helps by removing dependence on the browser pixel and sending conversion data server-side to platform APIs</li>
           <li><strong>Slow internet or missing JavaScript in the browser</strong> - the server does not wait for the client</li>
         </ul>
