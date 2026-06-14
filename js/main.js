@@ -190,8 +190,10 @@
         });
       },
       {
-        threshold: 0.08,
-        rootMargin: "0px 0px -36px 0px",
+        threshold: 0,
+        // 200px vor Viewport-Eintritt triggern → Reveal ist fertig
+        // bevor User das Element wirklich sieht (kein Scroll-Lag)
+        rootMargin: "0px 0px 200px 0px",
       },
     );
 
