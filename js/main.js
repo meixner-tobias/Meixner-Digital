@@ -511,6 +511,17 @@
     var submitBtn = document.getElementById("submitBtn");
     var formErrorMsg = document.getElementById("formErrorMsg");
 
+    // Reset form display state on page show (handles bfcache restore
+    // when user navigates back to /kontakt/ after successful submit).
+    // Without this, the inline styles set by the submit handler persist
+    // and both formContent and formSuccess would be shown together.
+    window.addEventListener("pageshow", function () {
+      var fc = document.getElementById("formContent");
+      var fs = document.getElementById("formSuccess");
+      if (fc) fc.style.display = "";
+      if (fs) fs.style.display = "";
+    });
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
 
