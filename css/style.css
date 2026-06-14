@@ -491,8 +491,71 @@ img { display: block; max-width: 100%; height: auto; }
   color: var(--muted);
   font-weight: 400;
 }
+
+/* ── Nested Server-Side Tracking accordion inside drawer-submenu ── */
+.drawer-submenu .drawer-nested { width: 100%; }
+.drawer-submenu .drawer-nested > summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 0 11px 12px;
+  font-family: var(--fd);
+  font-size: .92rem;
+  font-weight: 500;
+  color: var(--navy);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  border-bottom: none;
+}
+.drawer-submenu .drawer-nested > summary::-webkit-details-marker,
+.drawer-submenu .drawer-nested > summary::marker { display: none; content: ''; }
+.drawer-submenu .drawer-nested[open] > summary { color: var(--indigo-dark); font-weight: 600; }
+.drawer-submenu .drawer-nested .drawer-accordion-chevron {
+  width: 12px;
+  height: 12px;
+}
+.drawer-submenu-nested {
+  list-style: none;
+  padding: 4px 0 8px 12px;
+  margin: 0 0 0 4px;
+  border-left: 1.5px solid var(--indigo-mid);
+}
+.drawer-submenu-nested li { padding: 0; }
+.drawer-submenu-nested a {
+  display: flex;
+  align-items: center;
+  padding: 9px 0 9px 12px;
+  font-size: .86rem;
+  font-weight: 500;
+  color: var(--navy);
+  border-bottom: none;
+}
+.drawer-submenu-nested a::before {
+  content: '↳';
+  display: inline-block;
+  margin-right: 8px;
+  color: var(--muted);
+  font-weight: 400;
+}
+.drawer-submenu-nested a.drawer-pillar-link {
+  color: var(--indigo-dark);
+  font-weight: 700;
+  font-size: .78rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.drawer-submenu-nested a.drawer-pillar-link::before { display: none; }
+.drawer-submenu-nested a.active {
+  color: var(--indigo-dark);
+  font-weight: 700;
+}
+
 [data-theme="dark"] .drawer details > summary { color: var(--text); }
 [data-theme="dark"] .drawer-submenu a { color: var(--text); }
+[data-theme="dark"] .drawer-submenu .drawer-nested > summary { color: var(--text); }
+[data-theme="dark"] .drawer-submenu-nested a { color: var(--text); }
 
 /* Dark Mode toggle row inside mobile drawer */
 .drawer .theme-toggle {
@@ -584,6 +647,76 @@ img { display: block; max-width: 100%; height: auto; }
 .nav-drop-menu a:hover  { background: var(--indigo-soft); color: var(--indigo-dark) !important; }
 .nav-drop-menu a::after { display: none !important; }
 .nav-drop-menu a.active { background: var(--indigo-soft); color: var(--indigo-dark) !important; font-weight: 700; }
+
+/* ── Nested Server-Side Tracking accordion in desktop dropdown ── */
+.nav-drop-nested { padding: 0; }
+.nav-drop-menu details { width: 100%; }
+.nav-drop-menu details > summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-family: var(--fd);
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background .15s, color .15s;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+.nav-drop-menu details > summary::-webkit-details-marker,
+.nav-drop-menu details > summary::marker { display: none; content: ''; }
+.nav-drop-menu details > summary:hover {
+  background: var(--indigo-soft);
+  color: var(--indigo-dark);
+}
+.nav-drop-menu details[open] > summary {
+  background: var(--indigo-soft);
+  color: var(--indigo-dark);
+}
+.nav-drop-chevron {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  margin-left: 8px;
+  transition: transform .22s ease;
+}
+.nav-drop-menu details[open] .nav-drop-chevron { transform: rotate(180deg); }
+.nav-drop-submenu {
+  list-style: none;
+  padding: 4px 0 6px 12px;
+  margin: 4px 0 0 8px;
+  border-left: 2px solid var(--indigo-mid);
+}
+.nav-drop-submenu li { padding: 0; }
+.nav-drop-submenu a {
+  display: block;
+  padding: 8px 10px !important;
+  font-size: .78rem !important;
+  font-weight: 500 !important;
+  color: var(--muted) !important;
+  border-radius: 6px;
+}
+.nav-drop-submenu a:hover {
+  background: var(--indigo-soft);
+  color: var(--indigo-dark) !important;
+}
+.nav-drop-submenu a.active {
+  background: var(--indigo-soft);
+  color: var(--indigo-dark) !important;
+  font-weight: 700 !important;
+}
+.nav-drop-pillar-link {
+  color: var(--indigo-dark) !important;
+  font-weight: 700 !important;
+  font-size: .72rem !important;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
 
 /* Cluster-Item im Dropdown (Stape unter Server-Side) */
 .nav-drop-cluster a {
