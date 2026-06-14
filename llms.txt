@@ -36,9 +36,9 @@ JavaScript, Cloudflare Workers (Resend email).
 
 - [GTM & GA4 Setup](/en/services/) — focus area. Three complexity tiers:
   * Basic: from €390 (1 domain, 2-3 events, Consent Mode v2, no CRM)
-  * Standard: €800-1,300 (5+ events, DataLayer planning, Custom Dimensions/
+  * Standard: €800-1,200 (5+ events, DataLayer planning, Custom Dimensions/
     Conversions, cross-domain, extensive handover)
-  * B2B SaaS: €1,200-2,000 (+ CRM integration, custom integrations like
+  * B2B SaaS: €1,300-2,500 (+ CRM integration, custom integrations like
     Intercom, lead-source/UTM attribution end-to-end)
 - [Website Implementation](/en/services/) — template-based, technically clean:
   * Basic: from €890 (3-5 pages, modern template, SSL, hosting, Schema.org)

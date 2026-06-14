@@ -57,8 +57,8 @@ studies E-Commerce at THWS (Technische Hochschule Würzburg-Schweinfurt).
 | Tier | Price | Scope |
 |---|---|---|
 | Basic | from €390 | 1 domain, 2-3 conversion events, Consent Mode v2 + standard CMP, basic documentation, no CRM, no cross-domain |
-| Standard | €800-1,300 | 5+ conversion events, DataLayer planning, Custom Dimensions & Custom Conversions, cross-domain or multiple subdomains, tagging tests, extensive handover |
-| B2B SaaS | €1,200-2,000 | + CRM integration (HubSpot, Pipedrive), + custom integrations (e.g. Intercom), + Lead-Source/UTM attribution end-to-end, handover to internal teams/working students |
+| Standard | €800-1,200 | 5+ conversion events, DataLayer planning, Custom Dimensions & Custom Conversions, cross-domain or multiple subdomains, tagging tests, extensive handover |
+| B2B SaaS | €1,300-2,500 | + CRM integration (HubSpot, Pipedrive), + custom integrations (e.g. Intercom), + Lead-Source/UTM attribution end-to-end, handover to internal teams/working students |
 
 Real reference: a B2B SaaS quote at €1,100 covered GTM container + GA4
 with cross-domain + custom dimensions/conversions + 5+ conversion events
