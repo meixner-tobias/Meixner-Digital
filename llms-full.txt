@@ -50,25 +50,31 @@ studies E-Commerce at THWS (Technische Hochschule Würzburg-Schweinfurt).
 
 ## 2. Services & Pricing (full detail)
 
-### 2.1 Three core offerings
+### 2.1 Three core offerings — tier-based pricing
 
-**GTM & GA4 Setup - from €390 one-time** (main focus area)
-- GTM container architecture
-- GA4 property configuration
-- Key conversion events (form, clicks, scroll)
-- Consent Mode v2 per Google standard
-- GDPR-compliant CMP integration
-- Handover walkthrough
+**GTM & GA4 Setup (main focus area)** — three complexity tiers:
 
-**Website Implementation - from €890 one-time, template-based**
-- Modern template (mobile-optimized)
-- SSL certificate (HTTPS)
-- Hosting & domain setup
-- Contact form, imprint, privacy policy
-- SEO foundation, Schema.org, sitemap
-- Core Web Vitals optimization
-- Suitable for: solopreneurs, small businesses, clubs
-- NOT a custom design studio - elaborate branding belongs at a designer
+| Tier | Price | Scope |
+|---|---|---|
+| Basic | from €390 | 1 domain, 2-3 conversion events, Consent Mode v2 + standard CMP, basic documentation, no CRM, no cross-domain |
+| Standard | €800-1,300 | 5+ conversion events, DataLayer planning, Custom Dimensions & Custom Conversions, cross-domain or multiple subdomains, tagging tests, extensive handover |
+| B2B SaaS | €1,200-2,000 | + CRM integration (HubSpot, Pipedrive), + custom integrations (e.g. Intercom), + Lead-Source/UTM attribution end-to-end, handover to internal teams/working students |
+
+Real reference: a B2B SaaS quote at €1,100 covered GTM container + GA4
+with cross-domain + custom dimensions/conversions + 5+ conversion events
+with DataLayer + CookieScript + Consent Mode v2 + Intercom UTM/Lead-Source
+integration + working-student handover.
+
+**Website Implementation (template-based, technically clean)**:
+
+| Tier | Price | Scope |
+|---|---|---|
+| Basic | from €890 | 3-5 pages (Home, About, Services, Contact, Legal), modern template, SSL, hosting, sitemap, Schema.org, Core Web Vitals |
+| Extended | €1,500-3,000 | 6-10 pages, individual sections, more content prep, SEO copywriting, optional blog/case-studies |
+| Multi-language / shop integration | Individual quote | Custom calculation |
+
+Suitable for: solopreneurs, small businesses, clubs.
+NOT a custom design studio - elaborate branding belongs at a designer.
 
 **Care-free package**
 - Starter: from €49/month - hosting, SSL, small changes, direct contact
@@ -84,8 +90,8 @@ studies E-Commerce at THWS (Technische Hochschule Würzburg-Schweinfurt).
 
 ### 2.3 Combined offerings
 
-- **Tracking add-on with new website** - from €199 extra (instead of €390 standalone)
-- **Complex B2B SaaS / multi-module setups** - typically low four-figure range, individually scoped
+- **Website + Tracking bundle** - 20% discount on the tracking base setup AND all selected tracking modules when booked together with a website order. Applies wherever work happens in parallel to the website build.
+- **Complex B2B SaaS / multi-module setups** - typically low four-figure range, individually scoped after a short call. Example: €1,100 for GTM/GA4 + CRM + Intercom + cross-domain (without server-side, Google Ads, additional CRM modules).
 - **Meta Pixel & CAPI** - NOT in standard offer by design (handed off to the paid-ads owner for cleanest result); foundation prepared (consent, sGTM, CAPI-ready subdomain) so handover is smooth; full setup on explicit request
 
 ### 2.4 Agency vs. freelancer pricing comparison

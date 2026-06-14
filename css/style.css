@@ -2502,6 +2502,98 @@ textarea:focus-visible {
   font-size: .72rem; font-weight: 700; color: #fff; margin-top: 5px;
 }
 
+/* ── Scope Tiers (Warum schwankt der Preis?) ── */
+.svc-scope {
+  margin-top: clamp(40px, 6vw, 64px);
+  padding-block: clamp(32px, 4vw, 48px);
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+.svc-scope-head { text-align: center; max-width: 720px; margin: 0 auto clamp(28px, 4vw, 40px); }
+.svc-scope-title {
+  font-family: var(--fd); font-size: clamp(1.4rem, 2.6vw, 1.8rem);
+  font-weight: 800; color: #fff; margin: 8px 0 12px;
+}
+.svc-scope-sub { color: rgba(255,255,255,.62); font-size: .95rem; line-height: 1.7; }
+.scope-block { margin-bottom: clamp(28px, 4vw, 40px); }
+.scope-block-head { margin-bottom: 16px; }
+.scope-block-title {
+  font-family: var(--fd); font-size: 1.05rem;
+  font-weight: 700; color: #fff; margin: 0 0 4px;
+}
+.scope-block-sub { font-size: .85rem; color: rgba(255,255,255,.5); }
+.scope-tier-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.scope-tier-grid--two { grid-template-columns: repeat(2, 1fr); }
+.scope-tier {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: var(--r);
+  padding: 20px 22px;
+  display: flex; flex-direction: column;
+}
+.scope-tier--standard { border-color: rgba(165,180,252,.25); background: rgba(99,102,241,.06); }
+.scope-tier--saas {
+  border-color: rgba(165,180,252,.45);
+  background: rgba(99,102,241,.1);
+  box-shadow: 0 0 0 1px rgba(165,180,252,.18) inset;
+}
+.scope-tier-label {
+  font-family: var(--fd);
+  font-size: .68rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .12em;
+  color: rgba(255,255,255,.55); margin-bottom: 6px;
+}
+.scope-tier--standard .scope-tier-label,
+.scope-tier--saas .scope-tier-label { color: #a5b4fc; }
+.scope-tier-price {
+  font-family: var(--fd);
+  font-size: 1.4rem; font-weight: 800;
+  color: #fff; margin-bottom: 2px;
+}
+.scope-tier-multi {
+  font-size: .78rem; color: rgba(255,255,255,.4);
+  margin-bottom: 14px; font-variant-numeric: tabular-nums;
+}
+.scope-tier--saas .scope-tier-multi { color: #a5b4fc; }
+.scope-tier-list {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.scope-tier-list li {
+  font-size: .85rem; line-height: 1.55;
+  color: rgba(255,255,255,.78);
+  padding-left: 18px; position: relative;
+}
+.scope-tier-list li::before {
+  content: '';
+  position: absolute; left: 0; top: 9px;
+  width: 6px; height: 6px;
+  background: rgba(165,180,252,.4);
+  border-radius: 50%;
+}
+.scope-tier--standard .scope-tier-list li::before { background: #a5b4fc; }
+.scope-tier--saas .scope-tier-list li::before { background: #c7d2fe; }
+.scope-note {
+  margin-top: clamp(24px, 3vw, 32px);
+  padding: 18px 22px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--r);
+  font-size: .88rem; line-height: 1.65;
+  color: rgba(255,255,255,.7);
+}
+.scope-note strong { color: #fff; }
+
+@media (max-width: 900px) {
+  .scope-tier-grid,
+  .scope-tier-grid--two { grid-template-columns: 1fr; }
+}
+
+[data-theme="dark"] .svc-scope { border-top-color: rgba(255,255,255,.05); }
+
 .svc-includes {
   background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
   border-radius: var(--r); padding: clamp(24px, 3vw, 32px) clamp(20px, 2.5vw, 28px);

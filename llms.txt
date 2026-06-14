@@ -32,15 +32,18 @@ JavaScript, Cloudflare Workers (Resend email).
 
 ## Services / Leistungen
 
-### Main services (3 core offerings)
+### Main services (3 core offerings) — tier-based pricing
 
-- [GTM & GA4 Setup](/en/services/) — from €390 one-time (focus area).
-  Google Tag Manager container, GA4 property, key conversion events,
-  Consent Mode v2, GDPR-compliant CMP integration, handover walkthrough.
-- [Website Implementation](/en/services/) — from €890 one-time, template-based.
-  Modern template, SSL, hosting, contact form, legal pages, SEO foundation,
-  Schema.org, Core Web Vitals optimisation. Not a custom design studio -
-  suited for solopreneurs, small businesses and clubs.
+- [GTM & GA4 Setup](/en/services/) — focus area. Three complexity tiers:
+  * Basic: from €390 (1 domain, 2-3 events, Consent Mode v2, no CRM)
+  * Standard: €800-1,300 (5+ events, DataLayer planning, Custom Dimensions/
+    Conversions, cross-domain, extensive handover)
+  * B2B SaaS: €1,200-2,000 (+ CRM integration, custom integrations like
+    Intercom, lead-source/UTM attribution end-to-end)
+- [Website Implementation](/en/services/) — template-based, technically clean:
+  * Basic: from €890 (3-5 pages, modern template, SSL, hosting, Schema.org)
+  * Extended: €1,500-3,000 (6-10 pages, individual sections, SEO copywriting)
+  * Multi-language or shop integration: individual quote
 - [Care-free package](/en/services/) — from €49/month (Starter) or €99/month
   (Plus). Starter: hosting, SSL, small changes, direct contact, technical
   support. Plus: additionally tracking maintenance (events & GA4 health),
@@ -60,11 +63,13 @@ JavaScript, Cloudflare Workers (Resend email).
 
 ### Combined offerings
 
-- Tracking add-on with new website — from €199 extra (instead of €390
-  standalone). Base GTM/GA4 setup right at website launch.
+- Website + Tracking bundle: 20% discount on tracking base setup and all
+  selected tracking modules (server-side, Google Ads, CRM) when booked
+  together with a website order.
 - For complex setups (B2B SaaS, multi-domain, multiple modules combined,
-  custom integrations like Intercom): individual quote, typically in the
-  low four-figure range.
+  custom integrations like Intercom): individual fixed-price quote after
+  a short call, typically in the low four-figure range (real example:
+  €1,100 for GTM/GA4 + CRM + Intercom + cross-domain + custom dimensions).
 
 Meta Pixel and CAPI: not in the standard offer by design. Foundation
 (consent, sGTM, CAPI-ready subdomain) prepared so a paid-ads specialist
