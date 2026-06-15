@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0D1B2A" media="(prefers-color-scheme: dark)">
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','functionality_storage':'denied','security_storage':'granted','wait_for_update':500});</script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','functionality_storage':'denied','security_storage':'granted','wait_for_update':500});if(location.hostname==='127.0.0.1'||location.hostname==='localhost'){document.cookie='CookieScriptConsent='+encodeURIComponent(JSON.stringify({action:'accept',categories:['performance','targeting','functionality','unclassified']}))+'; path=/; max-age=31536000';gtag('consent','update',{'analytics_storage':'granted','ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted','functionality_storage':'granted'});var s=document.createElement('style');s.textContent='#cookiescript_injected,.cookiescript_injected,.cookiescript_wrapper,.cookiescript_badge,#cookiescript_iframe{display:none!important}';document.head.appendChild(s);}</script>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src="https://data.meixner-tobias.com/e5jncwjrlbsgj.js?"+i;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','6lg7q00=AwNOJTg%2FR0I7KysmOEY%2BURxaQUxdVA4ZVwoWCxQcDwVHExwABRMZWQkIHg%3D%3D');</script>
 <!-- End Google Tag Manager -->
@@ -159,7 +159,7 @@
             <details open>
               <summary>Server-Side Tracking <svg class="nav-drop-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
               <ul class="nav-drop-submenu">
-                <li role="none"><a href="/en/blog/server-side-tracking/" role="menuitem" class="nav-drop-pillar-link">View pillar article <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+                <li role="none"><a href="/en/blog/server-side-tracking/" role="menuitem" class="nav-drop-pillar-link">View main article <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
                 <li role="none"><a href="/en/blog/stape-io-setup/" role="menuitem">Stape.io setup</a></li>
                 <li role="none"><a href="/en/blog/meta-capi-server-side-gtm/" role="menuitem">Meta CAPI via sGTM</a></li>
                 <li role="none"><a href="/en/blog/google-ads-enhanced-conversions/" role="menuitem">Google Ads Enhanced Conv.</a></li>
@@ -238,7 +238,7 @@
             <details class="drawer-nested" open>
               <summary>Server-Side Tracking <svg class="drawer-accordion-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
               <ul class="drawer-submenu-nested">
-                <li><a href="/en/blog/server-side-tracking/" class="drawer-pillar-link">View pillar article <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+                <li><a href="/en/blog/server-side-tracking/" class="drawer-pillar-link">View main article <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
                 <li><a href="/en/blog/stape-io-setup/">Stape.io setup</a></li>
                 <li><a href="/en/blog/meta-capi-server-side-gtm/">Meta CAPI via sGTM</a></li>
                 <li><a href="/en/blog/google-ads-enhanced-conversions/">Google Ads Enhanced Conv.</a></li>
@@ -294,7 +294,7 @@
           <div class="article-meta-div" aria-hidden="true"></div>
           <span>12 min read</span>
           <div class="article-meta-div" aria-hidden="true"></div>
-          <span>Cluster: Server-Side Tracking</span>
+          <span>Server-Side Tracking</span>
         </div>
       </div>
     </div>
@@ -344,7 +344,7 @@
           <p>
             <strong>Prerequisite:</strong> sGTM container already running (e.g. via
             <a href="/en/blog/stape-io-setup/">Stape</a>). Background on server-side in the
-            <a href="/en/blog/server-side-tracking/">Pillar article</a>.
+            <a href="/en/blog/server-side-tracking/">Main article</a>.
           </p>
         </div>
 
@@ -707,16 +707,16 @@
           </ul>
         </nav>
 
-        <div class="cluster-card" role="complementary" aria-label="Cluster overview">
+        <div class="cluster-card" role="complementary" aria-label="Topic overview">
           <div class="cluster-card-label">
             <svg aria-hidden="true" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-            Part of cluster
+            Topic group
           </div>
           <a href="/en/blog/server-side-tracking/" class="cluster-card-pillar">
-            <span class="cluster-card-pillar-tag">Pillar</span>
+            <span class="cluster-card-pillar-tag">Hauptartikel</span>
             <span class="cluster-card-pillar-title">Server-Side Tracking 2026 - Complete Overview</span>
           </a>
-          <div class="cluster-card-list-title">More in cluster</div>
+          <div class="cluster-card-list-title">More detail articles</div>
           <ul class="cluster-card-list">
             <li class="cluster-card-item">
               <span class="cluster-card-marker" aria-hidden="true">&rarr;</span>
@@ -755,8 +755,8 @@
 <footer>
   <div class="container">
     <div class="footer-cluster" style="display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid var(--border);font-size:.82rem;">
-      <span style="font-family:var(--fd);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);">Server-Side Tracking Cluster:</span>
-      <a href="/en/blog/server-side-tracking/" style="color:var(--muted);text-decoration:none;">Pillar</a>
+      <span style="font-family:var(--fd);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);">Server-Side Tracking Topic:</span>
+      <a href="/en/blog/server-side-tracking/" style="color:var(--muted);text-decoration:none;">Main article</a>
       <a href="/en/blog/stape-io-setup/" style="color:var(--muted);text-decoration:none;">Stape.io Setup</a>
       <a href="/en/blog/meta-capi-server-side-gtm/" style="color:var(--muted);text-decoration:none;">Meta CAPI via sGTM</a>
       <a href="/en/blog/google-ads-enhanced-conversions/" style="color:var(--muted);text-decoration:none;">Google Ads Enhanced Conv.</a>

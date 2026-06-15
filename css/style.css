@@ -3651,3 +3651,17 @@ body:has(.contact-section) .page-hero-desc  { max-width: 500px; }
   .types-grid          { grid-template-columns: 1fr; }
   .product-quick-stats { flex-direction: column; }
 }
+
+
+/* ============================================================
+   Footer-Cluster Widget — Mobile-Verhalten
+   Auf Mobile (≤640px) ganz ausblenden: die Cluster-Card im
+   Artikel-Body zeigt bereits alle Detail-Artikel, dieses
+   Footer-Widget ist redundant und visuell unruhig.
+   Auf Desktop bleibt das Widget unverändert sichtbar.
+   ============================================================ */
+@media (max-width: 640px) {
+  .footer-cluster {
+    display: none !important;
+  }
+}
