@@ -78,6 +78,3 @@ Disallow: /en/terms-and-conditions/
 
 # Sitemap
 Sitemap: https://meixner-tobias.com/sitemap.xml
-
-# LLM context
-LLM-context: https://meixner-tobias.com/llms.txt
