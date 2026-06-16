@@ -14,7 +14,10 @@
 
 Tobias Meixner is a freelancer since February 2026, studying E-Commerce at
 THWS (Technische Hochschule Würzburg-Schweinfurt). Location: Würzburg, Bavaria.
-Languages: German (native), English. Google Ads certified.
+Languages: German (native), English. Google Ads certified (cert ID 166956880,
+https://skillshop.credential.net/7c7f49fe-c3ff-481c-b22b-fb7470d94dd5) and
+Google Analytics certified (cert ID 185483479,
+https://skillshop.credential.net/61df521c-ab65-49c0-aa1b-6020be5c740c).
 
 Specialisations: tracking implementations (GTM, GA4, server-side via Stape.io),
 DSGVO/GDPR compliance (Consent Mode v2, CMP integration), cross-domain tracking,
