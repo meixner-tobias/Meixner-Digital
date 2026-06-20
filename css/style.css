@@ -398,7 +398,11 @@ img { display: block; max-width: 100%; height: auto; }
 .burger.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .burger.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-/* ── Mobile drawer (slides down from nav) ── */
+/* ── Mobile drawer (slides down from nav) ──
+   On desktop (≥769px) the drawer is fully hidden via display:none so
+   its 30+ links never enter the keyboard focus order. On mobile we use
+   the transform/opacity transition for the slide animation AND toggle
+   the `inert` attribute via JS so closed drawer stays out of focus.   */
 .drawer {
   position: fixed;
   top: var(--nav-h); left: 0; right: 0;
@@ -416,6 +420,9 @@ img { display: block; max-width: 100%; height: auto; }
   overflow-y: auto;
 }
 .drawer.is-open { transform: none; opacity: 1; pointer-events: all; }
+@media (min-width: 769px) {
+  .drawer { display: none !important; }
+}
 .drawer ul { list-style: none; }
 
 .drawer a {
@@ -603,10 +610,13 @@ img { display: block; max-width: 100%; height: auto; }
   list-style: none;
   min-width: 240px;
   padding: 6px;
+  /* visibility:hidden removes from focus order; transition-delay keeps
+     items focusable during the fade-out so Shift+Tab still works.       */
+  visibility: hidden;
   opacity: 0;
   pointer-events: none;
   transform: translateX(-50%) translateY(-8px);
-  transition: opacity .2s, transform .2s;
+  transition: opacity .2s, transform .2s, visibility 0s .2s;
   z-index: 300;
 }
 
@@ -631,9 +641,11 @@ img { display: block; max-width: 100%; height: auto; }
 
 .nav-dropdown:hover .nav-drop-menu,
 .nav-dropdown:focus-within .nav-drop-menu {
+  visibility: visible;
   opacity: 1;
   pointer-events: all;
   transform: translateX(-50%) translateY(0);
+  transition: opacity .2s, transform .2s, visibility 0s 0s;
 }
 
 .nav-drop-menu a {
