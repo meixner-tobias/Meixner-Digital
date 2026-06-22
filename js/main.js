@@ -424,6 +424,119 @@
     document.head.appendChild(script);
   }
 
+  /* ═══════════════════════════════════════════════════
+     Cookie-Banner A11y-Upgrade
+     CookieScript injects a banner without proper ARIA modal
+     semantics. We watch for it, upgrade it to a real dialog,
+     and make the rest of the body `inert` so keyboard + screen
+     reader users land in the banner first (not at position 38).
+  ═══════════════════════════════════════════════════ */
+  function initCookieBannerA11y() {
+    // Localhost has the banner disabled via the inline bypass.
+    if (
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1"
+    ) {
+      return;
+    }
+
+    var BANNER_SELECTOR =
+      "#cookiescript_injected, .cookiescript_injected, .cookiescript_wrapper";
+    var previouslyFocused = null;
+
+    function isBannerNode(node) {
+      if (!node || node.nodeType !== 1) return false;
+      return (
+        node.matches && node.matches(BANNER_SELECTOR)
+      );
+    }
+
+    function trapBanner(banner) {
+      banner.setAttribute("role", "dialog");
+      banner.setAttribute("aria-modal", "true");
+      var heading = banner.querySelector("h1, h2, h3, [class*='title']");
+      if (heading) {
+        if (!heading.id) heading.id = "cookie-banner-title";
+        banner.setAttribute("aria-labelledby", heading.id);
+      } else {
+        banner.setAttribute("aria-label", "Cookie-Einstellungen");
+      }
+
+      // Make all siblings of the banner inert. Banner is appended to
+      // <body> by CookieScript, so we iterate body children.
+      var bodyChildren = document.body.children;
+      for (var i = 0; i < bodyChildren.length; i++) {
+        var el = bodyChildren[i];
+        if (el === banner || banner.contains(el)) continue;
+        if (el.tagName === "SCRIPT" || el.tagName === "NOSCRIPT") continue;
+        // Skip the skip-link so it's still focusable after dismiss
+        if (el.classList && el.classList.contains("skip-link")) continue;
+        // Remember prior inert state, then apply inert.
+        el.setAttribute(
+          "data-prev-inert",
+          el.hasAttribute("inert") ? "1" : "0",
+        );
+        el.setAttribute("inert", "");
+      }
+
+      // Move focus into the banner (first interactive element).
+      previouslyFocused = document.activeElement;
+      setTimeout(function () {
+        var firstFocusable = banner.querySelector(
+          "button, a[href], [tabindex]:not([tabindex='-1']), input, select, textarea",
+        );
+        if (firstFocusable && firstFocusable.focus) {
+          firstFocusable.focus();
+        }
+      }, 80);
+    }
+
+    function releaseBanner() {
+      var prev = document.querySelectorAll("[data-prev-inert]");
+      for (var i = 0; i < prev.length; i++) {
+        var el = prev[i];
+        if (el.getAttribute("data-prev-inert") === "0") {
+          el.removeAttribute("inert");
+        }
+        el.removeAttribute("data-prev-inert");
+      }
+      if (previouslyFocused && previouslyFocused.focus) {
+        try {
+          previouslyFocused.focus();
+        } catch (_) {
+          /* element may have been removed */
+        }
+      }
+    }
+
+    // If banner is already in DOM at script-run, trap immediately.
+    var existing = document.querySelector(BANNER_SELECTOR);
+    if (existing) {
+      trapBanner(existing);
+    }
+
+    // Watch for banner injection + removal.
+    var observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (m) {
+        m.addedNodes.forEach(function (node) {
+          if (isBannerNode(node)) {
+            trapBanner(node);
+          } else if (node.nodeType === 1 && node.querySelector) {
+            // Banner might be nested inside an injected wrapper
+            var inner = node.querySelector(BANNER_SELECTOR);
+            if (inner) trapBanner(inner);
+          }
+        });
+        m.removedNodes.forEach(function (node) {
+          if (isBannerNode(node)) {
+            releaseBanner();
+          }
+        });
+      });
+    });
+    observer.observe(document.body, { childList: true, subtree: false });
+  }
+
   onDocumentReady(function () {
     initThemeToggle();
     initNavbarScroll();
@@ -435,6 +548,7 @@
     initHeroCanvas();
     initAddonBox();
     initContactForm();
+    initCookieBannerA11y();
   });
 
   // Formular senden & Validierung
