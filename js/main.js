@@ -48,15 +48,6 @@
       safeQueryAll(".theme-label").forEach(function (el) {
         el.textContent = isDark ? "Light Mode" : "Dark Mode";
       });
-      var ariaLabel = isDark
-        ? "Helles Design aktivieren"
-        : "Dunkles Design aktivieren";
-      [themeToggle, themeToggleMobile].forEach(function (btn) {
-        if (btn) {
-          btn.setAttribute("aria-label", ariaLabel);
-          btn.setAttribute("aria-pressed", String(isDark));
-        }
-      });
     }
 
     function setDarkTheme() {
@@ -116,20 +107,11 @@
       return;
     }
 
-    // Start in closed/inert state — guarantees no focus leak even
-    // if the HTML attribute was forgotten on a given page.
-    drawer.setAttribute("inert", "");
-
     function closeDrawer() {
-      var wasOpen = drawer.classList.contains("is-open");
       drawer.classList.remove("is-open");
       burger.classList.remove("is-open");
       burger.setAttribute("aria-expanded", "false");
-      drawer.setAttribute("inert", "");
       document.body.style.overflow = "";
-      if (wasOpen) {
-        burger.focus();
-      }
     }
 
     burger.addEventListener("click", function () {
@@ -139,14 +121,10 @@
       burger.setAttribute("aria-expanded", String(open));
       document.body.style.overflow = open ? "hidden" : "";
       if (open) {
-        drawer.removeAttribute("inert");
         var firstLink = drawer.querySelector("a");
         if (firstLink) {
           firstLink.focus();
         }
-      } else {
-        drawer.setAttribute("inert", "");
-        burger.focus();
       }
     });
 
@@ -161,22 +139,9 @@
     });
 
     document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && drawer.classList.contains("is-open")) {
+      if (event.key === "Escape") {
         closeDrawer();
       }
-    });
-
-    // Defensive: if user resizes from mobile to desktop while drawer
-    // is open, force-close it. Prevents stuck-open state when CSS
-    // hides the drawer but JS state still says "open".
-    var resizeTimer;
-    window.addEventListener("resize", function () {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(function () {
-        if (window.innerWidth >= 769 && drawer.classList.contains("is-open")) {
-          closeDrawer();
-        }
-      }, 150);
     });
   }
 
@@ -187,36 +152,24 @@
       return;
     }
 
-    // Start in inert/closed state — matches the initial HTML attribute
-    // and guarantees no focus leak even if HTML attr was forgotten.
-    langDropdown.setAttribute("inert", "");
-
     langBtn.addEventListener("click", function (event) {
       event.stopPropagation();
-      var willOpen = !langDropdown.classList.contains("is-open");
-      langDropdown.classList.toggle("is-open", willOpen);
-      langBtn.classList.toggle("is-open", willOpen);
-      langBtn.setAttribute("aria-expanded", String(willOpen));
-      if (willOpen) {
-        langDropdown.removeAttribute("inert");
-      } else {
-        langDropdown.setAttribute("inert", "");
-      }
+      var isOpen = langDropdown.classList.contains("is-open");
+      langDropdown.classList.toggle("is-open");
+      langBtn.classList.toggle("is-open");
+      langBtn.setAttribute("aria-expanded", String(!isOpen));
     });
 
     document.addEventListener("click", function () {
       langDropdown.classList.remove("is-open");
       langBtn.classList.remove("is-open");
       langBtn.setAttribute("aria-expanded", "false");
-      langDropdown.setAttribute("inert", "");
     });
 
     document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && langDropdown.classList.contains("is-open")) {
+      if (event.key === "Escape") {
         langDropdown.classList.remove("is-open");
         langBtn.classList.remove("is-open");
-        langBtn.setAttribute("aria-expanded", "false");
-        langBtn.focus();
       }
     });
   }

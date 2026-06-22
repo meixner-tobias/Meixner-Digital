@@ -100,7 +100,8 @@
 <nav class="nav" id="nav">
   <div class="nav-inner">
     <a href="/" aria-label="Tobias Meixner - Startseite" style="display:flex;align-items:center;padding-top:6px;">
-      <svg class="nav-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 230" aria-hidden="true">
+      <svg class="nav-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 230" role="img" aria-labelledby="logo-sst">
+        <title id="logo-sst">Tobias Meixner</title>
         <g transform="translate(8 6)">
           <circle class="logo-dot" cx="50" cy="108" r="18"/>
           <line class="logo-stroke" x1="68" y1="62" x2="98" y2="118"/>
@@ -115,7 +116,7 @@
       <li><a href="/leistungen/">Leistungen</a></li>
       <li><a href="/projekte/">Projekte</a></li>
       <li class="nav-dropdown">
-        <a href="/blog/" class="active" aria-current="page">Blog</a>
+        <a href="/blog/" class="active">Blog</a>
         <ul class="nav-drop-menu" role="menu">
           <li role="none"><a href="/blog/answer-engine-optimization/" role="menuitem">Answer Engine Optimization</a></li>
           <li role="none"><a href="/blog/performance-max-vs-advantage-plus/" role="menuitem">Performance Max vs. Advantage Plus</a></li>
@@ -123,7 +124,7 @@
             <details open>
               <summary>Server-Side Tracking <svg class="nav-drop-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
               <ul class="nav-drop-submenu">
-                <li role="none"><a href="/blog/server-side-tracking/" role="menuitem" class="nav-drop-pillar-link active" aria-current="page">Hauptartikel ansehen <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+                <li role="none"><a href="/blog/server-side-tracking/" role="menuitem" class="nav-drop-pillar-link active">Hauptartikel ansehen <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
                 <li role="none"><a href="/blog/stape-io-einrichten/" role="menuitem">Stape.io einrichten</a></li>
                 <li role="none"><a href="/blog/meta-capi-server-side-gtm/" role="menuitem">Meta CAPI via sGTM</a></li>
                 <li role="none"><a href="/blog/google-ads-enhanced-conversions/" role="menuitem">Google Ads Enhanced Conv.</a></li>
@@ -138,13 +139,13 @@
 
       <!-- LANGUAGE SWITCHER -->
       <li class="lang-switch">
-        <button class="lang-btn" id="langBtn" aria-label="Sprache wählen" aria-expanded="false" aria-controls="langDropdown" aria-haspopup="menu">
+        <button class="lang-btn" id="langBtn" aria-label="Sprache wählen" aria-expanded="false">
           <div class="flag-circle"><div class="flag-de"></div></div>
           DE
           <span class="lang-arrow">▾</span>
         </button>
-        <div class="lang-dropdown" id="langDropdown" role="menu" inert>
-          <a href="/blog/server-side-tracking/" class="lang-option active" role="menuitem" aria-current="page">
+        <div class="lang-dropdown" id="langDropdown" role="menu">
+          <a href="/blog/server-side-tracking/" class="lang-option active" role="menuitem">
             <div class="flag-lg"><div class="flag-de"></div></div>
             <div class="lang-option-text">
               <span class="lang-option-name">Deutsch</span>
@@ -168,17 +169,17 @@
       <svg class="icon-sun" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
       <svg class="icon-moon" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>
     </button>
-    <button class="burger" id="burger" aria-label="Navigation öffnen" aria-expanded="false" aria-controls="drawer">
+    <button class="burger" id="burger" aria-label="Navigation öffnen" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 
-<nav class="drawer" id="drawer" aria-label="Mobile Navigation" inert>
+<nav class="drawer" id="drawer" aria-label="Mobile Navigation">
   <ul>
     <li>
       <div class="drawer-lang">
-        <a href="/blog/server-side-tracking/" class="drawer-lang-btn active" aria-current="page">
+        <a href="/blog/server-side-tracking/" class="drawer-lang-btn active">
           <div class="flag-circle"><div class="flag-de"></div></div>
           Deutsch
         </a>
