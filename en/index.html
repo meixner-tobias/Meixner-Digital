@@ -169,8 +169,7 @@
 <nav class="nav" id="nav">
   <div class="nav-inner">
     <a href="/en/" aria-label="Tobias Meixner - Home" style="display:flex;align-items:center;padding-top:6px;">
-      <svg class="nav-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 230" role="img" aria-labelledby="logo-t">
-        <title id="logo-t">Tobias Meixner</title>
+      <svg class="nav-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 230" aria-hidden="true">
         <g transform="translate(8 6)">
           <circle class="logo-dot" cx="50" cy="108" r="18"/>
           <line class="logo-stroke" x1="68" y1="62" x2="98" y2="118"/>
@@ -181,7 +180,7 @@
     </a>
 
     <ul class="nav-links">
-      <li><a href="/en/" class="active">Home</a></li>
+      <li><a href="/en/" class="active" aria-current="page">Home</a></li>
       <li><a href="/en/about/">About</a></li>
       <li><a href="/en/services/">Services</a></li>
       <li><a href="/en/projects/">Projects</a></li>
@@ -209,12 +208,12 @@
 
       <!-- LANGUAGE SWITCHER - EN active -->
       <li class="lang-switch">
-        <button class="lang-btn" id="langBtn" aria-label="Choose language" aria-expanded="false">
+        <button class="lang-btn" id="langBtn" aria-label="Choose language" aria-expanded="false" aria-controls="langDropdown" aria-haspopup="menu">
           <div class="flag-circle"><div class="flag-us"></div></div>
           EN
           <span class="lang-arrow">▾</span>
         </button>
-        <div class="lang-dropdown" id="langDropdown" role="menu">
+        <div class="lang-dropdown" id="langDropdown" role="menu" inert>
           <a href="/" class="lang-option" role="menuitem">
             <div class="flag-lg"><div class="flag-de"></div></div>
             <div class="lang-option-text">
@@ -222,7 +221,7 @@
               <span class="lang-option-sub">Deutschland</span>
             </div>
           </a>
-          <a href="/en/" class="lang-option active" role="menuitem">
+          <a href="/en/" class="lang-option active" role="menuitem" aria-current="page">
             <div class="flag-lg"><div class="flag-us"></div></div>
             <div class="lang-option-text">
               <span class="lang-option-name">English</span>
@@ -240,14 +239,14 @@
       <svg class="icon-sun" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
       <svg class="icon-moon" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>
     </button>
-    <button class="burger" id="burger" aria-label="Open navigation" aria-expanded="false">
+    <button class="burger" id="burger" aria-label="Open navigation" aria-expanded="false" aria-controls="drawer">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 
 <!-- MOBILE DRAWER -->
-<nav class="drawer" id="drawer" aria-label="Mobile Navigation">
+<nav class="drawer" id="drawer" aria-label="Mobile Navigation" inert>
   <ul>
     <li>
       <div class="drawer-lang">
@@ -255,13 +254,13 @@
           <div class="flag-circle"><div class="flag-de"></div></div>
           Deutsch
         </a>
-        <a href="/en/" class="drawer-lang-btn active">
+        <a href="/en/" class="drawer-lang-btn active" aria-current="page">
           <div class="flag-circle"><div class="flag-us"></div></div>
           English
         </a>
       </div>
     </li>
-    <li><a href="/en/" class="active">Home <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
+    <li><a href="/en/" class="active" aria-current="page">Home <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
     <li><a href="/en/about/">About <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
     <li><a href="/en/services/">Services <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
     <li><a href="/en/projects/">Projects <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
