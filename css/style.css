@@ -62,7 +62,7 @@
 --indigo-soft: #F0F9FF;          /* Sehr helles Blau für Backgrounds */
 --indigo-mid:  #BAE6FD;          /* Medium Blau für Borders & muted accents */
 --text:        #1A2332;
---muted:       #64748B;
+--muted:       #5B6B7E;  /* 5.07:1 on --bg #F5F7FA — WCAG AA */
 --border:      #E2E8F0;
 
   /* ── Shadows ── */
