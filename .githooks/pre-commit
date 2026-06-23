@@ -1,0 +1,36 @@
+#!/bin/sh
+# Auto-refresh cache-bust hashes (style.css/main.js) and sitemap.xml
+# lastmod dates before every commit.
+#
+# One-time setup per clone:   git config core.hooksPath .githooks
+# Bypass for one commit:      git commit --no-verify
+
+set -e
+
+staged=$(git diff --cached --name-only)
+asset_staged=$(echo "$staged" | grep -E '^(css/style\.css|js/main\.js)$' || true)
+html_staged=$(echo "$staged" | grep -E '\.html$' || true)
+
+if [ -z "$asset_staged" ] && [ -z "$html_staged" ]; then
+  exit 0
+fi
+
+if [ -n "$asset_staged" ]; then
+  echo "[pre-commit] CSS/JS changed -> running bump_assets.py"
+  python bump_assets.py
+  # bump_assets rewrote ?v=... in every HTML file; re-stage them so
+  # the cache-bust update lands in this commit.
+  find . -name "*.html" \
+    -not -path "./.venv/*" \
+    -not -path "./node_modules/*" \
+    -not -path "./.git/*" \
+    -print0 | xargs -0 git add
+fi
+
+if [ -n "$asset_staged" ] || [ -n "$html_staged" ]; then
+  echo "[pre-commit] Refreshing sitemap.xml lastmod dates"
+  python update_sitemap.py
+  git add sitemap.xml
+fi
+
+exit 0
