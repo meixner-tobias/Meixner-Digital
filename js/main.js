@@ -221,6 +221,55 @@
     });
   }
 
+  function initProductFilter() {
+    var filterBtns = safeQueryAll(".filter-btn[data-filter]");
+    var productCards = safeQueryAll(".product-card[data-category]");
+    var resultCount = document.getElementById("result-count");
+    if (filterBtns.length === 0 || productCards.length === 0) return;
+
+    var isEN = document.documentElement.getAttribute("lang") === "en";
+
+    function updateResultText(count) {
+      if (!resultCount) return;
+      if (count === 0) {
+        resultCount.textContent = isEN
+          ? "No products found"
+          : "Keine Produkte gefunden";
+      } else if (count === 1) {
+        resultCount.textContent = isEN ? "1 product" : "1 Produkt";
+      } else {
+        resultCount.textContent = count + (isEN ? " products" : " Produkte");
+      }
+    }
+
+    function applyFilter(filter) {
+      var visibleCount = 0;
+      productCards.forEach(function (card) {
+        var cat = card.getAttribute("data-category");
+        var matches = filter === "alle" || cat === filter;
+        if (matches) {
+          card.hidden = false;
+          visibleCount++;
+        } else {
+          card.hidden = true;
+        }
+      });
+      updateResultText(visibleCount);
+    }
+
+    filterBtns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var filter = btn.getAttribute("data-filter");
+        filterBtns.forEach(function (b) {
+          var isActive = b === btn;
+          b.classList.toggle("active", isActive);
+          b.setAttribute("aria-pressed", String(isActive));
+        });
+        applyFilter(filter);
+      });
+    });
+  }
+
   function initRevealAnimations() {
     if (typeof IntersectionObserver === "undefined") {
       return;
@@ -435,6 +484,7 @@
     initHeroCanvas();
     initAddonBox();
     initContactForm();
+    initProductFilter();
   });
 
   // Formular senden & Validierung
