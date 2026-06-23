@@ -4,6 +4,136 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
   <!-- ═══ STARTSEITE / HOME ═══════════════════════════════════════ -->
+  <url>
+    <loc>https://meixner-tobias.com/</loc>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://meixner-tobias.com/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://meixner-tobias.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://meixner-tobias.com/en/"/>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://meixner-tobias.com/assets/img/og-image.jpg</image:loc>
+      <image:title>Tobias Meixner - Tracking-Spezialist und Web-Freelancer Würzburg</image:title>
+    </image:image>
+  
+  </url>
+  <url>
+    <loc>https://meixner-tobias.com/en/</loc>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://meixner-tobias.com/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://meixner-tobias.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://meixner-tobias.com/en/"/>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://meixner-tobias.com/assets/img/og-image.jpg</image:loc>
+      <image:title>Tobias Meixner - Tracking Specialist und Web Freelancer Würzburg</image:title>
+    </image:image>
+  
+  </url>
+
+  <!-- ═══ LEISTUNGEN / SERVICES ══════════════════════════════════ -->
+  <url>
+    <loc>https://meixner-tobias.com/leistungen/</loc>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://meixner-tobias.com/leistungen/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://meixner-tobias.com/en/services/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://meixner-tobias.com/en/services/"/>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://meixner-tobias.com/en/services/</loc>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://meixner-tobias.com/leistungen/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://meixner-tobias.com/en/services/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://meixner-tobias.com/en/services/"/>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- ═══ ÜBER MICH / ABOUT ══════════════════════════════════════ -->
+  <url>
+    <loc>https://meixner-tobias.com/ueber-mich/</loc>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://meixner-tobias.com/ueber-mich/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://meixner-tobias.com/en/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://meixner-tobias.com/en/about/"/>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://meixner-tobias.com/assets/img/Profilbild2.jpg</image:loc>
+      <image:title>Tobias Meixner Profilbild</image:title>
+    </image:image>
+  
+  </url>
+  <url>
+    <loc>https://meixner-tobias.com/en/about/</loc>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://meixner-tobias.com/ueber-mich/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://meixner-tobias.com/en/about/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://meixner-tobias.com/en/about/"/>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://meixner-tobias.com/assets/img/Profilbild2.jpg</image:loc>
+      <image:title>Tobias Meixner Profile Photo</image:title>
+    </image:image>
+  
+  </url>
+
+  <!-- ═══ PROJEKTE / PROJECTS ════════════════════════════════════ -->
+  <url>
+    <loc>https://meixner-tobias.com/projekte/</loc>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://meixner-tobias.com/projekte/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://meixner-tobias.com/en/projects/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://meixner-tobias.com/en/projects/"/>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://meixner-tobias.com/assets/img/og-image.jpg</image:loc>
+      <image:title>Projekte - Tobias Meixner</image:title>
+    </image:image>
+  
+  </url>
+  <url>
+    <loc>https://meixner-tobias.com/en/projects/</loc>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://meixner-tobias.com/projekte/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://meixner-tobias.com/en/projects/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://meixner-tobias.com/en/projects/"/>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://meixner-tobias.com/assets/img/og-image.jpg</image:loc>
+      <image:title>Projects - Tobias Meixner</image:title>
+    </image:image>
+  
+  </url>
+
+  <!-- ═══ KONTAKT / CONTACT ══════════════════════════════════════ -->
+  <url>
+    <loc>https://meixner-tobias.com/kontakt/</loc>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://meixner-tobias.com/kontakt/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://meixner-tobias.com/en/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://meixner-tobias.com/en/contact/"/>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://meixner-tobias.com/en/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="de"        href="https://meixner-tobias.com/kontakt/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://meixner-tobias.com/en/contact/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://meixner-tobias.com/en/contact/"/>
+    <lastmod>2026-06-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- ═══ PRODUKTE / PRODUCTS ════════════════════════════════════ -->
 
   <!-- ═══ BLOG ÜBERSICHT / OVERVIEW ══════════════════════════════ -->
   <url>
