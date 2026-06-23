@@ -3426,7 +3426,7 @@ body:has(.contact-section) .page-hero-desc  { max-width: 500px; }
   display: flex; flex-direction: column; position: relative;
 }
 .product-card:hover { transform: translateY(-4px); box-shadow: var(--sh-lg); border-color: var(--indigo-mid); }
-.product-card[data-category="hidden"] { display: none; }
+.product-card[hidden] { display: none !important; }
 
 .product-cover {
   background: linear-gradient(145deg, #0d1117 0%, #0f1c35 100%);
