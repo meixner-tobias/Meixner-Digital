@@ -857,7 +857,11 @@ img { display: block; max-width: 100%; height: auto; }
 .lang-option-sub  { display: block; font-size: .7rem; color: var(--muted); margin-top: 1px; }
 .lang-check       { color: var(--indigo-dark); font-size: .8rem; font-weight: 700; }
 
-/* Mobile drawer language buttons */
+/* Mobile drawer language buttons.
+   The `border-bottom: 1.5px solid` override is intentional — the
+   general `.drawer a` selector sets a 1px separator border-bottom
+   that would clip our pill shape. Re-asserting the 1.5px solid
+   border-bottom keeps the pill fully outlined.                  */
 .drawer-lang-btn,
 .drawer .drawer-lang-btn {
   display: flex !important;
@@ -872,9 +876,9 @@ img { display: block; max-width: 100%; height: auto; }
   font-weight: 700 !important;
   color: var(--muted) !important;
   border: 1.5px solid var(--border) !important;
+  border-bottom: 1.5px solid var(--border) !important;
   background: transparent !important;
   text-decoration: none !important;
-  border-bottom: none !important;
   -webkit-tap-highlight-color: transparent !important;
 }
 .drawer .drawer-lang-btn.active {
