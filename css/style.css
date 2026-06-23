@@ -1585,6 +1585,33 @@ textarea:focus-visible {
    All three blog articles share this structure.
    ============================================================ */
 
+/* ── Breadcrumbs (article + product detail pages) ── */
+.breadcrumbs { margin-bottom: 20px; position: relative; z-index: 2; }
+.breadcrumb-list {
+  display: flex; flex-wrap: wrap; align-items: center;
+  list-style: none; padding: 0; margin: 0; gap: 0;
+  font-family: var(--fb); font-size: .78rem;
+  color: rgba(255,255,255,.65);
+}
+.breadcrumb-list li { display: flex; align-items: center; }
+.breadcrumb-list li:not(:last-child)::after {
+  content: '\203A'; margin: 0 9px;
+  color: rgba(255,255,255,.4); font-size: 1rem; line-height: 1;
+}
+.breadcrumb-list a {
+  color: rgba(255,255,255,.65); text-decoration: none;
+  border-bottom: 1px solid transparent; transition: color .15s, border-color .15s;
+}
+.breadcrumb-list a:hover { color: #fff; border-bottom-color: rgba(255,255,255,.4); }
+.breadcrumb-list [aria-current="page"] { color: #fff; font-weight: 500; }
+
+/* Light variant for product hero (which has a light background) */
+.product-hero .breadcrumb-list { color: var(--muted); }
+.product-hero .breadcrumb-list li:not(:last-child)::after { color: var(--muted); opacity: .55; }
+.product-hero .breadcrumb-list a { color: var(--muted); }
+.product-hero .breadcrumb-list a:hover { color: var(--indigo-dark); border-bottom-color: var(--indigo-mid); }
+.product-hero .breadcrumb-list [aria-current="page"] { color: var(--text); }
+
 /* Dark gradient hero at the top of every article */
 .article-hero {
   padding: calc(var(--nav-h) + 48px) 0 clamp(48px, 7vw, 80px);
