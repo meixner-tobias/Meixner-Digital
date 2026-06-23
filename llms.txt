@@ -83,16 +83,6 @@ Meta Pixel and CAPI: not in the standard offer by design. Foundation
 (consent, sGTM, CAPI-ready subdomain) prepared so a paid-ads specialist
 can take over the implementation cleanly.
 
-## Digital Products / Digitale Produkte
-
-- [Schema Markup Template Pack](/en/products/schema-markup-template-pack/):
-  9 ready-to-use JSON-LD templates for Person, LocalBusiness, Organization,
-  WebSite, Service, BlogPosting, BreadcrumbList, AggregateRating, FAQPage.
-  Includes PDF guide and error checklist. €9 via Gumroad.
-- [Google Tag Manager Beginner Guide](/en/products/gtm-beginner-guide/):
-  15-page PDF guide. GTM from scratch: tags, triggers, variables, GA4 setup,
-  button-click tracking, outbound links, preview mode, 10 common beginner
-  mistakes. €9 via Gumroad.
 
 ## Blog Articles / Blog-Artikel
 
@@ -189,8 +179,6 @@ Pricing model: Small business (§19 UStG) - prices are final, no VAT.
 - [Projekte (DE)](https://meixner-tobias.com/projekte/)
 - [Blog (EN)](https://meixner-tobias.com/en/blog/)
 - [Blog (DE)](https://meixner-tobias.com/blog/)
-- [Products (EN)](https://meixner-tobias.com/en/products/)
-- [Produkte (DE)](https://meixner-tobias.com/produkte/)
 - [Contact (EN)](https://meixner-tobias.com/en/contact/)
 - [Kontakt (DE)](https://meixner-tobias.com/kontakt/)
 

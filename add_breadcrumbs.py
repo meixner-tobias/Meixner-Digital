@@ -39,12 +39,6 @@ TITLES = {
     "en/blog/performance-max-vs-advantage-plus": "Performance Max vs. Advantage+",
     "en/blog/prompt-engineering-ecommerce": "Prompt Engineering for E-Commerce",
     "en/blog/answer-engine-optimization": "Answer Engine Optimization",
-    # Products DE
-    "produkte/schema-markup-template-pack": "Schema Markup Template Pack",
-    "produkte/gtm-anfaenger-guide": "GTM Anfänger-Guide",
-    # Products EN
-    "en/products/schema-markup-template-pack": "Schema Markup Template Pack",
-    "en/products/gtm-beginner-guide": "GTM Beginner's Guide",
 }
 
 
