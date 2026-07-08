@@ -184,7 +184,7 @@ Pricing model: Small business (§19 UStG) - prices are final, no VAT.
 
 ## Technical Details
 
-Last updated: June 2026
+Last updated: June 23, 2026
 Languages: German (DE), English (EN) with hreflang
 Region: Germany, DACH, Bavaria
 Pricing model: VAT-exempt small business (§19 UStG) - prices are final
