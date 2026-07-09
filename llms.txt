@@ -29,7 +29,9 @@ Clients/Projects: Gumb AG (complete GTM/GA4 tracking ecosystem with server-side
 considerations, Meta Pixel, Google Ads conversions, Enhanced Conversions,
 Consent Mode v2), Stefanie Mischka (website + ongoing maintenance),
 ANNETTE § HAMBURG (website with 100/100 Lighthouse SEO, 97 Performance,
-DNS + HTTPS + Web3Forms + Schema.org GEO markup).
+DNS + HTTPS + Web3Forms + Schema.org GEO markup), HERZVOLLGOLD /
+Susanne Vollgold (landing page on onepage.io + Meta Ads campaign
+management on 8-week cycle for live workshops).
 
 Technologies: Google Tag Manager, Google Analytics 4, Stape.io, Consent Mode v2,
 CookieScript, Cookiebot, HubSpot, Pipedrive, Schema.org JSON-LD, HTML, CSS,
@@ -145,6 +147,12 @@ can take over the implementation cleanly.
   from client design template, Strato DNS + HTTPS, Web3Forms contact, Schema.org
   GEO markup, WCAG AA accessibility. Lighthouse scores: 100/100 SEO, 97 Performance,
   98 Accessibility, 100 Best Practices. Ongoing maintenance since July 2026.
+- [HERZVOLLGOLD Landing Page & Meta Ads](/en/projects/): Workshop landing page
+  for Susanne Vollgold (medium, coach, healer) built on onepage.io. Meta Pixel
+  and Meta Ads Manager integration, campaign setup with audience targeting,
+  ongoing 8-week cycle campaign management with ad creatives, copy optimisation
+  and A/B tests. Live at workshop.herzvollgold.de/medium since May 2026, ongoing
+  campaign management since August 2026.
 - [Personal site meixner-tobias.com](/en/projects/): HTML/CSS/JS,
   GitHub Pages hosting, full GTM/GA4 tracking with custom dimensions,
   complete schema.org markup, llms.txt protocol.
