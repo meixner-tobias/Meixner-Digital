@@ -145,8 +145,10 @@ can take over the implementation cleanly.
 - [ANNETTE § HAMBURG Website](/en/projects/): Complete technical implementation
   for a legal-communication seminar provider (annette-hamburg.de). HTML/CSS/JS
   from client design template, Strato DNS + HTTPS, Web3Forms contact, Schema.org
-  GEO markup, WCAG AA accessibility. Lighthouse scores: 100/100 SEO, 97 Performance,
-  98 Accessibility, 100 Best Practices. Ongoing maintenance since July 2026.
+  GEO markup, WCAG AA accessibility. Lighthouse scores (as of 2026-07-09):
+  SEO 100/100, Best Practices 100/100, Desktop Performance 100/100 and Mobile
+  Performance 99/100, Accessibility 99 Desktop / 98 Mobile. Ongoing maintenance
+  since July 2026.
 - [HERZVOLLGOLD Landing Page & Meta Ads](/en/projects/): Workshop landing page
   for Susanne Vollgold (medium, coach, healer) built on onepage.io. Meta Pixel
   and Meta Ads Manager integration, campaign setup with audience targeting,
