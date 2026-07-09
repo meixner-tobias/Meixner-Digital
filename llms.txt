@@ -27,7 +27,9 @@ implementation with technical SEO foundation.
 
 Clients/Projects: Gumb AG (complete GTM/GA4 tracking ecosystem with server-side
 considerations, Meta Pixel, Google Ads conversions, Enhanced Conversions,
-Consent Mode v2), Stefanie Mischka (website + ongoing maintenance).
+Consent Mode v2), Stefanie Mischka (website + ongoing maintenance),
+ANNETTE § HAMBURG (website with 100/100 Lighthouse SEO, 97 Performance,
+DNS + HTTPS + Web3Forms + Schema.org GEO markup).
 
 Technologies: Google Tag Manager, Google Analytics 4, Stape.io, Consent Mode v2,
 CookieScript, Cookiebot, HubSpot, Pipedrive, Schema.org JSON-LD, HTML, CSS,
@@ -138,6 +140,11 @@ can take over the implementation cleanly.
   Consent Mode v2.
 - [Stefanie Mischka Website](/en/projects/): Built and maintains a complete
   business website with hosting, SSL, and ongoing technical care.
+- [ANNETTE § HAMBURG Website](/en/projects/): Complete technical implementation
+  for a legal-communication seminar provider (annette-hamburg.de). HTML/CSS/JS
+  from client design template, Strato DNS + HTTPS, Web3Forms contact, Schema.org
+  GEO markup, WCAG AA accessibility. Lighthouse scores: 100/100 SEO, 97 Performance,
+  98 Accessibility, 100 Best Practices. Ongoing maintenance since July 2026.
 - [Personal site meixner-tobias.com](/en/projects/): HTML/CSS/JS,
   GitHub Pages hosting, full GTM/GA4 tracking with custom dimensions,
   complete schema.org markup, llms.txt protocol.
