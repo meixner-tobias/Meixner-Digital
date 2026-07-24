@@ -1459,6 +1459,26 @@ textarea:focus-visible {
 .proj-link:hover { gap: 10px; }
 .proj-foot { text-align: center; margin-top: 30px; }
 
+/* Founder-owned product variant of proj-card (Home BikeCare teaser) */
+.proj-card-founder {
+  position: relative;
+  background:
+    radial-gradient(120% 100% at 100% 0%, rgba(249,115,22,.10), transparent 55%),
+    var(--bg-card);
+  border-color: rgba(249,115,22,.35);
+}
+.proj-card-founder:hover { border-color: rgba(249,115,22,.55); }
+.proj-card-founder .proj-logo { filter: none; }
+.proj-card-founder .proj-link { color: #F97316; }
+.proj-card-founder .proj-list li::before { color: #F97316; }
+.proj-card-badge {
+  position: absolute; top: 14px; right: 14px;
+  background: #F97316; color: #fff;
+  font-family: var(--fd); font-weight: 700;
+  font-size: .62rem; letter-spacing: .08em; text-transform: uppercase;
+  padding: 4px 9px; border-radius: 999px;
+}
+
 
 /* ============================================================
    21. HOME — WHY ME
@@ -2554,13 +2574,31 @@ textarea:focus-visible {
   /* Sections */
   .section { padding-block: clamp(40px, 7vw, 68px); }
 
-  /* Home — Hero */
-  .hero-grid     { grid-template-columns: 1fr; gap: 28px; padding-block: calc(var(--nav-h) + 28px) 52px; text-align: center; }
+  /* Home — Hero (compact mobile — fit above-the-fold + preview of next section) */
+  .hero-grid     { grid-template-columns: 1fr; gap: 18px; padding-block: calc(var(--nav-h) + 14px) 24px; text-align: center; }
   .hero-img-wrap { order: -1; }
-  .hero-img-frame { max-width: 260px; }
-  .hero-badge, .hero-p { margin-inline: auto; }
-  .hero-btns, .trust   { justify-content: center; }
+  .hero-img-frame { max-width: 180px; }
+  .hero-badge    { margin-inline: auto; padding: 5px 10px; font-size: .7rem; }
+  .hero-h1       { font-size: 1.7rem; line-height: 1.18; margin-bottom: 8px; }
+  .hero-sub      { font-size: .78rem; margin-bottom: 8px; }
+  .hero-p        { margin-inline: auto; font-size: .9rem; line-height: 1.5; margin-bottom: 14px; }
+  .hero-btns     { gap: 8px; justify-content: center; margin-bottom: 12px; }
+  .hero-btns .btn { padding: 10px 16px; font-size: .82rem; }
+  .trust         { gap: 6px 8px; justify-content: center; margin-top: 4px; }
+  .trust-div     { display: none; }               /* remove dividers -> more chip room */
+  .trust-chip    { padding: 4px 8px; font-size: .7rem; gap: 4px; }
+  .trust-chip img { width: 18px; height: 18px; }
   .fc { display: none; }
+
+  /* Page-hero for inner pages (Projekte, Über mich, Leistungen, Kontakt) */
+  .page-hero-inner { padding-block: clamp(28px, 6vw, 44px); }
+  .page-hero-title { font-size: clamp(1.6rem, 5vw, 2.1rem); line-height: 1.2; }
+  .page-hero-desc  { font-size: .92rem; line-height: 1.55; margin-top: 10px; }
+  .page-hero-badge { padding: 5px 10px; font-size: .68rem; }
+  .hero-stats      { gap: 14px; margin-top: 18px; flex-wrap: wrap; justify-content: center; }
+  .hstat-n         { font-size: 1.4rem; }
+  .hstat-l         { font-size: .72rem; }
+  .hstat-sep       { display: none; }
 
   /* Home — Pain */
   .pain-grid { grid-template-columns: 1fr; }
