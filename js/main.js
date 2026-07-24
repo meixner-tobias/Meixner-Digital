@@ -221,6 +221,56 @@
     });
   }
 
+  /* ═══════════════════════════════════════════════════
+     Case-card accordion state — <details> elements on /projekte/
+     should be closed on mobile (accordion) and open on desktop
+     (full expanded case-study layout).
+     CSS-only "force open on desktop" fails in some browsers because
+     the details content is hidden via shadow DOM, so we explicitly
+     set the [open] attribute per viewport.
+  ═══════════════════════════════════════════════════ */
+  function initCaseAccordion() {
+    var cards = safeQueryAll("details.case-card-collapsible");
+    if (!cards.length) return;
+    var mql = window.matchMedia("(min-width: 769px)");
+    function sync() {
+      var desktop = mql.matches;
+      cards.forEach(function (d) { d.open = desktop; });
+    }
+    sync();
+    if (mql.addEventListener) mql.addEventListener("change", sync);
+    else if (mql.addListener) mql.addListener(sync);           // Safari <14
+  }
+
+  /* ═══════════════════════════════════════════════════
+     Scroll-triggered highlight for cards
+     Mobile has no :hover, so cards look flat until scrolled to.
+     Adds .in-view when a card enters the viewport — CSS mirrors
+     the hover state (logo colorizes, subtle lift + shadow).
+     Only runs on mobile viewports; desktop keeps native :hover.
+  ═══════════════════════════════════════════════════ */
+  function initCardScrollHighlight() {
+    if (typeof IntersectionObserver === "undefined") return;
+    if (!window.matchMedia("(max-width: 768px)").matches) return;
+    var cards = safeQueryAll(
+      ".proj-card, .pain-card, details.case-card-collapsible, .case-card, .why-freelance-card, .travel-card"
+    );
+    if (!cards.length) return;
+    var obs = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add("in-view");
+          } else {
+            e.target.classList.remove("in-view");
+          }
+        });
+      },
+      { threshold: 0.35, rootMargin: "0px 0px -8% 0px" }
+    );
+    cards.forEach(function (c) { obs.observe(c); });
+  }
+
   function initProductFilter() {
     var filterBtns = safeQueryAll(".filter-btn[data-filter]");
     var productCards = safeQueryAll(".product-card[data-category]");
@@ -485,6 +535,8 @@
     initAddonBox();
     initContactForm();
     initProductFilter();
+    initCaseAccordion();
+    initCardScrollHighlight();
   });
 
   // Formular senden & Validierung

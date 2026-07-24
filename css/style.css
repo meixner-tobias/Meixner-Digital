@@ -224,11 +224,14 @@ img { display: block; max-width: 100%; height: auto; }
   transform: translateY(-2px);
 }
 
-/* Indigo outlined */
+/* Indigo outlined — hardened for readable contrast on light card
+   backgrounds. Text uses navy (~15:1 on white) instead of indigo-dark
+   (~5.9:1), border is stronger, and a subtle indigo-tinted background
+   makes the button feel clickable instead of ghostly.               */
 .btn-outline-indigo {
-  background: transparent;
-  color: var(--indigo-dark);
-  border: 1.5px solid var(--indigo-mid);
+  background: rgba(2,132,199,.06);
+  color: var(--navy);
+  border: 1.5px solid rgba(2,132,199,.45);
 }
 .btn-outline-indigo:hover {
   background: var(--indigo-dark);
@@ -1459,6 +1462,56 @@ textarea:focus-visible {
 .proj-link:hover { gap: 10px; }
 .proj-foot { text-align: center; margin-top: 30px; }
 
+/* Scroll-triggered highlight — mobile has no :hover, so cards look
+   flat until touched. Mirrors the hover state via JS-added .in-view
+   class so scrolling past a card lights it up (logo colorizes, subtle
+   lift + shadow, border warms). Only applies on mobile viewports;
+   desktop keeps native :hover. */
+.proj-card, .pain-card, .why-freelance-card, .travel-card,
+details.case-card-collapsible {
+  transition:
+    transform .35s cubic-bezier(.2,.7,.2,1),
+    box-shadow .35s ease,
+    border-color .35s ease;
+}
+@media (max-width: 768px) {
+  .proj-card.in-view {
+    transform: translateY(-4px);
+    box-shadow: var(--sh-lg);
+    border-color: var(--indigo-mid);
+  }
+  .proj-card.in-view .proj-logo { filter: none; }
+
+  .proj-card-founder.in-view {
+    border-color: rgba(249,115,22,.55);
+    box-shadow: 0 12px 32px rgba(249,115,22,.18);
+  }
+
+  .pain-card.in-view {
+    transform: translateY(-3px);
+    box-shadow: var(--sh-lg);
+  }
+
+  .why-freelance-card.in-view,
+  .travel-card.in-view {
+    transform: translateY(-3px);
+    box-shadow: var(--sh-md);
+  }
+
+  details.case-card-collapsible.in-view {
+    border-color: var(--indigo-mid);
+    box-shadow: var(--sh-md);
+  }
+  details.case-card-collapsible.in-view .case-summary-logo {
+    filter: none;
+  }
+  details.case-card-collapsible.in-view .case-summary-year {
+    background: rgba(2,132,199,.15);
+    color: var(--indigo-dark);
+    font-weight: 700;
+  }
+}
+
 /* Case-card accordion: <details> element that shows a compact teaser
    summary on mobile (collapsed by default), always-expanded on desktop
    via CSS override. Native HTML — no JavaScript required.               */
@@ -2433,11 +2486,13 @@ details.case-card-collapsible[open] .case-summary-chevron {
    /projekte/ to differentiate founder-owned work from client work.
    Palette: navy base + BikeCare orange (#F97316) accent.
    ============================================================ */
-/* Anchor scroll offset — compensate for the fixed nav so the heading
-   lands below the nav-bar, not underneath it. */
+/* Anchor scroll offset — anchor targets #own-product (the section
+   itself), so scroll-margin lands the visitor at the top edge of the
+   orange gradient panel with just a nav-height buffer. Also keep a
+   fallback on the heading for defensive anchoring. */
 .own-product-section,
 #own-product-heading {
-  scroll-margin-top: calc(var(--nav-h) + 24px);
+  scroll-margin-top: calc(var(--nav-h) + 4px);
 }
 
 .own-product-section {
@@ -2511,6 +2566,19 @@ details.case-card-collapsible[open] .case-summary-chevron {
 
 .own-product-actions {
   display: flex; flex-direction: column; gap: 16px; margin-bottom: 18px;
+}
+/* Center the CTA text — button spans column width, text needs
+   justify-content:center to sit in the middle instead of flex-start. */
+.own-product-actions > .btn-primary {
+  justify-content: center;
+  align-self: stretch;
+  min-height: 46px;
+}
+@media (min-width: 900px) {
+  .own-product-actions > .btn-primary {
+    align-self: flex-start;
+    min-width: 260px;
+  }
 }
 
 /* Text-based Apple/Google store buttons (NOT the trademarked badges,
@@ -2647,20 +2715,21 @@ details.case-card-collapsible[open] .case-summary-chevron {
   /* Sections */
   .section { padding-block: clamp(40px, 7vw, 68px); }
 
-  /* Home — Hero (compact mobile — fit above-the-fold + preview of next section) */
-  .hero-grid     { grid-template-columns: 1fr; gap: 18px; padding-block: calc(var(--nav-h) + 14px) 24px; text-align: center; }
+  /* Home — Hero (aggressively compact — the next section must peek
+     into view above the fold on standard mobile viewports ~640px). */
+  .hero-grid     { grid-template-columns: 1fr; gap: 10px; padding-block: calc(var(--nav-h) + 6px) 14px; text-align: center; }
   .hero-img-wrap { order: -1; }
-  .hero-img-frame { max-width: 180px; }
-  .hero-badge    { margin-inline: auto; padding: 5px 10px; font-size: .7rem; }
-  .hero-h1       { font-size: 1.7rem; line-height: 1.18; margin-bottom: 8px; }
-  .hero-sub      { font-size: .78rem; margin-bottom: 8px; }
-  .hero-p        { margin-inline: auto; font-size: .9rem; line-height: 1.5; margin-bottom: 14px; }
-  .hero-btns     { gap: 8px; justify-content: center; margin-bottom: 12px; }
-  .hero-btns .btn { padding: 10px 16px; font-size: .82rem; }
-  .trust         { gap: 6px 8px; justify-content: center; margin-top: 4px; }
-  .trust-div     { display: none; }               /* remove dividers -> more chip room */
-  .trust-chip    { padding: 4px 8px; font-size: .7rem; gap: 4px; }
-  .trust-chip img { width: 18px; height: 18px; }
+  .hero-img-frame { max-width: 150px; }
+  .hero-badge    { margin-top: 10px; margin-inline: auto; padding: 4px 9px; font-size: .66rem; }
+  .hero-h1       { font-size: 1.45rem; line-height: 1.15; margin-bottom: 6px; }
+  .hero-sub      { font-size: .72rem; margin-bottom: 6px; }
+  .hero-p        { margin-inline: auto; font-size: .82rem; line-height: 1.45; margin-bottom: 10px; }
+  .hero-btns     { gap: 6px; justify-content: center; margin-bottom: 8px; }
+  .hero-btns .btn { padding: 8px 14px; font-size: .78rem; }
+  .trust         { gap: 4px 6px; justify-content: center; margin-top: 2px; }
+  .trust-div     { display: none; }
+  .trust-chip    { padding: 3px 7px; font-size: .66rem; gap: 3px; }
+  .trust-chip img { width: 15px; height: 15px; }
   .fc { display: none; }
 
   /* Page-hero for inner pages (Projekte, Über mich, Leistungen, Kontakt) */
