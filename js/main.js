@@ -244,16 +244,21 @@
 
   /* ═══════════════════════════════════════════════════
      Scroll-triggered highlight for cards
-     Mobile has no :hover, so cards look flat until scrolled to.
-     Adds .in-view when a card enters the viewport — CSS mirrors
-     the hover state (logo colorizes, subtle lift + shadow).
-     Only runs on mobile viewports; desktop keeps native :hover.
+     Adds .in-view class when a card enters the viewport so mobile
+     visitors (who have no :hover) see cards light up as they scroll.
+     Runs on EVERY viewport — CSS gates the visual effect to mobile
+     via @media (max-width: 768px). Removing the previous JS-side
+     matchMedia gate fixes the bug where the observer never set up
+     if the initial viewport was desktop-sized (e.g., DevTools mobile
+     emulation, tablet rotation, resized browser window).
+     Threshold 0.15 with a small negative bottom rootMargin fires
+     the highlight EARLY as a card scrolls into view — so users see
+     the transition, not a snap.
   ═══════════════════════════════════════════════════ */
   function initCardScrollHighlight() {
     if (typeof IntersectionObserver === "undefined") return;
-    if (!window.matchMedia("(max-width: 768px)").matches) return;
     var cards = safeQueryAll(
-      ".proj-card, .pain-card, details.case-card-collapsible, .case-card, .why-freelance-card, .travel-card"
+      ".proj-card, .pain-card, details.case-card-collapsible, .case-card, .why-freelance-card, .travel-card, .svc-card, .own-card, .about-hero-img, .personal-img-wrap, .cta-box"
     );
     if (!cards.length) return;
     var obs = new IntersectionObserver(
@@ -266,7 +271,7 @@
           }
         });
       },
-      { threshold: 0.35, rootMargin: "0px 0px -8% 0px" }
+      { threshold: 0.15, rootMargin: "0px 0px -5% 0px" }
     );
     cards.forEach(function (c) { obs.observe(c); });
   }

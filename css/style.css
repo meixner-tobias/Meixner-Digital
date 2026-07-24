@@ -1476,26 +1476,41 @@ details.case-card-collapsible {
 }
 @media (max-width: 768px) {
   .proj-card.in-view {
-    transform: translateY(-4px);
+    transform: translateY(-5px);
     box-shadow: var(--sh-lg);
     border-color: var(--indigo-mid);
   }
   .proj-card.in-view .proj-logo { filter: none; }
 
   .proj-card-founder.in-view {
-    border-color: rgba(249,115,22,.55);
-    box-shadow: 0 12px 32px rgba(249,115,22,.18);
+    border-color: rgba(249,115,22,.6);
+    box-shadow: 0 14px 34px rgba(249,115,22,.22);
   }
 
   .pain-card.in-view {
-    transform: translateY(-3px);
+    transform: translateY(-4px);
     box-shadow: var(--sh-lg);
+  }
+  .pain-card.in-view .pain-icon {
+    transform: scale(1.08);
   }
 
   .why-freelance-card.in-view,
   .travel-card.in-view {
-    transform: translateY(-3px);
-    box-shadow: var(--sh-md);
+    transform: translateY(-4px);
+    box-shadow: var(--sh-lg);
+    border-color: var(--indigo-mid);
+  }
+  .why-freelance-card.in-view .why-freelance-icon {
+    background: var(--indigo-soft);
+    color: var(--indigo-dark);
+  }
+
+  .svc-card.in-view,
+  .own-card.in-view {
+    transform: translateY(-4px);
+    box-shadow: var(--sh-lg);
+    border-color: var(--indigo-mid);
   }
 
   details.case-card-collapsible.in-view {
@@ -1510,6 +1525,17 @@ details.case-card-collapsible {
     color: var(--indigo-dark);
     font-weight: 700;
   }
+
+  /* Smooth transition for pain-icon scale + why-icon color change */
+  .pain-icon,
+  .why-freelance-icon {
+    transition: transform .35s ease, background .35s ease, color .35s ease;
+  }
+}
+/* Dark-mode adjustments so highlighted cards stay visible */
+[data-theme="dark"] details.case-card-collapsible.in-view .case-summary-year {
+  background: rgba(2,132,199,.30);
+  color: #F0F9FF;
 }
 
 /* Case-card accordion: <details> element that shows a compact teaser
@@ -2356,6 +2382,16 @@ details.case-card-collapsible[open] .case-summary-chevron {
 [data-theme="dark"] .btn-ghost:hover   { background: rgba(255,255,255,.08) !important; color: #fff !important; }
 [data-theme="dark"] .btn-white { background: rgba(255,255,255,.1) !important; color: #fff !important; border: 1px solid rgba(255,255,255,.2) !important; }
 [data-theme="dark"] .btn-white:hover  { background: rgba(255,255,255,.18) !important; color: #fff !important; }
+[data-theme="dark"] .btn-outline-indigo {
+  background: rgba(2,132,199,.20) !important;
+  color: #F0F9FF !important;
+  border-color: rgba(56,189,248,.65) !important;
+}
+[data-theme="dark"] .btn-outline-indigo:hover {
+  background: var(--indigo-dark) !important;
+  color: #fff !important;
+  border-color: var(--indigo-dark) !important;
+}
 
 /* ── Dark Mode toggle ── */
 [data-theme="dark"] .icon-moon { display: block; }
@@ -2487,12 +2523,12 @@ details.case-card-collapsible[open] .case-summary-chevron {
    Palette: navy base + BikeCare orange (#F97316) accent.
    ============================================================ */
 /* Anchor scroll offset — anchor targets #own-product (the section
-   itself), so scroll-margin lands the visitor at the top edge of the
-   orange gradient panel with just a nav-height buffer. Also keep a
-   fallback on the heading for defensive anchoring. */
+   itself). +12px extra buffer so the top of the orange gradient
+   sits a bit BELOW the nav instead of flush against it (cleaner
+   visual arrival than a flush edge). Fallback on the heading. */
 .own-product-section,
 #own-product-heading {
-  scroll-margin-top: calc(var(--nav-h) + 4px);
+  scroll-margin-top: calc(var(--nav-h) + 12px);
 }
 
 .own-product-section {
