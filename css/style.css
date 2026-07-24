@@ -1459,6 +1459,79 @@ textarea:focus-visible {
 .proj-link:hover { gap: 10px; }
 .proj-foot { text-align: center; margin-top: 30px; }
 
+/* Case-card accordion: <details> element that shows a compact teaser
+   summary on mobile (collapsed by default), always-expanded on desktop
+   via CSS override. Native HTML — no JavaScript required.               */
+details.case-card-collapsible {
+  padding: 0;                  /* summary + inner handle their own spacing */
+  overflow: hidden;
+}
+.case-summary {
+  display: flex; align-items: center; gap: 14px;
+  padding: 18px 20px;
+  cursor: pointer;
+  list-style: none;
+  border-radius: var(--r-lg);
+  transition: background .2s;
+  user-select: none;
+}
+.case-summary::-webkit-details-marker,
+.case-summary::marker { display: none; content: ''; }
+.case-summary:hover { background: var(--indigo-soft); }
+details.case-card-collapsible[open] > .case-summary {
+  background: var(--indigo-soft);
+  border-bottom: 1px solid var(--border);
+  border-radius: var(--r-lg) var(--r-lg) 0 0;
+}
+.case-summary-logo {
+  height: 36px; width: auto; max-width: 100px;
+  object-fit: contain; flex-shrink: 0;
+  filter: grayscale(1) opacity(.6);
+  transition: filter .2s;
+}
+.case-summary:hover .case-summary-logo,
+details.case-card-collapsible[open] .case-summary-logo { filter: none; }
+.case-summary-body { flex: 1; min-width: 0; }
+.case-summary-type {
+  display: block; font-family: var(--fd); font-weight: 700;
+  font-size: .62rem; color: var(--indigo-dark);
+  text-transform: uppercase; letter-spacing: .08em; margin-bottom: 2px;
+}
+.case-summary-title {
+  font-family: var(--fd); font-size: .95rem; font-weight: 600;
+  color: var(--navy); margin: 0; line-height: 1.3;
+}
+.case-summary-year {
+  flex-shrink: 0; font-size: .74rem; color: var(--muted);
+  padding: 4px 10px; background: var(--indigo-soft);
+  border-radius: 999px; white-space: nowrap;
+}
+.case-summary-chevron {
+  color: var(--muted); flex-shrink: 0;
+  transition: transform .3s ease;
+}
+details.case-card-collapsible[open] .case-summary-chevron {
+  transform: rotate(180deg); color: var(--indigo-dark);
+}
+
+/* Desktop: always show inner content, hide summary teaser entirely.
+   Overrides the browser's default collapse behavior for <details>.    */
+@media (min-width: 769px) {
+  details.case-card-collapsible > .case-summary { display: none; }
+  details.case-card-collapsible > .case-inner    { display: grid !important; }
+}
+
+/* Mobile: tighter summary, hide year-pill on very small screens */
+@media (max-width: 640px) {
+  .case-summary        { padding: 14px 16px; gap: 10px; }
+  .case-summary-logo   { height: 30px; max-width: 70px; }
+  .case-summary-title  { font-size: .88rem; }
+  .case-summary-year   { font-size: .68rem; padding: 3px 8px; }
+}
+@media (max-width: 380px) {
+  .case-summary-year   { display: none; }
+}
+
 /* Founder-owned product variant of proj-card (Home BikeCare teaser) */
 .proj-card-founder {
   position: relative;
