@@ -244,16 +244,17 @@
 
   /* ═══════════════════════════════════════════════════
      Scroll-triggered highlight for cards
-     Adds .in-view class when a card enters the viewport so mobile
-     visitors (who have no :hover) see cards light up as they scroll.
-     Runs on EVERY viewport — CSS gates the visual effect to mobile
-     via @media (max-width: 768px). Removing the previous JS-side
-     matchMedia gate fixes the bug where the observer never set up
-     if the initial viewport was desktop-sized (e.g., DevTools mobile
-     emulation, tablet rotation, resized browser window).
-     Threshold 0.15 with a small negative bottom rootMargin fires
-     the highlight EARLY as a card scrolls into view — so users see
-     the transition, not a snap.
+     Adds .in-view once a card is nicely settled inside the viewport
+     so the visitor actually WATCHES the highlight transition instead
+     of a snap. Fires ONCE per card (unobserve after first trigger)
+     so the highlight persists as "reveal-and-stay" — no flashing
+     on/off when scrolling past-and-back.
+     Trigger geometry: threshold 0.45 = card must be ~45 percent inside
+     the viewport; rootMargin -15 percent bottom = the effective bottom
+     of the viewport sits 15 percent up from the actual bottom, so the
+     card has to be well past the fold before firing.
+     Runs on EVERY viewport; CSS gates the visual effect to mobile via
+     @media (max-width: 768px) — desktop keeps its :hover states.
   ═══════════════════════════════════════════════════ */
   function initCardScrollHighlight() {
     if (typeof IntersectionObserver === "undefined") return;
@@ -266,12 +267,11 @@
         entries.forEach(function (e) {
           if (e.isIntersecting) {
             e.target.classList.add("in-view");
-          } else {
-            e.target.classList.remove("in-view");
+            obs.unobserve(e.target);        // one-shot reveal
           }
         });
       },
-      { threshold: 0.15, rootMargin: "0px 0px -5% 0px" }
+      { threshold: 0.45, rootMargin: "0px 0px -15% 0px" }
     );
     cards.forEach(function (c) { obs.observe(c); });
   }

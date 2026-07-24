@@ -224,20 +224,22 @@ img { display: block; max-width: 100%; height: auto; }
   transform: translateY(-2px);
 }
 
-/* Indigo outlined — hardened for readable contrast on light card
-   backgrounds. Text uses navy (~15:1 on white) instead of indigo-dark
-   (~5.9:1), border is stronger, and a subtle indigo-tinted background
-   makes the button feel clickable instead of ghostly.               */
+/* .btn-outline-indigo — despite the name, this is now a SOLID indigo
+   button with white text. The name stays for backwards-compatibility
+   across the existing HTML. Solid style guarantees max readability
+   in both light and dark mode (was too subtle previously). Hover
+   deepens the blue + adds an indigo shadow for tactile feedback.  */
 .btn-outline-indigo {
-  background: rgba(2,132,199,.06);
-  color: var(--navy);
-  border: 1.5px solid rgba(2,132,199,.45);
-}
-.btn-outline-indigo:hover {
   background: var(--indigo-dark);
   color: #fff;
-  border-color: var(--indigo-dark);
+  border: 1.5px solid var(--indigo-dark);
+}
+.btn-outline-indigo:hover {
+  background: #024E7A;
+  border-color: #024E7A;
+  color: #fff;
   transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(2,132,199,.35);
 }
 
 /* White — used on dark backgrounds */
@@ -2383,14 +2385,15 @@ details.case-card-collapsible[open] .case-summary-chevron {
 [data-theme="dark"] .btn-white { background: rgba(255,255,255,.1) !important; color: #fff !important; border: 1px solid rgba(255,255,255,.2) !important; }
 [data-theme="dark"] .btn-white:hover  { background: rgba(255,255,255,.18) !important; color: #fff !important; }
 [data-theme="dark"] .btn-outline-indigo {
-  background: rgba(2,132,199,.20) !important;
-  color: #F0F9FF !important;
-  border-color: rgba(56,189,248,.65) !important;
-}
-[data-theme="dark"] .btn-outline-indigo:hover {
   background: var(--indigo-dark) !important;
   color: #fff !important;
   border-color: var(--indigo-dark) !important;
+}
+[data-theme="dark"] .btn-outline-indigo:hover {
+  background: #38BDF8 !important;
+  color: #0D1B2A !important;
+  border-color: #38BDF8 !important;
+  box-shadow: 0 6px 18px rgba(56,189,248,.35) !important;
 }
 
 /* ── Dark Mode toggle ── */
