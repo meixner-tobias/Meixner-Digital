@@ -2340,6 +2340,13 @@ textarea:focus-visible {
    /projekte/ to differentiate founder-owned work from client work.
    Palette: navy base + BikeCare orange (#F97316) accent.
    ============================================================ */
+/* Anchor scroll offset — compensate for the fixed nav so the heading
+   lands below the nav-bar, not underneath it. */
+.own-product-section,
+#own-product-heading {
+  scroll-margin-top: calc(var(--nav-h) + 24px);
+}
+
 .own-product-section {
   position: relative;
   padding: clamp(72px, 10vw, 120px) 0;
@@ -2446,37 +2453,35 @@ textarea:focus-visible {
   100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
 }
 
-/* Right column — device mockups */
+/* Right column — device mockups.
+   Uses CSS Grid to STACK both phones in a single cell, then transforms
+   them apart. The cell itself stays centered, so the whole composition
+   is always visually centered regardless of viewport width.            */
 .own-product-visual { position: relative; }
 .own-product-devices {
   position: relative; margin: 0;
-  display: flex; justify-content: center; align-items: center;
+  display: grid; place-items: center;
   min-height: 420px;
 }
 .own-product-devices::before {
   content: ""; position: absolute; inset: -40px;
   background: radial-gradient(circle at 50% 50%, rgba(249,115,22,.22), transparent 60%);
-  filter: blur(20px); z-index: 0;
+  filter: blur(20px); z-index: 0; pointer-events: none;
 }
 .own-product-device {
+  grid-column: 1; grid-row: 1;                 /* stack both in same cell */
   position: relative; z-index: 1;
-  width: 240px; height: auto; max-width: 60%;
+  width: 220px; height: auto; max-width: 45%;
   border-radius: 24px;
   box-shadow: 0 30px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.06);
 }
-.own-product-device-back {
-  transform: translateX(-30%) rotate(-6deg);
-  opacity: .92;
-}
-.own-product-device-front {
-  transform: translateX(0%) rotate(4deg);
-  margin-left: -140px;
-  z-index: 2;
-}
+.own-product-device-back  { transform: translateX(-45%) rotate(-6deg); opacity: .92; }
+.own-product-device-front { transform: translateX( 45%) rotate( 4deg); z-index: 2; }
 @media (max-width: 600px) {
-  .own-product-devices { min-height: 340px; }
-  .own-product-device { width: 180px; }
-  .own-product-device-front { margin-left: -110px; }
+  .own-product-devices    { min-height: 340px; }
+  .own-product-device     { width: 160px; max-width: 42%; }
+  .own-product-device-back  { transform: translateX(-38%) rotate(-5deg); }
+  .own-product-device-front { transform: translateX( 38%) rotate( 4deg); }
 }
 
 .own-product-facts {
