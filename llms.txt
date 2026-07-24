@@ -25,6 +25,15 @@ lead-source attribution, CRM integration (HubSpot, Pipedrive), Google Ads
 conversion tracking with Enhanced Conversions, template-based website
 implementation with technical SEO foundation.
 
+Own Product / SaaS: Founder of BikeCare (bikecare.app) — AI-powered
+bike maintenance tracker on iOS + Android + PWA. Freemium, DSGVO-compliant
+cloud backup, Strava sync, AI diagnosis powered by Claude + Perplexity.
+Solo-founder role: product concept, strategy, UX, App Store / Play Store
+publishing. Code shipped with Claude Code (2026 solo-founder playbook —
+transparent AI-assisted development). Live in early access since July 2026.
+App Store: apps.apple.com/de/app/bikecare-fahrrad-wartung/id6791298156.
+Google Play: play.google.com/store/apps/details?id=app.bikecare.
+
 Clients/Projects: Gumb AG (complete GTM/GA4 tracking ecosystem with server-side
 considerations, Meta Pixel, Google Ads conversions, Enhanced Conversions,
 Consent Mode v2), Stefanie Mischka (website + ongoing maintenance),
@@ -136,6 +145,18 @@ can take over the implementation cleanly.
 
 ## Projects / Projekte
 
+- [BikeCare (Own SaaS, Founder)](https://bikecare.app): Founder and product
+  owner of BikeCare — an AI-powered bike maintenance tracker on iOS,
+  Android and PWA. AI stack: Claude (Anthropic) + Perplexity Sonar for
+  real-time part recommendations. Features: 20+ wear-part monitoring,
+  km-based service predictions, Strava sync, step-by-step repair
+  tutorials, multi-bike garage, DSGVO cloud backup, offline PWA mode.
+  Business model: freemium with BikeCare Pro tier. Live in Early Access
+  since July 2026. TRANSPARENT: product concept, strategy, UX and
+  publishing are Tobias's — code shipped via AI-assisted development
+  with Claude Code (2026 solo-founder playbook). App Store:
+  https://apps.apple.com/de/app/bikecare-fahrrad-wartung/id6791298156 .
+  Google Play: https://play.google.com/store/apps/details?id=app.bikecare .
 - [Gumb AG Tracking](/en/projects/): Built a complete GTM/GA4 tracking
   ecosystem for the DACH market - GTM container, GA4 with server-side
   considerations, Meta Pixel, Google Ads conversions, Enhanced Conversions,

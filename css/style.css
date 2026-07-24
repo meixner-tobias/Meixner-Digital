@@ -2333,6 +2333,185 @@ textarea:focus-visible {
 [data-theme="dark"] .article-sidebar .author-card { background: #1F2937 !important; }
 [data-theme="dark"] .cta-card { background: #1F2937 !important; }
 
+
+/* ============================================================
+   28b.  OWN PRODUCT (Founder section — BikeCare)
+   Dark elevated block that sits ABOVE the client-projects grid on
+   /projekte/ to differentiate founder-owned work from client work.
+   Palette: navy base + BikeCare orange (#F97316) accent.
+   ============================================================ */
+.own-product-section {
+  position: relative;
+  padding: clamp(72px, 10vw, 120px) 0;
+  background:
+    radial-gradient(60% 80% at 85% 20%, rgba(249,115,22,.14), transparent 60%),
+    radial-gradient(50% 70% at 10% 90%, rgba(2,132,199,.18), transparent 65%),
+    linear-gradient(180deg, #0D1B2A 0%, #0A1622 100%);
+  color: #fff;
+  overflow: hidden;
+}
+.own-product-section .sec-label.own-product-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: #F97316;
+  background: rgba(249,115,22,.10);
+  border: 1px solid rgba(249,115,22,.35);
+  padding: 6px 12px; border-radius: 999px;
+  font-weight: 700; letter-spacing: .08em;
+}
+.own-product-section .sec-title { color: #fff; }
+.own-product-section .sec-title em { color: #F97316; font-style: normal; }
+.own-product-section .sec-desc { color: rgba(255,255,255,.7); }
+
+.own-product-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+  margin-top: clamp(32px, 5vw, 56px);
+}
+@media (max-width: 900px) { .own-product-inner { grid-template-columns: 1fr; } }
+
+.own-product-logo { height: 40px; width: auto; margin-bottom: 22px; }
+.own-product-headline {
+  font-family: var(--fd);
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  font-weight: 600; line-height: 1.35;
+  margin: 0 0 16px; color: #fff;
+}
+.own-product-desc {
+  font-size: 1.02rem; line-height: 1.65;
+  color: rgba(255,255,255,.72); margin: 0 0 24px;
+}
+.own-product-features {
+  list-style: none; padding: 0; margin: 0 0 24px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px;
+}
+@media (max-width: 600px) { .own-product-features { grid-template-columns: 1fr; } }
+.own-product-features li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: .94rem; color: rgba(255,255,255,.85);
+}
+.own-product-dot {
+  width: 6px; height: 6px; margin-top: 8px; border-radius: 50%;
+  background: #F97316; flex: none;
+  box-shadow: 0 0 0 4px rgba(249,115,22,.15);
+}
+
+.own-product-ai {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 14px 16px; margin: 0 0 24px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-left: 3px solid #F97316;
+  border-radius: 10px;
+  font-size: .9rem; color: rgba(255,255,255,.8); line-height: 1.55;
+}
+.own-product-ai strong { color: #fff; font-weight: 600; }
+.own-product-ai-icon { color: #F97316; flex: none; margin-top: 2px; }
+
+.own-product-actions {
+  display: flex; flex-direction: column; gap: 16px; margin-bottom: 18px;
+}
+
+/* Text-based Apple/Google store buttons (NOT the trademarked badges,
+   so no legal risk. Upgrade to official badges later if desired.) */
+.own-product-stores { display: flex; gap: 12px; flex-wrap: wrap; }
+.own-product-store {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 10px 18px;
+  background: #000; color: #fff;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: transform .2s ease, background .2s ease;
+  border: 1px solid rgba(255,255,255,.15);
+}
+.own-product-store:hover { transform: translateY(-2px); background: #1a1a1a; }
+.own-product-store-icon { width: 24px; height: 24px; flex: none; }
+.own-product-store-text { display: flex; flex-direction: column; line-height: 1.1; text-align: left; }
+.own-product-store-small { font-size: .68rem; opacity: .85; }
+.own-product-store-big { font-size: .95rem; font-weight: 600; letter-spacing: .2px; }
+
+.own-product-status {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: .82rem; color: rgba(255,255,255,.6);
+}
+.own-product-pulse {
+  width: 8px; height: 8px; border-radius: 50%; background: #22c55e;
+  box-shadow: 0 0 0 0 rgba(34,197,94,.6);
+  animation: ownProductPulse 2s infinite;
+}
+@keyframes ownProductPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(34,197,94,.5); }
+  70%  { box-shadow: 0 0 0 10px rgba(34,197,94,0); }
+  100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+}
+
+/* Right column — device mockups */
+.own-product-visual { position: relative; }
+.own-product-devices {
+  position: relative; margin: 0;
+  display: flex; justify-content: center; align-items: center;
+  min-height: 420px;
+}
+.own-product-devices::before {
+  content: ""; position: absolute; inset: -40px;
+  background: radial-gradient(circle at 50% 50%, rgba(249,115,22,.22), transparent 60%);
+  filter: blur(20px); z-index: 0;
+}
+.own-product-device {
+  position: relative; z-index: 1;
+  width: 240px; height: auto; max-width: 60%;
+  border-radius: 24px;
+  box-shadow: 0 30px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.06);
+}
+.own-product-device-back {
+  transform: translateX(-30%) rotate(-6deg);
+  opacity: .92;
+}
+.own-product-device-front {
+  transform: translateX(0%) rotate(4deg);
+  margin-left: -140px;
+  z-index: 2;
+}
+@media (max-width: 600px) {
+  .own-product-devices { min-height: 340px; }
+  .own-product-device { width: 180px; }
+  .own-product-device-front { margin-left: -110px; }
+}
+
+.own-product-facts {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  margin-top: 24px;
+}
+.own-product-fact {
+  padding: 14px 12px; text-align: center;
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px;
+}
+.own-product-fact-n {
+  font-family: var(--fd); font-weight: 700; font-size: .9rem; color: #fff;
+  letter-spacing: -.01em;
+}
+.own-product-fact-l {
+  font-size: .72rem; color: rgba(255,255,255,.55);
+  margin-top: 3px;
+}
+
+/* Founder trust-chip on home hero — link style */
+.trust-chip-founder {
+  background: linear-gradient(135deg, rgba(249,115,22,.10), rgba(249,115,22,.04));
+  border: 1px solid rgba(249,115,22,.35);
+  border-radius: 999px;
+  padding: 6px 12px;
+}
+.trust-chip-founder a {
+  color: inherit; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+}
+.trust-chip-founder a:hover { color: #F97316; }
+.trust-chip-founder svg { color: #F97316; }
+
+
 /* ============================================================
    29. MEDIA QUERIES
    All responsive breakpoints in one place.
