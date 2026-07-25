@@ -384,8 +384,8 @@
     }
 
     var script = document.createElement("script");
-    script.src =
-      "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
+    // Self-hosted three.js r128 — same-origin, immune to cdnjs outages, no extra DNS/TLS
+    script.src = "/js/vendor/three.min.js";
     script.onerror = function () {
       if (window.console) console.warn("three.js failed to load");
     };
@@ -632,7 +632,8 @@
     var form = document.getElementById("contactForm");
     if (!form) return;
 
-    var isEN = document.documentElement.getAttribute("lang") === "en";
+    var htmlLang = (document.documentElement.getAttribute("lang") || "").toLowerCase();
+    var isEN = htmlLang === "en" || htmlLang.indexOf("en-") === 0 || location.pathname.indexOf("/en/") === 0;
     var STRINGS = isEN
       ? { sending: "Sending …", submit: "Send message", error: "Something went wrong. Please try again.", timeout: "The request took too long. Please try again." }
       : { sending: "Wird gesendet …", submit: "Nachricht abschicken", error: "Etwas ist schiefgelaufen. Bitte versuche es erneut.", timeout: "Die Anfrage hat zu lange gedauert. Bitte versuche es erneut." };
