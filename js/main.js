@@ -488,7 +488,8 @@
       }
       animate();
 
-      window.addEventListener("pagehide", function () {
+      window.addEventListener("pagehide", function (e) {
+        if (e && e.persisted) return; // Skip teardown on BFCache freeze so loop resumes on restore
         if (rafId) cancelAnimationFrame(rafId);
         if (resizeObs) resizeObs.disconnect();
         if (renderer && renderer.dispose) renderer.dispose();
@@ -638,6 +639,7 @@
 
     var submitBtn = document.getElementById("submitBtn");
     var formErrorMsg = document.getElementById("formErrorMsg");
+    var submitBtnHTML = submitBtn ? submitBtn.innerHTML : ""; // Preserve inner SVG arrow across state changes
 
     function showErr(id) { var el = document.getElementById(id); if (el) el.style.display = "block"; }
     function hideErr(id) { var el = document.getElementById(id); if (el) el.style.display = "none"; }
@@ -651,6 +653,10 @@
       var fs = document.getElementById("formSuccess");
       if (fc) fc.style.display = "";
       if (fs) fs.style.display = "";
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = submitBtnHTML;
+      }
     });
 
     form.addEventListener("submit", function (e) {
@@ -705,7 +711,7 @@
       }
 
       function failWith(msgText) {
-        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = STRINGS.submit; }
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = submitBtnHTML; }
         if (formErrorMsg) { formErrorMsg.textContent = msgText; formErrorMsg.style.display = "block"; }
       }
 
