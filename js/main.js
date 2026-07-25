@@ -250,6 +250,15 @@
     sync();
     if (mql.addEventListener) mql.addEventListener("change", sync);
     else if (mql.addListener) mql.addListener(sync);           // Safari <14
+    // When user toggles a case (mobile), page height changes below —
+    // ScrollTriggers cached at init would fire at stale positions.
+    cards.forEach(function (d) {
+      d.addEventListener("toggle", function () {
+        setTimeout(function () {
+          if (window.ScrollTrigger) window.ScrollTrigger.refresh();
+        }, 300);
+      });
+    });
   }
 
   /* ═══════════════════════════════════════════════════
@@ -361,15 +370,25 @@
       window.gsap.ticker.lagSmoothing(0);
     }
     // Route anchor clicks through Lenis (fixed nav offset)
-    var navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--nav-h"), 10) || 68;
     safeQueryAll('a[href^="#"]').forEach(function (link) {
       var href = link.getAttribute("href");
       if (!href || href === "#" || href.length < 2) return;
       link.addEventListener("click", function (e) {
-        var target = document.querySelector(href);
+        // getElementById tolerates any id string (querySelector throws on
+        // hashes like #123abc, #a.b that aren't valid CSS selectors).
+        var target = document.getElementById(href.slice(1));
         if (!target) return;
         e.preventDefault();
+        // Recompute nav-h each click — --nav-h flips at tablet breakpoint
+        var navEl = document.getElementById("nav");
+        var navH = navEl ? navEl.getBoundingClientRect().height : 68;
         lenis.scrollTo(target, { offset: -navH - 12 });
+        // Transfer keyboard/AT focus so skip-link + TOC anchors actually
+        // move focus to the target — Lenis-only scroll wouldn't.
+        if (!target.hasAttribute("tabindex")) {
+          target.setAttribute("tabindex", "-1");
+        }
+        target.focus({ preventScroll: true });
       });
     });
   }
@@ -379,6 +398,11 @@
     if (!gsapReady) return;
     var introEls = safeQueryAll("[data-intro]");
     if (!introEls.length) return;
+    // reduce-motion: still split so screen readers get aria-label, but skip anim
+    if (reduceMotion) {
+      introEls.forEach(splitChars);
+      return;
+    }
     var allChars = [];
     introEls.forEach(function (el) {
       allChars.push.apply(allChars, splitChars(el));
@@ -396,9 +420,11 @@
 
   // 3. Section titles / labels / descriptions — fade-up on scroll
   function initSectionReveals() {
-    if (!stReady) return;
+    if (!stReady || reduceMotion) return;
     safeQueryAll(".sec-title, .sec-label, .sec-desc, .article-title, .page-hero__desc").forEach(function (el) {
       if (el.hasAttribute("data-intro") || el.closest("[data-intro]")) return;
+      // Skip elements already handled by .reveal IntersectionObserver system
+      if (el.classList.contains("reveal")) return;
       window.gsap.from(el, {
         y: 32, opacity: 0, duration: 0.85, ease: "power3.out",
         scrollTrigger: { trigger: el, start: "top 88%" },
@@ -408,7 +434,7 @@
 
   // 4. Magnetic buttons — cursor pulls element toward it
   function initMagnetic() {
-    if (!gsapReady || !window.matchMedia("(hover: hover)").matches) return;
+    if (!gsapReady || reduceMotion || !window.matchMedia("(hover: hover)").matches) return;
     // Implicit selectors: primary CTAs get magnetism without needing per-page markup.
     // Explicit opt-in via [data-magnetic] still works and can override strength.
     var selectors = [
@@ -418,10 +444,7 @@
       "#submitBtn",
       ".cta-box .btn",
     ].join(", ");
-    var seen = new Set();
     safeQueryAll(selectors).forEach(function (el) {
-      if (seen.has(el)) return;
-      seen.add(el);
       var strength = parseFloat(el.dataset.magnetic) || 0.24;
       el.addEventListener("mousemove", function (e) {
         var r = el.getBoundingClientRect();
@@ -443,11 +466,18 @@
       if (isNaN(target)) return;
       var suffix = el.dataset.countSuffix || "";
       var prefix = el.dataset.countPrefix || "";
+      // reduce-motion: normalize to target immediately, no animation
+      if (reduceMotion) {
+        el.textContent = prefix + target + suffix;
+        return;
+      }
       var obj = { v: 0 };
-      el.textContent = prefix + "0" + suffix;
+      // NOTE: do NOT overwrite HTML value at init — that flashes "0" before the
+      // ScrollTrigger fires. Wait for onEnter, then set to 0 + animate up.
       window.ScrollTrigger.create({
         trigger: el, start: "top 92%", once: true,
         onEnter: function () {
+          el.textContent = prefix + "0" + suffix;
           window.gsap.to(obj, {
             v: target, duration: 1.6, ease: "power2.out",
             onUpdate: function () { el.textContent = prefix + Math.round(obj.v) + suffix; },
@@ -494,7 +524,7 @@
 
   // 8. Case-card clip-path reveals
   function initCaseReveals() {
-    if (!stReady) return;
+    if (!stReady || reduceMotion) return;
     safeQueryAll("[data-case-reveal]").forEach(function (el) {
       window.gsap.fromTo(el,
         { clipPath: "inset(0 0 100% 0)" },
@@ -606,6 +636,11 @@
           item.classList.add("open");
           btn.setAttribute("aria-expanded", "true");
         }
+        // FAQ open/close changes page height — refresh ScrollTriggers below
+        // after the CSS max-height transition finishes (see .faq-a rule).
+        setTimeout(function () {
+          if (window.ScrollTrigger) window.ScrollTrigger.refresh();
+        }, 500);
       });
     });
   }
@@ -797,7 +832,10 @@
     var wrap = document.createElement("div");
     wrap.id = "signal-line";
     wrap.setAttribute("aria-hidden", "true");
-    wrap.style.cssText = "position:absolute;top:0;left:0;width:100%;height:" + docH + "px;pointer-events:none;z-index:0;";
+    // z-index:-1 keeps signal-line behind main content but visible through
+    // the body background. body { isolation:isolate } added in style.css
+    // ensures the -1 stays inside body's own stacking context.
+    wrap.style.cssText = "position:absolute;top:0;left:0;width:100%;height:" + docH + "px;pointer-events:none;z-index:-1;";
 
     var svg = document.createElementNS(NS, "svg");
     svg.setAttribute("viewBox", "0 0 " + w + " " + docH);
@@ -1120,12 +1158,19 @@
       var topicLabel = checkedTopics.map(function (t) { return topicMap[t] || t; }).join(", ");
 
       if (submitBtn) {
+        // Reset any magnetic transform before showing sending state so the
+        // "wird gesendet …" label sits centered where the user last saw it.
+        if (window.gsap) window.gsap.set(submitBtn, { x: 0, y: 0, overwrite: true });
         submitBtn.disabled = true;
         submitBtn.textContent = STRINGS.sending;
       }
 
       function failWith(msgText) {
-        if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = submitBtnHTML; }
+        if (submitBtn) {
+          if (window.gsap) window.gsap.set(submitBtn, { x: 0, y: 0, overwrite: true });
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = submitBtnHTML;
+        }
         if (formErrorMsg) { formErrorMsg.textContent = msgText; formErrorMsg.style.display = "block"; }
       }
 

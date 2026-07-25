@@ -59,6 +59,10 @@
    while keeping <source> functional for browser image selection. */
 picture { display: contents; }
 
+/* Isolate body stacking so #signal-line (z-index:-1) stays behind main
+   content but doesn't sink into browser chrome. */
+body { isolation: isolate; }
+
 /* Text-split reveal (Stage A GSAP intro) — chars slide up from y:110%,
    need parent overflow:hidden so they stay clipped until their reveal.
    .char is inline-block so transforms work; .word wraps in a whitespace
