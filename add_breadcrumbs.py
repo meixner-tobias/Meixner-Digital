@@ -43,18 +43,11 @@ TITLES = {
 
 
 def labels_for(stem: str):
-    """Return [(label, url), ...] for the parent path (Home, Blog/Products)."""
+    """Return [(label, url), ...] for the parent path (Home, Blog)."""
     is_en = stem.startswith("en/")
-    # Check against "blog/" (not "/blog/") — stems don't start with a slash,
-    # so DE blog stems like "blog/server-side-tracking" would never match.
-    is_blog = "blog/" in stem
     if is_en:
-        home = ("Home", "/en/")
-        parent = ("Blog", "/en/blog/") if is_blog else ("Products", "/en/products/")
-    else:
-        home = ("Startseite", "/")
-        parent = ("Blog", "/blog/") if is_blog else ("Produkte", "/produkte/")
-    return [home, parent], is_en
+        return [("Home", "/en/"), ("Blog", "/en/blog/")], True
+    return [("Startseite", "/"), ("Blog", "/blog/")], False
 
 
 def breadcrumb_html(stem: str) -> str:

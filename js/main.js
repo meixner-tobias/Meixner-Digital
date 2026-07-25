@@ -100,13 +100,16 @@
     if (!nav) {
       return;
     }
-    window.addEventListener(
-      "scroll",
-      function () {
-        nav.classList.toggle("scrolled", window.scrollY > 12);
-      },
-      { passive: true },
-    );
+    var isScrolled = false;
+    function sync() {
+      var shouldBe = window.scrollY > 12;
+      if (shouldBe !== isScrolled) {
+        isScrolled = shouldBe;
+        nav.classList.toggle("scrolled", shouldBe);
+      }
+    }
+    sync();
+    window.addEventListener("scroll", sync, { passive: true });
   }
 
   function initDrawer() {
@@ -204,7 +207,10 @@
       }
     });
 
-    document.addEventListener("click", function () {
+    document.addEventListener("click", function (event) {
+      if (langDropdown.contains(event.target) || langBtn.contains(event.target)) {
+        return;
+      }
       langDropdown.classList.remove("is-open");
       langBtn.classList.remove("is-open");
       langBtn.setAttribute("aria-expanded", "false");
@@ -274,55 +280,6 @@
       { threshold: 0.45, rootMargin: "0px 0px -15% 0px" }
     );
     cards.forEach(function (c) { obs.observe(c); });
-  }
-
-  function initProductFilter() {
-    var filterBtns = safeQueryAll(".filter-btn[data-filter]");
-    var productCards = safeQueryAll(".product-card[data-category]");
-    var resultCount = document.getElementById("result-count");
-    if (filterBtns.length === 0 || productCards.length === 0) return;
-
-    var isEN = document.documentElement.getAttribute("lang") === "en";
-
-    function updateResultText(count) {
-      if (!resultCount) return;
-      if (count === 0) {
-        resultCount.textContent = isEN
-          ? "No products found"
-          : "Keine Produkte gefunden";
-      } else if (count === 1) {
-        resultCount.textContent = isEN ? "1 product" : "1 Produkt";
-      } else {
-        resultCount.textContent = count + (isEN ? " products" : " Produkte");
-      }
-    }
-
-    function applyFilter(filter) {
-      var visibleCount = 0;
-      productCards.forEach(function (card) {
-        var cat = card.getAttribute("data-category");
-        var matches = filter === "alle" || cat === filter;
-        if (matches) {
-          card.hidden = false;
-          visibleCount++;
-        } else {
-          card.hidden = true;
-        }
-      });
-      updateResultText(visibleCount);
-    }
-
-    filterBtns.forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var filter = btn.getAttribute("data-filter");
-        filterBtns.forEach(function (b) {
-          var isActive = b === btn;
-          b.classList.toggle("active", isActive);
-          b.setAttribute("aria-pressed", String(isActive));
-        });
-        applyFilter(filter);
-      });
-    });
   }
 
   function initRevealAnimations() {
@@ -429,8 +386,12 @@
     var script = document.createElement("script");
     script.src =
       "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
+    script.onerror = function () {
+      if (window.console) console.warn("three.js failed to load");
+    };
     script.onload = function () {
       if (typeof THREE === "undefined") {
+        if (window.console) console.warn("three.js loaded but THREE undefined");
         return;
       }
       var hero = canvas.closest(".hero");
@@ -458,7 +419,8 @@
       }
 
       resizeCanvas();
-      new ResizeObserver(resizeCanvas).observe(hero);
+      var resizeObs = new ResizeObserver(resizeCanvas);
+      resizeObs.observe(hero);
 
       var count = 120;
       var positions = new Float32Array(count * 3);
@@ -508,8 +470,9 @@
       scene.add(tor);
 
       var time = 0;
-      (function animate() {
-        requestAnimationFrame(animate);
+      var rafId = 0;
+      function animate() {
+        rafId = requestAnimationFrame(animate);
         time += 0.004;
         particles.rotation.y = time * 0.1;
         particles.rotation.x = time * 0.04;
@@ -522,7 +485,14 @@
           scene.children[2].rotation.x = time * 0.09;
         }
         renderer.render(scene, camera);
-      })();
+      }
+      animate();
+
+      window.addEventListener("pagehide", function () {
+        if (rafId) cancelAnimationFrame(rafId);
+        if (resizeObs) resizeObs.disconnect();
+        if (renderer && renderer.dispose) renderer.dispose();
+      });
     };
 
     document.head.appendChild(script);
@@ -539,7 +509,6 @@
     initHeroCanvas();
     initAddonBox();
     initContactForm();
-    initProductFilter();
     initCaseAccordion();
     initCardScrollHighlight();
   });
@@ -662,13 +631,21 @@
     var form = document.getElementById("contactForm");
     if (!form) return;
 
+    var isEN = document.documentElement.getAttribute("lang") === "en";
+    var STRINGS = isEN
+      ? { sending: "Sending …", submit: "Send message", error: "Something went wrong. Please try again.", timeout: "The request took too long. Please try again." }
+      : { sending: "Wird gesendet …", submit: "Nachricht abschicken", error: "Etwas ist schiefgelaufen. Bitte versuche es erneut.", timeout: "Die Anfrage hat zu lange gedauert. Bitte versuche es erneut." };
+
     var submitBtn = document.getElementById("submitBtn");
     var formErrorMsg = document.getElementById("formErrorMsg");
 
+    function showErr(id) { var el = document.getElementById(id); if (el) el.style.display = "block"; }
+    function hideErr(id) { var el = document.getElementById(id); if (el) el.style.display = "none"; }
+    function getVal(id) { var el = document.getElementById(id); return el ? (el.value || "").trim() : ""; }
+    function getRaw(id) { var el = document.getElementById(id); return el ? el.value : ""; }
+
     // Reset form display state on page show (handles bfcache restore
     // when user navigates back to /kontakt/ after successful submit).
-    // Without this, the inline styles set by the submit handler persist
-    // and both formContent and formSuccess would be shown together.
     window.addEventListener("pageshow", function () {
       var fc = document.getElementById("formContent");
       var fs = document.getElementById("formSuccess");
@@ -685,75 +662,55 @@
       var privacy = document.getElementById("privacy");
       var topicBoxes = document.querySelectorAll('input[name="topic"]');
 
-      // Fehlermeldungen zurücksetzen
-      ["nameErr", "emailErr", "topicErr", "messageErr"].forEach(function (id) {
-        document.getElementById(id).style.display = "none";
-      });
-      formErrorMsg.style.display = "none";
+      ["nameErr", "emailErr", "topicErr", "messageErr"].forEach(hideErr);
+      if (formErrorMsg) formErrorMsg.style.display = "none";
 
-      // Topic-Auswahl einsammeln
       var checkedTopics = [];
       topicBoxes.forEach(function (cb) {
         if (cb.checked) checkedTopics.push(cb.value);
       });
 
-      // Validierung
       var valid = true;
-      if (!name.value.trim()) {
-        document.getElementById("nameErr").style.display = "block";
-        valid = false;
-      }
-      if (!email.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-        document.getElementById("emailErr").style.display = "block";
-        valid = false;
-      }
-      if (checkedTopics.length === 0) {
-        document.getElementById("topicErr").style.display = "block";
-        valid = false;
-      }
-      if (!message.value.trim()) {
-        document.getElementById("messageErr").style.display = "block";
-        valid = false;
-      }
-      if (!privacy.checked) {
-        formErrorMsg.style.display = "block";
+      if (!name || !name.value.trim())       { showErr("nameErr");    valid = false; }
+      if (!email || !email.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) { showErr("emailErr"); valid = false; }
+      if (checkedTopics.length === 0)        { showErr("topicErr");   valid = false; }
+      if (!message || !message.value.trim()) { showErr("messageErr"); valid = false; }
+      if (!privacy || !privacy.checked) {
+        if (formErrorMsg) formErrorMsg.style.display = "block";
         valid = false;
       }
       if (!valid) return;
 
-      // Werte VOR fetch sichern
-      var topicValue = checkedTopics.join(","); // z.B. "tracking,website"
-      var companyValue = document.getElementById("company").value.trim();
-      var phoneValue = document.getElementById("phone").value.trim();
-      var addonValue = document.getElementById("addon_tracking_val").value;
-      var tierValEl = document.getElementById("addon_tier_val");
-      var tierValue = tierValEl ? tierValEl.value : "";
+      var topicValue = checkedTopics.join(",");
+      var companyValue = getVal("company");
+      var phoneValue = getVal("phone");
+      var addonValue = getRaw("addon_tracking_val");
+      var tierValue = getRaw("addon_tier_val");
 
-      // Tracking-Tier aus Radio-Buttons (z.B. "Standard (800-1.200 €)")
       var trackingTierEl = document.querySelector('input[name="tracking_tier"]:checked');
       var trackingTierValue = trackingTierEl ? trackingTierEl.value : "";
-      // Kurzform für GA4 + Reports: "Standard (800-1.200 €)" -> "Standard"
-      var trackingTierShortValue = trackingTierValue ? trackingTierValue.split(" (")[0] : "Noch unsicher";
+      var trackingTierShortValue = trackingTierValue ? trackingTierValue.split(" (")[0] : (isEN ? "Not sure yet" : "Noch unsicher");
 
-      // Tracking-Extensions Freitext
-      var extensionsEl = document.getElementById("tracking_extensions");
-      var extensionsValue = extensionsEl ? extensionsEl.value.trim() : "";
+      var extensionsValue = getVal("tracking_extensions");
       var extensionsTextFilled = extensionsValue.length > 0;
 
-      var topicMap = {
-        tracking: "GTM & GA4 Setup",
-        website: "Website erstellen",
-        betreuung: "Sorglos-Betreuung",
-        other: "Noch unklar",
-      };
-      var topicLabel = checkedTopics
-        .map(function (t) {
-          return topicMap[t] || t;
-        })
-        .join(", ");
+      var topicMap = isEN
+        ? { tracking: "GTM & GA4 Setup", website: "Website build", betreuung: "Care package", other: "Not sure yet" }
+        : { tracking: "GTM & GA4 Setup", website: "Website erstellen", betreuung: "Sorglos-Betreuung", other: "Noch unklar" };
+      var topicLabel = checkedTopics.map(function (t) { return topicMap[t] || t; }).join(", ");
 
-      submitBtn.disabled = true;
-      submitBtn.textContent = "Wird gesendet …";
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = STRINGS.sending;
+      }
+
+      function failWith(msgText) {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = STRINGS.submit; }
+        if (formErrorMsg) { formErrorMsg.textContent = msgText; formErrorMsg.style.display = "block"; }
+      }
+
+      var controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+      var timeoutId = controller ? setTimeout(function () { controller.abort(); }, 20000) : null;
 
       fetch("https://kontakt-form.small-grass-e8fa.workers.dev", {
         method: "POST",
@@ -769,37 +726,32 @@
           tracking_extensions: extensionsValue,
           addon_tier: tierValue,
         }),
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        signal: controller ? controller.signal : undefined,
       })
         .then(function (res) {
-          if (res.ok) {
-            document.getElementById("formContent").style.display = "none";
-            document.getElementById("formSuccess").style.display = "flex";
+          if (timeoutId) clearTimeout(timeoutId);
+          if (!res.ok) throw new Error("Server error");
+          var fc = document.getElementById("formContent");
+          var fs = document.getElementById("formSuccess");
+          if (fc) fc.style.display = "none";
+          if (fs) fs.style.display = "flex";
 
-            window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({
-              event: "generate_lead",
-              lead_topic: topicLabel,
-              lead_addon: addonValue,
-              lead_tier: tierValue,
-              lead_has_company: companyValue !== "" ? "yes" : "no",
-              lead_has_phone: phoneValue !== "" ? "yes" : "no",
-              lead_tracking_tier: trackingTierShortValue,
-              lead_has_extensions: extensionsTextFilled ? "yes" : "no",
-            });
-          } else {
-            throw new Error("Server error");
-          }
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: "generate_lead",
+            lead_topic: topicLabel,
+            lead_addon: addonValue,
+            lead_tier: tierValue,
+            lead_has_company: companyValue !== "" ? "yes" : "no",
+            lead_has_phone: phoneValue !== "" ? "yes" : "no",
+            lead_tracking_tier: trackingTierShortValue,
+            lead_has_extensions: extensionsTextFilled ? "yes" : "no",
+          });
         })
-        .catch(function () {
-          submitBtn.disabled = false;
-          submitBtn.textContent = "Nachricht abschicken";
-          formErrorMsg.textContent =
-            "Etwas ist schiefgelaufen. Bitte versuche es erneut.";
-          formErrorMsg.style.display = "block";
+        .catch(function (err) {
+          if (timeoutId) clearTimeout(timeoutId);
+          failWith(err && err.name === "AbortError" ? STRINGS.timeout : STRINGS.error);
         });
     });
   }

@@ -4,7 +4,7 @@
 > tracking & web freelancer site, optimized for ingestion by LLM crawlers
 > (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, etc.).
 >
-> Last updated: 2026-06-09
+> Last updated: 2026-07-25
 > Pricing model: §19 UStG (German small business, no VAT)
 > Languages: German (DE) primary, English (EN) parallel
 > Location: Würzburg, Bavaria, Germany
@@ -36,9 +36,11 @@ studies E-Commerce at THWS (Technische Hochschule Würzburg-Schweinfurt).
 - Template-based website implementation - HTML/CSS/JS, GitHub Pages, Cloudflare
 
 **Credentials:**
-- Google Ads certified (Google Skillshop)
+- Google Ads certified (Google Skillshop, cert ID 166956880, https://skillshop.credential.net/7c7f49fe-c3ff-481c-b22b-fb7470d94dd5)
+- Google Analytics certified (Google Skillshop, cert ID 185483479, https://skillshop.credential.net/61df521c-ab65-49c0-aa1b-6020be5c740c)
 - Currently studying E-Commerce, THWS Würzburg-Schweinfurt
-- Real-world implementation experience: Gumb AG, Stefanie Mischka
+- Real-world implementation experience: Gumb AG (GTM/GA4/Meta ecosystem), Stefanie Mischka (website + maintenance), ANNETTE § HAMBURG (100/100 Lighthouse SEO), HERZVOLLGOLD/Susanne Vollgold (landing page + Meta Ads on 8-week cycle)
+- Founder of BikeCare.app (own SaaS, AI-assisted development with Claude Code — see Section 9)
 
 **Working style:**
 - Direct client relationship (no agency overhead)
@@ -335,20 +337,16 @@ Policy, DPA, data minimization) still apply.
 
 ## 9. Projects / Past Work
 
+- **BikeCare.app (Own SaaS, Founder)** - AI-powered bike maintenance tracker on iOS, Android and PWA. Live in Early Access since July 2026. AI stack: Claude (Anthropic) + Perplexity Sonar for real-time part recommendations. Features: 20+ wear-part monitoring, km-based service predictions, Strava sync, step-by-step repair tutorials, multi-bike garage, DSGVO-compliant cloud backup, offline PWA mode. Business model: freemium with BikeCare Pro tier. Solo-founder role: product concept, strategy, UX, App Store / Play Store publishing. TRANSPARENT: code shipped via AI-assisted development with Claude Code (2026 solo-founder playbook — Tobias owns product decisions, not the codebase authoring). App Store: https://apps.apple.com/de/app/bikecare-fahrrad-wartung/id6791298156 . Google Play: https://play.google.com/store/apps/details?id=app.bikecare .
 - **Gumb AG** - DACH market, complete GTM/GA4 tracking ecosystem with server-side considerations, Meta Pixel, Google Ads conversions, Enhanced Conversions, Consent Mode v2
+- **ANNETTE § HAMBURG** - complete technical website implementation for a legal-communication seminar provider (annette-hamburg.de). HTML/CSS/JS from client design template, Strato DNS + HTTPS, Web3Forms contact form, Schema.org GEO markup, WCAG AA accessibility. Lighthouse scores (as of 2026-07-09): SEO 100/100, Best Practices 100/100, Desktop Performance 100/100 and Mobile Performance 99/100, Accessibility 99 Desktop / 98 Mobile. Ongoing maintenance since July 2026.
+- **HERZVOLLGOLD / Susanne Vollgold** - workshop landing page for a medium, coach and healer with 20+ years of experience. Built on onepage.io, connected with Meta Pixel and Meta Ads Manager. Live at workshop.herzvollgold.de/medium since May 2026. Ongoing 8-week-cycle campaign management starting August 2026 - ad creatives, audience adjustments, and copy/image optimisation per workshop date.
 - **Stefanie Mischka** - business website + ongoing technical maintenance
 - **Personal site (meixner-tobias.com)** - HTML/CSS/JS, GitHub Pages hosting, full GTM/GA4 tracking with custom dimensions, complete schema.org markup, llms.txt + llms-full.txt protocol
 
 ---
 
-## 10. Digital Products (Self-Serve)
-
-- **Schema Markup Template Pack** (€9 via Gumroad) - 9 ready-to-use JSON-LD templates: Person, LocalBusiness, Organization, WebSite, Service, BlogPosting, BreadcrumbList, AggregateRating, FAQPage. Includes PDF guide and error checklist.
-- **Google Tag Manager Beginner Guide** (€9 via Gumroad) - 15-page PDF: GTM from scratch, tags/triggers/variables, GA4 setup, button-click tracking, outbound links, preview mode, 10 common beginner mistakes.
-
----
-
-## 11. Engagement Model
+## 10. Engagement Model
 
 - Initial 30-min conversation (free, no obligation)
 - Realistic timeline upfront (parallel to study commitment)

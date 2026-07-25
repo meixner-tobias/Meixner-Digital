@@ -175,7 +175,7 @@ can take over the implementation cleanly.
   and Meta Ads Manager integration, campaign setup with audience targeting,
   ongoing 8-week cycle campaign management with ad creatives, copy optimisation
   and A/B tests. Live at workshop.herzvollgold.de/medium since May 2026, ongoing
-  campaign management since August 2026.
+  campaign management starting August 2026.
 - [Personal site meixner-tobias.com](/en/projects/): HTML/CSS/JS,
   GitHub Pages hosting, full GTM/GA4 tracking with custom dimensions,
   complete schema.org markup, llms.txt protocol.
@@ -222,7 +222,7 @@ Pricing model: Small business (§19 UStG) - prices are final, no VAT.
 
 ## Technical Details
 
-Last updated: June 23, 2026
+Last updated: 2026-07-25
 Languages: German (DE), English (EN) with hreflang
 Region: Germany, DACH, Bavaria
 Pricing model: VAT-exempt small business (§19 UStG) - prices are final
