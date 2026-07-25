@@ -586,13 +586,18 @@
   ═══════════════════════════════════════════════════ */
 
   // 9. Floating idle animation — subtle bob for decorative elements
+  // Animates a CSS custom property (--float-y) instead of the transform
+  // directly, so elements with existing CSS transforms (e.g. the BikeCare
+  // mockups: translateX(-45%) rotate(-6deg)) can compose the float into
+  // their own transform via translateY(var(--float-y)). Elements without
+  // a custom transform get the default rule from CSS.
   function initFloating() {
     if (!gsapReady || reduceMotion) return;
     safeQueryAll("[data-float]").forEach(function (el, i) {
       var amp = parseFloat(el.dataset.float) || 6;      // px amplitude
       var dur = parseFloat(el.dataset.floatDur) || 3.2;  // seconds
       window.gsap.to(el, {
-        y: -amp,
+        "--float-y": (-amp) + "px",
         duration: dur,
         yoyo: true,
         repeat: -1,
