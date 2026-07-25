@@ -65,6 +65,49 @@ picture { display: contents; }
    span kept as normal text for line-break flow. */
 .char { display: inline-block; will-change: transform; }
 .word { display: inline-block; will-change: opacity; }
+
+/* Stage C — 3D tilt + case counter-motion */
+.svc-card, .proj-card, .own-card, .pain-card,
+.why-freelance-card, .travel-card, .svc-detail-card,
+.detail-card, .teaser-card, [data-tilt] {
+  transform-style: preserve-3d;
+  transition: transform .35s cubic-bezier(.2,.6,.2,1), box-shadow .35s;
+  will-change: transform;
+}
+/* Case-card counter-motion — big translucent number scrolls opposite to page */
+details.case-card-collapsible, .case-card { position: relative; overflow: hidden; }
+.case-card-num-bg {
+  position: absolute;
+  right: clamp(-24px, -1vw, -8px);
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--fd);
+  font-size: clamp(8rem, 20vw, 18rem);
+  font-weight: 900;
+  color: var(--indigo-dark);
+  opacity: 0.06;
+  line-height: 0.85;
+  letter-spacing: -0.06em;
+  pointer-events: none;
+  z-index: 0;
+  user-select: none;
+}
+details.case-card-collapsible .case-summary,
+details.case-card-collapsible .case-inner,
+.case-card > * { position: relative; z-index: 1; } /* keep content above number */
+[data-theme="dark"] .case-card-num-bg { color: var(--accent-text); opacity: 0.09; }
+
+/* Contact hero canvas — sits behind page-hero content as subtle 3D backdrop */
+#contact-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.85;
+}
+.page-hero .page-hero-inner { position: relative; z-index: 1; }
 [data-intro] {
   display: block;
   overflow: hidden;

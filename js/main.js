@@ -574,6 +574,233 @@
     });
   }
 
+  /* ═══════════════════════════════════════════════════
+     Stage C — Per-Page Signature Effects
+     Universal 3D tilt-on-hover on all card types + specific
+     signature effects per page (process-steps count-in with
+     line-draw on /leistungen/, big counter-motion numbers on
+     /projekte/ case-cards, personal-img parallax on /ueber-mich/,
+     hobby-pill scale-in reveal, small 3D wireframe canvas on
+     /kontakt/, floating idle animation on hero decorative elements).
+     Skip on blog articles/listings — user preference.
+  ═══════════════════════════════════════════════════ */
+
+  // 9. Floating idle animation — subtle bob for decorative elements
+  function initFloating() {
+    if (!gsapReady || reduceMotion) return;
+    safeQueryAll("[data-float]").forEach(function (el, i) {
+      var amp = parseFloat(el.dataset.float) || 6;      // px amplitude
+      var dur = parseFloat(el.dataset.floatDur) || 3.2;  // seconds
+      window.gsap.to(el, {
+        y: -amp,
+        duration: dur,
+        yoyo: true,
+        repeat: -1,
+        ease: "sine.inOut",
+        delay: i * 0.15,  // desync when multiple floats near each other
+      });
+    });
+  }
+
+  // 10. Parallax elements — [data-parallax-y="-10"] drifts by yPercent
+  function initParallaxElements() {
+    if (!stReady || reduceMotion) return;
+    safeQueryAll("[data-parallax-y]").forEach(function (el) {
+      var amt = parseFloat(el.dataset.parallaxY);
+      if (isNaN(amt)) return;
+      window.gsap.to(el, {
+        yPercent: amt,
+        ease: "none",
+        scrollTrigger: {
+          trigger: el.closest("section") || el,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    });
+  }
+
+  // 11. Process steps — count-in for numbered circles + line draw across grid
+  // Targets .process-step-num with numeric text (01, 02, 03, ...). Count from 0.
+  function initProcessStepsReveal() {
+    if (!stReady) return;
+    var stepNums = safeQueryAll(".process-step-num");
+    if (!stepNums.length) return;
+    var processGrid = document.querySelector(".process-grid");
+    if (!processGrid) return;
+
+    if (reduceMotion) return; // steps already show final value in HTML
+
+    // Count-up per step, staggered as grid enters viewport
+    var stepData = stepNums.map(function (el) {
+      var raw = el.textContent.trim();
+      var target = parseInt(raw, 10);
+      return { el: el, target: isNaN(target) ? null : target, pad: raw.length };
+    }).filter(function (s) { return s.target !== null; });
+
+    if (!stepData.length) return;
+
+    // Start state: show "00" (padded)
+    stepData.forEach(function (s) {
+      s.el.textContent = String(0).padStart(s.pad, "0");
+    });
+
+    window.ScrollTrigger.create({
+      trigger: processGrid, start: "top 80%", once: true,
+      onEnter: function () {
+        stepData.forEach(function (s, i) {
+          var obj = { v: 0 };
+          window.gsap.to(obj, {
+            v: s.target, duration: 0.9,
+            delay: i * 0.15,
+            ease: "power2.out",
+            onUpdate: function () {
+              s.el.textContent = String(Math.round(obj.v)).padStart(s.pad, "0");
+            },
+          });
+        });
+      },
+    });
+  }
+
+  // 12. Case-card counter-motion — inject big translucent numbers behind
+  // each .case-card that scroll OPPOSITE the page (elzn's gegenläufige Nummer).
+  function initCaseCounterMotion() {
+    if (!stReady || reduceMotion) return;
+    var cases = safeQueryAll("details.case-card-collapsible, .case-card");
+    if (!cases.length) return;
+    cases.forEach(function (card, i) {
+      if (card.querySelector(".case-card-num-bg")) return; // idempotent
+      var num = document.createElement("span");
+      num.className = "case-card-num-bg";
+      num.setAttribute("aria-hidden", "true");
+      num.textContent = "0" + (i + 1);
+      card.appendChild(num);
+      window.gsap.fromTo(num,
+        { yPercent: 60 },
+        {
+          yPercent: -60, ease: "none",
+          scrollTrigger: {
+            trigger: card,
+            start: "top bottom", end: "bottom top",
+            scrub: true,
+          },
+        }
+      );
+    });
+  }
+
+  // 13. Hobby-pill reveal — scale + fade in with stagger when hobby-list enters
+  function initHobbyPillReveal() {
+    if (!stReady || reduceMotion) return;
+    var lists = safeQueryAll(".hobby-list");
+    if (!lists.length) return;
+    lists.forEach(function (list) {
+      var pills = safeQueryAll(".hobby-pill", list);
+      if (!pills.length) return;
+      window.gsap.from(pills, {
+        opacity: 0, scale: 0.7, y: 12,
+        duration: 0.55,
+        stagger: 0.05,
+        ease: "back.out(1.8)",
+        scrollTrigger: { trigger: list, start: "top 88%", once: true },
+      });
+    });
+  }
+
+  // 14. Contact canvas — small 3D wireframe icosahedron behind contact-form.
+  // Reuses the /js/vendor/three.min.js already loaded for the home hero (if not
+  // yet loaded, lazily loads it). Semi-transparent, non-interactive, pauses off-screen.
+  function initContactCanvas() {
+    if (reduceMotion) return;
+    var canvas = document.getElementById("contact-canvas");
+    if (!canvas) return;
+
+    function boot() {
+      if (typeof THREE === "undefined") return;
+      var host = canvas.parentElement;
+      var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.6));
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+      camera.position.z = 6;
+      function resize() {
+        var w = host.offsetWidth, h = host.offsetHeight;
+        if (!w || !h) return;
+        renderer.setSize(w, h);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      }
+      resize();
+      var resizeObs = new ResizeObserver(resize);
+      resizeObs.observe(host);
+
+      // Two subtle wireframes drifting in the background
+      var ico = new THREE.Mesh(
+        new THREE.IcosahedronGeometry(2.2, 1),
+        new THREE.MeshBasicMaterial({ color: 0x0284c7, wireframe: true, transparent: true, opacity: 0.16 })
+      );
+      ico.position.set(1.3, 0.4, 0);
+      scene.add(ico);
+      var tor = new THREE.Mesh(
+        new THREE.TorusGeometry(1.2, 0.28, 12, 40),
+        new THREE.MeshBasicMaterial({ color: 0x38bdf8, wireframe: true, transparent: true, opacity: 0.12 })
+      );
+      tor.position.set(-1.8, -0.8, -0.3);
+      scene.add(tor);
+
+      // Pause when off-screen
+      var isVisible = true;
+      if (typeof IntersectionObserver !== "undefined") {
+        var visObs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { isVisible = e.isIntersecting; });
+        }, { rootMargin: "100px" });
+        visObs.observe(host);
+      }
+
+      var time = 0, rafId = 0;
+      function animate() {
+        rafId = requestAnimationFrame(animate);
+        if (!isVisible) return;
+        time += 0.003;
+        ico.rotation.y = time * 0.35;
+        ico.rotation.x = time * 0.18;
+        tor.rotation.z = time * 0.45;
+        tor.rotation.y = time * 0.22;
+        renderer.render(scene, camera);
+      }
+      animate();
+      window.addEventListener("pagehide", function (e) {
+        if (e && e.persisted) return;
+        if (rafId) cancelAnimationFrame(rafId);
+        if (visObs) visObs.disconnect();
+        resizeObs.disconnect();
+        renderer.dispose();
+      });
+    }
+
+    if (typeof THREE !== "undefined") {
+      boot();
+    } else {
+      var script = document.querySelector('script[src="/js/vendor/three.min.js"]');
+      if (script) {
+        // Home hero already loaded it or is loading it
+        var poll = setInterval(function () {
+          if (typeof THREE !== "undefined") { clearInterval(poll); boot(); }
+        }, 100);
+        setTimeout(function () { clearInterval(poll); }, 5000);
+      } else {
+        // Lazy load
+        var s = document.createElement("script");
+        s.src = "/js/vendor/three.min.js";
+        s.onload = boot;
+        s.onerror = function () { if (window.console) console.warn("three.js failed to load"); };
+        document.head.appendChild(s);
+      }
+    }
+  }
+
   function initCardScrollHighlight() {
     if (typeof IntersectionObserver === "undefined") return;
     var cards = safeQueryAll(
@@ -623,25 +850,27 @@
   }
 
   function initCardTilt() {
-    if (window.matchMedia && window.matchMedia("(hover: none)").matches) {
-      return;
-    }
-
-    safeQueryAll(".svc-card").forEach(function (card) {
+    if (window.matchMedia && window.matchMedia("(hover: none)").matches) return;
+    if (reduceMotion) return;
+    // Universal 3D tilt-on-hover — extended from .svc-card to all card types
+    // that benefit from perspective feedback. Explicit [data-tilt] opt-in
+    // gets an amplitude override.
+    var selectors = [
+      ".svc-card", ".proj-card", ".own-card", ".pain-card",
+      ".why-freelance-card", ".travel-card", ".svc-detail-card",
+      ".detail-card", ".teaser-card", "[data-tilt]",
+    ].join(", ");
+    safeQueryAll(selectors).forEach(function (card) {
+      var amp = parseFloat(card.dataset.tilt) || 6; // rotation degrees max
+      var lift = card.classList.contains("svc-card") ? 6 : 4; // px lift
       card.addEventListener("mousemove", function (event) {
         var rect = card.getBoundingClientRect();
-        var dx =
-          (event.clientX - rect.left - rect.width / 2) / (rect.width / 2);
-        var dy =
-          (event.clientY - rect.top - rect.height / 2) / (rect.height / 2);
+        var dx = (event.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+        var dy = (event.clientY - rect.top - rect.height / 2) / (rect.height / 2);
         card.style.transform =
-          "translateY(-6px) perspective(700px) rotateX(" +
-          -dy * 6 +
-          "deg) rotateY(" +
-          dx * 6 +
-          "deg)";
+          "translateY(-" + lift + "px) perspective(800px) rotateX(" +
+          (-dy * amp) + "deg) rotateY(" + (dx * amp) + "deg)";
       });
-
       card.addEventListener("mouseleave", function () {
         card.style.transform = "";
       });
@@ -1002,6 +1231,14 @@
     initHeroParallax();
     initPinnedWordReveal();
     initCaseReveals();
+
+    // Stage C: per-page signature effects (skipped on blog per user)
+    initFloating();
+    initParallaxElements();
+    initProcessStepsReveal();
+    initCaseCounterMotion();
+    initHobbyPillReveal();
+    initContactCanvas();
 
     // Stage B: build signal-line after fonts + images settle
     fitLines();
