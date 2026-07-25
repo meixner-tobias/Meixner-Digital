@@ -287,9 +287,31 @@
   var gsapReady   = typeof window.gsap !== "undefined";
   var stReady     = gsapReady && typeof window.ScrollTrigger !== "undefined";
   var lenisReady  = typeof window.Lenis !== "undefined";
-  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var reduceMotionMQL = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var reduceMotion = reduceMotionMQL.matches;
+
+  // Mid-session flip to reduce-motion: tear down all active animations.
+  // Flip back requires a page reload (re-init is complex, edge case).
+  function handleReduceMotionChange(e) {
+    if (!e.matches) return;
+    reduceMotion = true;
+    try {
+      if (window.__lenis && window.__lenis.destroy) window.__lenis.destroy();
+      if (stReady) window.ScrollTrigger.getAll().forEach(function (t) { t.kill(); });
+      var sig = document.getElementById("signal-line");
+      if (sig) sig.remove();
+      if (window.__heroRafId) cancelAnimationFrame(window.__heroRafId);
+    } catch (err) { /* best-effort teardown */ }
+  }
+  if (reduceMotionMQL.addEventListener) {
+    reduceMotionMQL.addEventListener("change", handleReduceMotionChange);
+  } else if (reduceMotionMQL.addListener) {
+    reduceMotionMQL.addListener(handleReduceMotionChange); // Safari <14
+  }
 
   // Walk DOM, replace text nodes with .char spans, preserve inline elements + <br>
+  var SVG_NS = "http://www.w3.org/2000/svg";
+  var MATHML_NS = "http://www.w3.org/1998/Math/MathML";
   function splitChars(el) {
     if (!el || el.dataset.split === "done") return safeQueryAll(".char", el);
     el.dataset.split = "done";
@@ -309,6 +331,9 @@
         }
         node.parentNode.replaceChild(frag, node);
       } else if (node.nodeType === 1 && node.tagName !== "BR") {
+        // Skip descent into SVG/MathML — HTML spans in those namespaces
+        // corrupt render + break <title>/<text> a11y.
+        if (node.namespaceURI === SVG_NS || node.namespaceURI === MATHML_NS) return;
         Array.prototype.slice.call(node.childNodes).forEach(walk);
       }
     }
@@ -398,6 +423,18 @@
     if (!gsapReady) return;
     var introEls = safeQueryAll("[data-intro]");
     if (!introEls.length) return;
+    // VoiceOver hardening: set aria-label on the closest heading *before*
+    // splitChars mutates the DOM. Ensures the H1's accessible name is
+    // computed from a single explicit label rather than aggregated from
+    // aria-label attributes on generic spans (WebKit is inconsistent).
+    var headingsSet = new Set ? new Set() : { _s: [], has: function (v) { return this._s.indexOf(v) >= 0; }, add: function (v) { this._s.push(v); } };
+    introEls.forEach(function (el) {
+      var heading = el.closest && el.closest("h1, h2, h3, h4, h5, h6");
+      if (heading && !heading.hasAttribute("aria-label") && !headingsSet.has(heading)) {
+        headingsSet.add(heading);
+        heading.setAttribute("aria-label", heading.textContent.trim().replace(/\s+/g, " "));
+      }
+    });
     // reduce-motion: still split so screen readers get aria-label, but skip anim
     if (reduceMotion) {
       introEls.forEach(splitChars);
@@ -760,17 +797,30 @@
           onUpdate: function (self) { scrollP = self.progress; },
         });
       }
-      window.addEventListener("mousemove", function (e) {
+      // Named mousemove handler so pagehide teardown can remove it
+      function onMouseMove(e) {
         mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
         mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
         targetSceneRotY = mouseX * 0.18;
         targetSceneRotX = mouseY * 0.10;
-      });
+      }
+      window.addEventListener("mousemove", onMouseMove);
+
+      // Pause RAF when hero is off-screen — saves CPU/GPU on long articles
+      var isVisible = true;
+      if (typeof IntersectionObserver !== "undefined") {
+        var visObs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { isVisible = e.isIntersecting; });
+        }, { rootMargin: "100px" });
+        visObs.observe(hero);
+      }
 
       var time = 0;
       var rafId = 0;
       function animate() {
         rafId = requestAnimationFrame(animate);
+        window.__heroRafId = rafId; // expose for reduce-motion teardown
+        if (!isVisible) return; // skip work when hero not visible
         time += 0.004;
         // Idle drift + scroll acceleration (scrollP: 0→1 over hero pass)
         particles.rotation.y = time * 0.1 + scrollP * 1.4;
@@ -793,6 +843,8 @@
       window.addEventListener("pagehide", function (e) {
         if (e && e.persisted) return; // Skip teardown on BFCache freeze so loop resumes on restore
         if (rafId) cancelAnimationFrame(rafId);
+        window.removeEventListener("mousemove", onMouseMove);
+        if (visObs) visObs.disconnect();
         if (resizeObs) resizeObs.disconnect();
         if (renderer && renderer.dispose) renderer.dispose();
       });
@@ -832,10 +884,11 @@
     var wrap = document.createElement("div");
     wrap.id = "signal-line";
     wrap.setAttribute("aria-hidden", "true");
-    // z-index:-1 keeps signal-line behind main content but visible through
-    // the body background. body { isolation:isolate } added in style.css
-    // ensures the -1 stays inside body's own stacking context.
-    wrap.style.cssText = "position:absolute;top:0;left:0;width:100%;height:" + docH + "px;pointer-events:none;z-index:-1;";
+    // z-index:1 puts signal-line above section backgrounds so it's visible
+    // through the whole scroll — z:-1 hid it behind hero/pain/about
+    // sections that have opaque backgrounds. Opacity 0.24 on the stroke
+    // + pointer-events:none keeps it non-obtrusive; sits below nav (z:1000).
+    wrap.style.cssText = "position:absolute;top:0;left:0;width:100%;height:" + docH + "px;pointer-events:none;z-index:1;";
 
     var svg = document.createElementNS(NS, "svg");
     svg.setAttribute("viewBox", "0 0 " + w + " " + docH);
