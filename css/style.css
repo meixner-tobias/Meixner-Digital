@@ -50,6 +50,15 @@
    ============================================================ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* <picture> is a layout-transparent wrapper — the child <img> should be the
+   effective grid/flex child of the picture's parent. Without this rule the
+   <picture> renders as inline, breaking any grid/flex positioning set on
+   the inner <img>'s class (e.g. .own-product-device grid-column:1 stacking
+   the two BikeCare mockups was broken after Phase 6 wrapped <img> in
+   <picture>). display:contents makes <picture> disappear from the box tree
+   while keeping <source> functional for browser image selection. */
+picture { display: contents; }
+
 :root {
   /* ── Colors ── */
 --bg:          #F5F7FA;
