@@ -59,6 +59,21 @@
    while keeping <source> functional for browser image selection. */
 picture { display: contents; }
 
+/* Text-split reveal (Stage A GSAP intro) — chars slide up from y:110%,
+   need parent overflow:hidden so they stay clipped until their reveal.
+   .char is inline-block so transforms work; .word wraps in a whitespace
+   span kept as normal text for line-break flow. */
+.char { display: inline-block; will-change: transform; }
+.word { display: inline-block; will-change: opacity; }
+[data-intro] {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+/* Small vertical padding + negative margin above compensates for descender
+   clipping (letters like g, y, p) inside the overflow:hidden container. */
+
 :root {
   /* ── Colors ── */
 --bg:          #F5F7FA;

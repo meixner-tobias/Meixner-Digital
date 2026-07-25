@@ -25,8 +25,8 @@
     return document.querySelector(selector);
   }
 
-  function safeQueryAll(selector) {
-    return Array.prototype.slice.call(document.querySelectorAll(selector));
+  function safeQueryAll(selector, root) {
+    return Array.prototype.slice.call((root || document).querySelectorAll(selector));
   }
 
   function onDocumentReady(callback) {
@@ -130,6 +130,7 @@
       burger.setAttribute("aria-expanded", "false");
       drawer.setAttribute("inert", "");
       document.body.style.overflow = "";
+      if (window.__lenis && wasOpen) window.__lenis.start();
       if (wasOpen) {
         burger.focus();
       }
@@ -141,6 +142,9 @@
       burger.classList.toggle("is-open", open);
       burger.setAttribute("aria-expanded", String(open));
       document.body.style.overflow = open ? "hidden" : "";
+      if (window.__lenis) {
+        open ? window.__lenis.stop() : window.__lenis.start();
+      }
       if (open) {
         drawer.removeAttribute("inert");
         var firstLink = drawer.querySelector("a");
@@ -262,6 +266,247 @@
      Runs on EVERY viewport; CSS gates the visual effect to mobile via
      @media (max-width: 768px) — desktop keeps its :hover states.
   ═══════════════════════════════════════════════════ */
+  /* ═══════════════════════════════════════════════════
+     Stage A — Lenis + GSAP + ScrollTrigger Enhancements
+     -----
+     Vendored under /js/vendor/. Each helper below early-returns
+     if its required global is missing, so the site still works
+     with just the base IntersectionObserver reveals if any
+     script gets blocked by a network hiccup or extension.
+  ═══════════════════════════════════════════════════ */
+
+  var gsapReady   = typeof window.gsap !== "undefined";
+  var stReady     = gsapReady && typeof window.ScrollTrigger !== "undefined";
+  var lenisReady  = typeof window.Lenis !== "undefined";
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Walk DOM, replace text nodes with .char spans, preserve inline elements + <br>
+  function splitChars(el) {
+    if (!el || el.dataset.split === "done") return safeQueryAll(".char", el);
+    el.dataset.split = "done";
+    var chars = [];
+    function walk(node) {
+      if (node.nodeType === 3) { // TEXT_NODE
+        var frag = document.createDocumentFragment();
+        var txt = node.textContent;
+        for (var i = 0; i < txt.length; i++) {
+          var ch = txt[i];
+          var span = document.createElement("span");
+          span.className = "char";
+          span.setAttribute("aria-hidden", "true");
+          span.innerHTML = ch === " " ? "&nbsp;" : ch;
+          frag.appendChild(span);
+          chars.push(span);
+        }
+        node.parentNode.replaceChild(frag, node);
+      } else if (node.nodeType === 1 && node.tagName !== "BR") {
+        Array.prototype.slice.call(node.childNodes).forEach(walk);
+      }
+    }
+    var accessibleLabel = el.textContent;
+    Array.prototype.slice.call(el.childNodes).forEach(walk);
+    el.setAttribute("aria-label", accessibleLabel);
+    return chars;
+  }
+
+  // Word-split preserving inline elements (<strong>, <em>, etc.) — walks DOM
+  function splitWords(el) {
+    if (!el || el.dataset.split === "done") return safeQueryAll(".word", el);
+    el.dataset.split = "done";
+    var words = [];
+    function walk(node) {
+      if (node.nodeType === 3) {
+        var parts = node.textContent.split(/(\s+)/);
+        var frag = document.createDocumentFragment();
+        parts.forEach(function (p) {
+          if (/^\s+$/.test(p)) {
+            frag.appendChild(document.createTextNode(p));
+          } else if (p.length) {
+            var span = document.createElement("span");
+            span.className = "word";
+            span.setAttribute("aria-hidden", "true");
+            span.textContent = p;
+            frag.appendChild(span);
+            words.push(span);
+          }
+        });
+        node.parentNode.replaceChild(frag, node);
+      } else if (node.nodeType === 1 && node.tagName !== "BR") {
+        Array.prototype.slice.call(node.childNodes).forEach(walk);
+      }
+    }
+    var accessibleLabel = el.textContent.trim();
+    Array.prototype.slice.call(el.childNodes).forEach(walk);
+    el.setAttribute("aria-label", accessibleLabel);
+    return words;
+  }
+
+  // 1. Lenis smooth scroll — wheel/keyboard only, keep native on touch
+  var lenis = null;
+  function initSmoothScroll() {
+    if (!lenisReady || reduceMotion) return;
+    // Kill CSS scroll-behavior:smooth so it doesn't double up with Lenis's
+    // own smoothing (would cause jerky/laggy scrolling on anchor jumps).
+    document.documentElement.style.scrollBehavior = "auto";
+    lenis = new window.Lenis({
+      duration: 1.05,
+      easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+      smoothWheel: true,
+      smoothTouch: false, // iOS momentum > Lenis touch
+    });
+    window.__lenis = lenis; // expose so drawer/other UI can stop/start it
+    if (stReady) lenis.on("scroll", window.ScrollTrigger.update);
+    if (gsapReady) {
+      window.gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+      window.gsap.ticker.lagSmoothing(0);
+    }
+    // Route anchor clicks through Lenis (fixed nav offset)
+    var navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--nav-h"), 10) || 68;
+    safeQueryAll('a[href^="#"]').forEach(function (link) {
+      var href = link.getAttribute("href");
+      if (!href || href === "#" || href.length < 2) return;
+      link.addEventListener("click", function (e) {
+        var target = document.querySelector(href);
+        if (!target) return;
+        e.preventDefault();
+        lenis.scrollTo(target, { offset: -navH - 12 });
+      });
+    });
+  }
+
+  // 2. Hero intro — [data-intro] char stagger reveal
+  function initHeroIntro() {
+    if (!gsapReady) return;
+    var introEls = safeQueryAll("[data-intro]");
+    if (!introEls.length) return;
+    var allChars = [];
+    introEls.forEach(function (el) {
+      allChars.push.apply(allChars, splitChars(el));
+    });
+    if (!allChars.length) return;
+    window.gsap.set(allChars, { yPercent: 110 });
+    window.gsap.to(allChars, {
+      yPercent: 0,
+      duration: 0.95,
+      stagger: 0.028,
+      ease: "power4.out",
+      delay: 0.12,
+    });
+  }
+
+  // 3. Section titles / labels / descriptions — fade-up on scroll
+  function initSectionReveals() {
+    if (!stReady) return;
+    safeQueryAll(".sec-title, .sec-label, .sec-desc, .article-title, .page-hero__desc").forEach(function (el) {
+      if (el.hasAttribute("data-intro") || el.closest("[data-intro]")) return;
+      window.gsap.from(el, {
+        y: 32, opacity: 0, duration: 0.85, ease: "power3.out",
+        scrollTrigger: { trigger: el, start: "top 88%" },
+      });
+    });
+  }
+
+  // 4. Magnetic buttons — cursor pulls element toward it
+  function initMagnetic() {
+    if (!gsapReady || !window.matchMedia("(hover: hover)").matches) return;
+    // Implicit selectors: primary CTAs get magnetism without needing per-page markup.
+    // Explicit opt-in via [data-magnetic] still works and can override strength.
+    var selectors = [
+      "[data-magnetic]",
+      ".nav-cta",
+      ".hero-btns .btn-primary",
+      "#submitBtn",
+      ".cta-box .btn",
+    ].join(", ");
+    var seen = new Set();
+    safeQueryAll(selectors).forEach(function (el) {
+      if (seen.has(el)) return;
+      seen.add(el);
+      var strength = parseFloat(el.dataset.magnetic) || 0.24;
+      el.addEventListener("mousemove", function (e) {
+        var r = el.getBoundingClientRect();
+        var x = (e.clientX - r.left - r.width / 2) * strength;
+        var y = (e.clientY - r.top - r.height / 2) * strength;
+        window.gsap.to(el, { x: x, y: y, duration: 0.4, ease: "power3.out" });
+      });
+      el.addEventListener("mouseleave", function () {
+        window.gsap.to(el, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1, 0.4)" });
+      });
+    });
+  }
+
+  // 5. Counter animations — [data-count="100"] counts up 0 → 100 on enter
+  function initCounters() {
+    if (!stReady) return;
+    safeQueryAll("[data-count]").forEach(function (el) {
+      var target = parseFloat(el.dataset.count);
+      if (isNaN(target)) return;
+      var suffix = el.dataset.countSuffix || "";
+      var prefix = el.dataset.countPrefix || "";
+      var obj = { v: 0 };
+      el.textContent = prefix + "0" + suffix;
+      window.ScrollTrigger.create({
+        trigger: el, start: "top 92%", once: true,
+        onEnter: function () {
+          window.gsap.to(obj, {
+            v: target, duration: 1.6, ease: "power2.out",
+            onUpdate: function () { el.textContent = prefix + Math.round(obj.v) + suffix; },
+          });
+        },
+      });
+    });
+  }
+
+  // 6. Hero parallax — H1 slight yPercent + opacity dip; blobs drift
+  function initHeroParallax() {
+    if (!stReady || reduceMotion) return;
+    var hero = document.querySelector(".hero");
+    if (!hero) return;
+    var h1 = hero.querySelector(".hero-h1, h1");
+    if (h1) {
+      window.gsap.to(h1, {
+        yPercent: -8, opacity: 0.65, ease: "none",
+        scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: 0.5 },
+      });
+    }
+    hero.querySelectorAll(".blob").forEach(function (b, i) {
+      window.gsap.to(b, {
+        yPercent: 25 + i * 12,
+        ease: "none",
+        scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true },
+      });
+    });
+  }
+
+  // 7. Pinned word-reveal — words darken as user scrolls through [data-pin-reveal]
+  function initPinnedWordReveal() {
+    if (!stReady || reduceMotion) return;
+    safeQueryAll("[data-pin-reveal]").forEach(function (el) {
+      var words = splitWords(el);
+      if (!words.length) return;
+      window.gsap.set(words, { opacity: 0.22 });
+      window.gsap.to(words, {
+        opacity: 1, stagger: 0.05, ease: "none",
+        scrollTrigger: { trigger: el, start: "top 75%", end: "bottom 45%", scrub: 0.5 },
+      });
+    });
+  }
+
+  // 8. Case-card clip-path reveals
+  function initCaseReveals() {
+    if (!stReady) return;
+    safeQueryAll("[data-case-reveal]").forEach(function (el) {
+      window.gsap.fromTo(el,
+        { clipPath: "inset(0 0 100% 0)" },
+        {
+          clipPath: "inset(0 0 0% 0)",
+          duration: 1.1, ease: "power4.out",
+          scrollTrigger: { trigger: el, start: "top 85%" },
+        }
+      );
+    });
+  }
+
   function initCardScrollHighlight() {
     if (typeof IntersectionObserver === "undefined") return;
     var cards = safeQueryAll(
@@ -469,21 +714,43 @@
       tor.position.set(-3.2, -1.2, -0.5);
       scene.add(tor);
 
+      // Stage B: scroll-driven rotation + mouse parallax on the whole scene
+      var scrollP = 0;
+      var mouseX = 0, mouseY = 0;
+      var targetSceneRotY = 0, targetSceneRotX = 0;
+      if (stReady) {
+        window.ScrollTrigger.create({
+          trigger: hero,
+          start: "top top", end: "bottom top",
+          onUpdate: function (self) { scrollP = self.progress; },
+        });
+      }
+      window.addEventListener("mousemove", function (e) {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+        targetSceneRotY = mouseX * 0.18;
+        targetSceneRotX = mouseY * 0.10;
+      });
+
       var time = 0;
       var rafId = 0;
       function animate() {
         rafId = requestAnimationFrame(animate);
         time += 0.004;
-        particles.rotation.y = time * 0.1;
+        // Idle drift + scroll acceleration (scrollP: 0→1 over hero pass)
+        particles.rotation.y = time * 0.1 + scrollP * 1.4;
         particles.rotation.x = time * 0.04;
         if (scene.children[1]) {
-          scene.children[1].rotation.y = time * 0.22;
+          scene.children[1].rotation.y = time * 0.22 + scrollP * 1.8;
           scene.children[1].rotation.x = time * 0.12;
         }
         if (scene.children[2]) {
-          scene.children[2].rotation.z = time * 0.28;
+          scene.children[2].rotation.z = time * 0.28 + scrollP * 2.1;
           scene.children[2].rotation.x = time * 0.09;
         }
+        // Mouse parallax on the whole scene — eases toward target
+        scene.rotation.y += (targetSceneRotY - scene.rotation.y) * 0.06;
+        scene.rotation.x += (targetSceneRotX - scene.rotation.x) * 0.06;
         renderer.render(scene, camera);
       }
       animate();
@@ -499,7 +766,130 @@
     document.head.appendChild(script);
   }
 
+  /* ═══════════════════════════════════════════════════
+     Stage B — Signal Line (home only) + Auto-Fit Headlines
+  ═══════════════════════════════════════════════════ */
+
+  // Signal-line SVG that threads through home page sections, drawn as scroll
+  // progresses, with a glowing dot at the current position. Only on pages
+  // with a .hero (home DE + EN).
+  var signalST = null;
+  function buildSignalLine() {
+    if (!stReady || reduceMotion) return;
+    if (!document.querySelector(".hero")) return;
+    var main = document.querySelector("main");
+    if (!main) return;
+
+    // Clean up prior instance (resize rebuild)
+    var oldWrap = document.getElementById("signal-line");
+    if (oldWrap) oldWrap.remove();
+    if (signalST) { signalST.kill(); signalST = null; }
+
+    // Anchor points: hero-right, then alternating left/right per major section
+    var sections = Array.prototype.slice.call(main.children)
+      .filter(function (el) { return el.offsetHeight > 200; });
+    if (sections.length < 2) return;
+
+    var w = window.innerWidth;
+    var docH = document.documentElement.scrollHeight;
+    var NS = "http://www.w3.org/2000/svg";
+
+    var wrap = document.createElement("div");
+    wrap.id = "signal-line";
+    wrap.setAttribute("aria-hidden", "true");
+    wrap.style.cssText = "position:absolute;top:0;left:0;width:100%;height:" + docH + "px;pointer-events:none;z-index:0;";
+
+    var svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("viewBox", "0 0 " + w + " " + docH);
+    svg.setAttribute("width", "100%");
+    svg.setAttribute("height", "100%");
+    svg.style.cssText = "position:absolute;top:0;left:0;overflow:visible;";
+
+    // Anchor points relative to page (scrollY absolute)
+    var pts = [[w * 0.88, window.innerHeight * 0.55]];
+    sections.slice(1).forEach(function (sec, i) {
+      var r = sec.getBoundingClientRect();
+      var y = r.top + window.scrollY + r.height * 0.5;
+      pts.push([i % 2 === 0 ? w * 0.08 : w * 0.92, y]);
+    });
+    pts.push([w * 0.5, docH - 80]);
+
+    // Build cubic-bezier path with 50% vertical control offset for smooth S-curves
+    var d = "M " + pts[0][0] + " " + pts[0][1];
+    for (var i = 1; i < pts.length; i++) {
+      var p0 = pts[i - 1], p1 = pts[i];
+      var dy = (p1[1] - p0[1]) * 0.5;
+      d += " C " + p0[0] + " " + (p0[1] + dy) + ", " + p1[0] + " " + (p1[1] - dy) + ", " + p1[0] + " " + p1[1];
+    }
+
+    var path = document.createElementNS(NS, "path");
+    path.setAttribute("d", d);
+    path.setAttribute("fill", "none");
+    path.setAttribute("stroke", "rgba(3, 105, 161, 0.24)"); // indigo-dark @ subtle
+    path.setAttribute("stroke-width", "1");
+    svg.appendChild(path);
+
+    // Glowing dot at line tip — soft outer + hard inner
+    var glow = document.createElementNS(NS, "circle");
+    glow.setAttribute("r", "8");
+    glow.setAttribute("fill", "rgba(56, 189, 248, 0.22)"); // sky-400 glow
+    var dot = document.createElementNS(NS, "circle");
+    dot.setAttribute("r", "3");
+    dot.setAttribute("fill", "#38BDF8"); // sky-400 hard core
+    svg.appendChild(glow);
+    svg.appendChild(dot);
+
+    wrap.appendChild(svg);
+    document.body.appendChild(wrap);
+
+    var len = path.getTotalLength();
+    path.style.strokeDasharray = len;
+    path.style.strokeDashoffset = len;
+
+    function place(p) {
+      path.style.strokeDashoffset = len * (1 - p);
+      var pt = path.getPointAtLength(len * p);
+      glow.setAttribute("cx", pt.x);
+      glow.setAttribute("cy", pt.y);
+      dot.setAttribute("cx", pt.x);
+      dot.setAttribute("cy", pt.y);
+    }
+    place(0);
+
+    signalST = window.ScrollTrigger.create({
+      start: 0, end: docH - window.innerHeight,
+      onUpdate: function (self) { place(self.progress); },
+    });
+  }
+
+  // Auto-fit — [data-fit] elements shrink font-size to fit their line width
+  // Safety net for hero H1 + case titles on narrow viewports.
+  function fitLines() {
+    safeQueryAll("[data-fit]").forEach(function (line) {
+      line.style.fontSize = "";
+      var current = parseFloat(getComputedStyle(line).fontSize);
+      var avail = line.clientWidth;
+      var needed = line.scrollWidth;
+      if (needed > avail && avail > 0) {
+        line.style.fontSize = Math.floor(current * (avail / needed) * 0.97) + "px";
+      }
+    });
+  }
+  var fitTimer;
+  window.addEventListener("resize", function () {
+    clearTimeout(fitTimer);
+    fitTimer = setTimeout(function () {
+      fitLines();
+      if (stReady) window.ScrollTrigger.refresh();
+      buildSignalLine();
+    }, 200);
+  });
+
   onDocumentReady(function () {
+    // Stage A libs first — sets window.__lenis so drawer/other UI can sync
+    if (stReady) window.gsap.registerPlugin(window.ScrollTrigger);
+    initSmoothScroll();
+
     initThemeToggle();
     initNavbarScroll();
     initDrawer();
@@ -512,6 +902,29 @@
     initContactForm();
     initCaseAccordion();
     initCardScrollHighlight();
+
+    // Stage A visual polish (order: intro first, then scroll-triggered)
+    initHeroIntro();
+    initSectionReveals();
+    initMagnetic();
+    initCounters();
+    initHeroParallax();
+    initPinnedWordReveal();
+    initCaseReveals();
+
+    // Stage B: build signal-line after fonts + images settle
+    fitLines();
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () {
+        fitLines();
+        if (stReady) window.ScrollTrigger.refresh();
+        buildSignalLine();
+      });
+    }
+    window.addEventListener("load", function () {
+      if (stReady) window.ScrollTrigger.refresh();
+      buildSignalLine();
+    });
   });
 
   // Formular senden & Validierung
