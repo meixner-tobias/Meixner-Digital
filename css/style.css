@@ -417,7 +417,7 @@ p { text-wrap: pretty; }
 .sec-desc {
   font-size: var(--fs-lead);
   color: var(--muted);
-  max-width: 58ch;
+  max-width: 42em;
   line-height: var(--lh-body);
 }
 
@@ -1562,7 +1562,13 @@ textarea:focus-visible {
   font-weight: var(--fw-semi); color: var(--text);
   line-height: var(--lh-tight); letter-spacing: var(--ls-tight);
   margin-bottom: var(--s-4);
-  max-width: 15ch;              /* forces the break the design wants */
+  /* em, not ch. The ch unit is the width of the "0" glyph, so it changes
+     with the font: 15ch measures 1098px in Plus Jakarta Sans but only 809px
+     in the system fallback — 26% narrower. The heading therefore wrapped
+     differently until the webfont arrived and the whole hero jumped up by
+     ~150px on swap. That single shift was the page's entire CLS (0.132).
+     11em matches the intended 15ch once the real font is in. */
+  max-width: 11em;
 }
 .hero-h1 .ac { color: var(--accent-text); }
 
@@ -1576,7 +1582,7 @@ textarea:focus-visible {
 .hero-p {
   font-size: var(--fs-lead);
   color: var(--muted); line-height: var(--lh-body);
-  margin-bottom: var(--s-7); max-width: 46ch;
+  margin-bottom: var(--s-7); max-width: 34em;
 }
 .hero-p strong { color: var(--text); font-weight: var(--fw-semi); }
 
@@ -1834,7 +1840,7 @@ textarea:focus-visible {
 @media (min-width: 769px) {
   .proj-card-founder .proj-list { columns: 2; column-gap: var(--s-7); }
   .proj-card-founder .proj-list li { break-inside: avoid; }
-  .proj-card-founder .proj-p { max-width: 62ch; }
+  .proj-card-founder .proj-p { max-width: 45em; }
 }
 
 .proj-card {
