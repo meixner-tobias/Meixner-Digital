@@ -68,13 +68,18 @@ User-agent: CCBot
 Allow: /
 
 # Pages excluded from indexing
-Disallow: /404.html
-Disallow: /impressum/
-Disallow: /datenschutz/
-Disallow: /agb/
-Disallow: /en/legal/
-Disallow: /en/policy-privacy/
-Disallow: /en/terms-and-conditions/
+#
+# Handled by <meta name="robots" content="noindex"> on the pages themselves
+# (Impressum, Datenschutz, AGB and their EN counterparts, plus 404.html) —
+# NOT by Disallow. Two reasons the previous Disallow block was removed:
+#
+#   1. It sat directly under "User-agent: CCBot", so by the grouping rules of
+#      robots.txt it applied to Common Crawl alone. Googlebot matched the
+#      "User-agent: *" group at the top and was never affected.
+#   2. Disallow and noindex work against each other. A crawler that may not
+#      fetch a page cannot read its noindex, so the URL can still surface in
+#      results — just without a snippet. Letting crawlers fetch the page and
+#      obey its noindex is what actually keeps it out of the index.
 
 # Sitemap
 Sitemap: https://meixner-tobias.com/sitemap.xml

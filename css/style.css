@@ -2824,9 +2824,9 @@ html:not([data-theme="light"]) .form-textarea:focus { background: var(--bg-card)
 
 /* ── Home — Hero ── */
 html:not([data-theme="light"]) .hero { background: var(--bg); }
-html:not([data-theme="light"]) .fc { background: var(--bg-card) !important; border-color: var(--border) !important; }
+html:not([data-theme="light"]) .fc { background: var(--bg-card); border-color: var(--border); }
 html:not([data-theme="light"]) .fi-ind,
-html:not([data-theme="light"]) .fi-grn { background: rgba(2,132,199,.25) !important; }
+html:not([data-theme="light"]) .fi-grn { background: rgba(2,132,199,.25); }
 
 /* ── Home — Pain section ── */
 html:not([data-theme="light"]) .pain-section { background: var(--bg-deep); }
@@ -2835,11 +2835,11 @@ html:not([data-theme="light"]) .pain-section { background: var(--bg-deep); }
 html:not([data-theme="light"]) .about-strip { background: var(--bg-deep); }
 
 /* ── Home — Why box ── */
-html:not([data-theme="light"]) .why-box  { background: var(--bg-card) !important; border-color: var(--border) !important; }
-html:not([data-theme="light"]) .why-item { border-color: rgba(255,255,255,.08) !important; }
+html:not([data-theme="light"]) .why-box  { background: var(--bg-card); border-color: var(--border); }
+html:not([data-theme="light"]) .why-item { border-color: rgba(255,255,255,.08); }
 
 /* ── Home — About cert / certs ── */
-html:not([data-theme="light"]) .about-cert { background: rgba(255,255,255,.06) !important; border-color: rgba(255,255,255,.1) !important; }
+html:not([data-theme="light"]) .about-cert { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.1); }
 
 /* ── Dark sections (services page, process etc.) ── */
 html:not([data-theme="light"]) .pkg-section,
@@ -2850,20 +2850,20 @@ html:not([data-theme="light"]) .faq-info-card,
 html:not([data-theme="light"]) .info-card,
 html:not([data-theme="light"]) .cta-box,
 html:not([data-theme="light"]) .story-section,
-html:not([data-theme="light"]) .stats-bar { background: var(--bg-deep) !important; }
+html:not([data-theme="light"]) .stats-bar { background: var(--bg-deep); }
 
 /* ── Services page ── */
 html:not([data-theme="light"]) .svc-main { background: var(--bg-deep); }
 /* .svc-main-card resolves through tokens (section 31) — no override. */
 
 /* ── Projects page ── */
-html:not([data-theme="light"]) .case-icon-card { background: var(--bg-card) !important; border-color: var(--border) !important; }
+html:not([data-theme="light"]) .case-icon-card { background: var(--bg-card); border-color: var(--border); }
 html:not([data-theme="light"]) .case-icon-card .ico-label,
-html:not([data-theme="light"]) .case-icon-card .ico-sub { color: var(--text) !important; }
-html:not([data-theme="light"]) .metric   { background: var(--bg-card) !important; box-shadow: none !important; }
-html:not([data-theme="light"]) .metric-l { color: var(--muted) !important; }
-html:not([data-theme="light"]) .proj-link { color: var(--accent-text) !important; }
-html:not([data-theme="light"]) .case-visual { background: linear-gradient(145deg, rgba(2,132,199,.15) 0%, rgba(2,132,199,.05) 100%) !important; }
+html:not([data-theme="light"]) .case-icon-card .ico-sub { color: var(--text); }
+html:not([data-theme="light"]) .metric   { background: var(--bg-card); box-shadow: none; }
+html:not([data-theme="light"]) .metric-l { color: var(--muted); }
+html:not([data-theme="light"]) .proj-link { color: var(--accent-text); }
+html:not([data-theme="light"]) .case-visual { background: linear-gradient(145deg, rgba(2,132,199,.15) 0%, rgba(2,132,199,.05) 100%); }
 
 /* ── Legal pages ── */
 html:not([data-theme="light"]) .legal-page { background: var(--bg); }
@@ -2907,8 +2907,8 @@ html:not([data-theme="light"]) .intro-box--aeo  { background: rgba(2,132,199,.08
 html:not([data-theme="light"]) .intro-box--sst  { background: rgba(14,165,233,.07); border-color: rgba(14,165,233,.2); }
 html:not([data-theme="light"]) .intro-box--pmax { background: rgba(251,146,60,.07);  border-color: rgba(251,146,60,.2); }
 html:not([data-theme="light"]) .intro-box--ai   { background: rgba(45,212,191,.07);  border-color: rgba(45,212,191,.18); }
-html:not([data-theme="light"]) .article-sidebar .author-card { background: var(--bg-card) !important; }
-html:not([data-theme="light"]) .cta-card { background: var(--bg-card) !important; }
+html:not([data-theme="light"]) .article-sidebar .author-card { background: var(--bg-card); }
+html:not([data-theme="light"]) .cta-card { background: var(--bg-card); }
 
 
 /* ============================================================

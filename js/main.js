@@ -1296,9 +1296,15 @@
     var addonBox = document.getElementById("addonBox");
     var addonBoxTracking = document.getElementById("addonBoxTracking");
     var addonBoxBetreuung = document.getElementById("addonBoxBetreuung");
-    var modulesVal = document.getElementById("addon_modules_val");
     var tierVal = document.getElementById("addon_tier_val");
     if (!topicBoxes.length) return;
+
+    // Der Ausgangswert kommt aus dem Markup ("Nein" / "No"), damit das
+    // Zuruecksetzen auf beiden Sprachfassungen den richtigen Wert schreibt.
+    // Vorher stand hier fest "Nein" — auf /en/contact/ landete damit ein
+    // deutscher Wert im dataLayer-Event und in der Benachrichtigungsmail.
+    var addonTrackingValEl = document.getElementById("addon_tracking_val");
+    var addonTrackingDefault = addonTrackingValEl ? addonTrackingValEl.value : "";
 
     function getCheckedTopics() {
       var arr = [];
@@ -1320,16 +1326,6 @@
         addonBoxBetreuung.style.display =
           topics.indexOf("betreuung") !== -1 ? "block" : "none";
 
-      // Module zurücksetzen, wenn Tracking nicht (mehr) ausgewählt
-      if (modulesVal && topics.indexOf("tracking") === -1) {
-        modulesVal.value = "";
-        document
-          .querySelectorAll('input[name="module"]')
-          .forEach(function (cb) {
-            cb.checked = false;
-          });
-      }
-
       // Sorglos-Tier synchronisieren bzw. zurücksetzen
       if (tierVal) {
         if (topics.indexOf("betreuung") !== -1) {
@@ -1349,26 +1345,15 @@
       // Tracking-Add-on (Website-Karte) zurücksetzen, wenn Website nicht (mehr) gewählt
       if (topics.indexOf("website") === -1) {
         var addonTrackingCb = document.getElementById("addon_tracking");
-        var addonTrackingVal = document.getElementById("addon_tracking_val");
         if (addonTrackingCb) addonTrackingCb.checked = false;
-        if (addonTrackingVal) addonTrackingVal.value = "Nein";
+        if (addonTrackingValEl) addonTrackingValEl.value = addonTrackingDefault;
       }
     }
 
-    // Module-Checkboxen synchron in Hidden-Field schreiben
-    if (modulesVal) {
-      var moduleBoxes = document.querySelectorAll('input[name="module"]');
-      function updateModulesVal() {
-        var checked = [];
-        moduleBoxes.forEach(function (cb) {
-          if (cb.checked) checked.push(cb.value);
-        });
-        modulesVal.value = checked.join(", ");
-      }
-      moduleBoxes.forEach(function (cb) {
-        cb.addEventListener("change", updateModulesVal);
-      });
-    }
+    // Der Block, der hier die Modul-Checkboxen (#addon_modules_val,
+    // input[name="module"]) in ein Hidden-Field geschrieben hat, ist
+    // entfernt: beide Elemente existieren in keiner HTML-Datei mehr. Er lief
+    // nur deshalb nicht auf einen Fehler, weil ein Null-Check davor stand.
 
     // Sorglos-Tier-Radios synchron in Hidden-Field schreiben
     if (tierVal) {
