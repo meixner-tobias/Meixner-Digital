@@ -2871,8 +2871,7 @@ html:not([data-theme="light"]) .form-textarea:focus { background: var(--bg-card)
 }
 /* Ablehnen: gleichwertig sichtbar, nur ohne Fuellung — eine versteckte
    Ablehnen-Option waere ohnehin angreifbar. */
-#cookiescript_reject,
-#cookiescript_manage {
+#cookiescript_reject {
   background: transparent !important;
   color: var(--text) !important;
   border: 1px solid var(--border-strong) !important;
@@ -2880,16 +2879,28 @@ html:not([data-theme="light"]) .form-textarea:focus { background: var(--bg-card)
   font-family: var(--fd) !important;
   font-weight: var(--fw-semi) !important;
 }
-#cookiescript_reject:hover,
-#cookiescript_manage:hover {
+#cookiescript_reject:hover {
   background: var(--text) !important;
   color: var(--bg) !important;
 }
+/* "Mehr erfahren" ist eine dritte, nachgeordnete Option — als Textlink,
+   nicht als dritte Kapsel neben den beiden Entscheidungs-Buttons. */
+#cookiescript_manage,
+#cookiescript_manage_wrap {
+  background: transparent !important;
+  border: 0 !important;
+  color: var(--muted) !important;
+}
+#cookiescript_manage:hover { color: var(--text) !important; }
+
+/* Nur echte Inhaltslinks einfaerben — der Anbieter-Hinweis im Fuss ist
+   keiner und wurde vom breiteren Selektor mit eingefaerbt. */
+#cookiescript_description a,
 #cookiescript_link,
-#cookiescript_readmore,
-#cookiescript_injected a { color: var(--accent-text) !important; }
+#cookiescript_readmore { color: var(--accent-text) !important; }
 #cookiescript_badge { background: var(--bg-card) !important; color: var(--text) !important; }
-#cookiescript_copyright { color: var(--muted-2) !important; }
+#cookiescript_copyright,
+#cookiescript_copyright a { color: var(--muted-2) !important; }
 
 /* ── Addon-Panels im Kontaktformular ──────────────────────────────
    Die drei aufklappbaren Bloecke (Bundle-Rabatt, Tracking-Tier,
