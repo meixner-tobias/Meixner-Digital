@@ -1194,8 +1194,12 @@ html:not([data-theme="light"]) .drawer-submenu-nested a { color: var(--text); }
   border-bottom: 1px solid var(--border);
 }
 .lang-option:last-child { border-bottom: none; }
-.lang-option:hover      { background: var(--indigo-soft); color: var(--accent-text); }
-.lang-option.active     { background: var(--indigo-soft); color: var(--accent-text); }
+/* Hover und Aktiv sahen identisch aus. Hover ist jetzt deutlich als
+   Aktion erkennbar, Aktiv nur gedaempft markiert (plus Haekchen im
+   Markup) — sonst wirkt die aktuelle Sprache wie der Wechsel-Button. */
+.lang-option:hover      { background: var(--accent); color: var(--accent-ink); }
+.lang-option.active     { background: transparent; color: var(--muted); cursor: default; }
+.lang-option.active:hover { background: var(--accent-soft); color: var(--muted); }
 .lang-option::after     { display: none !important; }
 
 .lang-option-text { flex: 1; }
@@ -1227,15 +1231,22 @@ html:not([data-theme="light"]) .drawer-submenu-nested a { color: var(--text); }
   text-decoration: none !important;
   -webkit-tap-highlight-color: transparent !important;
 }
+/* Aktive Sprache: gedaempft markiert, nicht als Aktion inszeniert. */
 .drawer .drawer-lang-btn.active {
-  background: var(--indigo-dark) !important;
-  color: #fff !important;
-  border-color: var(--accent-text) !important;
+  background: var(--accent-soft) !important;
+  color: var(--muted) !important;
+  border-color: var(--accent-line) !important;
+  cursor: default !important;
+}
+/* Die andere Sprache ist die eigentliche Aktion. */
+.drawer .drawer-lang-btn:not(.active) {
+  border-color: var(--border-strong) !important;
+  color: var(--text) !important;
 }
 .drawer .drawer-lang-btn:hover:not(.active) {
-  border-color: var(--bg-deep) !important;
-  color: var(--navy) !important;
-  background: transparent !important;
+  background: var(--accent) !important;
+  color: var(--accent-ink) !important;
+  border-color: var(--accent) !important;
 }
 
 
@@ -2812,10 +2823,24 @@ html:not([data-theme="light"]) .lang-btn { background: var(--accent-soft); borde
 html:not([data-theme="light"]) .lang-btn:hover,
 html:not([data-theme="light"]) .lang-btn.is-open { background: var(--bg-elev); color: var(--text); border-color: var(--border-strong); }
 html:not([data-theme="light"]) .lang-option { color: var(--text); }
-html:not([data-theme="light"]) .lang-option:hover  { background: var(--accent-soft); color: var(--accent-text); }
-html:not([data-theme="light"]) .lang-option.active { background: var(--accent-soft); color: var(--accent-text); }
-html:not([data-theme="light"]) .drawer .drawer-lang-btn { background: var(--bg-card) !important; border-color: var(--border) !important; color: var(--muted) !important; }
-html:not([data-theme="light"]) .drawer .drawer-lang-btn.active { background: var(--accent) !important; color: var(--accent-ink) !important; border-color: var(--accent) !important; }
+html:not([data-theme="light"]) .lang-option:hover  { background: var(--accent); color: var(--accent-ink); }
+html:not([data-theme="light"]) .lang-option.active { background: transparent; color: var(--muted); }
+html:not([data-theme="light"]) .lang-option.active:hover { background: var(--accent-soft); color: var(--muted); }
+/* Die aktive Sprache ist ein ZUSTAND, kein Angebot. Sie war als voll
+   gefuellter Akzent-Button gesetzt und sah damit aus wie die Aktion —
+   wer darauf tippt, bleibt aber genau dort, wo er schon ist, und es
+   passiert scheinbar nichts. Jetzt ist die aktive Sprache dezent
+   markiert und die andere klar als anklickbare Option erkennbar. */
+html:not([data-theme="light"]) .drawer .drawer-lang-btn {
+  background: transparent !important;
+  border-color: var(--border-strong) !important;
+  color: var(--text) !important;
+}
+html:not([data-theme="light"]) .drawer .drawer-lang-btn.active {
+  background: var(--accent-soft) !important;
+  color: var(--muted) !important;
+  border-color: var(--accent-line) !important;
+}
 
 /* ── Forms ── */
 html:not([data-theme="light"]) .form-card { background: var(--bg-card); border-color: var(--border); }
