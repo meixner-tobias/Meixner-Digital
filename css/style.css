@@ -2828,6 +2828,53 @@ html:not([data-theme="light"]) .form-select:focus,
 html:not([data-theme="light"]) .form-textarea:focus { background: var(--bg-card); color: var(--text); border-color: var(--indigo-mid); }
 /* .form-submit follows .btn-primary — no override needed. */
 
+/* ── Addon-Panels im Kontaktformular ──────────────────────────────
+   Die drei aufklappbaren Bloecke (Bundle-Rabatt, Tracking-Tier,
+   Betreuungs-Tier) waren komplett inline gestylt — 115 style-Attribute
+   ueber beide Sprachfassungen, mit hart gesetzten Farben wie #fff, die
+   im dunklen Theme ein weisses Eingabefeld ergaben.
+   display:none bleibt bewusst inline: das ist Zustand, den main.js
+   umschaltet, keine Gestaltung.                                      */
+.addon-panel {
+  margin-top: var(--s-3);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-line);
+  border-radius: var(--r);
+  padding: var(--s-4) var(--s-4);
+}
+.addon-option {
+  display: flex; align-items: flex-start; gap: var(--s-3);
+  cursor: pointer; font-size: var(--fs-body); color: var(--text);
+}
+.addon-option input { margin-top: 3px; accent-color: var(--accent); flex-shrink: 0; }
+.addon-option strong { color: var(--text); font-weight: var(--fw-semi); }
+.addon-option .muted,
+.addon-note { color: var(--muted); font-weight: var(--fw-body); }
+.addon-title {
+  font-size: var(--fs-body); font-weight: var(--fw-semi);
+  color: var(--text); font-family: var(--fd); margin-bottom: 6px;
+}
+.addon-hint {
+  font-size: var(--fs-body-sm); color: var(--muted);
+  line-height: var(--lh-snug); margin-bottom: var(--s-3);
+}
+.addon-group {
+  display: flex; flex-direction: column; gap: var(--s-3);
+  margin-bottom: var(--s-4);
+}
+.addon-group:last-child { margin-bottom: 0; }
+.addon-textarea {
+  width: 100%; padding: 10px 12px;
+  font-family: var(--fb); font-size: var(--fs-body);
+  border: 1px solid var(--border); border-radius: var(--r-sm);
+  background: var(--bg); color: var(--text);
+  resize: vertical; line-height: 1.5;
+}
+.addon-textarea:focus {
+  outline: none; border-color: var(--accent-line); background: var(--bg-card);
+}
+.addon-textarea::placeholder { color: var(--muted-2); }
+
 /* ── Home — Hero ── */
 html:not([data-theme="light"]) .hero { background: var(--bg); }
 html:not([data-theme="light"]) .fc { background: var(--bg-card); border-color: var(--border); }

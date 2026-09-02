@@ -45,7 +45,7 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"></noscript>
 
-  <link rel="stylesheet" href="/css/style.css?v=8ec4599e">
+  <link rel="stylesheet" href="/css/style.css?v=062557a2">
 
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon/favicon-96x96.png">
   <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg">
@@ -332,70 +332,69 @@
               <span class="field-error" id="topicErr" role="alert">Bitte w&#228;hle mindestens eine Leistung aus.</span>
             </div>
             <input type="hidden" id="addon_tracking_val" name="addon_tracking" value="Nein">
-            <div id="addonBox" style="display:none; margin-top:12px; background:var(--indigo-soft); border:1px solid var(--indigo-mid); border-radius:var(--r); padding:14px 16px;">
-              <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; font-size:.875rem; color:var(--text);">
-                <input type="checkbox" id="addon_tracking" style="margin-top:2px; accent-color:var(--indigo); flex-shrink:0;"
+            <div id="addonBox" class="addon-panel" style="display:none">
+              <label class="addon-option">
+                <input type="checkbox" id="addon_tracking"
                   onchange="document.getElementById('addon_tracking_val').value = this.checked ? 'Ja - GTM & GA4 Add-on gewünscht' : 'Nein'">
-                <span><strong style="color:var(--navy); font-family:var(--fd);">+ Tracking direkt mit dazu &mdash; 20 % Rabatt im Bundle</strong><br>
+                <span><strong>+ Tracking direkt mit dazu &mdash; 20 % Rabatt im Bundle</strong><br>
                 GTM &amp; GA4 gleich beim Website-Launch einrichten. Der 20-%-Rabatt gilt auf das Basis-Setup und alle gewählten Tracking-Module.</span>
               </label>
             </div>
 
             <!-- Form-Felder für Worker: tracking_tier (Radio mit human-readable values) + tracking_extensions (Freitext) -->
-            <div id="addonBoxTracking" style="display:none; margin-top:12px; background:var(--indigo-soft); border:1px solid var(--indigo-mid); border-radius:var(--r); padding:14px 16px;">
-              <div id="trackingTierLbl" style="font-size:.85rem; font-weight:700; color:var(--navy); font-family:var(--fd); margin-bottom:6px;">
-                Wie groß ist dein Tracking-Setup ungefähr? <span style="font-weight:400; color:var(--muted);">(grobe Einordnung, unverbindlich)</span>
+            <div id="addonBoxTracking" class="addon-panel" style="display:none">
+              <div id="trackingTierLbl" class="addon-title">
+                Wie groß ist dein Tracking-Setup ungefähr? <span class="addon-note">(grobe Einordnung, unverbindlich)</span>
               </div>
-              <div style="font-size:.78rem; color:var(--muted); line-height:1.55; margin-bottom:12px;">
+              <div class="addon-hint">
                 Ich quote dir nach kurzem Gespräch einen Festpreis - die Tier-Auswahl hilft mir nur, dein Setup vorab grob einzuordnen.
               </div>
-              <div role="radiogroup" aria-labelledby="trackingTierLbl" style="display:flex; flex-direction:column; gap:9px; margin-bottom:14px;">
-                <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; font-size:.85rem; color:var(--text);">
-                  <input type="radio" name="tracking_tier" value="Basis (ab 390 €)" style="margin-top:2px; accent-color:var(--indigo); flex-shrink:0;">
-                  <span><strong style="color:var(--navy);">Basis</strong> <span style="color:var(--muted);">- ab 390 € · 1 Domain, 2-3 Events, Consent v2, keine CRM</span></span>
+              <div role="radiogroup" aria-labelledby="trackingTierLbl" class="addon-group">
+                <label class="addon-option">
+                  <input type="radio" name="tracking_tier" value="Basis (ab 390 €)">
+                  <span><strong>Basis</strong> <span class="muted">- ab 390 € · 1 Domain, 2-3 Events, Consent v2, keine CRM</span></span>
                 </label>
-                <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; font-size:.85rem; color:var(--text);">
-                  <input type="radio" name="tracking_tier" value="Standard (800-1.200 €)" style="margin-top:2px; accent-color:var(--indigo); flex-shrink:0;">
-                  <span><strong style="color:var(--navy);">Standard</strong> <span style="color:var(--muted);">- 800-1.200 € · 5+ Events, DataLayer-Planung, Custom Dimensions, Cross-Domain</span></span>
+                <label class="addon-option">
+                  <input type="radio" name="tracking_tier" value="Standard (800-1.200 €)">
+                  <span><strong>Standard</strong> <span class="muted">- 800-1.200 € · 5+ Events, DataLayer-Planung, Custom Dimensions, Cross-Domain</span></span>
                 </label>
-                <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; font-size:.85rem; color:var(--text);">
-                  <input type="radio" name="tracking_tier" value="B2B SaaS (1.300-2.500 €)" style="margin-top:2px; accent-color:var(--indigo); flex-shrink:0;">
-                  <span><strong style="color:var(--navy);">B2B SaaS</strong> <span style="color:var(--muted);">- 1.300-2.500 € · + CRM-Anbindung, + Custom-Integrationen (z.B. Intercom)</span></span>
+                <label class="addon-option">
+                  <input type="radio" name="tracking_tier" value="B2B SaaS (1.300-2.500 €)">
+                  <span><strong>B2B SaaS</strong> <span class="muted">- 1.300-2.500 € · + CRM-Anbindung, + Custom-Integrationen (z.B. Intercom)</span></span>
                 </label>
-                <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; font-size:.85rem; color:var(--text);">
-                  <input type="radio" name="tracking_tier" value="Noch unsicher" checked style="margin-top:2px; accent-color:var(--indigo); flex-shrink:0;">
-                  <span><strong style="color:var(--navy);">Noch unsicher</strong> <span style="color:var(--muted);">- besprechen wir im Gespräch</span></span>
+                <label class="addon-option">
+                  <input type="radio" name="tracking_tier" value="Noch unsicher" checked>
+                  <span><strong>Noch unsicher</strong> <span class="muted">- besprechen wir im Gespräch</span></span>
                 </label>
               </div>
 
-              <div style="font-size:.85rem; font-weight:700; color:var(--navy); font-family:var(--fd); margin-bottom:6px;">
-                Brauchst du spezielle Erweiterungen? <span style="font-weight:400; color:var(--muted);">(optional)</span>
+              <div class="addon-title">
+                Brauchst du spezielle Erweiterungen? <span class="addon-note">(optional)</span>
               </div>
-              <div style="font-size:.78rem; color:var(--muted); line-height:1.55; margin-bottom:8px;">
+              <div class="addon-hint">
                 Server-Side Tracking, Google Ads Conversion, CRM-Anbindung, Cross-Domain, Intercom, ...
               </div>
               <textarea id="tracking_extensions" name="tracking_extensions" rows="2"
-                placeholder="z.B. Server-Side via Stape.io, HubSpot-Anbindung, Cross-Domain zwischen marketing.de und app.example.com"
-                style="width:100%; padding:10px 12px; font-family:var(--fb); font-size:.85rem; border:1px solid var(--border); border-radius:8px; background:#fff; color:var(--text); resize:vertical; line-height:1.5;"></textarea>
+                placeholder="z.B. Server-Side via Stape.io, HubSpot-Anbindung, Cross-Domain zwischen marketing.de und app.example.com" class="addon-textarea"></textarea>
             </div>
 
             <input type="hidden" id="addon_tier_val" name="addon_tier" value="">
-            <div id="addonBoxBetreuung" style="display:none; margin-top:12px; background:var(--indigo-soft); border:1px solid var(--indigo-mid); border-radius:var(--r); padding:14px 16px;">
-              <div id="betreuungTierLbl" style="font-size:.85rem; font-weight:700; color:var(--navy); font-family:var(--fd); margin-bottom:10px;">
-                Welcher Tier passt für dich? <span style="font-weight:400; color:var(--muted);">(unverbindlich)</span>
+            <div id="addonBoxBetreuung" class="addon-panel" style="display:none">
+              <div id="betreuungTierLbl" class="addon-title">
+                Welcher Tier passt für dich? <span class="addon-note">(unverbindlich)</span>
               </div>
-              <div role="radiogroup" aria-labelledby="betreuungTierLbl" style="display:flex; flex-direction:column; gap:9px;">
-                <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; font-size:.85rem; color:var(--text);">
-                  <input type="radio" name="tier" value="starter" style="margin-top:2px; accent-color:var(--indigo); flex-shrink:0;">
-                  <span><strong style="color:var(--navy);">Starter</strong> <span style="color:var(--muted);">- ab 49 €/Mt. — Hosting, SSL, kleine Anpassungen, direkter Kontakt</span></span>
+              <div role="radiogroup" aria-labelledby="betreuungTierLbl" class="addon-group">
+                <label class="addon-option">
+                  <input type="radio" name="tier" value="starter">
+                  <span><strong>Starter</strong> <span class="muted">- ab 49 €/Mt. — Hosting, SSL, kleine Anpassungen, direkter Kontakt</span></span>
                 </label>
-                <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; font-size:.85rem; color:var(--text);">
-                  <input type="radio" name="tier" value="plus" style="margin-top:2px; accent-color:var(--indigo); flex-shrink:0;">
-                  <span><strong style="color:var(--navy);">Plus</strong> <span style="color:var(--muted);">- ab 99 €/Mt. — zusätzlich Tracking-Wartung, Mini-Reporting, Priority-Reaktion</span></span>
+                <label class="addon-option">
+                  <input type="radio" name="tier" value="plus">
+                  <span><strong>Plus</strong> <span class="muted">- ab 99 €/Mt. — zusätzlich Tracking-Wartung, Mini-Reporting, Priority-Reaktion</span></span>
                 </label>
-                <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer; font-size:.85rem; color:var(--text);">
-                  <input type="radio" name="tier" value="unsure" checked style="margin-top:2px; accent-color:var(--indigo); flex-shrink:0;">
-                  <span><strong style="color:var(--navy);">Noch unsicher</strong> <span style="color:var(--muted);">- besprechen wir im Gespräch</span></span>
+                <label class="addon-option">
+                  <input type="radio" name="tier" value="unsure" checked>
+                  <span><strong>Noch unsicher</strong> <span class="muted">- besprechen wir im Gespräch</span></span>
                 </label>
               </div>
             </div>
