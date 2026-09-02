@@ -1117,7 +1117,16 @@
   // progresses, with a glowing dot at the current position. Only on pages
   // with a .hero (home DE + EN).
   var signalST = null;
+  // DISABLED with the redesign. The line threaded diagonally across every
+  // section of the home page and terminated in a glowing dot, which put a
+  // second, unrelated focal point next to whatever section the visitor was
+  // actually reading. It also had no counterpart anywhere else on the site,
+  // so it read as an effect rather than as part of a language. The builder
+  // is kept intact so it can be switched back on by flipping this flag.
+  var SIGNAL_LINE_ENABLED = false;
+
   function buildSignalLine() {
+    if (!SIGNAL_LINE_ENABLED) return;
     if (!stReady || reduceMotion) return;
     if (!document.querySelector(".hero")) return;
     var main = document.querySelector("main");

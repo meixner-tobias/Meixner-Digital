@@ -1,4 +1,4 @@
-﻿/* ============================================================
+/* ============================================================
    MEIXNER-TOBIAS.COM — MASTER STYLESHEET
    ============================================================
    This is the SINGLE CSS file for the entire website.
@@ -58,6 +58,17 @@
    <picture>). display:contents makes <picture> disappear from the box tree
    while keeping <source> functional for browser image selection. */
 picture { display: contents; }
+
+/* Because <picture> is layout-transparent, the inner <img> becomes the
+   direct flex/grid item. Flex and grid items default to min-width: auto,
+   so an image carrying its native width as an attribute (some are over
+   5000px, kept for CLS) sizes its parent to that width and pushes the page
+   sideways. max-width alone does not help — the min-width floor wins.
+   This is why the overflow only showed up after the lazy images loaded. */
+img { min-width: 0; }
+.lightbox-trigger,
+.case-logo, .case-summary-logo, .proj-logo, .about-cert img { max-width: 100%; }
+.lightbox-trigger { width: 100%; height: auto; }
 
 /* Text-split reveal (Stage A GSAP intro) — chars slide up from y:110%,
    need parent overflow:hidden so they stay clipped until their reveal.
@@ -1698,14 +1709,26 @@ textarea:focus-visible {
 }
 
 .pain-solution {
-  display: flex; align-items: center; gap: 8px;
-  background: rgba(255,255,255,.08); border-radius: 99px;
-  padding: 8px 14px; font-size: .8rem; font-weight: 600;
-  color: #fff; width: fit-content; margin-bottom: 20px;
+  display: flex; align-items: center; gap: var(--s-2);
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-radius: var(--r-pill);
+  padding: 8px 14px; font-size: var(--fs-body-sm); font-weight: var(--fw-semi);
+  color: var(--text); width: fit-content; margin-bottom: var(--s-5);
 }
-.pain-card.featured .pain-solution { background: rgba(255,255,255,.2); }
-.pain-solution svg { color: rgba(125,211,250,.8); flex-shrink: 0; }
-.pain-card.featured .pain-solution svg { color: #fff; }
+.pain-solution svg { color: var(--accent-text); flex-shrink: 0; }
+
+/* One button treatment across all three cards. The featured card is marked
+   by its ground and border; a second, differently-coloured button on top of
+   that made the row read as three unrelated designs. */
+.pain-card .btn-white,
+.pain-card .btn-outline-indigo {
+  background: var(--accent); color: var(--accent-ink); border-color: var(--accent);
+}
+.pain-card .btn-white:hover,
+.pain-card .btn-outline-indigo:hover {
+  background: transparent; color: var(--accent); border-color: var(--accent);
+}
+.pain-card .btn { margin-top: auto; }
 
 
 /* ============================================================
@@ -1802,7 +1825,17 @@ textarea:focus-visible {
    20. HOME — PROJECTS
    Two-column grid of project reference cards.
    ============================================================ */
-.proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap-card); }
+/* Three cards in a two-column grid left the bottom-right quarter empty.
+   The founder card is the odd one out anyway (own product, own accent), so
+   it takes the full width and lays its facts out in two columns — the row
+   closes and the card gets the emphasis it was already asking for. */
+.proj-card-founder { grid-column: 1 / -1; }
+@media (min-width: 769px) {
+  .proj-card-founder .proj-list { columns: 2; column-gap: var(--s-7); }
+  .proj-card-founder .proj-list li { break-inside: avoid; }
+  .proj-card-founder .proj-p { max-width: 62ch; }
+}
 
 .proj-card {
   background: var(--bg-card); border: 1px solid var(--border);
@@ -1812,14 +1845,35 @@ textarea:focus-visible {
 }
 .proj-card:hover { box-shadow: var(--sh-lg); border-color: var(--indigo-mid); }
 
-/* Client logo — greyed out, colorizes on hover */
+/* Client logo. The source files are dark artwork made for a light page, so
+   on the dark ground they were nearly invisible — greyscale+opacity made it
+   worse. In the dark theme they are inverted to read as light marks and
+   return to their true colours on hover; the light theme keeps the original
+   grey-to-colour treatment. */
 .proj-logo {
   height: 34px; width: auto; max-width: 130px;
   object-fit: contain; object-position: left;
   margin-bottom: 16px;
-  filter: grayscale(1) opacity(.6); transition: filter .3s;
+  transition: filter var(--dur-mid) var(--ease-inout);
 }
-.proj-card:hover .proj-logo { filter: none; }
+/* Most client marks are transparent cut-outs in a dark ink, so on the dark
+   ground they need inverting to be visible at all. The ANNETTE mark is the
+   exception: it ships as a finished tile with its own petrol ground and
+   light lettering — inverting it turned the whole tile into a grey block.
+   It is excluded by source rather than by an extra class, so the HTML
+   stays untouched across all 35 files. */
+html:not([data-theme="light"]) .proj-logo:not([src*="annette"]) {
+  filter: brightness(0) invert(1) opacity(.72);
+}
+html:not([data-theme="light"]) .proj-card:hover .proj-logo:not([src*="annette"]) {
+  filter: brightness(0) invert(1) opacity(1);
+}
+html:not([data-theme="light"]) .proj-logo[src*="annette"] {
+  border-radius: var(--r-sm); opacity: .9;
+}
+html:not([data-theme="light"]) .proj-card:hover .proj-logo[src*="annette"] { opacity: 1; }
+[data-theme="light"] .proj-logo { filter: grayscale(1) opacity(.6); }
+[data-theme="light"] .proj-card:hover .proj-logo { filter: none; }
 
 .proj-h { font-family: var(--fd); font-size: clamp(.95rem, 1.8vw, 1.12rem); font-weight: 600; color: var(--navy); margin-bottom: 9px; }
 .proj-p { font-size: .875rem; color: var(--muted); line-height: 1.65; margin-bottom: 16px; }
@@ -1940,11 +1994,19 @@ details.case-card-collapsible[open] > .case-summary {
 .case-summary-logo {
   height: 36px; width: auto; max-width: 100px;
   object-fit: contain; flex-shrink: 0;
-  filter: grayscale(1) opacity(.6);
-  transition: filter .2s;
+  transition: filter var(--dur-fast) var(--ease-inout);
 }
-.case-summary:hover .case-summary-logo,
-details.case-card-collapsible[open] .case-summary-logo { filter: none; }
+html:not([data-theme="light"]) .case-summary-logo:not([src*="annette"]) { filter: brightness(0) invert(1) opacity(.7); }
+html:not([data-theme="light"]) .case-summary-logo[src*="annette"] { border-radius: var(--r-sm); opacity: .85; }
+[data-theme="light"] .case-summary-logo { filter: grayscale(1) opacity(.6); }
+html:not([data-theme="light"]) .case-summary:hover .case-summary-logo:not([src*="annette"]),
+html:not([data-theme="light"]) details.case-card-collapsible[open] .case-summary-logo:not([src*="annette"]) {
+  filter: brightness(0) invert(1) opacity(1);
+}
+html:not([data-theme="light"]) .case-summary:hover .case-summary-logo[src*="annette"],
+html:not([data-theme="light"]) details.case-card-collapsible[open] .case-summary-logo[src*="annette"] { opacity: 1; }
+[data-theme="light"] .case-summary:hover .case-summary-logo,
+[data-theme="light"] details.case-card-collapsible[open] .case-summary-logo { filter: none; }
 .case-summary-body { flex: 1; min-width: 0; }
 .case-summary-type {
   display: block; font-family: var(--fd); font-weight: 600;
@@ -2335,7 +2397,7 @@ html:not([data-theme="light"]) .blog-section-tag--single { color: rgba(255,255,2
   display: inline-block;
   font-family: var(--fd); font-size: .62rem; font-weight: 600;
   text-transform: uppercase; letter-spacing: .1em;
-  color: #0369a1; background: rgba(14,165,233,.2);
+  color: var(--accent-text); background: rgba(14,165,233,.2);
   padding: 2px 6px; border-radius: 4px; margin-bottom: 4px;
 }
 .cluster-card-pillar-title {
@@ -2366,7 +2428,7 @@ html:not([data-theme="light"]) .blog-section-tag--single { color: rgba(255,255,2
 .cluster-card-here {
   display: inline-block;
   font-size: .68rem; font-weight: 600;
-  color: #0369a1; background: rgba(14,165,233,.15);
+  color: var(--accent-text); background: rgba(14,165,233,.15);
   padding: 1px 6px; border-radius: 4px;
   margin-left: 4px;
 }
@@ -4130,6 +4192,8 @@ body:has(.contact-section) .page-hero-desc  { max-width: 500px; }
 .case-type    { font-size: .72rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-text); background: var(--indigo-soft); padding: 4px 11px; border-radius: 99px; }
 .case-year    { font-size: .78rem; color: var(--muted); font-weight: 500; }
 .case-logo    { height: 36px; width: auto; max-width: 160px; object-fit: contain; object-position: left; margin-bottom: 16px; }
+html:not([data-theme="light"]) .case-logo:not([src*="annette"]) { filter: brightness(0) invert(1); }
+html:not([data-theme="light"]) .case-logo[src*="annette"] { border-radius: var(--r-sm); }
 .case-title,
 .case-title-visual { font-family: var(--fd); font-size: clamp(1.2rem, 2.5vw, 1.6rem); font-weight: 600; color: var(--navy); line-height: 1.2; letter-spacing: -.02em; margin-bottom: 12px; }
 .case-desc    { font-size: clamp(.875rem, 1.4vw, 1rem); color: var(--muted); line-height: 1.75; margin-bottom: 24px; }
