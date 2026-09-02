@@ -39,7 +39,7 @@ studies E-Commerce at THWS (Technische Hochschule Würzburg-Schweinfurt).
 - Google Ads certified (Google Skillshop, cert ID 166956880, https://skillshop.credential.net/7c7f49fe-c3ff-481c-b22b-fb7470d94dd5)
 - Google Analytics certified (Google Skillshop, cert ID 185483479, https://skillshop.credential.net/61df521c-ab65-49c0-aa1b-6020be5c740c)
 - Currently studying E-Commerce, THWS Würzburg-Schweinfurt
-- Real-world implementation experience: Gumb AG (GTM/GA4/Meta ecosystem), Stefanie Mischka (website + maintenance), ANNETTE § HAMBURG (100/100 Lighthouse SEO), HERZVOLLGOLD/Susanne Vollgold (landing page + Meta Ads on 8-week cycle)
+- Real-world implementation experience: Gumb AG (GTM/GA4/Meta ecosystem), Stefanie Mischka (full website rebuild + digital product sales), ANNETTE § HAMBURG (100/100 Lighthouse SEO), HERZVOLLGOLD/Susanne Vollgold (landing page + Meta Ads on 8-week cycle)
 - Founder of BikeCare.app (own SaaS, AI-assisted development with Claude Code — see Section 9)
 
 **Working style:**
@@ -341,7 +341,7 @@ Policy, DPA, data minimization) still apply.
 - **Gumb AG** - DACH market, complete GTM/GA4 tracking ecosystem with server-side considerations, Meta Pixel, Google Ads conversions, Enhanced Conversions, Consent Mode v2
 - **ANNETTE § HAMBURG** - complete technical website implementation for a legal-communication seminar provider (annette-hamburg.de). HTML/CSS/JS from client design template, Strato DNS + HTTPS, Web3Forms contact form, Schema.org GEO markup, WCAG AA accessibility. Lighthouse scores (as of 2026-07-09): SEO 100/100, Best Practices 100/100, Desktop Performance 100/100 and Mobile Performance 99/100, Accessibility 99 Desktop / 98 Mobile. Ongoing maintenance since July 2026.
 - **HERZVOLLGOLD / Susanne Vollgold** - workshop landing page for a medium, coach and healer with 20+ years of experience. Built on onepage.io, connected with Meta Pixel and Meta Ads Manager. Live at workshop.herzvollgold.de/medium since May 2026. Ongoing 8-week-cycle campaign management starting August 2026 - ad creatives, audience adjustments, and copy/image optimisation per workshop date.
-- **Stefanie Mischka** - business website + ongoing technical maintenance
+- **Stefanie Mischka** - complete rebuild of stefaniemischka.com as a sales platform for digital products (Switzerland-based sole proprietor selling to DE/AT customers). Astro 7 on Cloudflare Workers, Stripe checkout with webhook-verified fulfilment and signed downloads, statutory cancellation button per § 356a BGB, double-opt-in email automation (no open/click tracking by design), two fixed-price currencies (EUR 59 / CHF 59), 199 unit + 124 browser tests against the built output (as of 2026-08-31). TRANSPARENT: built via AI-assisted development with Claude Code - Tobias leads, decides and verifies. Ongoing technical care since 09/2025.
 - **Personal site (meixner-tobias.com)** - HTML/CSS/JS, GitHub Pages hosting, full GTM/GA4 tracking with custom dimensions, complete schema.org markup, llms.txt + llms-full.txt protocol
 
 ---

@@ -16,7 +16,7 @@
   <meta property="og:type"        content="website">
   <meta property="og:url"         content="https://meixner-tobias.com/en/projects/">
   <meta property="og:title"       content="Projects - GTM, GA4 & Website Experience | Tobias Meixner">
-  <meta property="og:description" content="Real projects: tracking ecosystem for Gumb AG, website & hosting for Stefanie Mischka. Freelancer from Würzburg with hands-on experience.">
+  <meta property="og:description" content="Real projects: tracking ecosystem for Gumb AG, full website rebuild with shop for Stefanie Mischka. Freelancer from Würzburg with hands-on experience.">
   <meta property="og:image"       content="https://meixner-tobias.com/assets/img/og/og-projects-en.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -25,7 +25,7 @@
   <meta property="og:site_name"   content="Tobias Meixner">
   <meta name="twitter:card"        content="summary_large_image">
   <meta name="twitter:title"       content="Projects - GTM, GA4 & Website Experience | Tobias Meixner">
-  <meta name="twitter:description" content="Real projects: tracking ecosystem for Gumb AG, website for Stefanie Mischka. Freelancer from Würzburg.">
+  <meta name="twitter:description" content="Real projects: tracking ecosystem for Gumb AG, website rebuild with shop for Stefanie Mischka. Freelancer from Würzburg.">
   <meta name="twitter:image"       content="https://meixner-tobias.com/assets/img/og/og-projects-en.jpg">
 
   <link rel="canonical" href="https://meixner-tobias.com/en/projects/">
@@ -38,7 +38,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"></noscript>
-  <link rel="stylesheet" href="/css/style.css?v=e1bbc65a">
+  <link rel="stylesheet" href="/css/style.css?v=c5ca0203">
 
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon/favicon-96x96.png">
   <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg">
@@ -660,10 +660,10 @@
     <!-- CASE 4: Stefanie Mischka -->
     <details class="case-card case-card-collapsible reveal">
       <summary class="case-summary">
-        <img src="/assets/img/clients/stefanie-mischka.webp" alt="Stefanie Mischka" class="case-summary-logo" width="80" height="40" loading="lazy">
+        <img src="/assets/img/clients/stefanie-mischka.webp" alt="Stefanie Mischka" class="case-summary-logo" width="497" height="72" loading="lazy">
         <div class="case-summary-body">
-          <span class="case-summary-type">Website & Tech</span>
-          <h3 class="case-summary-title">Stefanie Mischka - Website & technical operations</h3>
+          <span class="case-summary-type">Website & E-Commerce</span>
+          <h3 class="case-summary-title">Stefanie Mischka - Website rebuild with shop & email system</h3>
         </div>
         <span class="case-summary-year">2025 - present</span>
         <svg class="case-summary-chevron" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
@@ -671,27 +671,36 @@
       <div class="case-inner reverse">
         <div class="case-content">
           <div class="case-meta">
-            <span class="case-type">Website &amp; Tech</span>
+            <span class="case-type">Website &amp; E-Commerce</span>
             <span class="case-year">2025 - present</span>
           </div>
-          <img src="/assets/img/clients/stefanie-mischka.webp" alt="Stefanie Mischka - Space for Health" class="case-logo" width="160" height="36" loading="lazy">
-          <p class="case-title-visual">Stefanie Mischka - Website &amp; Technical Operations</p>
-          <p class="case-desc">Full technical implementation and ongoing maintenance of the website for Stefanie Mischka - Space for Health. From the basic structure, domain and hosting through to day-to-day technical support for her online business.</p>
+          <img src="/assets/img/clients/stefanie-mischka.webp" alt="Stefanie Mischka - Space for Health" class="case-logo" width="497" height="72" loading="lazy">
+          <p class="case-title-visual">Stefanie Mischka - Website rebuild with shop &amp; email system</p>
+          <p class="case-desc">Complete rebuild of the website as a sales platform for digital products - from Switzerland to customers in Germany and Austria. From checkout and the statutory cancellation button through email sequences to 323 automated tests against the built output.</p>
+          <div class="case-story">
+            <p>A sole proprietor based in Switzerland sells digital products to customers in Germany and Austria &#8211; and more hangs on that than meets the eye: the right of withdrawal for digital content including the cancellation button required by § 356a BGB, the existing-customer exemption of § 7 (3) UWG with its four conditions, VAT owed in the customer's country from the very first sale because the EU threshold doesn't apply to third-country sellers &#8211; and two currencies with fixed prices instead of awkward conversions.</p>
+            <p>The real difference is the diligence a finished site never shows: the buy button answered with HTTP 502 in production &#8211; a test-mode key running against a live price. The unsubscribe link reported success and wrote nothing to the database &#8211; two services, two different signing secrets. Every email's sender pointed to the provider's test domain &#8211; caught on a genuinely delivered email, not in the code. A fade-in animation made everything below the first screen unreadable &#8211; 420 contrast violations on a single page, found by an automated test. These bugs share one trait: the source code looked right. They were found by measuring the running system.</p>
+            <p>Just as deliberate is what's missing: no open or click tracking in the emails, no one-click unsubscribe that would always have failed against the CSRF protection &#8211; two clicks that work instead of one that doesn't &#8211; and no offer of content-related support for the self-study course, because that would trigger German distance-learning law.</p>
+            <p>Built with Claude Code: I lead, decide and verify; the AI writes, researches and measures. What makes that reliable is the method &#8211; tests measure the built output rather than the source, findings are cross-checked before they are believed, numbers are measured rather than claimed. Including my own: a diagnosis of the scroll behaviour was already settled until the measurement refuted it &#8211; the signal came from a stale preview server, not the code.</p>
+          </div>
           <div class="task-grid">
-            <div class="task-item"><span class="task-dot"></span>Website build with CMS system</div>
-            <div class="task-item"><span class="task-dot"></span>Domain and hosting migration</div>
-            <div class="task-item"><span class="task-dot"></span>DNS configuration &amp; SSL</div>
-            <div class="task-item"><span class="task-dot"></span>Technical settings &amp; structure</div>
-            <div class="task-item"><span class="task-dot"></span>Ongoing maintenance &amp; changes</div>
-            <div class="task-item"><span class="task-dot"></span>Technical support for day-to-day operations</div>
+            <div class="task-item"><span class="task-dot"></span>Website rebuild: Astro on Cloudflare Workers</div>
+            <div class="task-item"><span class="task-dot"></span>Checkout with Stripe &amp; signed delivery</div>
+            <div class="task-item"><span class="task-dot"></span>Cancellation button per § 356a BGB</div>
+            <div class="task-item"><span class="task-dot"></span>Email sequences with double opt-in</div>
+            <div class="task-item"><span class="task-dot"></span>Two currencies: €59 / CHF 59, no conversion</div>
+            <div class="task-item"><span class="task-dot"></span>Legal groundwork: withdrawal, VAT, distance-learning law</div>
+            <div class="task-item"><span class="task-dot"></span>Automated tests against the built output</div>
+            <div class="task-item"><span class="task-dot"></span>Ongoing maintenance &amp; technical support</div>
           </div>
           <div class="tech-row">
-            <span class="tech-tag">CMS / Website builder</span>
-            <span class="tech-tag">Domain management</span>
-            <span class="tech-tag">Hosting migration</span>
-            <span class="tech-tag">DNS</span>
-            <span class="tech-tag">SSL</span>
-            <span class="tech-tag">Technical support</span>
+            <span class="tech-tag">Astro</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">Cloudflare Workers</span>
+            <span class="tech-tag">Stripe</span>
+            <span class="tech-tag">Resend</span>
+            <span class="tech-tag">Playwright &amp; axe-core</span>
+            <span class="tech-tag">Claude Code</span>
           </div>
           <div class="case-actions">
             <a href="https://www.stefaniemischka.com/" target="_blank" rel="noopener" class="btn btn-primary">View website <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
@@ -700,15 +709,18 @@
         </div>
         <div class="case-visual">
           <div class="case-icon-grid">
-            <div class="case-icon-card"><div class="ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div><div class="ico-label">Website</div><div class="ico-sub">Build &amp; maintenance</div></div>
-            <div class="case-icon-card"><div class="ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z"/></svg></div><div class="ico-label">Hosting</div><div class="ico-sub">Migration &amp; setup</div></div>
-            <div class="case-icon-card"><div class="ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></svg></div><div class="ico-label">DNS</div><div class="ico-sub">Configuration</div></div>
-            <div class="case-icon-card"><div class="ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></div><div class="ico-label">SSL</div><div class="ico-sub">Secure &amp; active</div></div>
+            <div class="case-icon-card"><div class="ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg></div><div class="ico-label">Checkout</div><div class="ico-sub">Stripe &amp; webhooks</div></div>
+            <div class="case-icon-card"><div class="ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></div><div class="ico-label">Withdrawal</div><div class="ico-sub">§ 356a BGB</div></div>
+            <div class="case-icon-card"><div class="ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div><div class="ico-label">Email system</div><div class="ico-sub">Double opt-in</div></div>
+            <div class="case-icon-card"><div class="ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></div><div class="ico-label">Testing</div><div class="ico-sub">Measured, not guessed</div></div>
           </div>
           <div class="metrics">
+            <div class="metric"><div class="metric-n">323</div><div class="metric-l">Automated tests</div></div>
             <div class="metric"><div class="metric-n">1<em>+</em></div><div class="metric-l">Year of ongoing support</div></div>
-            <div class="metric"><div class="metric-n">∞</div><div class="metric-l">Direct point of contact</div></div>
           </div>
+          <p style="font-size:.72rem;color:var(--muted);text-align:center;margin:12px 0 0;line-height:1.55;">
+            As of 2026-08-31 · 199 unit tests (Vitest) + 124 browser tests (Playwright &amp; axe-core)
+          </p>
         </div>
       </div>
     </details>
@@ -817,8 +829,8 @@
         <div class="tl-dot"><div class="tl-dot-inner"></div></div>
         <div class="tl-body">
           <div class="tl-date">09/2025 - present</div>
-          <div class="tl-title">Stefanie Mischka - Website &amp; technical operations</div>
-          <p class="tl-desc">Website build, hosting migration, DNS configuration, ongoing support.</p>
+          <div class="tl-title">Stefanie Mischka - Website rebuild with shop &amp; email system</div>
+          <p class="tl-desc">Initial build and operations, then a complete 2026 rebuild as a sales platform: Stripe checkout, email automation, ongoing support.</p>
         </div>
       </div>
       <div class="tl-item active">

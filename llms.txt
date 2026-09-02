@@ -36,7 +36,9 @@ Google Play: play.google.com/store/apps/details?id=app.bikecare.
 
 Clients/Projects: Gumb AG (complete GTM/GA4 tracking ecosystem with server-side
 considerations, Meta Pixel, Google Ads conversions, Enhanced Conversions,
-Consent Mode v2), Stefanie Mischka (website + ongoing maintenance),
+Consent Mode v2), Stefanie Mischka (complete website rebuild as a sales
+platform for digital products: Stripe checkout, § 356a BGB cancellation
+button, double-opt-in email automation, 323 automated tests),
 ANNETTE § HAMBURG (website with 100/100 Lighthouse SEO, 97 Performance,
 DNS + HTTPS + Web3Forms + Schema.org GEO markup), HERZVOLLGOLD /
 Susanne Vollgold (landing page on onepage.io + Meta Ads campaign
@@ -161,8 +163,13 @@ can take over the implementation cleanly.
   ecosystem for the DACH market - GTM container, GA4 with server-side
   considerations, Meta Pixel, Google Ads conversions, Enhanced Conversions,
   Consent Mode v2.
-- [Stefanie Mischka Website](/en/projects/): Built and maintains a complete
-  business website with hosting, SSL, and ongoing technical care.
+- [Stefanie Mischka Website](/en/projects/): Complete rebuild of
+  stefaniemischka.com as a sales platform for digital products - Astro on
+  Cloudflare Workers, Stripe checkout with signed download delivery, statutory
+  cancellation button (§ 356a BGB), double-opt-in email automation, two fixed
+  price currencies (EUR 59 / CHF 59), 199 unit + 124 browser tests against the
+  built output (as of 2026-08-31). Built with Claude Code; ongoing technical
+  care since 2025.
 - [ANNETTE § HAMBURG Website](/en/projects/): Complete technical implementation
   for a legal-communication seminar provider (annette-hamburg.de). HTML/CSS/JS
   from client design template, Strato DNS + HTTPS, Web3Forms contact, Schema.org
