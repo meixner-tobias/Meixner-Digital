@@ -42,46 +42,59 @@
     var themeToggleMobile = document.getElementById("themeToggleMobile");
     var savedTheme = localStorage.getItem("theme");
 
+    // Dark is the default appearance and lives on :root, so the absence of
+    // data-theme means dark. Only an explicit light choice sets the attribute.
+    // The inline anti-flash script in every <head> applies the same rule
+    // before first paint.
+    var THEME_COLORS = { dark: "#0E1114", light: "#FAFAFA" };
+
+    function isLight() {
+      return document.documentElement.getAttribute("data-theme") === "light";
+    }
+
+    function syncThemeColorMeta() {
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute("content", THEME_COLORS[isLight() ? "light" : "dark"]);
+    }
+
     function updateThemeLabel() {
-      var isDark =
-        document.documentElement.getAttribute("data-theme") === "dark";
+      var light = isLight();
       safeQueryAll(".theme-label").forEach(function (el) {
-        el.textContent = isDark ? "Light Mode" : "Dark Mode";
+        el.textContent = light ? "Dark Mode" : "Light Mode";
       });
-      var ariaLabel = isDark
-        ? "Helles Design aktivieren"
-        : "Dunkles Design aktivieren";
+      var ariaLabel = light
+        ? "Dunkles Design aktivieren"
+        : "Helles Design aktivieren";
       [themeToggle, themeToggleMobile].forEach(function (btn) {
         if (btn) {
           btn.setAttribute("aria-label", ariaLabel);
-          btn.setAttribute("aria-pressed", String(isDark));
+          btn.setAttribute("aria-pressed", String(!light));
         }
       });
+      syncThemeColorMeta();
     }
 
     function setDarkTheme() {
-      document.documentElement.setAttribute("data-theme", "dark");
+      document.documentElement.removeAttribute("data-theme");
       localStorage.setItem("theme", "dark");
     }
 
     function setLightTheme() {
-      document.documentElement.removeAttribute("data-theme");
+      document.documentElement.setAttribute("data-theme", "light");
       localStorage.setItem("theme", "light");
     }
 
     function toggleTheme() {
-      var isDark =
-        document.documentElement.getAttribute("data-theme") === "dark";
-      if (isDark) {
-        setLightTheme();
-      } else {
+      if (isLight()) {
         setDarkTheme();
+      } else {
+        setLightTheme();
       }
       updateThemeLabel();
     }
 
-    if (savedTheme === "dark") {
-      setDarkTheme();
+    if (savedTheme === "light") {
+      setLightTheme();
     }
 
     updateThemeLabel();
@@ -721,6 +734,11 @@
     if (reduceMotion) return;
     var canvas = document.getElementById("contact-canvas");
     if (!canvas) return;
+    // Same gate as the hero canvas: three.js is 603 KB, and this is a purely
+    // decorative backdrop. Loading it on a phone spends the mobile budget on
+    // something nobody came for. Desktop and a 4g-class connection only.
+    if (window.innerWidth <= 768) return;
+    if (navigator.connection && navigator.connection.effectiveType !== "4g") return;
 
     function boot() {
       if (typeof THREE === "undefined") return;
@@ -827,7 +845,17 @@
   }
 
   function initRevealAnimations() {
-    if (typeof IntersectionObserver === "undefined") {
+    var all = safeQueryAll(".reveal");
+
+    function revealAll() {
+      all.forEach(function (el) { el.classList.add("in"); });
+    }
+
+    // A .reveal element starts at opacity 0. If anything prevents the
+    // observer from running, that content stays invisible — so every exit
+    // path here has to end with the content shown, never with a bare return.
+    if (typeof IntersectionObserver === "undefined" || reduceMotion) {
+      revealAll();
       return;
     }
 
@@ -849,38 +877,32 @@
       },
     );
 
-    safeQueryAll(".reveal").forEach(function (element) {
+    all.forEach(function (element) {
       observer.observe(element);
     });
+
+    // Safety net: if the observer has not fired for an element that is
+    // already inside the viewport after 1.2s (print stylesheets, an aborted
+    // layout pass, a browser quirk), show it anyway. Cheap, and it makes
+    // "invisible page" impossible.
+    window.setTimeout(function () {
+      all.forEach(function (el) {
+        if (el.classList.contains("in")) return;
+        var r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) {
+          el.classList.add("in");
+          observer.unobserve(el);
+        }
+      });
+    }, 1200);
   }
 
-  function initCardTilt() {
-    if (window.matchMedia && window.matchMedia("(hover: none)").matches) return;
-    if (reduceMotion) return;
-    // Universal 3D tilt-on-hover — extended from .svc-card to all card types
-    // that benefit from perspective feedback. Explicit [data-tilt] opt-in
-    // gets an amplitude override.
-    var selectors = [
-      ".svc-card", ".proj-card", ".own-card", ".pain-card",
-      ".why-freelance-card", ".travel-card", ".svc-detail-card",
-      ".detail-card", ".teaser-card", "[data-tilt]",
-    ].join(", ");
-    safeQueryAll(selectors).forEach(function (card) {
-      var amp = parseFloat(card.dataset.tilt) || 6; // rotation degrees max
-      var lift = card.classList.contains("svc-card") ? 6 : 4; // px lift
-      card.addEventListener("mousemove", function (event) {
-        var rect = card.getBoundingClientRect();
-        var dx = (event.clientX - rect.left - rect.width / 2) / (rect.width / 2);
-        var dy = (event.clientY - rect.top - rect.height / 2) / (rect.height / 2);
-        card.style.transform =
-          "translateY(-" + lift + "px) perspective(800px) rotateX(" +
-          (-dy * amp) + "deg) rotateY(" + (dx * amp) + "deg)";
-      });
-      card.addEventListener("mouseleave", function () {
-        card.style.transform = "";
-      });
-    });
-  }
+  /* The 3D card tilt lived here. Removed with the redesign: it ran a
+     mousemove handler that read getBoundingClientRect() and then wrote
+     style.transform on every pointer move — a layout read/write per frame
+     on whichever card the pointer was crossing. Card hover is now a pure
+     CSS colour transition (background + border), which the compositor
+     handles without touching layout at all. */
 
   function initFaqAccordion() {
     var faqButtons = safeQueryAll(".faq-q");
@@ -1095,7 +1117,16 @@
   // progresses, with a glowing dot at the current position. Only on pages
   // with a .hero (home DE + EN).
   var signalST = null;
+  // DISABLED with the redesign. The line threaded diagonally across every
+  // section of the home page and terminated in a glowing dot, which put a
+  // second, unrelated focal point next to whatever section the visitor was
+  // actually reading. It also had no counterpart anywhere else on the site,
+  // so it read as an effect rather than as part of a language. The builder
+  // is kept intact so it can be switched back on by flipping this flag.
+  var SIGNAL_LINE_ENABLED = false;
+
   function buildSignalLine() {
+    if (!SIGNAL_LINE_ENABLED) return;
     if (!stReady || reduceMotion) return;
     if (!document.querySelector(".hero")) return;
     var main = document.querySelector("main");
@@ -1220,7 +1251,6 @@
     initDrawer();
     initLanguageSwitcher();
     initRevealAnimations();
-    initCardTilt();
     initFaqAccordion();
     initHeroCanvas();
     initAddonBox();
