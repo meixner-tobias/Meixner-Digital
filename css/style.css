@@ -1899,36 +1899,31 @@ html:not([data-theme="light"]) .proj-card:hover .proj-logo[src*="annette"] { opa
 .proj-card, .pain-card, .why-freelance-card, .travel-card,
 details.case-card-collapsible {
   transition:
-    transform .35s cubic-bezier(.2,.7,.2,1),
-    box-shadow .35s ease,
-    border-color .35s ease;
+    background-color var(--dur-fast) var(--ease-inout),
+    border-color var(--dur-fast) var(--ease-inout);
 }
+/* Touch devices have no hover, so a card would stay flat until tapped.
+   Scrolling past it marks it instead — but with the same vocabulary the
+   desktop hover uses (ground and border), not with a lift. */
 @media (max-width: 768px) {
   .proj-card.in-view {
-    transform: translateY(-5px);
-    box-shadow: var(--sh-lg);
-    border-color: var(--indigo-mid);
+    background: var(--bg-elev);
+    border-color: var(--border-strong);
   }
-  .proj-card.in-view .proj-logo { filter: none; }
 
   .proj-card-founder.in-view {
-    border-color: rgba(249,115,22,.6);
-    box-shadow: 0 14px 34px rgba(249,115,22,.22);
+    border-color: rgba(249,115,22,.55);
   }
 
   .pain-card.in-view {
-    transform: translateY(-4px);
-    box-shadow: var(--sh-lg);
-  }
-  .pain-card.in-view .pain-icon {
-    transform: scale(1.08);
+    background: var(--bg-elev);
+    border-color: var(--border-strong);
   }
 
   .why-freelance-card.in-view,
   .travel-card.in-view {
-    transform: translateY(-4px);
-    box-shadow: var(--sh-lg);
-    border-color: var(--indigo-mid);
+    background: var(--bg-elev);
+    border-color: var(--border-strong);
   }
   .why-freelance-card.in-view .why-freelance-icon {
     background: var(--indigo-soft);
@@ -2058,8 +2053,13 @@ details.case-card-collapsible[open] .case-summary-chevron {
 }
 .proj-card-founder:hover { border-color: rgba(249,115,22,.55); }
 .proj-card-founder .proj-logo { filter: none; }
+/* #F97316 is the BikeCare product colour and carries enough contrast on the
+   dark card (5.5:1). On the light theme's near-white ground it drops to
+   2.56:1, so the light theme uses a darkened variant of the same hue. */
 .proj-card-founder .proj-link { color: #F97316; }
 .proj-card-founder .proj-list li::before { color: #F97316; }
+[data-theme="light"] .proj-card-founder .proj-link { color: #9A3412; }
+[data-theme="light"] .proj-card-founder .proj-list li::before { color: #9A3412; }
 .proj-card-badge {
   position: absolute; top: 14px; right: 14px;
   background: #F97316; color: #17120C;   /* 7.5:1 — white on this orange was 2.8:1 */
