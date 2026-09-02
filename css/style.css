@@ -726,10 +726,14 @@ p { text-wrap: pretty; }
 }
 .burger:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
 
+/* Die Striche sind VORDERGRUND, keine Flaeche. Beim Umstellen der
+   Flaechen-Tokens sind sie faelschlich auf --bg-deep gelandet und waren
+   damit im dunklen Theme fast-schwarz auf dunkler Leiste — praktisch
+   unsichtbar. Sie gehoeren an die Ink-Farbe. */
 .burger span {
   display: block;
   width: 20px; height: 1.5px;
-  background: var(--bg-deep);
+  background: var(--text);
   border-radius: 99px;
   transition: transform .28s, opacity .28s;
   transform-origin: center;
@@ -2607,7 +2611,9 @@ html:not([data-theme="light"]) .cluster-card-soon-tag { color: var(--muted); }
 /* ── Approach cards (SST implementation options) ── */
 .approach-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 22px 24px; margin-bottom: 16px; }
 .approach-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-.approach-num { background: var(--bg-deep); color: #fff; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; flex-shrink: 0; font-family: var(--fd); font-size: .8rem; font-weight: 600; }
+/* Nummernkreis auf einer Karte — --bg-deep war dort dunkel auf dunkel.
+   Gleiche Behandlung wie .process-step-num.active. */
+.approach-num { background: var(--accent); color: var(--accent-ink); width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; flex-shrink: 0; font-family: var(--fd); font-size: .8rem; font-weight: 600; }
 .approach-title    { font-family: var(--fd); font-size: 1rem; font-weight: 600; color: var(--navy); }
 .approach-subtitle { font-size: .8rem; color: var(--muted); margin-top: 1px; }
 .approach-card p { font-size: .9rem; color: var(--text); line-height: 1.7; margin-bottom: 10px; }
@@ -2901,6 +2907,26 @@ html:not([data-theme="light"]) .form-textarea:focus { background: var(--bg-card)
 #cookiescript_badge { background: var(--bg-card) !important; color: var(--text) !important; }
 #cookiescript_copyright,
 #cookiescript_copyright a { color: var(--muted-2) !important; }
+
+/* Auf dem Telefon nahm das Banner 406 von 844 Pixeln ein — knapp die
+   halbe Hoehe — und verdeckte im geoeffneten Menue alles ab "Kontakt
+   aufnehmen". Es liegt mit z-index 999997 ueber allem, was rechtlich auch
+   richtig ist; also wird es nicht nach hinten geschoben, sondern kleiner.
+   Alle Optionen bleiben erreichbar: bei sehr langem Text scrollt der
+   Inhalt innerhalb des Banners, die Buttons bleiben stehen. */
+@media (max-width: 768px) {
+  #cookiescript_injected {
+    max-height: 62vh !important;
+    overflow-y: auto !important;
+    padding: 16px 16px 14px !important;
+  }
+  #cookiescript_header { font-size: 1rem !important; margin-bottom: 6px !important; }
+  #cookiescript_description { font-size: .8125rem !important; line-height: 1.5 !important; }
+  #cookiescript_checkboxs { margin: 10px 0 !important; }
+  #cookiescript_buttons { margin-top: 10px !important; }
+  #cookiescript_accept, #cookiescript_reject { padding: 11px 18px !important; font-size: .8125rem !important; }
+  #cookiescript_copyright { font-size: .625rem !important; margin-top: 8px !important; }
+}
 
 /* ── Addon-Panels im Kontaktformular ──────────────────────────────
    Die drei aufklappbaren Bloecke (Bundle-Rabatt, Tracking-Tier,
