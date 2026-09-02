@@ -2828,6 +2828,69 @@ html:not([data-theme="light"]) .form-select:focus,
 html:not([data-theme="light"]) .form-textarea:focus { background: var(--bg-card); color: var(--text); border-color: var(--indigo-mid); }
 /* .form-submit follows .btn-primary — no override needed. */
 
+/* ── Cookie-Banner (CookieScript) ─────────────────────────────────
+   Das Banner kommt fertig gestylt vom Anbieter und stand als weisse
+   Flaeche vor der dunklen Seite — das erste, was ein Besucher sieht.
+   Der Zustimmen-Button lag ausserdem bei 2,29:1 (weiss auf #22B8F0).
+   Angefasst werden ausschliesslich Farben, Rahmen und Radien; Layout,
+   Reihenfolge und Klickflaechen bleiben, wie der Anbieter sie liefert,
+   damit die Einwilligung technisch unveraendert funktioniert.
+   Die IDs sind seit Jahren stabil; sollte CookieScript sie doch aendern,
+   faellt das Banner auf sein Standardaussehen zurueck — es bleibt
+   funktionsfaehig, nur wieder hell.                                   */
+#cookiescript_injected {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--r) !important;
+  box-shadow: var(--sh-lg) !important;
+  font-family: var(--fb) !important;
+}
+#cookiescript_header,
+#cookiescript_description,
+#cookiescript_description span,
+#cookiescript_close,
+.cookiescript_pre_header,
+#cookiescript_checkboxs .cookiescript_checkbox_text,
+#cookiescript_manage_wrap { color: var(--text) !important; }
+#cookiescript_description,
+#cookiescript_description span { color: var(--muted) !important; }
+#cookiescript_header { font-family: var(--fd) !important; font-weight: var(--fw-semi) !important; }
+
+/* Zustimmen: heller Akzent mit dunkler Schrift — 11,6:1 statt 2,29:1 */
+#cookiescript_accept {
+  background: var(--accent) !important;
+  color: var(--accent-ink) !important;
+  border: 1px solid var(--accent) !important;
+  border-radius: var(--r-pill) !important;
+  font-family: var(--fd) !important;
+  font-weight: var(--fw-semi) !important;
+}
+#cookiescript_accept:hover {
+  background: transparent !important;
+  color: var(--accent) !important;
+}
+/* Ablehnen: gleichwertig sichtbar, nur ohne Fuellung — eine versteckte
+   Ablehnen-Option waere ohnehin angreifbar. */
+#cookiescript_reject,
+#cookiescript_manage {
+  background: transparent !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border-strong) !important;
+  border-radius: var(--r-pill) !important;
+  font-family: var(--fd) !important;
+  font-weight: var(--fw-semi) !important;
+}
+#cookiescript_reject:hover,
+#cookiescript_manage:hover {
+  background: var(--text) !important;
+  color: var(--bg) !important;
+}
+#cookiescript_link,
+#cookiescript_readmore,
+#cookiescript_injected a { color: var(--accent-text) !important; }
+#cookiescript_badge { background: var(--bg-card) !important; color: var(--text) !important; }
+#cookiescript_copyright { color: var(--muted-2) !important; }
+
 /* ── Addon-Panels im Kontaktformular ──────────────────────────────
    Die drei aufklappbaren Bloecke (Bundle-Rabatt, Tracking-Tier,
    Betreuungs-Tier) waren komplett inline gestylt — 115 style-Attribute
