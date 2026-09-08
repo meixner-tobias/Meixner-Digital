@@ -1085,6 +1085,10 @@ pre,
 
 /* Projektkarten auf dem Bild. Auf schmalen Viewports ausgeblendet, weil sie
    dort das Gesicht verdecken wuerden. */
+/* Feste Breite und einzeilige Beschriftung: Die Karten sind rein dekorativ
+   (aria-hidden) und duerfen ihre Groesse nicht vom Schriftschnitt abhaengig
+   machen. Gemessen: mit inhaltsgetriebener Breite verschob der Tausch von
+   font-display: swap sie um bis zu 0,062 CLS. */
 .fc {
   position: absolute;
   z-index: 2;
@@ -1097,7 +1101,18 @@ pre,
   border: 1px solid var(--color-border);
   border-radius: 10px;
   box-shadow: var(--shadow-float);
-  max-width: 74%;
+  width: clamp(186px, 52%, 248px);
+}
+
+.fc-lbl,
+.fc-meta {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fc > div:last-child {
+  min-width: 0;
 }
 
 .fc-1 {
