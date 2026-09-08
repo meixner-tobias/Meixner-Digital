@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0E1114">
-  <script>try{if(localStorage.getItem("theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
+
+
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','functionality_storage':'denied','security_storage':'granted','wait_for_update':500});if(location.hostname==='127.0.0.1'||location.hostname==='localhost'){document.cookie='CookieScriptConsent='+encodeURIComponent(JSON.stringify({action:'accept',categories:['performance','targeting','functionality','unclassified']}))+'; path=/; max-age=31536000';gtag('consent','update',{'analytics_storage':'granted','ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted','functionality_storage':'granted'});var s=document.createElement('style');s.textContent='#cookiescript_injected,.cookiescript_injected,.cookiescript_wrapper,.cookiescript_badge,#cookiescript_iframe{display:none!important}';document.head.appendChild(s);}</script>
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src="https://data.meixner-tobias.com/e5jncwjrlbsgj.js?"+i;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','6lg7q00=AwNOJTg%2FR0I7KysmOEY%2BURxaQUxdVA4ZVwoWCxQcDwVHExwABRMZWQkIHg%3D%3D');</script>
@@ -35,11 +35,11 @@
   <meta name="twitter:image"       content="https://meixner-tobias.com/assets/img/og/aeo-en.png">
 
   <link rel="preconnect" href="https://data.meixner-tobias.com">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"></noscript>
-  <link rel="stylesheet" href="/css/style.css?v=dd48c3be">
+
+
+
+
+  <link rel="stylesheet" href="/css/style.css?v=ddf723f8">
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon/favicon-96x96.png">
   <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg">
   <link rel="shortcut icon" href="/assets/favicon/favicon.ico">
@@ -88,10 +88,10 @@
   ]
 }
 </script>
-<script src="/js/vendor/lenis.min.js" defer></script>
-<script src="/js/vendor/gsap.min.js" defer></script>
-<script src="/js/vendor/gsap-scrolltrigger.min.js" defer></script>
-<script src="/js/main.js?v=4361b3ba" defer></script>
+
+
+
+<script src="/js/main.js?v=1d88a40b" defer></script>
   <link rel="alternate" type="application/rss+xml" title="Tobias Meixner - Blog (EN)" href="https://meixner-tobias.com/en/blog/feed.xml">
 </head>
 <body>
@@ -101,17 +101,10 @@
 <!-- End Google Tag Manager (noscript) -->
 
 <!-- NAVBAR -->
-<nav class="nav" id="nav">
+<nav class="nav" id="nav" aria-label="Main navigation">
   <div class="nav-inner">
-    <a href="/en/" aria-label="Tobias Meixner - Home" style="display:flex;align-items:center;padding-top:6px;">
-      <svg class="nav-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 230" aria-hidden="true">
-        <g transform="translate(8 6)">
-          <circle class="logo-dot" cx="50" cy="108" r="18"/>
-          <line class="logo-stroke" x1="68" y1="62" x2="98" y2="118"/>
-          <line class="logo-stroke" x1="136" y1="62" x2="166" y2="118"/>
-          <text class="logo-t" x="208" y="136">eixner</text>
-        </g>
-      </svg>
+    <a href="/en/" aria-label="Tobias Meixner - Home">
+      <span class="nav-logo">Tobias Meixner</span>
     </a>
     <ul class="nav-links">
       <li><a href="/en/">Home</a></li>
@@ -119,13 +112,15 @@
       <li><a href="/en/services/">Services</a></li>
       <li><a href="/en/projects/">Projects</a></li>
       <li class="nav-dropdown">
+        <details>
+          <summary>Blog</summary>
         <a href="/en/blog/" class="active" aria-current="page">Blog</a>
         <ul class="nav-drop-menu">
           <li><a href="/en/blog/answer-engine-optimization/" class="active" aria-current="page">Answer Engine Optimization</a></li>
           <li><a href="/en/blog/performance-max-vs-advantage-plus/">Performance Max vs. Advantage Plus</a></li>
           <li class="nav-drop-nested">
             <details>
-              <summary>Server-Side Tracking <svg class="nav-drop-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
+              <summary>Server-Side Tracking <svg class="nav-drop-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
               <ul class="nav-drop-submenu">
                 <li><a href="/en/blog/server-side-tracking/" class="nav-drop-pillar-link">View main article <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
                 <li><a href="/en/blog/stape-io-setup/">Stape.io setup</a></li>
@@ -137,14 +132,15 @@
           </li>
           <li><a href="/en/blog/prompt-engineering-ecommerce/">AI Copywriting for E-Commerce</a></li>
         </ul>
+      </details>
       </li>
       <li class="lang-switch">
-        <button class="lang-btn" id="langBtn" aria-label="Choose language" aria-expanded="false" aria-controls="langDropdown" aria-haspopup="true">
-          <div class="flag-circle"><div class="flag-us"></div></div>
+        <button class="lang-btn" id="langBtn" aria-label="Choose language" aria-expanded="false" aria-controls="langDropdown" aria-haspopup="true" hidden>
+          <span class="flag-circle"><span class="flag-us"></span></span>
           EN
           <span class="lang-arrow">▾</span>
         </button>
-        <div class="lang-dropdown" id="langDropdown" inert>
+        <div class="lang-dropdown" id="langDropdown">
           <a href="/blog/answer-engine-optimization/" class="lang-option">
             <div class="flag-lg"><div class="flag-de"></div></div>
             <div class="lang-option-text">
@@ -164,17 +160,12 @@
       </li>
       <li><a href="/en/contact/" class="nav-cta">Get in touch</a></li>
     </ul>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-      <svg class="icon-sun" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-      <svg class="icon-moon" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>
-    </button>
-    <button class="burger" id="burger" aria-label="Open navigation" aria-expanded="false" aria-controls="drawer">
-      <span></span><span></span><span></span>
-    </button>
+
+    <button class="burger" id="burger" aria-label="Open navigation" aria-expanded="false" aria-controls="drawer" hidden>Navigation</button>
   </div>
 </nav>
 
-<nav class="drawer" id="drawer" aria-label="Mobile Navigation" inert>
+<nav class="drawer" id="drawer" aria-label="Mobile Navigation" inert hidden>
   <ul>
     <li>
       <div class="drawer-lang">
@@ -216,17 +207,11 @@
       </details>
     </li>
     <li><a href="/en/contact/">Get in touch <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
-    <li style="padding-top:16px;border-top:1px solid var(--border);display:flex;justify-content:center;">
-      <button class="theme-toggle" id="themeToggleMobile" aria-label="Toggle dark mode">
-        <svg class="icon-sun" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-        <svg class="icon-moon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>
-        <span class="theme-label">Dark Mode</span>
-      </button>
-    </li>
+
   </ul>
 </nav>
 
-<main id="main-content">
+<main id="main-content" tabindex="-1">
 
   <!-- HERO -->
   <header class="article-hero article-hero--aeo" aria-labelledby="article-heading">
@@ -278,18 +263,18 @@
         <nav class="toc-box" aria-label="Table of contents">
           <div class="toc-box-title">Table of Contents</div>
           <ol>
-            <li><span>1</span><a href="#what-is-aeo">What is Answer Engine Optimization?</a></li>
-            <li><span>2</span><a href="#why-2026">Why is classical SEO losing reach?</a></li>
-            <li><span>3</span><a href="#aeo-vs-seo">AEO vs. SEO: What's the difference?</a></li>
-            <li><span>4</span><a href="#answer-engines">Which answer engines matter?</a></li>
-            <li><span>5</span><a href="#ai-sources">How does AI select its sources?</a></li>
-            <li><span>6</span><a href="#strategy">How does a small business implement AEO?</a></li>
-            <li><span>7</span><a href="#schema">Which Schema Markup do I need?</a></li>
-            <li><span>8</span><a href="#content">How do I optimise content for AI?</a></li>
-            <li><span>9</span><a href="#eeat">What is E-E-A-T and why does it matter?</a></li>
-            <li><span>10</span><a href="#measure">How do I measure AEO success?</a></li>
-            <li><span>11</span><a href="#mistakes">Which AEO mistakes should I avoid?</a></li>
-            <li><span>12</span><a href="#faq">FAQ</a></li>
+            <li><a href="#what-is-aeo">What is Answer Engine Optimization?</a></li>
+            <li><a href="#why-2026">Why is classical SEO losing reach?</a></li>
+            <li><a href="#aeo-vs-seo">AEO vs. SEO: What's the difference?</a></li>
+            <li><a href="#answer-engines">Which answer engines matter?</a></li>
+            <li><a href="#ai-sources">How does AI select its sources?</a></li>
+            <li><a href="#strategy">How does a small business implement AEO?</a></li>
+            <li><a href="#schema">Which Schema Markup do I need?</a></li>
+            <li><a href="#content">How do I optimise content for AI?</a></li>
+            <li><a href="#eeat">What is E-E-A-T and why does it matter?</a></li>
+            <li><a href="#measure">How do I measure AEO success?</a></li>
+            <li><a href="#mistakes">Which AEO mistakes should I avoid?</a></li>
+            <li><a href="#faq">FAQ</a></li>
           </ol>
         </nav>
 
@@ -520,7 +505,7 @@ quality of the campaign structure."</span>
             <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
             Where to add it
           </div>
-          <p>Directly in the HTML of your page, inside a <code style="background:rgba(0,0,0,.06);padding:2px 6px;border-radius:4px;font-size:.85em;">&lt;script type="application/ld+json"&gt;</code> tag. In WordPress, plugins like Yoast SEO, RankMath or All in One SEO largely automate this.</p>
+          <p>Directly in the HTML of your page, inside a <code>&lt;script type="application/ld+json"&gt;</code> tag. In WordPress, plugins like Yoast SEO, RankMath or All in One SEO largely automate this.</p>
         </div>
 
         <!-- 8 -->
@@ -605,41 +590,41 @@ quality of the campaign structure."</span>
 
         <div class="faq-list" role="list">
           <div class="faq-item" role="listitem">
-            <button class="faq-q" aria-expanded="false">What is Answer Engine Optimization (AEO)? <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <button class="faq-q" aria-expanded="true" type="button">What is Answer Engine Optimization (AEO)? <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
             <div class="faq-a"><div class="faq-a-inner">Answer Engine Optimization (AEO) is the optimisation of content and digital presence so that AI systems like ChatGPT, Perplexity and Google AI Overviews select your website as a reliable source and cite it in generated answers. The three central measures are: structured content with Schema Markup, direct question-and-answer format, and demonstrable authority through external mentions.</div></div>
           </div>
           <div class="faq-item" role="listitem">
-            <button class="faq-q" aria-expanded="false">What is the difference between AEO and SEO? <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <button class="faq-q" aria-expanded="true" type="button">What is the difference between AEO and SEO? <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
             <div class="faq-a"><div class="faq-a-inner">Classical SEO optimises for rankings on search results pages that users click on. AEO optimises to be cited in AI-generated answers. SEO optimises for keywords and backlinks - AEO optimises for entities, fact density and structured content.</div></div>
           </div>
           <div class="faq-item" role="listitem">
-            <button class="faq-q" aria-expanded="false">What is the difference between AEO and GEO? <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <button class="faq-q" aria-expanded="true" type="button">What is the difference between AEO and GEO? <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
             <div class="faq-a"><div class="faq-a-inner">AEO and GEO are often used synonymously but have a nuanced difference: <strong>AEO (Answer Engine Optimization)</strong> focuses on direct answers in search systems - i.e. Featured Snippets and Google AI Overviews. <strong>GEO (Generative Engine Optimization)</strong> targets specifically the citability in generative AI models like ChatGPT or Gemini. In practice the two overlap strongly - those who optimise for AEO are automatically doing GEO as well.</div></div>
           </div>
           <div class="faq-item" role="listitem">
-            <button class="faq-q" aria-expanded="false">Is AEO worth it for small businesses? <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <button class="faq-q" aria-expanded="true" type="button">Is AEO worth it for small businesses? <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
             <div class="faq-a"><div class="faq-a-inner">Yes. Since few small businesses are actively doing AEO yet, competition is low. Those who act early build a lead. AI traffic converts measurably better than classic organic traffic - Ahrefs reported internally up to 23x higher registration rates, other studies (Semrush, Visibility Labs) confirm the trend with 1.5x to 3x higher conversion rates. The reason is the same: users who arrive via AI have already received a recommendation.</div></div>
           </div>
           <div class="faq-item" role="listitem">
-            <button class="faq-q" aria-expanded="false">How much does AEO cost? <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <button class="faq-q" aria-expanded="true" type="button">How much does AEO cost? <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
             <div class="faq-a"><div class="faq-a-inner">Technical foundations like Schema Markup can be implemented with free plugins (Yoast, RankMath). Content creation and external visibility are time investments. External consulting for an initial analysis and action plan starts at around €500 to €1,500.</div></div>
           </div>
           <div class="faq-item" role="listitem">
-            <button class="faq-q" aria-expanded="false">How long does it take for AEO measures to show results? <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <button class="faq-q" aria-expanded="true" type="button">How long does it take for AEO measures to show results? <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
             <div class="faq-a"><div class="faq-a-inner">First results are often measurable after four to eight weeks, especially with Google AI Overviews. Impact on ChatGPT and Perplexity depends on when these systems update their indices - that can take weeks to months.</div></div>
           </div>
           <div class="faq-item" role="listitem">
-            <button class="faq-q" aria-expanded="false">Can I implement AEO myself or do I need an agency? <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <button class="faq-q" aria-expanded="true" type="button">Can I implement AEO myself or do I need an agency? <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
             <div class="faq-a"><div class="faq-a-inner">Basic AEO measures - Schema Markup, FAQ structure, content optimisation - can be implemented by anyone. For technically more complex setups or faster results, external support makes sense.</div></div>
           </div>
           <div class="faq-item" role="listitem">
-            <button class="faq-q" aria-expanded="false">Which tools help with AEO? <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
+            <button class="faq-q" aria-expanded="true" type="button">Which tools help with AEO? <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></button>
             <div class="faq-a"><div class="faq-a-inner"><strong>HubSpot AEO Grader</strong> analyses free of charge how your brand is represented in GPT, Perplexity and Gemini - evaluating sentiment, presence quality, share of voice and market position. <strong>Google Search Console</strong> has shown separate impressions and clicks for AI Overviews since March 2026. <strong>AnswerThePublic</strong> and <strong>AlsoAsked</strong> find the questions of your target audience. The <strong>Schema Markup Validator</strong> (schema.org) checks structured markup. <strong>Perplexity.ai</strong> is suitable for manual tests of whether you are cited for relevant questions.</div></div>
           </div>
         </div>
 
         <!-- CONCLUSION -->
-        <h2 id="conclusion" style="scroll-margin-top:calc(var(--nav-h) + 24px);">Conclusion: Those who act now have a head start</h2>
+        <h2 id="conclusion">Conclusion: Those who act now have a head start</h2>
         <p>Around 58% of all Google searches end without a click on any website. AI referral traffic is growing strongly across all industries - by several hundred percent from 2024 to 2025 according to Frase.io. And visitors from AI sources convert measurably better than classic organic traffic.</p>
         <p>For small businesses, this is one of the rare situations where speed matters more than budget. Those who lay the technical foundation now, build the right content and strengthen external visibility have a genuine lead over larger competitors - because most of them are not yet acting.</p>
 
@@ -655,26 +640,26 @@ quality of the campaign structure."</span>
 
         <div class="sources-box" role="note" aria-label="Sources">
           <strong>Sources</strong>
-          <a href="https://www.hubspot.com/aeo-grader" target="_blank" rel="noopener" style="color:var(--indigo);">HubSpot AEO Grader</a> ·
-          <a href="https://ppc.land/hubspot-launches-aeo-tool-as-organic-traffic-drops-27-for-its-customers/" target="_blank" rel="noopener" style="color:var(--indigo);">HubSpot Organic Traffic -27% (PPC Land, April 2026)</a> ·
-          <a href="https://techcrunch.com/2026/02/27/chatgpt-reaches-900m-weekly-active-users/" target="_blank" rel="noopener" style="color:var(--indigo);">OpenAI: ChatGPT 900M users (TechCrunch, Feb 2026)</a> ·
-          <a href="https://techcrunch.com/2025/07/21/chatgpt-users-send-2-5-billion-prompts-a-day/" target="_blank" rel="noopener" style="color:var(--indigo);">OpenAI: 2.5B prompts daily (TechCrunch, July 2025)</a> ·
-          <a href="https://emarketed.com/ai/gartner-predicts-25-percent-search-volume-drop-2026/" target="_blank" rel="noopener" style="color:var(--indigo);">Gartner: -25% classic search by end of 2026</a> ·
-          <a href="https://developers.google.com/search/blog/2023/08/howto-faq-changes" target="_blank" rel="noopener" style="color:var(--indigo);">Google: FAQ Rich Results restriction (Aug 2023)</a> ·
-          <a href="https://cxl.com/blog/google-ai-overview-citation-sources/" target="_blank" rel="noopener" style="color:var(--indigo);">CXL: AI Overview Citation Sources Study (March 2026)</a> ·
-          <a href="https://developers.google.com/search/blog/2022/12/google-raters-guidelines-e-e-a-t" target="_blank" rel="noopener" style="color:var(--indigo);">Google: E-E-A-T Quality Rater Guidelines (Dec 2022)</a> ·
-          <a href="https://www.conductor.com/academy/aeo-geo-benchmarks-report/" target="_blank" rel="noopener" style="color:var(--indigo);">Conductor AEO/GEO Benchmarks Report 2026</a>
+          <a href="https://www.hubspot.com/aeo-grader" target="_blank" rel="noopener">HubSpot AEO Grader</a> ·
+          <a href="https://ppc.land/hubspot-launches-aeo-tool-as-organic-traffic-drops-27-for-its-customers/" target="_blank" rel="noopener">HubSpot Organic Traffic -27% (PPC Land, April 2026)</a> ·
+          <a href="https://techcrunch.com/2026/02/27/chatgpt-reaches-900m-weekly-active-users/" target="_blank" rel="noopener">OpenAI: ChatGPT 900M users (TechCrunch, Feb 2026)</a> ·
+          <a href="https://techcrunch.com/2025/07/21/chatgpt-users-send-2-5-billion-prompts-a-day/" target="_blank" rel="noopener">OpenAI: 2.5B prompts daily (TechCrunch, July 2025)</a> ·
+          <a href="https://emarketed.com/ai/gartner-predicts-25-percent-search-volume-drop-2026/" target="_blank" rel="noopener">Gartner: -25% classic search by end of 2026</a> ·
+          <a href="https://developers.google.com/search/blog/2023/08/howto-faq-changes" target="_blank" rel="noopener">Google: FAQ Rich Results restriction (Aug 2023)</a> ·
+          <a href="https://cxl.com/blog/google-ai-overview-citation-sources/" target="_blank" rel="noopener">CXL: AI Overview Citation Sources Study (March 2026)</a> ·
+          <a href="https://developers.google.com/search/blog/2022/12/google-raters-guidelines-e-e-a-t" target="_blank" rel="noopener">Google: E-E-A-T Quality Rater Guidelines (Dec 2022)</a> ·
+          <a href="https://www.conductor.com/academy/aeo-geo-benchmarks-report/" target="_blank" rel="noopener">Conductor AEO/GEO Benchmarks Report 2026</a>
         </div>
 
         <!-- CTA -->
-        <div class="cta-card" style="margin-top:32px;background:var(--navy);border-radius:var(--r-lg);padding:28px 32px;">
-          <p style="font-family:var(--fd);font-size:1rem;font-weight:700;color:#fff;margin-bottom:8px;">Want the technical AEO foundation set up?</p>
-          <p style="font-size:.875rem;color:rgba(255,255,255,.6);line-height:1.65;margin-bottom:20px;">Schema Markup, FAQ structure, GTM &amp; GA4 - I set up the technical base so you get found in AI answers.</p>
+        <div class="cta-card">
+          <p>Want the technical AEO foundation set up?</p>
+          <p>Schema Markup, FAQ structure, GTM &amp; GA4 - I set up the technical base so you get found in AI answers.</p>
           <a href="/en/contact/" class="btn btn-indigo btn-sm">Get in touch <svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         </div>
 
-        <div style="margin-top:24px;">
-          <a href="/en/blog/" style="display:inline-flex;align-items:center;gap:6px;font-size:.84rem;color:var(--muted);text-decoration:none;font-family:var(--fd);font-weight:600;">
+        <div>
+          <a href="/en/blog/">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
             Back to Blog
           </a>
@@ -703,8 +688,8 @@ quality of the campaign structure."</span>
         </nav>
         <div class="author-card">
           <picture>
-            <source srcset="/assets/img/about/ueber-mich-roadtrip.jpg" type="image/jpeg">
-            <picture><source type="image/webp" srcset="/assets/img/about/ueber-mich-roadtrip.webp"><img src="/assets/img/about/ueber-mich-roadtrip.jpg" alt="Tobias Meixner" width="48" height="48" loading="lazy"></picture>
+
+            <source type="image/webp" srcset="/assets/img/about/ueber-mich-roadtrip.webp"><img src="/assets/img/about/ueber-mich-roadtrip.jpg" alt="Tobias Meixner" width="48" height="48" loading="lazy">
           </picture>
           <div class="author-name">Tobias Meixner</div>
           <div class="author-role">Freelancer · Würzburg</div>
@@ -719,13 +704,13 @@ quality of the campaign structure."</span>
 <!-- FOOTER -->
 <footer>
   <div class="container">
-    <div class="footer-cluster" style="display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid var(--border);font-size:.82rem;">
-      <span style="font-family:var(--fd);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);">Server-Side Tracking Topic:</span>
-      <a href="/en/blog/server-side-tracking/" style="color:var(--muted);text-decoration:none;">Main article</a>
-      <a href="/en/blog/stape-io-setup/" style="color:var(--muted);text-decoration:none;">Stape.io Setup</a>
-      <a href="/en/blog/meta-capi-server-side-gtm/" style="color:var(--muted);text-decoration:none;">Meta CAPI via sGTM</a>
-      <a href="/en/blog/google-ads-enhanced-conversions/" style="color:var(--muted);text-decoration:none;">Google Ads Enhanced Conv.</a>
-      <a href="/en/blog/bypassing-safari-itp/" style="color:var(--muted);text-decoration:none;">Bypassing Safari ITP</a>
+    <div class="footer-cluster">
+      <span>Server-Side Tracking Topic:</span>
+      <a href="/en/blog/server-side-tracking/">Main article</a>
+      <a href="/en/blog/stape-io-setup/">Stape.io Setup</a>
+      <a href="/en/blog/meta-capi-server-side-gtm/">Meta CAPI via sGTM</a>
+      <a href="/en/blog/google-ads-enhanced-conversions/">Google Ads Enhanced Conv.</a>
+      <a href="/en/blog/bypassing-safari-itp/">Bypassing Safari ITP</a>
     </div>
     <div class="footer-row">
       <span class="footer-copy">© 2026 Tobias Meixner</span>
@@ -734,7 +719,7 @@ quality of the campaign structure."</span>
         <li><a href="/en/legal/">Legal notice</a></li>
         <li><a href="/en/policy-privacy/">Privacy policy</a></li>
         <li><a href="/en/terms-and-conditions/">Terms and Conditions</a></li>
-        <li><button type="button" class="footer-cookie-btn" onclick="CookieScript.instance.show()">Cookie settings</button></li>
+        <li><button type="button" class="footer-cookie-btn" onclick="if (window.CookieScript &amp;&amp; CookieScript.instance &amp;&amp; typeof CookieScript.instance.show === &#x27;function&#x27;) CookieScript.instance.show()">Cookie settings</button></li>
         <li><a href="https://www.linkedin.com/in/meixner-tobias" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn</a></li>
       </ul>
     </div>

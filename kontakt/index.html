@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0E1114">
-  <script>try{if(localStorage.getItem("theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
+
+
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','functionality_storage':'denied','security_storage':'granted','wait_for_update':500});if(location.hostname==='127.0.0.1'||location.hostname==='localhost'){document.cookie='CookieScriptConsent='+encodeURIComponent(JSON.stringify({action:'accept',categories:['performance','targeting','functionality','unclassified']}))+'; path=/; max-age=31536000';gtag('consent','update',{'analytics_storage':'granted','ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted','functionality_storage':'granted'});var s=document.createElement('style');s.textContent='#cookiescript_injected,.cookiescript_injected,.cookiescript_wrapper,.cookiescript_badge,#cookiescript_iframe{display:none!important}';document.head.appendChild(s);}</script>
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src="https://data.meixner-tobias.com/e5jncwjrlbsgj.js?"+i;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','6lg7q00=AwNOJTg%2FR0I7KysmOEY%2BURxaQUxdVA4ZVwoWCxQcDwVHExwABRMZWQkIHg%3D%3D');</script>
@@ -40,12 +40,12 @@
   <link rel="alternate" hreflang="x-default" href="https://meixner-tobias.com/en/contact/">
 
   <link rel="preconnect" href="https://data.meixner-tobias.com">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"></noscript>
 
-  <link rel="stylesheet" href="/css/style.css?v=dd48c3be">
+
+
+
+
+  <link rel="stylesheet" href="/css/style.css?v=ddf723f8">
 
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon/favicon-96x96.png">
   <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg">
@@ -99,10 +99,10 @@
 }
 </script>
 
-<script src="/js/vendor/lenis.min.js" defer></script>
-<script src="/js/vendor/gsap.min.js" defer></script>
-<script src="/js/vendor/gsap-scrolltrigger.min.js" defer></script>
-<script src="/js/main.js?v=4361b3ba" defer></script>
+
+
+
+<script src="/js/main.js?v=1d88a40b" defer></script>
   <link rel="alternate" type="application/rss+xml" title="Tobias Meixner - Blog (DE)" href="https://meixner-tobias.com/blog/feed.xml">
 </head>
 
@@ -116,17 +116,10 @@
 <!-- End Google Tag Manager (noscript) -->
 
 <!-- NAVBAR -->
-<nav class="nav" id="nav">
+<nav class="nav" id="nav" aria-label="Hauptnavigation">
   <div class="nav-inner">
     <a href="/" aria-label="Tobias Meixner - Startseite">
-      <svg class="nav-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 230" aria-hidden="true">
-        <g transform="translate(8 6)">
-          <circle class="logo-dot" cx="50" cy="108" r="18"/>
-          <line class="logo-stroke" x1="68" y1="62" x2="98" y2="118"/>
-          <line class="logo-stroke" x1="136" y1="62" x2="166" y2="118"/>
-          <text class="logo-t" x="208" y="136">eixner</text>
-        </g>
-      </svg>
+      <span class="nav-logo">Tobias Meixner</span>
     </a>
     <ul class="nav-links">
       <li><a href="/">Home</a></li>
@@ -134,13 +127,15 @@
       <li><a href="/leistungen/">Leistungen</a></li>
       <li><a href="/projekte/">Projekte</a></li>
       <li class="nav-dropdown">
+        <details>
+          <summary>Blog</summary>
         <a href="/blog/">Blog</a>
         <ul class="nav-drop-menu">
           <li><a href="/blog/answer-engine-optimization/">Answer Engine Optimization</a></li>
           <li><a href="/blog/performance-max-vs-advantage-plus/">Performance Max vs. Advantage Plus</a></li>
           <li class="nav-drop-nested">
             <details>
-              <summary>Server-Side Tracking <svg class="nav-drop-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
+              <summary>Server-Side Tracking <svg class="nav-drop-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
               <ul class="nav-drop-submenu">
                 <li><a href="/blog/server-side-tracking/" class="nav-drop-pillar-link">Hauptartikel ansehen <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
                 <li><a href="/blog/stape-io-einrichten/">Stape.io einrichten</a></li>
@@ -152,16 +147,17 @@
           </li>
           <li><a href="/blog/prompt-engineering-ecommerce/">KI-Texterstellung E-Commerce</a></li>
         </ul>
+      </details>
       </li>
 
       <!-- LANGUAGE SWITCHER -->
       <li class="lang-switch">
-        <button class="lang-btn" id="langBtn" aria-label="Sprache wählen" aria-expanded="false" aria-controls="langDropdown" aria-haspopup="true">
-          <div class="flag-circle"><div class="flag-de"></div></div>
+        <button class="lang-btn" id="langBtn" aria-label="Sprache wählen" aria-expanded="false" aria-controls="langDropdown" aria-haspopup="true" hidden>
+          <span class="flag-circle"><span class="flag-de"></span></span>
           DE
           <span class="lang-arrow">▾</span>
         </button>
-        <div class="lang-dropdown" id="langDropdown" inert>
+        <div class="lang-dropdown" id="langDropdown">
           <a href="/" class="lang-option active" aria-current="page">
             <div class="flag-lg"><div class="flag-de"></div></div>
             <div class="lang-option-text">
@@ -182,17 +178,12 @@
 
       <li><a href="/kontakt/" class="nav-cta active" aria-current="page">Kontakt aufnehmen</a></li>
     </ul>
-    <button class="theme-toggle" id="themeToggle" aria-label="Dark Mode umschalten">
-      <svg class="icon-sun" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-      <svg class="icon-moon" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>
-    </button>
-    <button class="burger" id="burger" aria-label="Navigation &#246;ffnen" aria-expanded="false" aria-controls="drawer">
-      <span></span><span></span><span></span>
-    </button>
+
+    <button class="burger" id="burger" aria-label="Navigation &#246;ffnen" aria-expanded="false" aria-controls="drawer" hidden>Navigation</button>
   </div>
 </nav>
 
-<nav class="drawer" id="drawer" aria-label="Mobile Navigation" inert>
+<nav class="drawer" id="drawer" aria-label="Mobile Navigation" inert hidden>
   <ul>
     <li>
       <div class="drawer-lang">
@@ -234,23 +225,17 @@
       </details>
     </li>
     <li><a href="/kontakt/" class="active" aria-current="page">Kontakt aufnehmen <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
-    <li style="padding-top:16px; border-top:1px solid var(--border); display:flex; justify-content:center;">
-      <button class="theme-toggle" id="themeToggleMobile" aria-label="Dark Mode umschalten">
-        <svg class="icon-sun" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-        <svg class="icon-moon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>
-        <span class="theme-label">Dark Mode</span>
-      </button>
-    </li> 
+
   </ul>
 </nav>
 
-<main id="main-content">
+<main id="main-content" tabindex="-1">
 
 
 
 <!-- PAGE HERO -->
 <section class="page-hero" aria-labelledby="hero-heading">
-  <canvas id="contact-canvas" aria-hidden="true"></canvas>
+
   <div class="container">
     <div class="page-hero-inner">
       <div class="page-hero-badge">
@@ -273,9 +258,9 @@
       <div class="form-card reveal">
         <div id="formContent">
           <h2 class="form-title" id="contact-heading">Schreib mir kurz</h2>
-          <p class="form-subtitle">Felder mit <span style="color:var(--indigo)">*</span> müssen sein - der Rest ist optional. Je mehr du schreibst desto konkreter kann ich dir antworten.</p>
+          <p class="form-subtitle">Felder mit <span>*</span> müssen sein - der Rest ist optional. Je mehr du schreibst desto konkreter kann ich dir antworten.</p>
 
-          <div id="formErrorMsg" class="form-error-msg" role="alert">Bitte f&#252;lle alle Pflichtfelder korrekt aus.</div>
+          <div id="formErrorMsg" class="form-error-msg" role="alert" hidden>Bitte f&#252;lle alle Pflichtfelder korrekt aus.</div>
 
           <form id="contactForm" novalidate aria-label="Projektanfrage-Formular">
             <div class="form-row">
@@ -284,14 +269,14 @@
                 <input class="form-input" type="text" id="name" name="name"
                       placeholder="Dein Name" autocomplete="name"
                       required aria-required="true" aria-describedby="nameErr">
-                <span class="field-error" id="nameErr" role="alert">Bitte gib deinen Namen ein.</span>
+                <span class="field-error" id="nameErr" role="alert" hidden>Bitte gib deinen Namen ein.</span>
               </div>
               <div class="form-group">
                 <label class="form-label" for="email">E-Mail <span class="req">*</span></label>
                 <input class="form-input" type="email" id="email" name="email"
                       placeholder="deine@email.de" autocomplete="email"
                       required aria-required="true" aria-describedby="emailErr">
-                <span class="field-error" id="emailErr" role="alert">Bitte gib eine g&#252;ltige E-Mail-Adresse ein.</span>
+                <span class="field-error" id="emailErr" role="alert" hidden>Bitte gib eine g&#252;ltige E-Mail-Adresse ein.</span>
               </div>
             </div>
 
@@ -329,10 +314,10 @@
                   <span class="topic-check-text">Noch unklar - einfach melden</span>
                 </label>
               </div>
-              <span class="field-error" id="topicErr" role="alert">Bitte w&#228;hle mindestens eine Leistung aus.</span>
+              <span class="field-error" id="topicErr" role="alert" hidden>Bitte w&#228;hle mindestens eine Leistung aus.</span>
             </div>
             <input type="hidden" id="addon_tracking_val" name="addon_tracking" value="Nein">
-            <div id="addonBox" class="addon-panel" style="display:none">
+            <div id="addonBox" class="addon-panel" hidden>
               <label class="addon-option">
                 <input type="checkbox" id="addon_tracking"
                   onchange="document.getElementById('addon_tracking_val').value = this.checked ? 'Ja - GTM & GA4 Add-on gewünscht' : 'Nein'">
@@ -342,7 +327,7 @@
             </div>
 
             <!-- Form-Felder für Worker: tracking_tier (Radio mit human-readable values) + tracking_extensions (Freitext) -->
-            <div id="addonBoxTracking" class="addon-panel" style="display:none">
+            <div id="addonBoxTracking" class="addon-panel" hidden>
               <div id="trackingTierLbl" class="addon-title">
                 Wie groß ist dein Tracking-Setup ungefähr? <span class="addon-note">(grobe Einordnung, unverbindlich)</span>
               </div>
@@ -368,9 +353,9 @@
                 </label>
               </div>
 
-              <div class="addon-title">
+              <label class="addon-title" for="tracking_extensions">
                 Brauchst du spezielle Erweiterungen? <span class="addon-note">(optional)</span>
-              </div>
+              </label>
               <div class="addon-hint">
                 Server-Side Tracking, Google Ads Conversion, CRM-Anbindung, Cross-Domain, Intercom, ...
               </div>
@@ -379,7 +364,7 @@
             </div>
 
             <input type="hidden" id="addon_tier_val" name="addon_tier" value="">
-            <div id="addonBoxBetreuung" class="addon-panel" style="display:none">
+            <div id="addonBoxBetreuung" class="addon-panel" hidden>
               <div id="betreuungTierLbl" class="addon-title">
                 Welcher Tier passt für dich? <span class="addon-note">(unverbindlich)</span>
               </div>
@@ -403,18 +388,19 @@
               <textarea class="form-textarea" id="message" name="message" rows="5"
                         placeholder="Was brauchst du, bis wann ungefähr, welches Budget hast du grob im Kopf - den Rest klären wir zusammen."
                         required aria-required="true" aria-describedby="messageErr"></textarea>
-              <span class="field-error" id="messageErr" role="alert">Bitte schreib eine kurze Nachricht.</span>
+              <span class="field-error" id="messageErr" role="alert" hidden>Bitte schreib eine kurze Nachricht.</span>
             </div>
 
             <div class="form-check">
               <input type="checkbox" id="privacy" name="privacy"
                     required aria-required="true">
               <label class="form-check-label" for="privacy">
-                Ich habe die <a href="/datenschutz/">Datenschutzerkl&#228;rung</a> gelesen und bin damit einverstanden, dass meine Daten zur Bearbeitung meiner Anfrage gespeichert werden. <span style="color:var(--indigo)">*</span>
+                Ich habe die <a href="/datenschutz/">Datenschutzerkl&#228;rung</a> gelesen und bin damit einverstanden, dass meine Daten zur Bearbeitung meiner Anfrage gespeichert werden. <span>*</span>
               </label>
             </div>
 
-            <button type="submit" class="form-submit" id="submitBtn" aria-live="polite">
+            <noscript><p>Zum Senden dieses Formulars bitte JavaScript aktivieren. Alternativ per E-Mail an <a href="mailto:contact@meixner-tobias.com">contact@meixner-tobias.com</a>.</p></noscript>
+            <button type="submit" class="form-submit" id="submitBtn" aria-live="polite" disabled>
               Nachricht abschicken
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </button>
@@ -422,13 +408,13 @@
         </div>
 
         <!-- Success state -->
-        <div class="form-success" id="formSuccess" role="status">
+        <div class="form-success" id="formSuccess" role="status" hidden>
           <div class="success-icon">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
           <div class="success-title">Nachricht ist raus - danke!</div>
           <p class="success-desc">Ich melde mich in der Regel in den nächsten 24 Stunden bei dir. Vielen Dank!</p>
-          <a href="/" class="btn btn-outline" style="margin-top:8px;">Zurück zur Startseite</a>
+          <a href="/" class="btn btn-outline">Zurück zur Startseite</a>
         </div>
       </div><!-- /form-card -->
 
@@ -457,9 +443,9 @@
         <div class="faq-card reveal" data-d="2">
           <div class="faq-card-title">Kurze Antworten</div>
           <div class="faq-mini">
-            <div class="faq-mini-item"><strong>Wie schnell geht es los?</strong>Nach dem ersten Gespräch und klarem Auftrag meist innerhalb weniger Tage. Ich studiere parallel - aber ich sage dir von Anfang an ehrlich was realistisch ist.</div>
-            <div class="faq-mini-item"><strong>Was kostet das?</strong>GTM & GA4 ab 390 €, Website ab 890 €, Betreuung ab 49 €/Mt. (Plus ab 99 €). Module wie Server-Side oder CRM-Anbindung baue ich modular dazu. Konkretes Angebot nach dem Gespräch.</div>
-            <div class="faq-mini-item"><strong>Was wenn du etwas nicht kannst?</strong>Dann sage ich das direkt - lieber vorher als mittendrin. Ich verkaufe keine Luft.</div>
+            <div class="faq-mini-item"><strong>Wie schnell geht es los?</strong> Nach dem ersten Gespräch und klarem Auftrag meist innerhalb weniger Tage. Ich studiere parallel - aber ich sage dir von Anfang an ehrlich was realistisch ist.</div>
+            <div class="faq-mini-item"><strong>Was kostet das?</strong> GTM & GA4 ab 390 €, Website ab 890 €, Betreuung ab 49 €/Mt. (Plus ab 99 €). Module wie Server-Side oder CRM-Anbindung baue ich modular dazu. Konkretes Angebot nach dem Gespräch.</div>
+            <div class="faq-mini-item"><strong>Was wenn du etwas nicht kannst?</strong> Dann sage ich das direkt - lieber vorher als mittendrin. Ich verkaufe keine Luft.</div>
           </div>
         </div>
 
@@ -492,13 +478,13 @@
 <!-- FOOTER -->
 <footer>
   <div class="container">
-    <div class="footer-cluster" style="display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid var(--border);font-size:.82rem;">
-      <span style="font-family:var(--fd);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);">Themengruppe Server-Side Tracking:</span>
-      <a href="/blog/server-side-tracking/" style="color:var(--muted);text-decoration:none;">Hauptartikel</a>
-      <a href="/blog/stape-io-einrichten/" style="color:var(--muted);text-decoration:none;">Stape.io einrichten</a>
-      <a href="/blog/meta-capi-server-side-gtm/" style="color:var(--muted);text-decoration:none;">Meta CAPI via sGTM</a>
-      <a href="/blog/google-ads-enhanced-conversions/" style="color:var(--muted);text-decoration:none;">Google Ads Enhanced Conv.</a>
-      <a href="/blog/safari-itp-umgehen/" style="color:var(--muted);text-decoration:none;">Safari ITP umgehen</a>
+    <div class="footer-cluster">
+      <span>Themengruppe Server-Side Tracking:</span>
+      <a href="/blog/server-side-tracking/">Hauptartikel</a>
+      <a href="/blog/stape-io-einrichten/">Stape.io einrichten</a>
+      <a href="/blog/meta-capi-server-side-gtm/">Meta CAPI via sGTM</a>
+      <a href="/blog/google-ads-enhanced-conversions/">Google Ads Enhanced Conv.</a>
+      <a href="/blog/safari-itp-umgehen/">Safari ITP umgehen</a>
     </div>
     <div class="footer-row">
       <span class="footer-copy">&#169; 2026 Tobias Meixner</span>
@@ -507,7 +493,7 @@
         <li><a href="/impressum/">Impressum</a></li>
         <li><a href="/datenschutz/">Datenschutz</a></li>
         <li><a href="/agb/">AGB</a></li>
-        <li><button type="button" class="footer-cookie-btn" onclick="CookieScript.instance.show()">Cookie-Einstellungen</button></li>
+        <li><button type="button" class="footer-cookie-btn" onclick="if (window.CookieScript &amp;&amp; CookieScript.instance &amp;&amp; typeof CookieScript.instance.show === &#x27;function&#x27;) CookieScript.instance.show()">Cookie-Einstellungen</button></li>
         <li>
           <a href="https://www.linkedin.com/in/meixner-tobias" target="_blank" rel="noopener" aria-label="Tobias Meixner auf LinkedIn">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>

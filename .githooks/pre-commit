@@ -15,21 +15,30 @@ if [ -z "$asset_staged" ] && [ -z "$html_staged" ]; then
   exit 0
 fi
 
+# The helpers write whole files. Refuse partial staging before any mutation,
+# otherwise a cache refresh could accidentally commit unrelated user edits.
+if [ -n "$asset_staged" ]; then
+  unsafe=$(git diff --name-only -- css/style.css js/main.js sitemap.xml '*.html')
+else
+  unsafe=$(git diff --name-only -- sitemap.xml)
+fi
+if [ -n "$unsafe" ]; then
+  echo "[pre-commit] Cannot safely refresh generated metadata with unstaged changes in:"
+  echo "$unsafe"
+  echo "Stage or stash those changes, then retry. No helper files were changed."
+  exit 1
+fi
+
 if [ -n "$asset_staged" ]; then
   echo "[pre-commit] CSS/JS changed -> running bump_assets.py"
   python bump_assets.py
-  # bump_assets rewrote ?v=... in every HTML file; re-stage them so
-  # the cache-bust update lands in this commit.
-  find . -name "*.html" \
-    -not -path "./.venv/*" \
-    -not -path "./node_modules/*" \
-    -not -path "./.git/*" \
-    -print0 | xargs -0 git add
+  # Only tracked pages are patched/staged. Untracked drafts remain untouched.
+  git ls-files -z -- '*.html' | xargs -0 git add --
 fi
 
 if [ -n "$asset_staged" ] || [ -n "$html_staged" ]; then
   echo "[pre-commit] Refreshing sitemap.xml lastmod dates"
-  python update_sitemap.py
+  python update_sitemap.py --staged-only
   git add sitemap.xml
 fi
 

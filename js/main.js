@@ -1,8 +1,4 @@
-/* main.js
- * Globale Website-Logik für alle Seiten.
- * Diese Datei ersetzt wiederholte Inline-Skripte in allen HTML-Dateien.
- */
-
+/* Functional UI only. Visual reset contract: docs/VISUAL_RESET_AUDIT.md. */
 (function () {
   "use strict";
 
@@ -18,13 +14,6 @@
     document.head.appendChild(cookieScript);
   }
 
-  /* ═══════════════════════════════════════════════════
-     Helferfunktionen
-  ═══════════════════════════════════════════════════ */
-  function safeQuery(selector) {
-    return document.querySelector(selector);
-  }
-
   function safeQueryAll(selector, root) {
     return Array.prototype.slice.call((root || document).querySelectorAll(selector));
   }
@@ -37,1260 +26,137 @@
     }
   }
 
-  function initThemeToggle() {
-    var themeToggle = document.getElementById("themeToggle");
-    var themeToggleMobile = document.getElementById("themeToggleMobile");
-    var savedTheme = localStorage.getItem("theme");
-
-    // Dark is the default appearance and lives on :root, so the absence of
-    // data-theme means dark. Only an explicit light choice sets the attribute.
-    // The inline anti-flash script in every <head> applies the same rule
-    // before first paint.
-    var THEME_COLORS = { dark: "#0E1114", light: "#FAFAFA" };
-
-    function isLight() {
-      return document.documentElement.getAttribute("data-theme") === "light";
-    }
-
-    function syncThemeColorMeta() {
-      var meta = document.querySelector('meta[name="theme-color"]');
-      if (meta) meta.setAttribute("content", THEME_COLORS[isLight() ? "light" : "dark"]);
-    }
-
-    function updateThemeLabel() {
-      var light = isLight();
-      safeQueryAll(".theme-label").forEach(function (el) {
-        el.textContent = light ? "Dark Mode" : "Light Mode";
-      });
-      var ariaLabel = light
-        ? "Dunkles Design aktivieren"
-        : "Helles Design aktivieren";
-      [themeToggle, themeToggleMobile].forEach(function (btn) {
-        if (btn) {
-          btn.setAttribute("aria-label", ariaLabel);
-          btn.setAttribute("aria-pressed", String(!light));
-        }
-      });
-      syncThemeColorMeta();
-    }
-
-    function setDarkTheme() {
-      document.documentElement.removeAttribute("data-theme");
-      localStorage.setItem("theme", "dark");
-    }
-
-    function setLightTheme() {
-      document.documentElement.setAttribute("data-theme", "light");
-      localStorage.setItem("theme", "light");
-    }
-
-    function toggleTheme() {
-      if (isLight()) {
-        setDarkTheme();
-      } else {
-        setLightTheme();
-      }
-      updateThemeLabel();
-    }
-
-    if (savedTheme === "light") {
-      setLightTheme();
-    }
-
-    updateThemeLabel();
-
-    if (themeToggle) {
-      themeToggle.addEventListener("click", toggleTheme);
-    }
-
-    if (themeToggleMobile) {
-      themeToggleMobile.addEventListener("click", toggleTheme);
-    }
-  }
-
-  function initNavbarScroll() {
-    var nav = document.getElementById("nav");
-    if (!nav) {
-      return;
-    }
-    var isScrolled = false;
-    function sync() {
-      var shouldBe = window.scrollY > 12;
-      if (shouldBe !== isScrolled) {
-        isScrolled = shouldBe;
-        nav.classList.toggle("scrolled", shouldBe);
-      }
-    }
-    sync();
-    window.addEventListener("scroll", sync, { passive: true });
-  }
+  // One shared boundary for the CSS fallback, drawer and project details.
+  var mobileViewport = window.matchMedia("(max-width: 768px)");
 
   function initDrawer() {
     var burger = document.getElementById("burger");
     var drawer = document.getElementById("drawer");
-    if (!burger || !drawer) {
-      return;
-    }
+    if (!burger || !drawer) return;
 
-    // Start in closed/inert state — guarantees no focus leak even
-    // if the HTML attribute was forgotten on a given page.
-    drawer.setAttribute("inert", "");
-
-    function closeDrawer() {
-      var wasOpen = drawer.classList.contains("is-open");
-      drawer.classList.remove("is-open");
-      burger.classList.remove("is-open");
-      burger.setAttribute("aria-expanded", "false");
-      drawer.setAttribute("inert", "");
-      document.body.style.overflow = "";
-      if (window.__lenis && wasOpen) window.__lenis.start();
-      if (wasOpen) {
-        burger.focus();
-      }
-    }
-
-    burger.addEventListener("click", function () {
-      var open = !drawer.classList.contains("is-open");
+    function setOpen(open, restoreFocus) {
+      var wasOpen = !drawer.hidden;
+      drawer.hidden = !open;
+      drawer.toggleAttribute("inert", !open);
       drawer.classList.toggle("is-open", open);
       burger.classList.toggle("is-open", open);
       burger.setAttribute("aria-expanded", String(open));
-      document.body.style.overflow = open ? "hidden" : "";
-      if (window.__lenis) {
-        open ? window.__lenis.stop() : window.__lenis.start();
-      }
       if (open) {
-        drawer.removeAttribute("inert");
         var firstLink = drawer.querySelector("a");
-        if (firstLink) {
-          firstLink.focus();
-        }
-      } else {
-        drawer.setAttribute("inert", "");
+        if (firstLink) firstLink.focus();
+      } else if (wasOpen && restoreFocus && !burger.hidden) {
         burger.focus();
       }
-    });
+    }
 
-    safeQueryAll("#drawer a").forEach(function (a) {
-      a.addEventListener("click", closeDrawer);
-    });
+    function syncViewport() {
+      var focusInDrawer = drawer.contains(document.activeElement);
+      var desktopLinks = document.querySelector(".nav-links");
+      var focusInDesktopLinks = desktopLinks && desktopLinks.contains(document.activeElement);
+      burger.hidden = !mobileViewport.matches;
+      if (mobileViewport.matches && focusInDesktopLinks) burger.focus();
+      if (!mobileViewport.matches) {
+        setOpen(false, false);
+        if (focusInDrawer) {
+          var firstDesktopLink = document.querySelector(".nav-links a");
+          if (firstDesktopLink) firstDesktopLink.focus();
+        }
+      }
+    }
 
+    setOpen(false, false);
+    syncViewport();
+    mobileViewport.addEventListener("change", syncViewport);
+    burger.addEventListener("click", function () {
+      setOpen(drawer.hidden, true);
+    });
+    safeQueryAll("a", drawer).forEach(function (link) {
+      link.addEventListener("click", function () { setOpen(false, false); });
+    });
     document.addEventListener("click", function (event) {
       if (!drawer.contains(event.target) && !burger.contains(event.target)) {
-        closeDrawer();
+        setOpen(false, false);
       }
     });
-
     document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && drawer.classList.contains("is-open")) {
-        closeDrawer();
+      if (event.key === "Escape" && !drawer.hidden) {
+        setOpen(false, true);
       }
-    });
-
-    // Defensive: if user resizes from mobile to desktop while drawer
-    // is open, force-close it. Prevents stuck-open state when CSS
-    // hides the drawer but JS state still says "open".
-    var resizeTimer;
-    window.addEventListener("resize", function () {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(function () {
-        if (window.innerWidth >= 769 && drawer.classList.contains("is-open")) {
-          closeDrawer();
-        }
-      }, 150);
     });
   }
 
   function initLanguageSwitcher() {
-    var langBtn = document.getElementById("langBtn");
-    var langDropdown = document.getElementById("langDropdown");
-    if (!langBtn || !langDropdown) {
-      return;
+    var button = document.getElementById("langBtn");
+    var menu = document.getElementById("langDropdown");
+    if (!button || !menu) return;
+
+    function setOpen(open, restoreFocus) {
+      menu.hidden = !open;
+      menu.toggleAttribute("inert", !open);
+      menu.classList.toggle("is-open", open);
+      button.classList.toggle("is-open", open);
+      button.setAttribute("aria-expanded", String(open));
+      if (restoreFocus) button.focus();
     }
 
-    // Start in inert/closed state — matches the initial HTML attribute
-    // and guarantees no focus leak even if HTML attr was forgotten.
-    langDropdown.setAttribute("inert", "");
-
-    langBtn.addEventListener("click", function (event) {
-      event.stopPropagation();
-      var willOpen = !langDropdown.classList.contains("is-open");
-      langDropdown.classList.toggle("is-open", willOpen);
-      langBtn.classList.toggle("is-open", willOpen);
-      langBtn.setAttribute("aria-expanded", String(willOpen));
-      if (willOpen) {
-        langDropdown.removeAttribute("inert");
-      } else {
-        langDropdown.setAttribute("inert", "");
-      }
-    });
-
+    setOpen(false, false);
+    button.hidden = false;
+    button.addEventListener("click", function () { setOpen(menu.hidden, false); });
     document.addEventListener("click", function (event) {
-      if (langDropdown.contains(event.target) || langBtn.contains(event.target)) {
-        return;
+      if (!menu.contains(event.target) && !button.contains(event.target)) {
+        setOpen(false, false);
       }
-      langDropdown.classList.remove("is-open");
-      langBtn.classList.remove("is-open");
-      langBtn.setAttribute("aria-expanded", "false");
-      langDropdown.setAttribute("inert", "");
     });
-
     document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && langDropdown.classList.contains("is-open")) {
-        langDropdown.classList.remove("is-open");
-        langBtn.classList.remove("is-open");
-        langBtn.setAttribute("aria-expanded", "false");
-        langBtn.focus();
-      }
+      if (event.key === "Escape" && !menu.hidden) setOpen(false, true);
     });
   }
 
-  /* ═══════════════════════════════════════════════════
-     Case-card accordion state — <details> elements on /projekte/
-     should be closed on mobile (accordion) and open on desktop
-     (full expanded case-study layout).
-     CSS-only "force open on desktop" fails in some browsers because
-     the details content is hidden via shadow DOM, so we explicitly
-     set the [open] attribute per viewport.
-  ═══════════════════════════════════════════════════ */
   function initCaseAccordion() {
     var cards = safeQueryAll("details.case-card-collapsible");
     if (!cards.length) return;
-    var mql = window.matchMedia("(min-width: 769px)");
     function sync() {
-      var desktop = mql.matches;
-      cards.forEach(function (d) { d.open = desktop; });
+      cards.forEach(function (card) { card.open = !mobileViewport.matches; });
     }
     sync();
-    if (mql.addEventListener) mql.addEventListener("change", sync);
-    else if (mql.addListener) mql.addListener(sync);           // Safari <14
-    // When user toggles a case (mobile), page height changes below —
-    // ScrollTriggers cached at init would fire at stale positions.
-    cards.forEach(function (d) {
-      d.addEventListener("toggle", function () {
-        setTimeout(function () {
-          if (window.ScrollTrigger) window.ScrollTrigger.refresh();
-        }, 300);
-      });
-    });
+    mobileViewport.addEventListener("change", sync);
   }
-
-  /* ═══════════════════════════════════════════════════
-     Scroll-triggered highlight for cards
-     Adds .in-view once a card is nicely settled inside the viewport
-     so the visitor actually WATCHES the highlight transition instead
-     of a snap. Fires ONCE per card (unobserve after first trigger)
-     so the highlight persists as "reveal-and-stay" — no flashing
-     on/off when scrolling past-and-back.
-     Trigger geometry: threshold 0.45 = card must be ~45 percent inside
-     the viewport; rootMargin -15 percent bottom = the effective bottom
-     of the viewport sits 15 percent up from the actual bottom, so the
-     card has to be well past the fold before firing.
-     Runs on EVERY viewport; CSS gates the visual effect to mobile via
-     @media (max-width: 768px) — desktop keeps its :hover states.
-  ═══════════════════════════════════════════════════ */
-  /* ═══════════════════════════════════════════════════
-     Stage A — Lenis + GSAP + ScrollTrigger Enhancements
-     -----
-     Vendored under /js/vendor/. Each helper below early-returns
-     if its required global is missing, so the site still works
-     with just the base IntersectionObserver reveals if any
-     script gets blocked by a network hiccup or extension.
-  ═══════════════════════════════════════════════════ */
-
-  var gsapReady   = typeof window.gsap !== "undefined";
-  var stReady     = gsapReady && typeof window.ScrollTrigger !== "undefined";
-  var lenisReady  = typeof window.Lenis !== "undefined";
-  var reduceMotionMQL = window.matchMedia("(prefers-reduced-motion: reduce)");
-  var reduceMotion = reduceMotionMQL.matches;
-
-  // Mid-session flip to reduce-motion: tear down all active animations.
-  // Flip back requires a page reload (re-init is complex, edge case).
-  function handleReduceMotionChange(e) {
-    if (!e.matches) return;
-    reduceMotion = true;
-    try {
-      if (window.__lenis && window.__lenis.destroy) window.__lenis.destroy();
-      if (stReady) window.ScrollTrigger.getAll().forEach(function (t) { t.kill(); });
-      var sig = document.getElementById("signal-line");
-      if (sig) sig.remove();
-      if (window.__heroRafId) cancelAnimationFrame(window.__heroRafId);
-    } catch (err) { /* best-effort teardown */ }
-  }
-  if (reduceMotionMQL.addEventListener) {
-    reduceMotionMQL.addEventListener("change", handleReduceMotionChange);
-  } else if (reduceMotionMQL.addListener) {
-    reduceMotionMQL.addListener(handleReduceMotionChange); // Safari <14
-  }
-
-  // Walk DOM, replace text nodes with .char spans, preserve inline elements + <br>
-  var SVG_NS = "http://www.w3.org/2000/svg";
-  var MATHML_NS = "http://www.w3.org/1998/Math/MathML";
-  function splitChars(el) {
-    if (!el || el.dataset.split === "done") return safeQueryAll(".char", el);
-    el.dataset.split = "done";
-    var chars = [];
-    function walk(node) {
-      if (node.nodeType === 3) { // TEXT_NODE
-        var frag = document.createDocumentFragment();
-        var txt = node.textContent;
-        for (var i = 0; i < txt.length; i++) {
-          var ch = txt[i];
-          var span = document.createElement("span");
-          span.className = "char";
-          span.setAttribute("aria-hidden", "true");
-          span.innerHTML = ch === " " ? "&nbsp;" : ch;
-          frag.appendChild(span);
-          chars.push(span);
-        }
-        node.parentNode.replaceChild(frag, node);
-      } else if (node.nodeType === 1 && node.tagName !== "BR") {
-        // Skip descent into SVG/MathML — HTML spans in those namespaces
-        // corrupt render + break <title>/<text> a11y.
-        if (node.namespaceURI === SVG_NS || node.namespaceURI === MATHML_NS) return;
-        Array.prototype.slice.call(node.childNodes).forEach(walk);
-      }
-    }
-    var accessibleLabel = el.textContent;
-    Array.prototype.slice.call(el.childNodes).forEach(walk);
-    el.setAttribute("aria-label", accessibleLabel);
-    return chars;
-  }
-
-  // Word-split preserving inline elements (<strong>, <em>, etc.) — walks DOM
-  function splitWords(el) {
-    if (!el || el.dataset.split === "done") return safeQueryAll(".word", el);
-    el.dataset.split = "done";
-    var words = [];
-    function walk(node) {
-      if (node.nodeType === 3) {
-        var parts = node.textContent.split(/(\s+)/);
-        var frag = document.createDocumentFragment();
-        parts.forEach(function (p) {
-          if (/^\s+$/.test(p)) {
-            frag.appendChild(document.createTextNode(p));
-          } else if (p.length) {
-            var span = document.createElement("span");
-            span.className = "word";
-            span.setAttribute("aria-hidden", "true");
-            span.textContent = p;
-            frag.appendChild(span);
-            words.push(span);
-          }
-        });
-        node.parentNode.replaceChild(frag, node);
-      } else if (node.nodeType === 1 && node.tagName !== "BR") {
-        Array.prototype.slice.call(node.childNodes).forEach(walk);
-      }
-    }
-    var accessibleLabel = el.textContent.trim();
-    Array.prototype.slice.call(el.childNodes).forEach(walk);
-    el.setAttribute("aria-label", accessibleLabel);
-    return words;
-  }
-
-  // 1. Lenis smooth scroll — wheel/keyboard only, keep native on touch
-  var lenis = null;
-  function initSmoothScroll() {
-    if (!lenisReady || reduceMotion) return;
-    // Kill CSS scroll-behavior:smooth so it doesn't double up with Lenis's
-    // own smoothing (would cause jerky/laggy scrolling on anchor jumps).
-    document.documentElement.style.scrollBehavior = "auto";
-    lenis = new window.Lenis({
-      duration: 1.05,
-      easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
-      smoothWheel: true,
-      smoothTouch: false, // iOS momentum > Lenis touch
-    });
-    window.__lenis = lenis; // expose so drawer/other UI can stop/start it
-    if (stReady) lenis.on("scroll", window.ScrollTrigger.update);
-    if (gsapReady) {
-      window.gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
-      window.gsap.ticker.lagSmoothing(0);
-    }
-    // Route anchor clicks through Lenis (fixed nav offset)
-    safeQueryAll('a[href^="#"]').forEach(function (link) {
-      var href = link.getAttribute("href");
-      if (!href || href === "#" || href.length < 2) return;
-      link.addEventListener("click", function (e) {
-        // getElementById tolerates any id string (querySelector throws on
-        // hashes like #123abc, #a.b that aren't valid CSS selectors).
-        var target = document.getElementById(href.slice(1));
-        if (!target) return;
-        e.preventDefault();
-        // Recompute nav-h each click — --nav-h flips at tablet breakpoint
-        var navEl = document.getElementById("nav");
-        var navH = navEl ? navEl.getBoundingClientRect().height : 68;
-        lenis.scrollTo(target, { offset: -navH - 12 });
-        // Transfer keyboard/AT focus so skip-link + TOC anchors actually
-        // move focus to the target — Lenis-only scroll wouldn't.
-        if (!target.hasAttribute("tabindex")) {
-          target.setAttribute("tabindex", "-1");
-        }
-        target.focus({ preventScroll: true });
-      });
-    });
-  }
-
-  // 2. Hero intro — [data-intro] char stagger reveal
-  function initHeroIntro() {
-    if (!gsapReady) return;
-    var introEls = safeQueryAll("[data-intro]");
-    if (!introEls.length) return;
-    // VoiceOver hardening: set aria-label on the closest heading *before*
-    // splitChars mutates the DOM. Ensures the H1's accessible name is
-    // computed from a single explicit label rather than aggregated from
-    // aria-label attributes on generic spans (WebKit is inconsistent).
-    var headingsSet = new Set ? new Set() : { _s: [], has: function (v) { return this._s.indexOf(v) >= 0; }, add: function (v) { this._s.push(v); } };
-    introEls.forEach(function (el) {
-      var heading = el.closest && el.closest("h1, h2, h3, h4, h5, h6");
-      if (heading && !heading.hasAttribute("aria-label") && !headingsSet.has(heading)) {
-        headingsSet.add(heading);
-        heading.setAttribute("aria-label", heading.textContent.trim().replace(/\s+/g, " "));
-      }
-    });
-    // reduce-motion: still split so screen readers get aria-label, but skip anim
-    if (reduceMotion) {
-      introEls.forEach(splitChars);
-      return;
-    }
-    var allChars = [];
-    introEls.forEach(function (el) {
-      allChars.push.apply(allChars, splitChars(el));
-    });
-    if (!allChars.length) return;
-    window.gsap.set(allChars, { yPercent: 110 });
-    window.gsap.to(allChars, {
-      yPercent: 0,
-      duration: 0.95,
-      stagger: 0.028,
-      ease: "power4.out",
-      delay: 0.12,
-    });
-  }
-
-  // 3. Section titles / labels / descriptions — fade-up on scroll
-  function initSectionReveals() {
-    if (!stReady || reduceMotion) return;
-    safeQueryAll(".sec-title, .sec-label, .sec-desc, .article-title, .page-hero__desc").forEach(function (el) {
-      if (el.hasAttribute("data-intro") || el.closest("[data-intro]")) return;
-      // Skip elements already handled by .reveal IntersectionObserver system
-      if (el.classList.contains("reveal")) return;
-      window.gsap.from(el, {
-        y: 32, opacity: 0, duration: 0.85, ease: "power3.out",
-        scrollTrigger: { trigger: el, start: "top 88%" },
-      });
-    });
-  }
-
-  // 4. Magnetic buttons — cursor pulls element toward it
-  function initMagnetic() {
-    if (!gsapReady || reduceMotion || !window.matchMedia("(hover: hover)").matches) return;
-    // Implicit selectors: primary CTAs get magnetism without needing per-page markup.
-    // Explicit opt-in via [data-magnetic] still works and can override strength.
-    var selectors = [
-      "[data-magnetic]",
-      ".nav-cta",
-      ".hero-btns .btn-primary",
-      "#submitBtn",
-      ".cta-box .btn",
-    ].join(", ");
-    safeQueryAll(selectors).forEach(function (el) {
-      var strength = parseFloat(el.dataset.magnetic) || 0.24;
-      el.addEventListener("mousemove", function (e) {
-        var r = el.getBoundingClientRect();
-        var x = (e.clientX - r.left - r.width / 2) * strength;
-        var y = (e.clientY - r.top - r.height / 2) * strength;
-        window.gsap.to(el, { x: x, y: y, duration: 0.4, ease: "power3.out" });
-      });
-      el.addEventListener("mouseleave", function () {
-        window.gsap.to(el, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1, 0.4)" });
-      });
-    });
-  }
-
-  // 5. Counter animations — [data-count="100"] counts up 0 → 100 on enter
-  function initCounters() {
-    if (!stReady) return;
-    safeQueryAll("[data-count]").forEach(function (el) {
-      var target = parseFloat(el.dataset.count);
-      if (isNaN(target)) return;
-      var suffix = el.dataset.countSuffix || "";
-      var prefix = el.dataset.countPrefix || "";
-      // reduce-motion: normalize to target immediately, no animation
-      if (reduceMotion) {
-        el.textContent = prefix + target + suffix;
-        return;
-      }
-      var obj = { v: 0 };
-      // NOTE: do NOT overwrite HTML value at init — that flashes "0" before the
-      // ScrollTrigger fires. Wait for onEnter, then set to 0 + animate up.
-      window.ScrollTrigger.create({
-        trigger: el, start: "top 92%", once: true,
-        onEnter: function () {
-          el.textContent = prefix + "0" + suffix;
-          window.gsap.to(obj, {
-            v: target, duration: 1.6, ease: "power2.out",
-            onUpdate: function () { el.textContent = prefix + Math.round(obj.v) + suffix; },
-          });
-        },
-      });
-    });
-  }
-
-  // 6. Hero parallax — H1 slight yPercent + opacity dip; blobs drift
-  function initHeroParallax() {
-    if (!stReady || reduceMotion) return;
-    var hero = document.querySelector(".hero");
-    if (!hero) return;
-    var h1 = hero.querySelector(".hero-h1, h1");
-    if (h1) {
-      window.gsap.to(h1, {
-        yPercent: -8, opacity: 0.65, ease: "none",
-        scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: 0.5 },
-      });
-    }
-    hero.querySelectorAll(".blob").forEach(function (b, i) {
-      window.gsap.to(b, {
-        yPercent: 25 + i * 12,
-        ease: "none",
-        scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true },
-      });
-    });
-  }
-
-  // 7. Pinned word-reveal — words darken as user scrolls through [data-pin-reveal]
-  function initPinnedWordReveal() {
-    if (!stReady || reduceMotion) return;
-    safeQueryAll("[data-pin-reveal]").forEach(function (el) {
-      var words = splitWords(el);
-      if (!words.length) return;
-      window.gsap.set(words, { opacity: 0.22 });
-      window.gsap.to(words, {
-        opacity: 1, stagger: 0.05, ease: "none",
-        scrollTrigger: { trigger: el, start: "top 75%", end: "bottom 45%", scrub: 0.5 },
-      });
-    });
-  }
-
-  // 8. Case-card clip-path reveals
-  function initCaseReveals() {
-    if (!stReady || reduceMotion) return;
-    safeQueryAll("[data-case-reveal]").forEach(function (el) {
-      window.gsap.fromTo(el,
-        { clipPath: "inset(0 0 100% 0)" },
-        {
-          clipPath: "inset(0 0 0% 0)",
-          duration: 1.1, ease: "power4.out",
-          scrollTrigger: { trigger: el, start: "top 85%" },
-        }
-      );
-    });
-  }
-
-  /* ═══════════════════════════════════════════════════
-     Stage C — Per-Page Signature Effects
-     Universal 3D tilt-on-hover on all card types + specific
-     signature effects per page (process-steps count-in with
-     line-draw on /leistungen/, big counter-motion numbers on
-     /projekte/ case-cards, personal-img parallax on /ueber-mich/,
-     hobby-pill scale-in reveal, small 3D wireframe canvas on
-     /kontakt/, floating idle animation on hero decorative elements).
-     Skip on blog articles/listings — user preference.
-  ═══════════════════════════════════════════════════ */
-
-  // 9. Floating idle animation — subtle bob for decorative elements
-  // Animates a CSS custom property (--float-y) instead of the transform
-  // directly, so elements with existing CSS transforms (e.g. the BikeCare
-  // mockups: translateX(-45%) rotate(-6deg)) can compose the float into
-  // their own transform via translateY(var(--float-y)). Elements without
-  // a custom transform get the default rule from CSS.
-  function initFloating() {
-    if (!gsapReady || reduceMotion) return;
-    safeQueryAll("[data-float]").forEach(function (el, i) {
-      var amp = parseFloat(el.dataset.float) || 6;      // px amplitude
-      var dur = parseFloat(el.dataset.floatDur) || 3.2;  // seconds
-      window.gsap.to(el, {
-        "--float-y": (-amp) + "px",
-        duration: dur,
-        yoyo: true,
-        repeat: -1,
-        ease: "sine.inOut",
-        delay: i * 0.15,  // desync when multiple floats near each other
-      });
-    });
-  }
-
-  // 10. Parallax elements — [data-parallax-y="-10"] drifts by yPercent
-  function initParallaxElements() {
-    if (!stReady || reduceMotion) return;
-    safeQueryAll("[data-parallax-y]").forEach(function (el) {
-      var amt = parseFloat(el.dataset.parallaxY);
-      if (isNaN(amt)) return;
-      window.gsap.to(el, {
-        yPercent: amt,
-        ease: "none",
-        scrollTrigger: {
-          trigger: el.closest("section") || el,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-    });
-  }
-
-  // 11. Process steps — count-in for numbered circles + line draw across grid
-  // Targets .process-step-num with numeric text (01, 02, 03, ...). Count from 0.
-  function initProcessStepsReveal() {
-    if (!stReady) return;
-    var stepNums = safeQueryAll(".process-step-num");
-    if (!stepNums.length) return;
-    var processGrid = document.querySelector(".process-grid");
-    if (!processGrid) return;
-
-    if (reduceMotion) return; // steps already show final value in HTML
-
-    // Count-up per step, staggered as grid enters viewport
-    var stepData = stepNums.map(function (el) {
-      var raw = el.textContent.trim();
-      var target = parseInt(raw, 10);
-      return { el: el, target: isNaN(target) ? null : target, pad: raw.length };
-    }).filter(function (s) { return s.target !== null; });
-
-    if (!stepData.length) return;
-
-    // Start state: show "00" (padded)
-    stepData.forEach(function (s) {
-      s.el.textContent = String(0).padStart(s.pad, "0");
-    });
-
-    window.ScrollTrigger.create({
-      trigger: processGrid, start: "top 80%", once: true,
-      onEnter: function () {
-        stepData.forEach(function (s, i) {
-          var obj = { v: 0 };
-          window.gsap.to(obj, {
-            v: s.target, duration: 0.9,
-            delay: i * 0.15,
-            ease: "power2.out",
-            onUpdate: function () {
-              s.el.textContent = String(Math.round(obj.v)).padStart(s.pad, "0");
-            },
-          });
-        });
-      },
-    });
-  }
-
-  // 12. Case-card counter-motion — inject big translucent numbers behind
-  // each .case-card that scroll OPPOSITE the page (elzn's gegenläufige Nummer).
-  function initCaseCounterMotion() {
-    if (!stReady || reduceMotion) return;
-    var cases = safeQueryAll("details.case-card-collapsible, .case-card");
-    if (!cases.length) return;
-    cases.forEach(function (card, i) {
-      if (card.querySelector(".case-card-num-bg")) return; // idempotent
-      var num = document.createElement("span");
-      num.className = "case-card-num-bg";
-      num.setAttribute("aria-hidden", "true");
-      num.textContent = "0" + (i + 1);
-      card.appendChild(num);
-      window.gsap.fromTo(num,
-        { yPercent: 60 },
-        {
-          yPercent: -60, ease: "none",
-          scrollTrigger: {
-            trigger: card,
-            start: "top bottom", end: "bottom top",
-            scrub: true,
-          },
-        }
-      );
-    });
-  }
-
-  // 13. Hobby-pill reveal — scale + fade in with stagger when hobby-list enters
-  function initHobbyPillReveal() {
-    if (!stReady || reduceMotion) return;
-    var lists = safeQueryAll(".hobby-list");
-    if (!lists.length) return;
-    lists.forEach(function (list) {
-      var pills = safeQueryAll(".hobby-pill", list);
-      if (!pills.length) return;
-      window.gsap.from(pills, {
-        opacity: 0, scale: 0.7, y: 12,
-        duration: 0.55,
-        stagger: 0.05,
-        ease: "back.out(1.8)",
-        scrollTrigger: { trigger: list, start: "top 88%", once: true },
-      });
-    });
-  }
-
-  // 14. Contact canvas — small 3D wireframe icosahedron behind contact-form.
-  // Reuses the /js/vendor/three.min.js already loaded for the home hero (if not
-  // yet loaded, lazily loads it). Semi-transparent, non-interactive, pauses off-screen.
-  function initContactCanvas() {
-    if (reduceMotion) return;
-    var canvas = document.getElementById("contact-canvas");
-    if (!canvas) return;
-    // Same gate as the hero canvas: three.js is 603 KB, and this is a purely
-    // decorative backdrop. Loading it on a phone spends the mobile budget on
-    // something nobody came for. Desktop and a 4g-class connection only.
-    if (window.innerWidth <= 768) return;
-    if (navigator.connection && navigator.connection.effectiveType !== "4g") return;
-
-    function boot() {
-      if (typeof THREE === "undefined") return;
-      var host = canvas.parentElement;
-      var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.6));
-      var scene = new THREE.Scene();
-      var camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
-      camera.position.z = 6;
-      function resize() {
-        var w = host.offsetWidth, h = host.offsetHeight;
-        if (!w || !h) return;
-        renderer.setSize(w, h);
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
-      }
-      resize();
-      var resizeObs = new ResizeObserver(resize);
-      resizeObs.observe(host);
-
-      // Two subtle wireframes drifting in the background
-      var ico = new THREE.Mesh(
-        new THREE.IcosahedronGeometry(2.2, 1),
-        new THREE.MeshBasicMaterial({ color: 0x0284c7, wireframe: true, transparent: true, opacity: 0.16 })
-      );
-      ico.position.set(1.3, 0.4, 0);
-      scene.add(ico);
-      var tor = new THREE.Mesh(
-        new THREE.TorusGeometry(1.2, 0.28, 12, 40),
-        new THREE.MeshBasicMaterial({ color: 0x38bdf8, wireframe: true, transparent: true, opacity: 0.12 })
-      );
-      tor.position.set(-1.8, -0.8, -0.3);
-      scene.add(tor);
-
-      // Pause when off-screen
-      var isVisible = true;
-      if (typeof IntersectionObserver !== "undefined") {
-        var visObs = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) { isVisible = e.isIntersecting; });
-        }, { rootMargin: "100px" });
-        visObs.observe(host);
-      }
-
-      var time = 0, rafId = 0;
-      function animate() {
-        rafId = requestAnimationFrame(animate);
-        if (!isVisible) return;
-        time += 0.003;
-        ico.rotation.y = time * 0.35;
-        ico.rotation.x = time * 0.18;
-        tor.rotation.z = time * 0.45;
-        tor.rotation.y = time * 0.22;
-        renderer.render(scene, camera);
-      }
-      animate();
-      window.addEventListener("pagehide", function (e) {
-        if (e && e.persisted) return;
-        if (rafId) cancelAnimationFrame(rafId);
-        if (visObs) visObs.disconnect();
-        resizeObs.disconnect();
-        renderer.dispose();
-      });
-    }
-
-    if (typeof THREE !== "undefined") {
-      boot();
-    } else {
-      var script = document.querySelector('script[src="/js/vendor/three.min.js"]');
-      if (script) {
-        // Home hero already loaded it or is loading it
-        var poll = setInterval(function () {
-          if (typeof THREE !== "undefined") { clearInterval(poll); boot(); }
-        }, 100);
-        setTimeout(function () { clearInterval(poll); }, 5000);
-      } else {
-        // Lazy load
-        var s = document.createElement("script");
-        s.src = "/js/vendor/three.min.js";
-        s.onload = boot;
-        s.onerror = function () { if (window.console) console.warn("three.js failed to load"); };
-        document.head.appendChild(s);
-      }
-    }
-  }
-
-  function initCardScrollHighlight() {
-    if (typeof IntersectionObserver === "undefined") return;
-    var cards = safeQueryAll(
-      ".proj-card, .pain-card, details.case-card-collapsible, .case-card, .why-freelance-card, .travel-card, .svc-card, .own-card, .about-hero-img, .personal-img-wrap, .cta-box"
-    );
-    if (!cards.length) return;
-    var obs = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) {
-            e.target.classList.add("in-view");
-            obs.unobserve(e.target);        // one-shot reveal
-          }
-        });
-      },
-      { threshold: 0.45, rootMargin: "0px 0px -15% 0px" }
-    );
-    cards.forEach(function (c) { obs.observe(c); });
-  }
-
-  function initRevealAnimations() {
-    var all = safeQueryAll(".reveal");
-
-    function revealAll() {
-      all.forEach(function (el) { el.classList.add("in"); });
-    }
-
-    // A .reveal element starts at opacity 0. If anything prevents the
-    // observer from running, that content stays invisible — so every exit
-    // path here has to end with the content shown, never with a bare return.
-    if (typeof IntersectionObserver === "undefined" || reduceMotion) {
-      revealAll();
-      return;
-    }
-
-    var observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) {
-            return;
-          }
-          entry.target.classList.add("in");
-          observer.unobserve(entry.target);
-        });
-      },
-      {
-        threshold: 0,
-        // 200px vor Viewport-Eintritt triggern → Reveal ist fertig
-        // bevor User das Element wirklich sieht (kein Scroll-Lag)
-        rootMargin: "0px 0px 200px 0px",
-      },
-    );
-
-    all.forEach(function (element) {
-      observer.observe(element);
-    });
-
-    // Safety net: if the observer has not fired for an element that is
-    // already inside the viewport after 1.2s (print stylesheets, an aborted
-    // layout pass, a browser quirk), show it anyway. Cheap, and it makes
-    // "invisible page" impossible.
-    window.setTimeout(function () {
-      all.forEach(function (el) {
-        if (el.classList.contains("in")) return;
-        var r = el.getBoundingClientRect();
-        if (r.top < window.innerHeight && r.bottom > 0) {
-          el.classList.add("in");
-          observer.unobserve(el);
-        }
-      });
-    }, 1200);
-  }
-
-  /* The 3D card tilt lived here. Removed with the redesign: it ran a
-     mousemove handler that read getBoundingClientRect() and then wrote
-     style.transform on every pointer move — a layout read/write per frame
-     on whichever card the pointer was crossing. Card hover is now a pure
-     CSS colour transition (background + border), which the compositor
-     handles without touching layout at all. */
 
   function initFaqAccordion() {
-    var faqButtons = safeQueryAll(".faq-q");
-    if (faqButtons.length === 0) {
-      return;
+    var items = safeQueryAll(".faq-item");
+    function setOpen(item, open) {
+      var button = item.querySelector(".faq-q");
+      var answer = item.querySelector(".faq-a");
+      if (!button || !answer) return;
+      item.classList.toggle("open", open);
+      answer.hidden = !open;
+      button.setAttribute("aria-expanded", String(open));
     }
-
-    faqButtons.forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var item = btn.closest(".faq-item");
-        var isOpen = item.classList.contains("open");
-
-        // Close all other open items (one-at-a-time accordion behavior)
-        safeQueryAll(".faq-item.open").forEach(function (openItem) {
-          openItem.classList.remove("open");
-          var openBtn = openItem.querySelector(".faq-q");
-          if (openBtn) {
-            openBtn.setAttribute("aria-expanded", "false");
-          }
-        });
-
-        // Toggle the clicked item
-        if (!isOpen) {
-          item.classList.add("open");
-          btn.setAttribute("aria-expanded", "true");
-        }
-        // FAQ open/close changes page height — refresh ScrollTriggers below
-        // after the CSS max-height transition finishes (see .faq-a rule).
-        setTimeout(function () {
-          if (window.ScrollTrigger) window.ScrollTrigger.refresh();
-        }, 500);
+    items.forEach(function (item, index) {
+      var button = item.querySelector(".faq-q");
+      var answer = item.querySelector(".faq-a");
+      if (!button || !answer) return;
+      if (!answer.id) answer.id = "faq-answer-" + (index + 1);
+      button.setAttribute("aria-controls", answer.id);
+      setOpen(item, false);
+      button.addEventListener("click", function () {
+        var open = answer.hidden;
+        items.forEach(function (other) { setOpen(other, false); });
+        setOpen(item, open);
       });
     });
   }
-
-  function initHeroCanvas() {
-    var canvas = document.getElementById("hero-canvas");
-    if (!canvas) {
-      return;
-    }
-
-    var shouldLoadThree =
-      window.innerWidth > 768 &&
-      !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (navigator.connection) {
-      shouldLoadThree =
-        shouldLoadThree && navigator.connection.effectiveType === "4g";
-    }
-
-    if (!shouldLoadThree) {
-      return;
-    }
-
-    var script = document.createElement("script");
-    // Self-hosted three.js r128 — same-origin, immune to cdnjs outages, no extra DNS/TLS
-    script.src = "/js/vendor/three.min.js";
-    script.onerror = function () {
-      if (window.console) console.warn("three.js failed to load");
-    };
-    script.onload = function () {
-      if (typeof THREE === "undefined") {
-        if (window.console) console.warn("three.js loaded but THREE undefined");
-        return;
-      }
-      var hero = canvas.closest(".hero");
-      if (!hero) {
-        return;
-      }
-
-      var scene = new THREE.Scene();
-      var camera = new THREE.PerspectiveCamera(55, 1, 0.1, 100);
-      camera.position.z = 5;
-      var renderer = new THREE.WebGLRenderer({
-        canvas: canvas,
-        alpha: true,
-        antialias: true,
-      });
-      renderer.setClearColor(0x000000, 0);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-      function resizeCanvas() {
-        var width = hero.offsetWidth;
-        var height = hero.offsetHeight;
-        renderer.setSize(width, height);
-        camera.aspect = width / height;
-        camera.updateProjectionMatrix();
-      }
-
-      resizeCanvas();
-      var resizeObs = new ResizeObserver(resizeCanvas);
-      resizeObs.observe(hero);
-
-      var count = 120;
-      var positions = new Float32Array(count * 3);
-      for (var i = 0; i < count * 3; i += 1) {
-        positions[i] = (Math.random() - 0.5) * 14;
-      }
-
-      var particleGeometry = new THREE.BufferGeometry();
-      particleGeometry.setAttribute(
-        "position",
-        new THREE.BufferAttribute(positions, 3),
-      );
-      var particles = new THREE.Points(
-        particleGeometry,
-        new THREE.PointsMaterial({
-          color: 0x6366f1,
-          size: 0.045,
-          transparent: true,
-          opacity: 0.4,
-          sizeAttenuation: true,
-        }),
-      );
-      scene.add(particles);
-
-      var ico = new THREE.Mesh(
-        new THREE.IcosahedronGeometry(2, 1),
-        new THREE.MeshBasicMaterial({
-          color: 0x6366f1,
-          wireframe: true,
-          transparent: true,
-          opacity: 0.07,
-        }),
-      );
-      ico.position.set(2.8, 0.4, -1.5);
-      scene.add(ico);
-
-      var tor = new THREE.Mesh(
-        new THREE.TorusGeometry(0.9, 0.22, 12, 36),
-        new THREE.MeshBasicMaterial({
-          color: 0x6366f1,
-          wireframe: true,
-          transparent: true,
-          opacity: 0.05,
-        }),
-      );
-      tor.position.set(-3.2, -1.2, -0.5);
-      scene.add(tor);
-
-      // Stage B: scroll-driven rotation + mouse parallax on the whole scene
-      var scrollP = 0;
-      var mouseX = 0, mouseY = 0;
-      var targetSceneRotY = 0, targetSceneRotX = 0;
-      if (stReady) {
-        window.ScrollTrigger.create({
-          trigger: hero,
-          start: "top top", end: "bottom top",
-          onUpdate: function (self) { scrollP = self.progress; },
-        });
-      }
-      // Named mousemove handler so pagehide teardown can remove it
-      function onMouseMove(e) {
-        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-        targetSceneRotY = mouseX * 0.18;
-        targetSceneRotX = mouseY * 0.10;
-      }
-      window.addEventListener("mousemove", onMouseMove);
-
-      // Pause RAF when hero is off-screen — saves CPU/GPU on long articles
-      var isVisible = true;
-      if (typeof IntersectionObserver !== "undefined") {
-        var visObs = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) { isVisible = e.isIntersecting; });
-        }, { rootMargin: "100px" });
-        visObs.observe(hero);
-      }
-
-      var time = 0;
-      var rafId = 0;
-      function animate() {
-        rafId = requestAnimationFrame(animate);
-        window.__heroRafId = rafId; // expose for reduce-motion teardown
-        if (!isVisible) return; // skip work when hero not visible
-        time += 0.004;
-        // Idle drift + scroll acceleration (scrollP: 0→1 over hero pass)
-        particles.rotation.y = time * 0.1 + scrollP * 1.4;
-        particles.rotation.x = time * 0.04;
-        if (scene.children[1]) {
-          scene.children[1].rotation.y = time * 0.22 + scrollP * 1.8;
-          scene.children[1].rotation.x = time * 0.12;
-        }
-        if (scene.children[2]) {
-          scene.children[2].rotation.z = time * 0.28 + scrollP * 2.1;
-          scene.children[2].rotation.x = time * 0.09;
-        }
-        // Mouse parallax on the whole scene — eases toward target
-        scene.rotation.y += (targetSceneRotY - scene.rotation.y) * 0.06;
-        scene.rotation.x += (targetSceneRotX - scene.rotation.x) * 0.06;
-        renderer.render(scene, camera);
-      }
-      animate();
-
-      window.addEventListener("pagehide", function (e) {
-        if (e && e.persisted) return; // Skip teardown on BFCache freeze so loop resumes on restore
-        if (rafId) cancelAnimationFrame(rafId);
-        window.removeEventListener("mousemove", onMouseMove);
-        if (visObs) visObs.disconnect();
-        if (resizeObs) resizeObs.disconnect();
-        if (renderer && renderer.dispose) renderer.dispose();
-      });
-    };
-
-    document.head.appendChild(script);
-  }
-
-  /* ═══════════════════════════════════════════════════
-     Stage B — Signal Line (home only) + Auto-Fit Headlines
-  ═══════════════════════════════════════════════════ */
-
-  // Signal-line SVG that threads through home page sections, drawn as scroll
-  // progresses, with a glowing dot at the current position. Only on pages
-  // with a .hero (home DE + EN).
-  var signalST = null;
-  // DISABLED with the redesign. The line threaded diagonally across every
-  // section of the home page and terminated in a glowing dot, which put a
-  // second, unrelated focal point next to whatever section the visitor was
-  // actually reading. It also had no counterpart anywhere else on the site,
-  // so it read as an effect rather than as part of a language. The builder
-  // is kept intact so it can be switched back on by flipping this flag.
-  var SIGNAL_LINE_ENABLED = false;
-
-  function buildSignalLine() {
-    if (!SIGNAL_LINE_ENABLED) return;
-    if (!stReady || reduceMotion) return;
-    if (!document.querySelector(".hero")) return;
-    var main = document.querySelector("main");
-    if (!main) return;
-
-    // Clean up prior instance (resize rebuild)
-    var oldWrap = document.getElementById("signal-line");
-    if (oldWrap) oldWrap.remove();
-    if (signalST) { signalST.kill(); signalST = null; }
-
-    // Anchor points: hero-right, then alternating left/right per major section
-    var sections = Array.prototype.slice.call(main.children)
-      .filter(function (el) { return el.offsetHeight > 200; });
-    if (sections.length < 2) return;
-
-    var w = window.innerWidth;
-    var docH = document.documentElement.scrollHeight;
-    var NS = "http://www.w3.org/2000/svg";
-
-    var wrap = document.createElement("div");
-    wrap.id = "signal-line";
-    wrap.setAttribute("aria-hidden", "true");
-    // z-index:1 puts signal-line above section backgrounds so it's visible
-    // through the whole scroll — z:-1 hid it behind hero/pain/about
-    // sections that have opaque backgrounds. Opacity 0.24 on the stroke
-    // + pointer-events:none keeps it non-obtrusive; sits below nav (z:1000).
-    wrap.style.cssText = "position:absolute;top:0;left:0;width:100%;height:" + docH + "px;pointer-events:none;z-index:1;";
-
-    var svg = document.createElementNS(NS, "svg");
-    svg.setAttribute("viewBox", "0 0 " + w + " " + docH);
-    svg.setAttribute("width", "100%");
-    svg.setAttribute("height", "100%");
-    svg.style.cssText = "position:absolute;top:0;left:0;overflow:visible;";
-
-    // Anchor points relative to page (scrollY absolute)
-    var pts = [[w * 0.88, window.innerHeight * 0.55]];
-    sections.slice(1).forEach(function (sec, i) {
-      var r = sec.getBoundingClientRect();
-      var y = r.top + window.scrollY + r.height * 0.5;
-      pts.push([i % 2 === 0 ? w * 0.08 : w * 0.92, y]);
-    });
-    pts.push([w * 0.5, docH - 80]);
-
-    // Build cubic-bezier path with 50% vertical control offset for smooth S-curves
-    var d = "M " + pts[0][0] + " " + pts[0][1];
-    for (var i = 1; i < pts.length; i++) {
-      var p0 = pts[i - 1], p1 = pts[i];
-      var dy = (p1[1] - p0[1]) * 0.5;
-      d += " C " + p0[0] + " " + (p0[1] + dy) + ", " + p1[0] + " " + (p1[1] - dy) + ", " + p1[0] + " " + p1[1];
-    }
-
-    var path = document.createElementNS(NS, "path");
-    path.setAttribute("d", d);
-    path.setAttribute("fill", "none");
-    path.setAttribute("stroke", "rgba(3, 105, 161, 0.24)"); // indigo-dark @ subtle
-    path.setAttribute("stroke-width", "1");
-    svg.appendChild(path);
-
-    // Glowing dot at line tip — soft outer + hard inner
-    var glow = document.createElementNS(NS, "circle");
-    glow.setAttribute("r", "8");
-    glow.setAttribute("fill", "rgba(56, 189, 248, 0.22)"); // sky-400 glow
-    var dot = document.createElementNS(NS, "circle");
-    dot.setAttribute("r", "3");
-    dot.setAttribute("fill", "#38BDF8"); // sky-400 hard core
-    svg.appendChild(glow);
-    svg.appendChild(dot);
-
-    wrap.appendChild(svg);
-    document.body.appendChild(wrap);
-
-    var len = path.getTotalLength();
-    path.style.strokeDasharray = len;
-    path.style.strokeDashoffset = len;
-
-    function place(p) {
-      path.style.strokeDashoffset = len * (1 - p);
-      var pt = path.getPointAtLength(len * p);
-      glow.setAttribute("cx", pt.x);
-      glow.setAttribute("cy", pt.y);
-      dot.setAttribute("cx", pt.x);
-      dot.setAttribute("cy", pt.y);
-    }
-    place(0);
-
-    signalST = window.ScrollTrigger.create({
-      start: 0, end: docH - window.innerHeight,
-      onUpdate: function (self) { place(self.progress); },
-    });
-  }
-
-  // Auto-fit — [data-fit] elements shrink font-size to fit their line width
-  // Safety net for hero H1 + case titles on narrow viewports.
-  function fitLines() {
-    safeQueryAll("[data-fit]").forEach(function (line) {
-      line.style.fontSize = "";
-      var current = parseFloat(getComputedStyle(line).fontSize);
-      var avail = line.clientWidth;
-      var needed = line.scrollWidth;
-      if (needed > avail && avail > 0) {
-        line.style.fontSize = Math.floor(current * (avail / needed) * 0.97) + "px";
-      }
-    });
-  }
-  var fitTimer;
-  window.addEventListener("resize", function () {
-    clearTimeout(fitTimer);
-    fitTimer = setTimeout(function () {
-      fitLines();
-      if (stReady) window.ScrollTrigger.refresh();
-      buildSignalLine();
-    }, 200);
-  });
 
   onDocumentReady(function () {
-    // Stage A libs first — sets window.__lenis so drawer/other UI can sync
-    if (stReady) window.gsap.registerPlugin(window.ScrollTrigger);
-    initSmoothScroll();
-
-    initThemeToggle();
-    initNavbarScroll();
     initDrawer();
     initLanguageSwitcher();
-    initRevealAnimations();
     initFaqAccordion();
-    initHeroCanvas();
+    initCaseAccordion();
     initAddonBox();
     initContactForm();
-    initCaseAccordion();
-    initCardScrollHighlight();
-
-    // Stage A visual polish (order: intro first, then scroll-triggered)
-    initHeroIntro();
-    initSectionReveals();
-    initMagnetic();
-    initCounters();
-    initHeroParallax();
-    initPinnedWordReveal();
-    initCaseReveals();
-
-    // Stage C: per-page signature effects (skipped on blog per user)
-    initFloating();
-    initParallaxElements();
-    initProcessStepsReveal();
-    initCaseCounterMotion();
-    initHobbyPillReveal();
-    initContactCanvas();
-
-    // Stage B: build signal-line after fonts + images settle
-    fitLines();
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(function () {
-        fitLines();
-        if (stReady) window.ScrollTrigger.refresh();
-        buildSignalLine();
-      });
-    }
-    window.addEventListener("load", function () {
-      if (stReady) window.ScrollTrigger.refresh();
-      buildSignalLine();
-    });
+    document.documentElement.setAttribute("data-ui-ready", "");
   });
 
-  // Formular senden & Validierung
   function initAddonBox() {
     var topicBoxes = document.querySelectorAll('input[name="topic"]');
     var addonBox = document.getElementById("addonBox");
@@ -1299,10 +165,7 @@
     var tierVal = document.getElementById("addon_tier_val");
     if (!topicBoxes.length) return;
 
-    // Der Ausgangswert kommt aus dem Markup ("Nein" / "No"), damit das
-    // Zuruecksetzen auf beiden Sprachfassungen den richtigen Wert schreibt.
-    // Vorher stand hier fest "Nein" — auf /en/contact/ landete damit ein
-    // deutscher Wert im dataLayer-Event und in der Benachrichtigungsmail.
+    // Preserve the localized default from the markup.
     var addonTrackingValEl = document.getElementById("addon_tracking_val");
     var addonTrackingDefault = addonTrackingValEl ? addonTrackingValEl.value : "";
 
@@ -1317,14 +180,11 @@
     function updateAddonBox() {
       var topics = getCheckedTopics();
       if (addonBox)
-        addonBox.style.display =
-          topics.indexOf("website") !== -1 ? "block" : "none";
+        addonBox.hidden = topics.indexOf("website") === -1;
       if (addonBoxTracking)
-        addonBoxTracking.style.display =
-          topics.indexOf("tracking") !== -1 ? "block" : "none";
+        addonBoxTracking.hidden = topics.indexOf("tracking") === -1;
       if (addonBoxBetreuung)
-        addonBoxBetreuung.style.display =
-          topics.indexOf("betreuung") !== -1 ? "block" : "none";
+        addonBoxBetreuung.hidden = topics.indexOf("betreuung") === -1;
 
       // Sorglos-Tier synchronisieren bzw. zurücksetzen
       if (tierVal) {
@@ -1349,11 +209,6 @@
         if (addonTrackingValEl) addonTrackingValEl.value = addonTrackingDefault;
       }
     }
-
-    // Der Block, der hier die Modul-Checkboxen (#addon_modules_val,
-    // input[name="module"]) in ein Hidden-Field geschrieben hat, ist
-    // entfernt: beide Elemente existieren in keiner HTML-Datei mehr. Er lief
-    // nur deshalb nicht auf einen Fehler, weil ein Null-Check davor stand.
 
     // Sorglos-Tier-Radios synchron in Hidden-Field schreiben
     if (tierVal) {
@@ -1401,20 +256,37 @@
 
     var submitBtn = document.getElementById("submitBtn");
     var formErrorMsg = document.getElementById("formErrorMsg");
+    var submitting = false;
+    var initialErrorText = formErrorMsg ? formErrorMsg.textContent : "";
+    if (submitBtn) submitBtn.disabled = false;
     var submitBtnHTML = submitBtn ? submitBtn.innerHTML : ""; // Preserve inner SVG arrow across state changes
 
-    function showErr(id) { var el = document.getElementById(id); if (el) el.style.display = "block"; }
-    function hideErr(id) { var el = document.getElementById(id); if (el) el.style.display = "none"; }
+    function showErr(id) {
+      var el = document.getElementById(id);
+      if (el) el.hidden = false;
+      safeQueryAll('[aria-describedby~="' + id + '"]').forEach(function (field) {
+        field.setAttribute("aria-invalid", "true");
+      });
+    }
+    function hideErr(id) {
+      var el = document.getElementById(id);
+      if (el) el.hidden = true;
+      safeQueryAll('[aria-describedby~="' + id + '"]').forEach(function (field) {
+        field.removeAttribute("aria-invalid");
+      });
+    }
     function getVal(id) { var el = document.getElementById(id); return el ? (el.value || "").trim() : ""; }
     function getRaw(id) { var el = document.getElementById(id); return el ? el.value : ""; }
 
     // Reset form display state on page show (handles bfcache restore
     // when user navigates back to /kontakt/ after successful submit).
     window.addEventListener("pageshow", function () {
+      submitting = false;
+      form.removeAttribute("aria-busy");
       var fc = document.getElementById("formContent");
       var fs = document.getElementById("formSuccess");
-      if (fc) fc.style.display = "";
-      if (fs) fs.style.display = "";
+      if (fc) fc.hidden = false;
+      if (fs) fs.hidden = true;
       if (submitBtn) {
         submitBtn.disabled = false;
         submitBtn.innerHTML = submitBtnHTML;
@@ -1423,6 +295,7 @@
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
+      if (submitting) return;
 
       var name = document.getElementById("name");
       var email = document.getElementById("email");
@@ -1431,7 +304,11 @@
       var topicBoxes = document.querySelectorAll('input[name="topic"]');
 
       ["nameErr", "emailErr", "topicErr", "messageErr"].forEach(hideErr);
-      if (formErrorMsg) formErrorMsg.style.display = "none";
+      if (formErrorMsg) {
+        formErrorMsg.hidden = true;
+        formErrorMsg.textContent = initialErrorText;
+      }
+      if (privacy) privacy.removeAttribute("aria-invalid");
 
       var checkedTopics = [];
       topicBoxes.forEach(function (cb) {
@@ -1444,10 +321,19 @@
       if (checkedTopics.length === 0)        { showErr("topicErr");   valid = false; }
       if (!message || !message.value.trim()) { showErr("messageErr"); valid = false; }
       if (!privacy || !privacy.checked) {
-        if (formErrorMsg) formErrorMsg.style.display = "block";
+        if (privacy) privacy.setAttribute("aria-invalid", "true");
+        if (formErrorMsg) formErrorMsg.hidden = false;
         valid = false;
       }
-      if (!valid) return;
+      if (!valid) {
+        var firstInvalid = form.querySelector('[aria-invalid="true"]');
+        if (firstInvalid) {
+          var focusTarget = firstInvalid.matches("input, textarea, select")
+            ? firstInvalid : firstInvalid.querySelector("input, textarea, select");
+          if (focusTarget) focusTarget.focus();
+        }
+        return;
+      }
 
       var topicValue = checkedTopics.join(",");
       var companyValue = getVal("company");
@@ -1467,21 +353,21 @@
         : { tracking: "GTM & GA4 Setup", website: "Website erstellen", betreuung: "Sorglos-Betreuung", other: "Noch unklar" };
       var topicLabel = checkedTopics.map(function (t) { return topicMap[t] || t; }).join(", ");
 
+      submitting = true;
+      form.setAttribute("aria-busy", "true");
       if (submitBtn) {
-        // Reset any magnetic transform before showing sending state so the
-        // "wird gesendet …" label sits centered where the user last saw it.
-        if (window.gsap) window.gsap.set(submitBtn, { x: 0, y: 0, overwrite: true });
         submitBtn.disabled = true;
         submitBtn.textContent = STRINGS.sending;
       }
 
       function failWith(msgText) {
+        submitting = false;
+        form.removeAttribute("aria-busy");
         if (submitBtn) {
-          if (window.gsap) window.gsap.set(submitBtn, { x: 0, y: 0, overwrite: true });
           submitBtn.disabled = false;
           submitBtn.innerHTML = submitBtnHTML;
         }
-        if (formErrorMsg) { formErrorMsg.textContent = msgText; formErrorMsg.style.display = "block"; }
+        if (formErrorMsg) { formErrorMsg.textContent = msgText; formErrorMsg.hidden = false; }
       }
 
       var controller = typeof AbortController !== "undefined" ? new AbortController() : null;
@@ -1509,8 +395,14 @@
           if (!res.ok) throw new Error("Server error");
           var fc = document.getElementById("formContent");
           var fs = document.getElementById("formSuccess");
-          if (fc) fc.style.display = "none";
-          if (fs) fs.style.display = "flex";
+          if (fc) fc.hidden = true;
+          if (fs) {
+            fs.hidden = false;
+            fs.setAttribute("tabindex", "-1");
+            fs.focus();
+          }
+          submitting = false;
+          form.removeAttribute("aria-busy");
 
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({

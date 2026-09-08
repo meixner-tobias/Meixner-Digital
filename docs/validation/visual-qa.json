@@ -1,0 +1,1028 @@
+[
+  {
+    "page": "/",
+    "name": "home-desktop",
+    "size": [
+      1440,
+      1000
+    ],
+    "browser": "151.0.7922.34",
+    "metrics": {
+      "viewport": 1440,
+      "scrollWidth": 1440,
+      "animations": 0,
+      "oversizedIcons": [],
+      "overflowingControls": [],
+      "decodedImages": 7
+    },
+    "css_supports": [
+      {
+        "property": "box-sizing",
+        "value": "border-box",
+        "supported": true
+      },
+      {
+        "property": "text-size-adjust",
+        "value": "100%",
+        "supported": true
+      },
+      {
+        "property": "overflow-wrap",
+        "value": "anywhere",
+        "supported": true
+      },
+      {
+        "property": "max-width",
+        "value": "100%",
+        "supported": true
+      },
+      {
+        "property": "height",
+        "value": "auto",
+        "supported": true
+      },
+      {
+        "property": "font-style",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-variant-ligatures",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-variant-caps",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-variant-numeric",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-variant-east-asian",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-variant-alternates",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-variant-position",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-variant-emoji",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-weight",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-stretch",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-size",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "line-height",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-family",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-optical-sizing",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-size-adjust",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-kerning",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-feature-settings",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-variation-settings",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-language-override",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "max-width",
+        "value": "100%",
+        "supported": true
+      },
+      {
+        "property": "min-inline-size",
+        "value": "0px",
+        "supported": true
+      },
+      {
+        "property": "overflow-x",
+        "value": "auto",
+        "supported": true
+      },
+      {
+        "property": "display",
+        "value": "none",
+        "supported": true
+      },
+      {
+        "property": "position",
+        "value": "absolute",
+        "supported": true
+      },
+      {
+        "property": "width",
+        "value": "1px",
+        "supported": true
+      },
+      {
+        "property": "height",
+        "value": "1px",
+        "supported": true
+      },
+      {
+        "property": "padding-top",
+        "value": "0px",
+        "supported": true
+      },
+      {
+        "property": "padding-right",
+        "value": "0px",
+        "supported": true
+      },
+      {
+        "property": "padding-bottom",
+        "value": "0px",
+        "supported": true
+      },
+      {
+        "property": "padding-left",
+        "value": "0px",
+        "supported": true
+      },
+      {
+        "property": "margin-top",
+        "value": "-1px",
+        "supported": true
+      },
+      {
+        "property": "margin-right",
+        "value": "-1px",
+        "supported": true
+      },
+      {
+        "property": "margin-bottom",
+        "value": "-1px",
+        "supported": true
+      },
+      {
+        "property": "margin-left",
+        "value": "-1px",
+        "supported": true
+      },
+      {
+        "property": "overflow-x",
+        "value": "hidden",
+        "supported": true
+      },
+      {
+        "property": "overflow-y",
+        "value": "hidden",
+        "supported": true
+      },
+      {
+        "property": "clip",
+        "value": "rect(0px, 0px, 0px, 0px)",
+        "supported": true
+      },
+      {
+        "property": "white-space-collapse",
+        "value": "collapse",
+        "supported": true
+      },
+      {
+        "property": "text-wrap-mode",
+        "value": "nowrap",
+        "supported": true
+      },
+      {
+        "property": "border-top-width",
+        "value": "0px",
+        "supported": true
+      },
+      {
+        "property": "border-right-width",
+        "value": "0px",
+        "supported": true
+      },
+      {
+        "property": "border-bottom-width",
+        "value": "0px",
+        "supported": true
+      },
+      {
+        "property": "border-left-width",
+        "value": "0px",
+        "supported": true
+      },
+      {
+        "property": "border-top-style",
+        "value": "none",
+        "supported": true
+      },
+      {
+        "property": "border-right-style",
+        "value": "none",
+        "supported": true
+      },
+      {
+        "property": "border-bottom-style",
+        "value": "none",
+        "supported": true
+      },
+      {
+        "property": "border-left-style",
+        "value": "none",
+        "supported": true
+      },
+      {
+        "property": "border-top-color",
+        "value": "currentcolor",
+        "supported": true
+      },
+      {
+        "property": "border-right-color",
+        "value": "currentcolor",
+        "supported": true
+      },
+      {
+        "property": "border-bottom-color",
+        "value": "currentcolor",
+        "supported": true
+      },
+      {
+        "property": "border-left-color",
+        "value": "currentcolor",
+        "supported": true
+      },
+      {
+        "property": "border-image-source",
+        "value": "none",
+        "supported": true
+      },
+      {
+        "property": "border-image-slice",
+        "value": "100%",
+        "supported": true
+      },
+      {
+        "property": "border-image-width",
+        "value": "1",
+        "supported": true
+      },
+      {
+        "property": "border-image-outset",
+        "value": "0",
+        "supported": true
+      },
+      {
+        "property": "border-image-repeat",
+        "value": "stretch",
+        "supported": true
+      },
+      {
+        "property": "display",
+        "value": "none",
+        "supported": true
+      },
+      {
+        "property": "max-height",
+        "value": "62vh",
+        "supported": true
+      },
+      {
+        "property": "overflow-y",
+        "value": "auto",
+        "supported": true
+      }
+    ],
+    "unsupported_css": [],
+    "pageerrors": [],
+    "external_requests": "mocked; own production assets served locally"
+  },
+  {
+    "page": "/kontakt/",
+    "name": "contact-mobile",
+    "size": [
+      390,
+      844
+    ],
+    "browser": "151.0.7922.34",
+    "metrics": {
+      "viewport": 390,
+      "scrollWidth": 390,
+      "animations": 0,
+      "oversizedIcons": [],
+      "overflowingControls": [],
+      "decodedImages": 0
+    },
+    "css_supports": [
+      {
+        "property": "box-sizing",
+        "value": "border-box",
+        "supported": true
+      },
+      {
+        "property": "text-size-adjust",
+        "value": "100%",
+        "supported": true
+      },
+      {
+        "property": "overflow-wrap",
+        "value": "anywhere",
+        "supported": true
+      },
+      {
+        "property": "max-width",
+        "value": "100%",
+        "supported": true
+      },
+      {
+        "property": "height",
+        "value": "auto",
+        "supported": true
+      },
+      {
+        "property": "font-style",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-variant-ligatures",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-variant-caps",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-variant-numeric",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-variant-east-asian",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-variant-alternates",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-variant-position",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-variant-emoji",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-weight",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-stretch",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-size",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "line-height",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-family",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-optical-sizing",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-size-adjust",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-kerning",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-feature-settings",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-variation-settings",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-language-override",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "max-width",
+        "value": "100%",
+        "supported": true
+      },
+      {
+        "property": "min-inline-size",
+        "value": "0px",
+        "supported": true
+      },
+      {
+        "property": "overflow-x",
+        "value": "auto",
+        "supported": true
+      },
+      {
+        "property": "display",
+        "value": "none",
+        "supported": true
+      },
+      {
+        "property": "position",
+        "value": "absolute",
+        "supported": true
+      },
+      {
+        "property": "width",
+        "value": "1px",
+        "supported": true
+      },
+      {
+        "property": "height",
+        "value": "1px",
+        "supported": true
+      },
+      {
+        "property": "padding-top",
+        "value": "0px",
+        "supported": true
+      },
+      {
+        "property": "padding-right",
+        "value": "0px",
+        "supported": true
+      },
+      {
+        "property": "padding-bottom",
+        "value": "0px",
+        "supported": true
+      },
+      {
+        "property": "padding-left",
+        "value": "0px",
+        "supported": true
+      },
+      {
+        "property": "margin-top",
+        "value": "-1px",
+        "supported": true
+      },
+      {
+        "property": "margin-right",
+        "value": "-1px",
+        "supported": true
+      },
+      {
+        "property": "margin-bottom",
+        "value": "-1px",
+        "supported": true
+      },
+      {
+        "property": "margin-left",
+        "value": "-1px",
+        "supported": true
+      },
+      {
+        "property": "overflow-x",
+        "value": "hidden",
+        "supported": true
+      },
+      {
+        "property": "overflow-y",
+        "value": "hidden",
+        "supported": true
+      },
+      {
+        "property": "clip",
+        "value": "rect(0px, 0px, 0px, 0px)",
+        "supported": true
+      },
+      {
+        "property": "white-space-collapse",
+        "value": "collapse",
+        "supported": true
+      },
+      {
+        "property": "text-wrap-mode",
+        "value": "nowrap",
+        "supported": true
+      },
+      {
+        "property": "border-top-width",
+        "value": "0px",
+        "supported": true
+      },
+      {
+        "property": "border-right-width",
+        "value": "0px",
+        "supported": true
+      },
+      {
+        "property": "border-bottom-width",
+        "value": "0px",
+        "supported": true
+      },
+      {
+        "property": "border-left-width",
+        "value": "0px",
+        "supported": true
+      },
+      {
+        "property": "border-top-style",
+        "value": "none",
+        "supported": true
+      },
+      {
+        "property": "border-right-style",
+        "value": "none",
+        "supported": true
+      },
+      {
+        "property": "border-bottom-style",
+        "value": "none",
+        "supported": true
+      },
+      {
+        "property": "border-left-style",
+        "value": "none",
+        "supported": true
+      },
+      {
+        "property": "border-top-color",
+        "value": "currentcolor",
+        "supported": true
+      },
+      {
+        "property": "border-right-color",
+        "value": "currentcolor",
+        "supported": true
+      },
+      {
+        "property": "border-bottom-color",
+        "value": "currentcolor",
+        "supported": true
+      },
+      {
+        "property": "border-left-color",
+        "value": "currentcolor",
+        "supported": true
+      },
+      {
+        "property": "border-image-source",
+        "value": "none",
+        "supported": true
+      },
+      {
+        "property": "border-image-slice",
+        "value": "100%",
+        "supported": true
+      },
+      {
+        "property": "border-image-width",
+        "value": "1",
+        "supported": true
+      },
+      {
+        "property": "border-image-outset",
+        "value": "0",
+        "supported": true
+      },
+      {
+        "property": "border-image-repeat",
+        "value": "stretch",
+        "supported": true
+      },
+      {
+        "property": "display",
+        "value": "none",
+        "supported": true
+      },
+      {
+        "property": "max-height",
+        "value": "62vh",
+        "supported": true
+      },
+      {
+        "property": "overflow-y",
+        "value": "auto",
+        "supported": true
+      }
+    ],
+    "unsupported_css": [],
+    "pageerrors": [],
+    "external_requests": "mocked; own production assets served locally"
+  },
+  {
+    "page": "/blog/server-side-tracking/",
+    "name": "article-tablet",
+    "size": [
+      768,
+      1024
+    ],
+    "browser": "151.0.7922.34",
+    "metrics": {
+      "viewport": 768,
+      "scrollWidth": 768,
+      "animations": 0,
+      "oversizedIcons": [],
+      "overflowingControls": [],
+      "decodedImages": 1
+    },
+    "css_supports": [
+      {
+        "property": "box-sizing",
+        "value": "border-box",
+        "supported": true
+      },
+      {
+        "property": "text-size-adjust",
+        "value": "100%",
+        "supported": true
+      },
+      {
+        "property": "overflow-wrap",
+        "value": "anywhere",
+        "supported": true
+      },
+      {
+        "property": "max-width",
+        "value": "100%",
+        "supported": true
+      },
+      {
+        "property": "height",
+        "value": "auto",
+        "supported": true
+      },
+      {
+        "property": "font-style",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-variant-ligatures",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-variant-caps",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-variant-numeric",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-variant-east-asian",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-variant-alternates",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-variant-position",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-variant-emoji",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-weight",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-stretch",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-size",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "line-height",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-family",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-optical-sizing",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-size-adjust",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-kerning",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-feature-settings",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-variation-settings",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "font-language-override",
+        "value": "inherit",
+        "supported": true
+      },
+      {
+        "property": "max-width",
+        "value": "100%",
+        "supported": true
+      },
+      {
+        "property": "min-inline-size",
+        "value": "0px",
+        "supported": true
+      },
+      {
+        "property": "overflow-x",
+        "value": "auto",
+        "supported": true
+      },
+      {
+        "property": "display",
+        "value": "none",
+        "supported": true
+      },
+      {
+        "property": "position",
+        "value": "absolute",
+        "supported": true
+      },
+      {
+        "property": "width",
+        "value": "1px",
+        "supported": true
+      },
+      {
+        "property": "height",
+        "value": "1px",
+        "supported": true
+      },
+      {
+        "property": "padding-top",
+        "value": "0px",
+        "supported": true
+      },
+      {
+        "property": "padding-right",
+        "value": "0px",
+        "supported": true
+      },
+      {
+        "property": "padding-bottom",
+        "value": "0px",
+        "supported": true
+      },
+      {
+        "property": "padding-left",
+        "value": "0px",
+        "supported": true
+      },
+      {
+        "property": "margin-top",
+        "value": "-1px",
+        "supported": true
+      },
+      {
+        "property": "margin-right",
+        "value": "-1px",
+        "supported": true
+      },
+      {
+        "property": "margin-bottom",
+        "value": "-1px",
+        "supported": true
+      },
+      {
+        "property": "margin-left",
+        "value": "-1px",
+        "supported": true
+      },
+      {
+        "property": "overflow-x",
+        "value": "hidden",
+        "supported": true
+      },
+      {
+        "property": "overflow-y",
+        "value": "hidden",
+        "supported": true
+      },
+      {
+        "property": "clip",
+        "value": "rect(0px, 0px, 0px, 0px)",
+        "supported": true
+      },
+      {
+        "property": "white-space-collapse",
+        "value": "collapse",
+        "supported": true
+      },
+      {
+        "property": "text-wrap-mode",
+        "value": "nowrap",
+        "supported": true
+      },
+      {
+        "property": "border-top-width",
+        "value": "0px",
+        "supported": true
+      },
+      {
+        "property": "border-right-width",
+        "value": "0px",
+        "supported": true
+      },
+      {
+        "property": "border-bottom-width",
+        "value": "0px",
+        "supported": true
+      },
+      {
+        "property": "border-left-width",
+        "value": "0px",
+        "supported": true
+      },
+      {
+        "property": "border-top-style",
+        "value": "none",
+        "supported": true
+      },
+      {
+        "property": "border-right-style",
+        "value": "none",
+        "supported": true
+      },
+      {
+        "property": "border-bottom-style",
+        "value": "none",
+        "supported": true
+      },
+      {
+        "property": "border-left-style",
+        "value": "none",
+        "supported": true
+      },
+      {
+        "property": "border-top-color",
+        "value": "currentcolor",
+        "supported": true
+      },
+      {
+        "property": "border-right-color",
+        "value": "currentcolor",
+        "supported": true
+      },
+      {
+        "property": "border-bottom-color",
+        "value": "currentcolor",
+        "supported": true
+      },
+      {
+        "property": "border-left-color",
+        "value": "currentcolor",
+        "supported": true
+      },
+      {
+        "property": "border-image-source",
+        "value": "none",
+        "supported": true
+      },
+      {
+        "property": "border-image-slice",
+        "value": "100%",
+        "supported": true
+      },
+      {
+        "property": "border-image-width",
+        "value": "1",
+        "supported": true
+      },
+      {
+        "property": "border-image-outset",
+        "value": "0",
+        "supported": true
+      },
+      {
+        "property": "border-image-repeat",
+        "value": "stretch",
+        "supported": true
+      },
+      {
+        "property": "display",
+        "value": "none",
+        "supported": true
+      },
+      {
+        "property": "max-height",
+        "value": "62vh",
+        "supported": true
+      },
+      {
+        "property": "overflow-y",
+        "value": "auto",
+        "supported": true
+      }
+    ],
+    "unsupported_css": [],
+    "pageerrors": [],
+    "external_requests": "mocked; own production assets served locally"
+  }
+]

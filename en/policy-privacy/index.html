@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0E1114">
-  <script>try{if(localStorage.getItem("theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
+
+
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','functionality_storage':'denied','security_storage':'granted','wait_for_update':500});if(location.hostname==='127.0.0.1'||location.hostname==='localhost'){document.cookie='CookieScriptConsent='+encodeURIComponent(JSON.stringify({action:'accept',categories:['performance','targeting','functionality','unclassified']}))+'; path=/; max-age=31536000';gtag('consent','update',{'analytics_storage':'granted','ad_storage':'granted','ad_user_data':'granted','ad_personalization':'granted','functionality_storage':'granted'});var s=document.createElement('style');s.textContent='#cookiescript_injected,.cookiescript_injected,.cookiescript_wrapper,.cookiescript_badge,#cookiescript_iframe{display:none!important}';document.head.appendChild(s);}</script>
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src="https://data.meixner-tobias.com/e5jncwjrlbsgj.js?"+i;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','6lg7q00=AwNOJTg%2FR0I7KysmOEY%2BURxaQUxdVA4ZVwoWCxQcDwVHExwABRMZWQkIHg%3D%3D');</script>
@@ -29,12 +29,12 @@
   <link rel="alternate" hreflang="x-default" href="https://meixner-tobias.com/en/policy-privacy/">
 
   <link rel="preconnect" href="https://data.meixner-tobias.com">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"></noscript>
 
-  <link rel="stylesheet" href="/css/style.css?v=dd48c3be">
+
+
+
+
+  <link rel="stylesheet" href="/css/style.css?v=ddf723f8">
 
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon/favicon-96x96.png">
   <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg">
@@ -63,10 +63,10 @@
 }
 </script>
 
-<script src="/js/vendor/lenis.min.js" defer></script>
-<script src="/js/vendor/gsap.min.js" defer></script>
-<script src="/js/vendor/gsap-scrolltrigger.min.js" defer></script>
-<script src="/js/main.js?v=4361b3ba" defer></script>
+
+
+
+<script src="/js/main.js?v=1d88a40b" defer></script>
   <link rel="alternate" type="application/rss+xml" title="Tobias Meixner - Blog (EN)" href="https://meixner-tobias.com/en/blog/feed.xml">
 </head>
 
@@ -78,17 +78,10 @@
 <!-- End Google Tag Manager (noscript) -->
 
 <!-- NAVBAR -->
-<nav class="nav" id="nav">
+<nav class="nav" id="nav" aria-label="Main navigation">
   <div class="nav-inner">
-    <a href="/en/" aria-label="Tobias Meixner - Home" style="display:flex;align-items:center;padding-top:8px;">
-      <svg class="nav-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 230" aria-hidden="true">
-        <g transform="translate(8 6)">
-          <circle class="logo-dot" cx="50" cy="108" r="18"/>
-          <line class="logo-stroke" x1="68" y1="62" x2="98" y2="118"/>
-          <line class="logo-stroke" x1="136" y1="62" x2="166" y2="118"/>
-          <text class="logo-t" x="208" y="136">eixner</text>
-        </g>
-      </svg>
+    <a href="/en/" aria-label="Tobias Meixner - Home">
+      <span class="nav-logo">Tobias Meixner</span>
     </a>
     <ul class="nav-links">
       <li><a href="/en/">Home</a></li>
@@ -96,13 +89,15 @@
       <li><a href="/en/services/">Services</a></li>
       <li><a href="/en/projects/">Projects</a></li>
       <li class="nav-dropdown">
+        <details>
+          <summary>Blog</summary>
         <a href="/en/blog/">Blog</a>
         <ul class="nav-drop-menu">
           <li><a href="/en/blog/answer-engine-optimization/">Answer Engine Optimization</a></li>
           <li><a href="/en/blog/performance-max-vs-advantage-plus/">Performance Max vs. Advantage Plus</a></li>
           <li class="nav-drop-nested">
             <details>
-              <summary>Server-Side Tracking <svg class="nav-drop-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
+              <summary>Server-Side Tracking <svg class="nav-drop-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></summary>
               <ul class="nav-drop-submenu">
                 <li><a href="/en/blog/server-side-tracking/" class="nav-drop-pillar-link">View main article <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
                 <li><a href="/en/blog/stape-io-setup/">Stape.io setup</a></li>
@@ -114,16 +109,17 @@
           </li>
           <li><a href="/en/blog/prompt-engineering-ecommerce/">AI Copywriting for E-Commerce</a></li>
         </ul>
+      </details>
       </li>
 
       <!-- LANGUAGE SWITCHER -->
       <li class="lang-switch">
-        <button class="lang-btn" id="langBtn" aria-label="Choose language" aria-expanded="false" aria-controls="langDropdown" aria-haspopup="true">
-          <div class="flag-circle"><div class="flag-us"></div></div>
+        <button class="lang-btn" id="langBtn" aria-label="Choose language" aria-expanded="false" aria-controls="langDropdown" aria-haspopup="true" hidden>
+          <span class="flag-circle"><span class="flag-us"></span></span>
           EN
           <span class="lang-arrow">&#9662;</span>
         </button>
-        <div class="lang-dropdown" id="langDropdown" inert>
+        <div class="lang-dropdown" id="langDropdown">
           <a href="/datenschutz/" class="lang-option">
             <div class="flag-lg"><div class="flag-de"></div></div>
             <div class="lang-option-text">
@@ -144,17 +140,12 @@
 
       <li><a href="/en/contact/" class="nav-cta">Get in touch</a></li>
     </ul>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-      <svg class="icon-sun" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-      <svg class="icon-moon" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>
-    </button>
-    <button class="burger" id="burger" aria-label="Open navigation" aria-expanded="false" aria-controls="drawer">
-      <span></span><span></span><span></span>
-    </button>
+
+    <button class="burger" id="burger" aria-label="Open navigation" aria-expanded="false" aria-controls="drawer" hidden>Navigation</button>
   </div>
 </nav>
 
-<nav class="drawer" id="drawer" aria-label="Mobile Navigation" inert>
+<nav class="drawer" id="drawer" aria-label="Mobile Navigation" inert hidden>
   <ul>
     <li>
       <div class="drawer-lang">
@@ -196,17 +187,11 @@
       </details>
     </li>
     <li><a href="/en/contact/">Get in touch <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></li>
-    <li style="padding-top:16px; border-top:1px solid var(--border); display:flex; justify-content:center;">
-      <button class="theme-toggle" id="themeToggleMobile" aria-label="Toggle dark mode">
-        <svg class="icon-sun" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-        <svg class="icon-moon" aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>
-        <span class="theme-label">Dark Mode</span>
-      </button>
-    </li>
+
   </ul>
 </nav>
 
-<main id="main-content">
+<main id="main-content" tabindex="-1">
 
 
 
@@ -247,7 +232,7 @@
           <p class="legal-meta">Last updated: May 2026 &middot; Applies to meixner-tobias.com</p>
         </div>
 
-        <p class="legal-p" style="margin-bottom:28px;">
+        <p class="legal-p">
           The protection of personal data is important to me. This policy explains what data is collected
           on this website, why it is collected, and what rights you have.
         </p>
@@ -277,7 +262,7 @@
               </div>
             </div>
           </div>
-          <p class="legal-p" style="margin-top:10px;">Legal basis: Art. 6(1)(f) GDPR (legitimate interest in providing the website).</p>
+          <p class="legal-p">Legal basis: Art. 6(1)(f) GDPR (legitimate interest in providing the website).</p>
         </div>
 
         <!-- 3 -->
@@ -322,7 +307,7 @@
               <div class="service-desc">Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland.<br>Privacy policy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></div>
             </div>
           </div>
-          <p class="legal-p" style="margin-top:12px;">GTM is used to manage JavaScript tags centrally. GTM itself sets <strong>no cookies</strong> and does not process personal data independently. Its data-protection relevance comes from the tags it loads (see the relevant sections below).</p>
+          <p class="legal-p">GTM is used to manage JavaScript tags centrally. GTM itself sets <strong>no cookies</strong> and does not process personal data independently. Its data-protection relevance comes from the tags it loads (see the relevant sections below).</p>
           <p class="legal-p">GTM respects Consent Mode v2: tracking tags are only activated after consent has been given.</p>
           <p class="legal-p">Legal basis: Art. 6(1)(f) GDPR (legitimate interest in efficient tag management).</p>
         </div>
@@ -337,8 +322,8 @@
               <div class="service-desc">Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland.<br>Privacy policy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></div>
             </div>
           </div>
-          <p class="legal-p" style="margin-top:12px;">GA4 uses cookies and similar technologies to collect, among other things, the following data:</p>
-          <ul style="margin:8px 0 12px 20px; font-size:.9375rem; line-height:1.75; color:var(--text);">
+          <p class="legal-p">GA4 uses cookies and similar technologies to collect, among other things, the following data:</p>
+          <ul>
             <li>Page views, session duration and bounce rate</li>
             <li>Device information (browser type, operating system, screen resolution)</li>
             <li>Approximate location (country/region &mdash; no precise IP address)</li>
@@ -360,7 +345,7 @@
               <div class="service-desc">Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland.<br>Privacy policy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></div>
             </div>
           </div>
-          <p class="legal-p" style="margin-top:12px;">Google Ads Conversion Tracking sets a conversion cookie after defined actions (e.g. form submission) &mdash; valid for 30 days, contains no personal data.</p>
+          <p class="legal-p">Google Ads Conversion Tracking sets a conversion cookie after defined actions (e.g. form submission) &mdash; valid for 30 days, contains no personal data.</p>
           <p class="legal-p">In addition, <strong>Enhanced Conversions</strong> is used: user-provided data (e.g. email address) is hashed using SHA-256 before transmission.</p>
           <p class="legal-p">Conversion tracking is only activated after consent (Consent Mode v2 implemented). Data may be transferred to the USA (see Section 12).</p>
           <p class="legal-p">Legal basis: Art. 6(1)(a) GDPR (consent).</p>
@@ -376,7 +361,7 @@
               <div class="service-desc">Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland.<br>Privacy policy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></div>
             </div>
           </div>
-          <p class="legal-p" style="margin-top:12px;">Search Console is a webmaster tool and does not set any cookies on this website. Only aggregated search data is evaluated &mdash; no conclusions about individual persons are possible.</p>
+          <p class="legal-p">Search Console is a webmaster tool and does not set any cookies on this website. Only aggregated search data is evaluated &mdash; no conclusions about individual persons are possible.</p>
           <p class="legal-p">Legal basis: Art. 6(1)(f) GDPR (legitimate interest in search engine optimisation).</p>
         </div>
 
@@ -390,7 +375,7 @@
               <div class="service-desc">Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Ireland.<br>Privacy policy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></div>
             </div>
           </div>
-          <p class="legal-p" style="margin-top:12px;">This website loads fonts via the Google Fonts API. Your IP address is transmitted to Google servers in the process. Google Fonts does not set cookies for identification purposes according to current understanding.</p>
+          <p class="legal-p">This website loads fonts via the Google Fonts API. Your IP address is transmitted to Google servers in the process. Google Fonts does not set cookies for identification purposes according to current understanding.</p>
           <p class="legal-p">Legal basis: Art. 6(1)(f) GDPR. Data may be transferred to the USA (see Section 12).</p>
         </div>
 
@@ -407,7 +392,7 @@
               </div>
             </div>
           </div>
-          <p class="legal-p" style="margin-top:12px;">
+          <p class="legal-p">
             Digital products are sold and delivered via <strong>shop.meixner-tobias.com</strong> and links to
             <strong>tobiasmeixner.gumroad.com</strong>. Checkout and payment processing are handled entirely by Gumroad, Inc.
             Gumroad acts as the <strong>Merchant of Record</strong> and is responsible for order fulfilment including VAT compliance.
@@ -434,8 +419,8 @@
               <div class="service-desc">Processing of enquiries submitted via the contact form on meixner-tobias.com</div>
             </div>
           </div>
-          <p class="legal-p" style="margin-top:12px;">When you use the contact form, the following data is collected:</p>
-          <ul style="margin:8px 0 12px 20px; font-size:.9375rem; line-height:1.75; color:var(--text);">
+          <p class="legal-p">When you use the contact form, the following data is collected:</p>
+          <ul>
             <li>Name (required)</li>
             <li>Email address (required)</li>
             <li>Phone number (optional)</li>
@@ -457,7 +442,7 @@
               <div class="service-desc">Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, USA.<br>Privacy policy: <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">cloudflare.com/privacypolicy</a></div>
             </div>
           </div>
-          <p class="legal-p" style="margin-top:12px;">The contact form on this website is processed via Cloudflare Workers, a serverless computing service by Cloudflare, Inc. When you submit the contact form, the data you entered is transmitted to a Cloudflare Worker, which processes it and forwards it to the email delivery service Resend.</p>
+          <p class="legal-p">The contact form on this website is processed via Cloudflare Workers, a serverless computing service by Cloudflare, Inc. When you submit the contact form, the data you entered is transmitted to a Cloudflare Worker, which processes it and forwards it to the email delivery service Resend.</p>
           <p class="legal-p">Processing takes place on servers within the EU/EEA. Cloudflare, Inc. is certified under the EU–US Data Privacy Framework (DPF). Standard Contractual Clauses (SCC) pursuant to Art. 46(2)(c) GDPR are also in place.</p>
           <p class="legal-p">Legal basis: Art. 6(1)(b) GDPR (pre-contractual measures) and Art. 6(1)(f) GDPR (legitimate interest in the secure transmission of contact data).</p>
         </div>
@@ -472,7 +457,7 @@
               <div class="service-desc">WorkOS Inc. (Resend), 340 S Lemon Ave #4133, Walnut, CA 91789, USA.<br>Privacy policy: <a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener">resend.com/legal/privacy-policy</a></div>
             </div>
           </div>
-          <p class="legal-p" style="margin-top:12px;">Resend by WorkOS Inc. is used to send emails after form submission — both a confirmation email to you and a notification to me. The data entered in the contact form (in particular name and email address) is transmitted to Resend for the purpose of email delivery.</p>
+          <p class="legal-p">Resend by WorkOS Inc. is used to send emails after form submission — both a confirmation email to you and a notification to me. The data entered in the contact form (in particular name and email address) is transmitted to Resend for the purpose of email delivery.</p>
           <p class="legal-p">Resend temporarily stores email logs to ensure deliverability. A Data Processing Agreement (Art. 28 GDPR) is in place with WorkOS Inc. Data may be transferred to the USA (see Section 14).</p>
           <p class="legal-p">Legal basis: Art. 6(1)(b) GDPR (pre-contractual measures) and Art. 6(1)(f) GDPR (legitimate interest in reliable email delivery).</p>
         </div>
@@ -497,7 +482,7 @@
             <li><strong>Objection (Art. 21 GDPR)</strong> &ndash; You may object to processing based on legitimate interests.</li>
             <li><strong>Complaint</strong> &ndash; You have the right to lodge a complaint with a data protection supervisory authority. For residents of Bavaria (Germany): Bayerisches Landesamt f&uuml;r Datenschutzaufsicht (BayLDA), Promenade 18, 91522 Ansbach, Germany.</li>
           </ul>
-          <p class="legal-p" style="margin-top:14px;">To exercise your rights, please contact: <a href="mailto:contact@meixner-tobias.com">contact@meixner-tobias.com</a></p>
+          <p class="legal-p">To exercise your rights, please contact: <a href="mailto:contact@meixner-tobias.com">contact@meixner-tobias.com</a></p>
         </div>
 
         <!-- 16 -->
@@ -526,13 +511,13 @@
 <!-- FOOTER -->
 <footer>
   <div class="container">
-    <div class="footer-cluster" style="display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid var(--border);font-size:.82rem;">
-      <span style="font-family:var(--fd);font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);">Server-Side Tracking Topic:</span>
-      <a href="/en/blog/server-side-tracking/" style="color:var(--muted);text-decoration:none;">Main article</a>
-      <a href="/en/blog/stape-io-setup/" style="color:var(--muted);text-decoration:none;">Stape.io Setup</a>
-      <a href="/en/blog/meta-capi-server-side-gtm/" style="color:var(--muted);text-decoration:none;">Meta CAPI via sGTM</a>
-      <a href="/en/blog/google-ads-enhanced-conversions/" style="color:var(--muted);text-decoration:none;">Google Ads Enhanced Conv.</a>
-      <a href="/en/blog/bypassing-safari-itp/" style="color:var(--muted);text-decoration:none;">Bypassing Safari ITP</a>
+    <div class="footer-cluster">
+      <span>Server-Side Tracking Topic:</span>
+      <a href="/en/blog/server-side-tracking/">Main article</a>
+      <a href="/en/blog/stape-io-setup/">Stape.io Setup</a>
+      <a href="/en/blog/meta-capi-server-side-gtm/">Meta CAPI via sGTM</a>
+      <a href="/en/blog/google-ads-enhanced-conversions/">Google Ads Enhanced Conv.</a>
+      <a href="/en/blog/bypassing-safari-itp/">Bypassing Safari ITP</a>
     </div>
     <div class="footer-row">
       <span class="footer-copy">© 2026 Tobias Meixner</span>
@@ -541,7 +526,7 @@
         <li><a href="/en/legal/">Legal notice</a></li>
         <li><a href="/en/policy-privacy/">Privacy policy</a></li>
         <li><a href="/en/terms-and-conditions/">Terms and Conditions</a></li>
-        <li><button type="button" class="footer-cookie-btn" onclick="CookieScript.instance.show()">Cookie settings</button></li>
+        <li><button type="button" class="footer-cookie-btn" onclick="if (window.CookieScript &amp;&amp; CookieScript.instance &amp;&amp; typeof CookieScript.instance.show === &#x27;function&#x27;) CookieScript.instance.show()">Cookie settings</button></li>
         <li><a href="https://www.linkedin.com/in/meixner-tobias" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn</a></li>
       </ul>
     </div>

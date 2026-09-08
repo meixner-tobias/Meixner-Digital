@@ -14,16 +14,22 @@ Idempotent — running it without changes is a no-op (hashes match).
 """
 
 import hashlib
+import html
 import re
+import subprocess
 from pathlib import Path
+from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
-ROOT = Path(__file__).parent
+ROOT = Path(__file__).resolve().parent
 EXCLUDE = {".venv", "node_modules", ".git"}
 
-ASSETS = {
-    "css/style.css": "style.css",
-    "js/main.js": "main.js",
-}
+ASSETS = ("css/style.css", "js/main.js")
+
+ASSET_TAG = re.compile(r"<(?:link|script)\b[^>]*>", re.IGNORECASE)
+URL_ATTRIBUTE = re.compile(
+    r"(?P<prefix>\b(?:href|src)\s*=\s*)(?P<quote>['\"])(?P<url>[^'\"]+)(?P=quote)",
+    re.IGNORECASE,
+)
 
 
 def short_hash(file_path: Path, length: int = 8) -> str:
@@ -34,23 +40,45 @@ def short_hash(file_path: Path, length: int = 8) -> str:
 
 
 def collect_html_files():
-    out = []
-    for p in ROOT.rglob("*.html"):
-        if any(seg in EXCLUDE for seg in p.parts):
-            continue
-        out.append(p)
-    return out
+    """Use tracked pages in a Git checkout; never rewrite unrelated untracked HTML."""
+    try:
+        result = subprocess.run(
+            ["git", "ls-files", "-z", "--", "*.html"],
+            cwd=ROOT, capture_output=True, check=False,
+        )
+    except FileNotFoundError:
+        result = None
+    if result is not None and result.returncode == 0:
+        return [ROOT / name.decode("utf-8") for name in result.stdout.split(b"\0")
+                if name and (ROOT / name.decode("utf-8")).is_file()]
+    return sorted(p for p in ROOT.rglob("*.html")
+                  if not any(seg in EXCLUDE for seg in p.relative_to(ROOT).parts))
 
 
 def patch_file(path: Path, replacements: dict) -> bool:
-    """Replace asset references like style.css(?v=...)? -> style.css?v=NEWHASH."""
+    """Version only this site's actual CSS/JS URL attributes, retaining other query data."""
     src = path.read_text(encoding="utf-8")
+
+    def patch_attribute(match: re.Match) -> str:
+        url = urlsplit(html.unescape(match["url"]))
+        if url.scheme or url.netloc:
+            return match[0]
+        target = (ROOT / url.path.lstrip("/") if url.path.startswith("/")
+                  else path.parent / url.path).resolve()
+        try:
+            rel = target.relative_to(ROOT.resolve()).as_posix()
+        except ValueError:
+            return match[0]
+        if rel not in replacements:
+            return match[0]
+        query = [(key, value) for key, value in parse_qsl(url.query, keep_blank_values=True)
+                 if key != "v"]
+        query.append(("v", replacements[rel]))
+        updated = urlunsplit(url._replace(query=urlencode(query)))
+        return f'{match["prefix"]}{match["quote"]}{html.escape(updated, quote=True)}{match["quote"]}'
+
     orig = src
-    for filename, new_hash in replacements.items():
-        # Match: filename optionally followed by ?v=anyhash
-        # Captures the entire token so we can replace cleanly.
-        pattern = re.compile(re.escape(filename) + r"(\?v=[a-f0-9]+)?")
-        src = pattern.sub(f"{filename}?v={new_hash}", src)
+    src = ASSET_TAG.sub(lambda tag: URL_ATTRIBUTE.sub(patch_attribute, tag[0]), src)
     if src != orig:
         path.write_text(src, encoding="utf-8")
         return True
@@ -60,13 +88,13 @@ def patch_file(path: Path, replacements: dict) -> bool:
 def main():
     # Compute fresh hashes
     replacements = {}
-    for rel, basename in ASSETS.items():
+    for rel in ASSETS:
         f = ROOT / rel
         if not f.exists():
             print(f"WARNING: {rel} not found, skipping.")
             continue
         h = short_hash(f)
-        replacements[basename] = h
+        replacements[rel] = h
         print(f"  {rel}  ->  ?v={h}")
 
     # Apply to every HTML file

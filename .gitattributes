@@ -1,0 +1,2 @@
+# Shell hooks must remain executable by sh after a Windows checkout.
+.githooks/* text eol=lf
