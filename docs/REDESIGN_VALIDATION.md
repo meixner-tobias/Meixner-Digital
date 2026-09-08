@@ -107,6 +107,38 @@ messbar von −95 px auf 12 px ein.
 **Screenshots:** im Sitzungs-Scratchpad unter `…/scratchpad/shots/` und
 `…/scratchpad/shots/matrix/`. Sie liegen bewusst außerhalb des Repositories.
 
+## 4b. Abnahme nach dem Deployment
+
+Gemessen gegen `https://meixner-tobias.com/` nach dem Livegang, mit
+Cache-Buster, Chromium, 1440 × 1000 und 390 × 844.
+
+- **17 Seiten × 2 Viewports, DE und EN: alle sauber.** Schrift angewandt, kein
+  waagerechter Überlauf, kein hängengebliebener Reveal, keine kaputten Bilder,
+  keine JavaScript-Fehler, keine 404 auf eigene Ressourcen.
+- **LCP 464 ms, CLS 0,002, 0 Long Tasks** bei normaler CPU.
+- **537 KB in 12 Requests**, davon **210 KB eigene Seite**. Die übrigen 327 KB
+  sind GTM (297 KB) und CookieScript (29 KB) — beides bestehende Integrationen.
+- Bei vierfach gedrosselter CPU: LCP 1512 ms, 7 Long Tasks (1434 ms). Diese
+  Rechenzeit stammt überwiegend aus GTM, nicht aus dem Seitencode.
+
+### CLS: Messreihe statt Einzelwert
+
+Ein einzelner Lauf war nicht aussagekräftig, weil das Ergebnis davon abhängt,
+ob die Schrift vor oder nach dem First Contentful Paint eintrifft. Über sechs
+Läufe:
+
+| Stand | Median | min | max | Verursacher |
+| --- | --- | --- | --- | --- |
+| vor dem Preload | 0,064 | — | — | `div.fc` bei ~760 ms |
+| mit Font-Preload | 0,0017 | 0,0000 | 0,0640 | `div.fc`, nur bei später Schrift |
+| + feste Kartenbreite | **0,0017** | 0,0000 | 0,0450 | `ul.nav-links`, `a.btn` |
+
+Der Sprung an den Hero-Kärtchen ist damit strukturell beseitigt und taucht in
+keinem Lauf mehr auf. Der Rest stammt vom Umbruch normaler Textelemente beim
+Schrifttausch und bleibt deutlich unter dem Schwellenwert 0,1. Er wäre nur noch
+mit `size-adjust`-Fallbackmetriken zu entfernen — dafür ist der Messwert zu gut,
+um die Komplexität zu rechtfertigen.
+
 ## 5. Bewusste Abweichungen von der Referenz
 
 - **Die Tracking-Erklärung ist HTML plus CSS, kein SVG.** Der Auftrag bevorzugt SVG,
