@@ -19,6 +19,14 @@ VOID = set("area base br col embed hr img input link meta param source track wbr
 
 
 def normalize_visual_text(source):
+    # Eng gefasste Ausnahme fuer den visuellen Neuaufbau: die neu entworfene
+    # Tracking-Erklaerung auf den beiden Startseiten. Sie ist zusaetzliche
+    # Erklaergrafik, kein Ersatz fuer bestehenden Text. Entfernt wird
+    # ausschliesslich dieses eine <figure>; jeder andere Inhalt bleibt exakt
+    # gegen die Baseline geprueft. Die Grafik enthaelt bewusst keine
+    # data-*-Attribute, <a>, <img> oder <source>, damit alle uebrigen
+    # Snapshot-Felder unveraendert vergleichbar bleiben.
+    source = re.sub(r'<figure class="flow-figure[^"]*"[\s\S]*?</figure>\s*', '', source)
     # Adjacent formerly block-level hero spans need a word separator in native flow.
     source = source.replace('</span><span data-intro>', '</span> <span data-intro>')
     source = re.sub(r'(<div class="faq-mini-item"><strong>[^<]*</strong>)(?=\S)', r'\1 ', source)

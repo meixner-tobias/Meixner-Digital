@@ -1,2 +1,10 @@
 # Shell hooks must remain executable by sh after a Windows checkout.
 .githooks/* text eol=lf
+
+# Schriften und Bilder sind binaer. Ohne diese Regel haengt die Unversehrtheit
+# an Gits Auto-Erkennung, und autocrlf ist auf diesem Rechner aktiv.
+*.woff2 binary
+*.woff  binary
+*.webp  binary
+*.png   binary
+*.jpg   binary

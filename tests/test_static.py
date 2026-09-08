@@ -227,27 +227,34 @@ class StaticTests(unittest.TestCase):
                         check("function inlineHandler(event) {\n" + source + "\n}",
                               f"{path.relative_to(ROOT)}:{line} {name}")
 
-    def test_no_runtime_animation_dependencies(self):
-        js_forbidden = re.compile(
-            r"\b(?:gsap|ScrollTrigger|Lenis|THREE|requestAnimationFrame|cancelAnimationFrame|"
-            r"IntersectionObserver|ResizeObserver|MutationObserver|setInterval|clearInterval|"
-            r"animationend|transitionend)\b|\.animate\s*\(|behavior\s*:\s*['\"]smooth['\"]",
-            re.IGNORECASE,
-        )
-        css_forbidden = re.compile(r"@(?:-[\w]+-)?keyframes\b|\b(?:animation|transition)(?:-[\w-]+)?\s*:", re.IGNORECASE)
-        allowed_timeout = re.compile(
-            r"setTimeout\s*\(\s*function\s*\(\s*\)\s*\{\s*controller\.abort\(\);?\s*\}\s*,\s*20000\s*\)"
+    def test_motion_stays_dependency_free_and_css_is_safe(self):
+        """The visual redesign allows CSS animation; it does not allow a new
+        animation runtime, and it must not hide broken geometry.
+
+        Replaces the former zero-animation assertions of the visual reset.
+        Deliberately still forbidden:
+          - animation libraries (gsap / ScrollTrigger / Lenis / three.js)
+          - a global `transition: all`, which animates unnamed properties
+          - `overflow-x: hidden` on html/body to mask layout overflow
+          - declarative SVG animation elements
+        """
+        libraries = re.compile(r"\b(?:gsap|ScrollTrigger|Lenis|THREE)\b")
+        transition_all = re.compile(r"transition\s*:\s*all\b", re.IGNORECASE)
+        body_clip = re.compile(
+            r"(?:^|[},])\s*(?:html|body)[^{}]*\{[^{}]*overflow-x\s*:\s*hidden", re.IGNORECASE
         )
         sources = [(path, path.read_text(encoding="utf-8")) for path in files(".js")]
         styles = [(path, path.read_text(encoding="utf-8")) for path in files(".css")]
         for path, page in self.pages.items():
             for attrs, source, _ in page.scripts:
                 if (attrs.get("type") or "").lower() != "application/ld+json":
-                    self.assertNotIn("/js/vendor/", attrs.get("src", ""), str(path))
+                    self.assertNotIn("/js/vendor/", attrs.get("src", ""),
+                                     f"{path}: vendored animation runtime reintroduced")
                     sources.append((path, source))
             styles += [(path, source) for _, source, _ in page.styles]
             for tag, attrs, line, _ in page.nodes:
-                self.assertNotIn(tag, {"animate", "animatetransform", "animatemotion", "set"}, f"SVG animation {path}:{line}")
+                self.assertNotIn(tag, {"animate", "animatetransform", "animatemotion", "set"},
+                                 f"Declarative SVG animation {path}:{line}")
                 if attrs.get("style"):
                     styles.append((path, attrs["style"]))
                 for name, source in attrs.items():
@@ -255,13 +262,30 @@ class StaticTests(unittest.TestCase):
                         sources.append((path, source))
         for path, source in sources:
             with self.subTest(path=path.relative_to(ROOT)):
-                self.assertIsNone(js_forbidden.search(source), "Removed animation/runtime dependency reintroduced")
-                without_network_timeout = allowed_timeout.sub("", source)
-                self.assertNotRegex(without_network_timeout, r"\bsetTimeout\s*\(", "Only the explicit fetch-abort timeout remains")
+                self.assertIsNone(libraries.search(source),
+                                  "Animation library reintroduced; motion is CSS + IntersectionObserver")
         for path, source in styles:
             with self.subTest(path=path.relative_to(ROOT)):
                 source = re.sub(r"/\*[\s\S]*?\*/", "", source)
-                self.assertIsNone(css_forbidden.search(source), "CSS animation/transition reintroduced")
+                self.assertIsNone(transition_all.search(source),
+                                  "Name the animated properties instead of `transition: all`")
+                self.assertIsNone(body_clip.search(source),
+                                  "Do not hide overflow on html/body; contain decorative motion instead")
+
+    def test_motion_preferences_are_honoured_in_css(self):
+        """Reduced motion and the explicit pause must both neutralise decoration."""
+        css = (ROOT / "css" / "style.css").read_text(encoding="utf-8")
+        self.assertIn("prefers-reduced-motion", css, "Reduced-motion handling is missing")
+        self.assertIn(".motion-paused", css, "Explicit pause state is missing")
+        # Every keyframe loop has to be reachable by the pause state.
+        for name in re.findall(r"@keyframes\s+([\w-]+)", css):
+            with self.subTest(keyframes=name):
+                users = re.findall(r"animation:[^;]*\b" + re.escape(name) + r"\b[^;]*;", css)
+                self.assertTrue(users, f"@keyframes {name} is declared but never used")
+                for rule in re.findall(r"([^{}]+)\{[^{}]*animation:[^;]*\b"
+                                       + re.escape(name) + r"\b", css):
+                    self.assertIn("motion-paused", rule,
+                                  f"Loop {name} keeps running when the user pauses motion")
 
 
 if __name__ == "__main__":

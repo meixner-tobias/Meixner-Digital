@@ -126,19 +126,21 @@ class BrowserTests(unittest.TestCase):
         transport_retries = 0
         for path in files:
             with self.subTest(path=path.relative_to(ROOT).as_posix()):
-                for attempt in range(3):
+                # Das Stylesheet ist mit dem Designsystem deutlich groesser
+                # geworden; 5 s reichten dem lokalen Testserver unter Last nicht.
+                for attempt in range(4):
                     try:
-                        with urlopen(self.base + "/" + path.relative_to(ROOT).as_posix(), timeout=5) as response:
+                        with urlopen(self.base + "/" + path.relative_to(ROOT).as_posix(), timeout=20) as response:
                             self.assertEqual(200, response.status)
                             self.assertEqual(path.read_bytes(), response.read())
                         break
                     except (TimeoutError, ConnectionError, http.client.IncompleteRead):
-                        if attempt == 2:
+                        if attempt == 3:
                             raise
                         transport_retries += 1
         print(f"HTTP: {len(files)} exact file responses; {transport_retries} transient transport retries")
 
-    def test_all_pages_responsive_and_no_animations(self):
+    def test_all_pages_responsive_and_content_reachable(self):
         files = sorted(p for p in ROOT.rglob("*.html")
                        if not any(part.startswith(".") or part in {"node_modules", "tests"}
                                   for part in p.relative_to(ROOT).parts))
@@ -157,22 +159,38 @@ class BrowserTests(unittest.TestCase):
                     self.assertEqual([], broken)
                     self.assertEqual(1, self.page.locator("main").count())
                     self.assertEqual(1, self.page.locator("h1").count())
+                    # Nach dem Durchscrollen darf kein Inhalt unsichtbar
+                    # zurueckbleiben und die Seite nicht seitlich ueberlaufen.
+                    self.page.evaluate("""async () => {
+                      for (let y = 0; y < document.documentElement.scrollHeight; y += 600) {
+                        window.scrollTo(0, y);
+                        await new Promise(r => setTimeout(r, 30));
+                      }
+                      window.scrollTo(0, 0);
+                    }""")
+                    # Jeder Reveal muss angekommen sein. Danach einpendeln
+                    # lassen: Delay plus Dauer koennen bis 1,4 s brauchen, und
+                    # blindes Warten waere hier langsam und trotzdem unsicher.
+                    self.page.wait_for_timeout(200)
+                    not_arrived = self.page.evaluate(
+                        """() => [...document.querySelectorAll('.reveal')]
+                             .filter(el => !el.classList.contains('is-in'))
+                             .map(el => el.tagName + '.' + el.className)""")
+                    self.assertEqual([], not_arrived,
+                                     "Reveal never arrived after scrolling through the page")
+                    self.page.wait_for_function(
+                        """() => ![...document.querySelectorAll('.reveal, [data-intro]')]
+                             .some(el => {
+                               const s = getComputedStyle(el);
+                               return s.opacity === '0' || s.visibility === 'hidden';
+                             })""",
+                        timeout=4000)
                     state = self.page.evaluate("""() => ({
                       overflow: document.documentElement.scrollWidth - innerWidth,
-                      animations: document.getAnimations().length,
-                      animated: [...document.querySelectorAll('body *')].filter(el => {
-                        const s = getComputedStyle(el);
-                        return s.animationName !== 'none' || s.transitionDuration.split(',').some(v => parseFloat(v) > 0);
-                      }).map(el => el.tagName + '.' + el.className),
-                      invisibleReveals: [...document.querySelectorAll('.reveal, [data-intro]')].filter(el => {
-                        const s = getComputedStyle(el);
-                        return s.opacity === '0' || s.visibility === 'hidden';
-                      }).length
+                      styled: getComputedStyle(document.body).fontFamily.includes('Jakarta')
                     })""")
+                    self.assertTrue(state["styled"], "Stylesheet did not apply")
                     self.assertLessEqual(state["overflow"], 1)
-                    self.assertEqual(0, state["animations"])
-                    self.assertEqual([], state["animated"])
-                    self.assertEqual(0, state["invisibleReveals"])
         print(f"Validated {len(files)} pages at {len(sizes)} viewport sizes")
 
     def test_navigation_keyboard_and_resize(self):
@@ -231,10 +249,18 @@ class BrowserTests(unittest.TestCase):
             self.assertFalse(answers.first.is_visible())
             questions.first.focus()
             self.page.keyboard.press("Enter")
-            self.assertTrue(answers.first.is_visible())
+            # Der semantische Zustand gilt sofort — er haengt nicht an der
+            # 350-ms-Hoehenanimation, die bei 0 px startet.
             self.assertEqual("true", questions.first.get_attribute("aria-expanded"))
+            self.assertFalse(answers.first.evaluate("el => el.hidden"))
+            self.page.wait_for_timeout(450)
+            self.assertTrue(answers.first.is_visible())
             questions.nth(1).click()
+            # Beim Schliessen gilt hidden sofort: es bleibt keine unsichtbare,
+            # weiter fokussierbare Flaeche stehen.
             self.assertFalse(answers.first.is_visible())
+            self.assertEqual("false", questions.first.get_attribute("aria-expanded"))
+            self.page.wait_for_timeout(450)
             self.assertTrue(answers.nth(1).is_visible())
             questions.nth(1).click()
             self.assertFalse(answers.nth(1).is_visible())
@@ -337,11 +363,63 @@ class BrowserTests(unittest.TestCase):
             if page.locator("#submitBtn").count():
                 self.assertTrue(page.locator("#submitBtn").is_disabled())
         no_js.close()
-        self.page.emulate_media(reduced_motion="reduce")
-        self.goto("/")
-        self.assertEqual(0, self.page.evaluate("document.getAnimations().length"))
-        self.page.emulate_media(reduced_motion="no-preference")
-        self.assertEqual(0, self.page.evaluate("document.getAnimations().length"))
+
+        # Ohne JavaScript ist trotzdem jeder Reveal-Inhalt sichtbar: Der
+        # vorbereitete Zustand haengt an html.js-motion, das nur JS setzt.
+        no_js2 = self.browser.new_context(java_script_enabled=False,
+                                          viewport={"width": 1440, "height": 900})
+        no_js2.route("**/*", self.route)
+        bare = no_js2.new_page()
+        bare.goto(self.base + "/")
+        hidden = bare.evaluate("""() => [...document.querySelectorAll('.reveal')]
+            .filter(el => getComputedStyle(el).opacity === '0').length""")
+        self.assertEqual(0, hidden, "Reveals stay hidden when JavaScript is unavailable")
+        no_js2.close()
+
+        # Reduzierte Bewegung: keine laufende dekorative Animation, Inhalt sichtbar.
+        reduced = self.browser.new_context(reduced_motion="reduce",
+                                           viewport={"width": 1440, "height": 900})
+        reduced.route("**/*", self.route)
+        page = reduced.new_page()
+        page.goto(self.base + "/")
+        page.wait_for_timeout(900)
+        state = page.evaluate("""() => ({
+          running: document.getAnimations().filter(a => a.playState === 'running').length,
+          hidden: [...document.querySelectorAll('.reveal')]
+                    .filter(el => getComputedStyle(el).opacity === '0').length,
+          toggle: !!document.querySelector('.motion-toggle')
+        })""")
+        self.assertEqual(0, state["running"], "Decorative motion keeps running under reduced motion")
+        self.assertEqual(0, state["hidden"], "Content stays hidden under reduced motion")
+        self.assertFalse(state["toggle"], "Pause control is redundant when the system already asks for less motion")
+        reduced.close()
+
+        # Ausdrueckliche Pause: wirkt unabhaengig von der Systemangabe und
+        # laesst jeden Inhalt in seinem sichtbaren Endzustand stehen.
+        paused = self.browser.new_context(viewport={"width": 1440, "height": 900})
+        paused.route("**/*", self.route)
+        page = paused.new_page()
+        page.goto(self.base + "/")
+        page.wait_for_timeout(600)
+        page.click(".motion-toggle")
+        page.wait_for_timeout(400)
+        state = page.evaluate("""() => ({
+          running: document.getAnimations().filter(a => a.playState === 'running').length,
+          hidden: [...document.querySelectorAll('.reveal')]
+                    .filter(el => getComputedStyle(el).opacity === '0').length,
+          pressed: document.querySelector('.motion-toggle').getAttribute('aria-pressed')
+        })""")
+        self.assertEqual(0, state["running"], "Pause did not stop decorative motion")
+        self.assertEqual(0, state["hidden"], "Pause left content invisible")
+        self.assertEqual("true", state["pressed"])
+
+        # Die Entscheidung ueberlebt eine Navigation.
+        page.goto(self.base + "/leistungen/")
+        page.wait_for_timeout(600)
+        self.assertEqual("true", page.evaluate(
+            "document.querySelector('.motion-toggle').getAttribute('aria-pressed')"),
+            "Explicit pause was forgotten on the next page")
+        paused.close()
 
 
 if __name__ == "__main__":

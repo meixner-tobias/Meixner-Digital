@@ -27,7 +27,9 @@
   }
 
   // One shared boundary for the CSS fallback, drawer and project details.
-  var mobileViewport = window.matchMedia("(max-width: 768px)");
+  // Must stay in sync with the @media (max-width: 1000px) nav rule in style.css:
+  // the desktop nav links alone need roughly 750px.
+  var mobileViewport = window.matchMedia("(max-width: 1000px)");
 
   function initDrawer() {
     var burger = document.getElementById("burger");
@@ -124,13 +126,47 @@
 
   function initFaqAccordion() {
     var items = safeQueryAll(".faq-item");
-    function setOpen(item, open) {
+
+    // Referenz M09: 350 ms auf die natuerliche Hoehe. Der semantische Zustand
+    // (hidden, aria-expanded, Klasse) wird immer sofort gesetzt; die Animation
+    // ist reine Dekoration und darf abbrechen, ohne etwas zu hinterlassen.
+    function animateHeight(answer, open) {
+      var canAnimate =
+        typeof answer.animate === "function" &&
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
+        !document.documentElement.classList.contains("motion-paused");
+      if (answer.__faqAnim) answer.__faqAnim.cancel();
+      if (!canAnimate) {
+        answer.style.height = "";
+        return;
+      }
+      var full = answer.scrollHeight;
+      var anim = answer.animate(
+        open
+          ? [{ height: "0px" }, { height: full + "px" }]
+          : [{ height: full + "px" }, { height: "0px" }],
+        { duration: 350, easing: "ease" }
+      );
+      answer.__faqAnim = anim;
+      function clear() {
+        if (answer.__faqAnim === anim) answer.__faqAnim = null;
+        answer.style.height = "";
+      }
+      anim.addEventListener("finish", clear);
+      anim.addEventListener("cancel", clear);
+    }
+
+    function setOpen(item, open, animate) {
       var button = item.querySelector(".faq-q");
       var answer = item.querySelector(".faq-a");
       if (!button || !answer) return;
+      var changed = answer.hidden === open;
       item.classList.toggle("open", open);
       answer.hidden = !open;
       button.setAttribute("aria-expanded", String(open));
+      // Beim Schliessen bleibt nichts unsichtbar Fokussierbares stehen:
+      // hidden gilt sofort, die Hoehenanimation laeuft nur beim Oeffnen.
+      if (animate && changed && open) animateHeight(answer, true);
     }
     items.forEach(function (item, index) {
       var button = item.querySelector(".faq-q");
@@ -142,9 +178,180 @@
       button.addEventListener("click", function () {
         var open = answer.hidden;
         items.forEach(function (other) { setOpen(other, false); });
-        setOpen(item, open);
+        setOpen(item, open, true);
       });
     });
+  }
+
+  /* ==========================================================================
+     Motion. Vertrag je Effekt: docs/MOTION_SYSTEM.md
+     Funktion und Animation sind getrennt: Ohne diese Schicht bleibt jede Seite
+     vollstaendig sichtbar und bedienbar. Der vorbereitete Reveal-Zustand wird
+     erst hier gesetzt und bei Abbruch zuverlaessig wieder entfernt.
+     ========================================================================== */
+  var MOTION_KEY = "motion-preference";
+  var reduceMotionMQL = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var root = document.documentElement;
+
+  function motionPausedByUser() {
+    try {
+      return window.localStorage.getItem(MOTION_KEY) === "paused";
+    } catch (err) {
+      return false; // Fehlender Speicherzugriff darf nichts beschaedigen.
+    }
+  }
+
+  function storeMotionPreference(paused) {
+    try {
+      window.localStorage.setItem(MOTION_KEY, paused ? "paused" : "playing");
+    } catch (err) {
+      /* Private-Mode o. ae. — die Entscheidung gilt dann nur fuer diese Seite. */
+    }
+  }
+
+  function decorativeMotionOff() {
+    return reduceMotionMQL.matches || motionPausedByUser();
+  }
+
+  function initMotion() {
+    var revealed = safeQueryAll(".reveal");
+
+    // Alles sofort sichtbar lassen und keinen vorbereiteten Zustand setzen.
+    function showEverything() {
+      root.classList.remove("js-motion");
+      revealed.forEach(function (el) { el.classList.add("is-in"); });
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      showEverything();
+      return;
+    }
+
+    if (decorativeMotionOff()) {
+      showEverything();
+    } else if (revealed.length) {
+      root.classList.add("js-motion");
+
+      var pending = revealed.slice();
+      function arrive(el) {
+        el.classList.add("is-in"); // einmal pro Seitenaufruf, kein Zurueckfallen
+        var i = pending.indexOf(el);
+        if (i > -1) pending.splice(i, 1);
+      }
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          observer.unobserve(entry.target);
+          arrive(entry.target);
+        });
+      }, { rootMargin: "0px 0px -10% 0px", threshold: 0 });
+
+      revealed.forEach(function (el) {
+        // Sehr hohe Elemente warten nie auf eine unerreichbare Sichtbarkeit.
+        if (el.getBoundingClientRect().top < window.innerHeight) arrive(el);
+        else observer.observe(el);
+      });
+
+      // Der Observer tastet ab und kann bei sehr schnellem oder programmatischem
+      // Scrollen Elemente ueberspringen. Dieser Nachlauf holt sie zuverlaessig
+      // ein und haengt sich selbst wieder aus, sobald alles angekommen ist.
+      var ticking = false;
+      function sweep() {
+        ticking = false;
+        pending.slice().forEach(function (el) {
+          if (el.getBoundingClientRect().top < window.innerHeight) {
+            observer.unobserve(el);
+            arrive(el);
+          }
+        });
+        if (!pending.length) {
+          window.removeEventListener("scroll", schedule);
+          window.removeEventListener("resize", schedule);
+          observer.disconnect();
+        }
+      }
+      function schedule() {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(sweep);
+      }
+      window.addEventListener("scroll", schedule, { passive: true });
+      window.addEventListener("resize", schedule);
+    }
+
+    // Hintergrundwechsel: aktive Sektion ueber eine Zone um die Viewportmitte.
+    // Deterministisch, damit schnelles Vor-/Zurueckscrollen nicht flackert.
+    var blueZones = safeQueryAll(".about-strip, .why-box");
+    if (blueZones.length && !decorativeMotionOff()) {
+      var active = 0;
+      var zoneObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          active += entry.isIntersecting ? 1 : -1;
+        });
+        active = Math.max(0, active);
+        document.body.classList.toggle("bg-blue", active > 0);
+      }, { rootMargin: "-45% 0px -45% 0px", threshold: 0 });
+      blueZones.forEach(function (zone) { zoneObserver.observe(zone); });
+    }
+
+    initMotionToggle();
+  }
+
+  // Pause-/Fortsetzen-Schalter fuer dekorative Bewegung (WCAG 2.2 Pause, Stop,
+  // Hide). Liegt bewusst ausserhalb von <main> und wird hier erzeugt, damit
+  // kein Seitenmarkup dafuer geaendert werden muss.
+  function initMotionToggle() {
+    if (reduceMotionMQL.matches) return; // Systemangabe genuegt bereits.
+    if (!document.querySelector(".why-box, .reveal")) return;
+
+    var isEN = (root.getAttribute("lang") || "").toLowerCase().indexOf("en") === 0;
+    var LABEL = isEN
+      ? { pause: "Pause animations", play: "Play animations" }
+      : { pause: "Animationen pausieren", play: "Animationen abspielen" };
+
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "motion-toggle";
+
+    function render() {
+      var paused = root.classList.contains("motion-paused");
+      button.textContent = paused ? LABEL.play : LABEL.pause;
+      button.setAttribute("aria-pressed", String(paused));
+    }
+
+    root.classList.toggle("motion-paused", motionPausedByUser());
+    render();
+
+    button.addEventListener("click", function () {
+      var paused = !root.classList.contains("motion-paused");
+      root.classList.toggle("motion-paused", paused);
+      storeMotionPreference(paused);
+      if (paused) {
+        safeQueryAll(".reveal").forEach(function (el) { el.classList.add("is-in"); });
+        document.body.classList.remove("bg-blue");
+      }
+      render();
+    });
+
+    document.body.appendChild(button);
+  }
+
+  // Wechsel der Bewegungspraeferenz mitten in der Sitzung: dekorative Bewegung
+  // sofort beenden und jeden Inhalt in seinem sichtbaren Endzustand lassen.
+  function handleReduceMotionChange(event) {
+    if (!event.matches) return;
+    root.classList.remove("js-motion");
+    safeQueryAll(".reveal").forEach(function (el) { el.classList.add("is-in"); });
+    document.body.classList.remove("bg-blue");
+    var toggle = document.querySelector(".motion-toggle");
+    if (toggle) toggle.remove();
+  }
+
+  if (reduceMotionMQL.addEventListener) {
+    reduceMotionMQL.addEventListener("change", handleReduceMotionChange);
+  } else if (reduceMotionMQL.addListener) {
+    reduceMotionMQL.addListener(handleReduceMotionChange); // Safari < 14
   }
 
   onDocumentReady(function () {
@@ -155,6 +362,7 @@
     initAddonBox();
     initContactForm();
     document.documentElement.setAttribute("data-ui-ready", "");
+    initMotion();
   });
 
   function initAddonBox() {
