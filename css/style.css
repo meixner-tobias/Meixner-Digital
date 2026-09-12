@@ -756,7 +756,7 @@ main > section:has(#whyme-heading) {
 /* In Eintraegen ist der Button eine Nebenhandlung - er nimmt nur seine
    Textbreite ein, nicht die ganze Spalte. */
 .pain-card .btn, .svc-card .btn { justify-self: start; align-self: start; }
-.btn-full { width: 100%; margin-top: auto; }
+.btn-full { width: auto; margin-top: auto; }
 
 .btn:disabled, .btn[aria-disabled="true"], .form-submit:disabled {
   color: var(--disabled); border-color: var(--line); cursor: not-allowed;
@@ -862,9 +862,11 @@ main > section:has(#whyme-heading) {
 .hero-img-frame picture { display: block; }
 .hero-img-frame img {
   width: 100%;
-  height: clamp(340px, 66vh, 700px);
+  /* Band statt Vollbild: Das Foto ist ein Schnappschuss mit viel Himmel -
+     ueber die ganze Viewporthoehe wirkt es beliebig. */
+  height: clamp(260px, 42vh, 460px);
   object-fit: cover;
-  object-position: 50% 26%;
+  object-position: 50% 38%;
   filter: saturate(0.92) contrast(1.04);
 }
 .hero-img-frame::after {
@@ -877,36 +879,40 @@ main > section:has(#whyme-heading) {
 
 /* Die vier Kundenhinweise werden zur gesetzten Bildlegende. */
 .fc {
-  display: flex; align-items: baseline; gap: 10px;
-  padding: 12px 0;
+  display: grid; gap: 3px;
+  padding: 14px 0 0;
   border-top: var(--hair) solid var(--ink-line);
   font-family: var(--sans);
+  min-width: 0;
 }
 .fi { display: none; }
 .fc-lbl { font-size: var(--t-meta); font-weight: 600; color: var(--on-ink); }
 .fc-meta { font-size: var(--t-meta); color: var(--on-ink-faint); }
 
-@media (min-width: 900px) {
-  .hero-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) var(--margin-col);
-    gap: var(--gap-col);
-    align-items: end;
-  }
-  .hero-img-wrap { grid-column: 1 / -1; }
+/* Das Foto laeuft ueber die volle Breite, die Kundenhinweise stehen als
+   gesetzte Legendenzeile darunter - nicht als Spalte daneben, die ans untere
+   Bildende rutscht. */
+.hero-img-frame { display: block; }
+.hero-img-frame picture { display: block; }
+
+@media (min-width: 760px) {
   .hero-img-frame {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) clamp(196px, 18vw, 260px);
-    align-items: end;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: var(--gap-col);
   }
-  .hero-img-frame picture { grid-column: 1; }
+  .hero-img-frame picture { grid-column: 1 / -1; }
   .hero-img-frame::after { display: none; }
   .hero-img-frame > .fc {
-    grid-column: 2;
-    padding-inline: 0 var(--gutter);
-    margin-left: var(--gap-col);
+    padding-inline: var(--gutter) 0;
+    border-right: var(--hair) solid var(--ink-line);
   }
-  .hero-img-frame > .fc:first-of-type { border-top: 0; }
+  .hero-img-frame > .fc:last-of-type { border-right: 0; }
+  .hero-img-frame > .fc + .fc { padding-inline: 0; }
+}
+
+@media (min-width: 900px) {
+  .hero-grid { display: block; }
 }
 
 /* ============================================================================
@@ -1239,6 +1245,8 @@ footer {
   transition: color var(--dur-fast) var(--ease);
 }
 .faq-q:hover { color: var(--signal-text); }
+/* Das Markup traegt bereits ein Chevron-SVG - ohne das hier stehen zwei da. */
+.faq-q > svg { display: none; }
 .faq-q::after {
   content: ""; flex: none;
   width: 12px; height: 12px;
@@ -1359,17 +1367,134 @@ blockquote {
 }
 
 /* Leistungen */
-.svc-main-grid, .svc-detail-grid, .includes-grid, .faq-grid, .why-freelance-grid,
-.skills-grid, .own-grid, .travel-cards, .process-grid, .scope-tier-grid,
-.blog-grid, .task-grid, .svc-compare-grid {
+.includes-grid, .faq-grid, .why-freelance-grid, .own-grid, .travel-cards,
+.scope-tier-grid, .blog-grid, .task-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: clamp(20px, 2.6vw, 40px);
   align-items: start;
 }
+
+/* Diese Raster kommen mit unterschiedlich vielen Eintraegen vor (3, 4 und 6).
+   Eine feste Spaltenzahl laesst immer eine Variante ragged umbrechen, deshalb
+   wird sie an der tatsaechlichen Kinderzahl gewaehlt: drei Spalten als Regel
+   (passt fuer 3 und 6), vier nur bei genau vier Eintraegen. */
+.svc-detail-grid, .skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(20px, 2.6vw, 40px);
+  align-items: start;
+}
+.svc-detail-grid:has(> :nth-child(4)):not(:has(> :nth-child(5))),
+.skills-grid:has(> :nth-child(4)):not(:has(> :nth-child(5))) {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 980px) {
+  .svc-detail-grid, .skills-grid,
+  .svc-detail-grid:has(> :nth-child(4)):not(:has(> :nth-child(5))),
+  .skills-grid:has(> :nth-child(4)):not(:has(> :nth-child(5))) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 560px) {
+  .svc-detail-grid, .skills-grid,
+  .svc-detail-grid:has(> :nth-child(4)):not(:has(> :nth-child(5))),
+  .skills-grid:has(> :nth-child(4)):not(:has(> :nth-child(5))) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Vier Themen im Formular stehen als 2x2 ruhiger als vier schmale Spalten. */
+.topic-checks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2px 18px;
+}
+@media (max-width: 560px) { .topic-checks { grid-template-columns: minmax(0, 1fr); } }
 .scope-tier-grid--two { grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); }
 
-.svc-main-card { display: flex; flex-direction: column; }
+/* Vier Schritte gehoeren in vier Spalten - sonst bricht der letzte allein um. */
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(20px, 2.6vw, 40px);
+  align-items: start;
+}
+@media (max-width: 1000px) { .process-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px)  { .process-grid { grid-template-columns: minmax(0, 1fr); } }
+
+/* Der Vergleich ist eine Liste von Zeilen, keine Spaltenreihe. */
+.svc-compare-grid { display: block; }
+.svc-compare-head { border-top: 2px solid var(--line-strong); }
+
+/* Die Sinnbild-Karten der Projekte hatten gar kein Raster und stapelten
+   ueber die volle Breite. */
+.case-icon-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+  margin-bottom: var(--stack);
+}
+@media (max-width: 900px) { .case-icon-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .case-icon-grid { grid-template-columns: minmax(0, 1fr); } }
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+  gap: clamp(16px, 2vw, 30px);
+}
+
+/* Drei Karten mit 924 / 592 / 825 px Hoehe und einer ohne Preis lassen sich
+   nebeneinander nicht ausrichten. Als gestapelte Eintraege stimmt die
+   Ordnung von selbst - und es ist dieselbe Sprache wie auf der Startseite. */
+.svc-main-grid { grid-template-columns: minmax(0, 1fr); gap: 0; }
+
+.svc-main-card {
+  display: grid;
+  gap: 10px;
+  padding: clamp(26px, 3.2vw, 44px) 0;
+  border-top: var(--hair) solid var(--line);
+}
+.svc-main-card:last-child { border-bottom: var(--hair) solid var(--line); }
+.svc-main-card.featured { border-top: 2px solid var(--signal); }
+
+@media (min-width: 900px) {
+  .svc-main-card {
+    grid-template-columns: var(--margin-col) minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: 4px var(--gap-col);
+    align-items: start;
+  }
+  /* Jede Zeile eindeutig belegt - sonst dehnt ein hoher Nachbar die Zeile
+     und zwischen Titel und Text klafft ein Loch. */
+  .svc-badge, .svc-badge-placeholder { grid-column: 1; grid-row: 1; margin: 0; }
+  .svc-price        { grid-column: 1; grid-row: 2; }
+  .svc-price-sub    { grid-column: 1; grid-row: 3; margin: 0; }
+  .svc-main-name    { grid-column: 2; grid-row: 1; margin: 0 0 8px; }
+  .svc-main-tagline { grid-column: 2; grid-row: 2; }
+  .svc-website-note { grid-column: 2; grid-row: 3; }
+  .addon-box        { grid-column: 2; grid-row: 4; }
+  .svc-divider      { display: none; }
+  .svc-feat-list    { grid-column: 3; grid-row: 1 / -1; margin: 0; }
+  .svc-main-card > .btn { grid-column: 2; grid-row: 5; justify-self: start; margin-top: 14px; }
+
+  /* Die Betreuung hat keinen Einstiegspreis, sondern zwei Tarife. Sie bekommt
+     deshalb ein eigenes Raster: Titel und Text ueber die volle Breite,
+     die Tarife nebeneinander darunter. */
+  .svc-main-card--tiered {
+    grid-template-columns: var(--margin-col) minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .svc-main-card--tiered > .svc-main-name    { grid-column: 2 / -1; grid-row: 1; }
+  .svc-main-card--tiered > .svc-main-tagline { grid-column: 2 / -1; grid-row: 2; max-width: var(--measure); }
+  /* :nth-of-type zaehlt nach Elementtyp, nicht nach Klasse - die Tarife sind
+     div unter vielen divs. Der Geschwisterselektor trifft zuverlaessig den
+     zweiten Tarif. */
+  .svc-main-card--tiered > .svc-tier { grid-column: 2; grid-row: 3; }
+  .svc-main-card--tiered > .svc-tier ~ .svc-tier { grid-column: 3; }
+  .svc-main-card--tiered > .btn { grid-column: 2; grid-row: 4; }
+}
+
+.svc-tier { display: grid; gap: 2px; align-content: start; }
+.svc-tier + .svc-tier { margin-top: 0; }
 .svc-main-card.featured, .scope-tier--standard, .svc-tier--highlight,
 .scope-tier--saas, .proj-card-founder { border-top-color: var(--signal); border-top-width: 2px; }
 
@@ -1638,10 +1763,7 @@ blockquote {
   padding: 10px 0 10px 14px; margin-bottom: 18px;
 }
 
-.topic-checks {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
-  gap: 2px;
-}
+.topic-checks { gap: 2px; }
 .topic-check, .addon-option, .form-check {
   display: flex; align-items: flex-start; gap: 12px;
   padding: 14px 14px 14px 0;
