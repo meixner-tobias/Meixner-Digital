@@ -1,0 +1,44 @@
+# Wartungsmodus — vorübergehend.
+#
+# Diese Datei nimmt die Website öffentlich offline, ohne eine einzige
+# Seitendatei zu verschieben oder zu löschen. Alles liegt unverändert im
+# Repository und ist lokal weiter aufrufbar (python dev.py).
+#
+# WIEDER ONLINE STELLEN: diese Datei sowie maintenance.html,
+# maintenance-404.html und _layouts/ löschen, committen, pushen.
+# Sonst ist nichts zu tun.
+#
+# Ausgeliefert wird nur noch die Wartungsseite; alles unter `exclude`
+# landet nicht im veröffentlichten Verzeichnis.
+
+exclude:
+  # Die eigentlichen Seiten
+  - index.html
+  - 404.html
+  - agb
+  - blog
+  - datenschutz
+  - en
+  - impressum
+  - kontakt
+  - leistungen
+  - projekte
+  - ueber-mich
+
+  # Verweist auf Adressen, die im Wartungsmodus nicht erreichbar sind
+  - sitemap.xml
+  - llms.txt
+  - llms-full.txt
+
+  # Gehörte ohnehin nicht ins veröffentlichte Verzeichnis
+  - docs
+  - tests
+  - scripts
+  - dev.py
+  - add_breadcrumbs.py
+  - bump_assets.py
+  - update_sitemap.py
+
+# assets/ bleibt veröffentlicht: Die Wartungsseite lädt von dort ihre Schrift.
+# css/ und js/ bleiben ebenfalls liegen, damit nach dem Wartungsmodus nichts
+# neu aufgebaut werden muss.

@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meixner Digital — Website wird neu gebaut</title>
+<meta name="description" content="Die Website von Tobias Meixner wird gerade vollständig neu gestaltet. In Kürze wieder erreichbar. Anfragen jederzeit per E-Mail.">
+<meta name="theme-color" content="#000000">
+<link rel="canonical" href="https://meixner-tobias.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Meixner Digital — Website wird neu gebaut">
+<meta property="og:description" content="Die Website wird gerade vollständig neu gestaltet. In Kürze wieder erreichbar.">
+<meta property="og:url" content="https://meixner-tobias.com/">
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/plus-jakarta-sans-latin.woff2" crossorigin>
+<style>
+  @font-face {
+    font-family: "Plus Jakarta Sans";
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url("/assets/fonts/plus-jakarta-sans-latin.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+      U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+      U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+
+  :root {
+    --bg: #000000;
+    --surface: #101213;
+    --border: #303133;
+    --text: #ffffff;
+    --muted: #b3b0ae;
+    --dim: #a3a1a0;
+    --accent: #cbf2fe;
+    --warm: #ebdcc8;
+    --ink: #05070a;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    padding: clamp(24px, 6vw, 72px);
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system,
+      "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Zwei sehr dunkle Verlaufsflächen, wie im neuen Designsystem. */
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.42;
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::before {
+    width: 46vmax; height: 46vmax; top: -16vmax; right: -12vmax;
+    background: radial-gradient(circle, #263a46, transparent 68%);
+  }
+  body::after {
+    width: 38vmax; height: 38vmax; bottom: -16vmax; left: -10vmax;
+    background: radial-gradient(circle, #1f3340, transparent 68%);
+  }
+
+  main {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 640px;
+    text-align: center;
+  }
+
+  .brand {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: clamp(32px, 7vw, 56px);
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 7px 16px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 26px;
+  }
+
+  .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent); flex: none;
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: .45; transform: scale(.82); }
+  }
+
+  h1 {
+    font-size: clamp(1.85rem, 1.1rem + 3vw, 3.25rem);
+    font-weight: 600;
+    line-height: 1.16;
+    letter-spacing: -0.03em;
+    margin: 0 0 20px;
+    text-wrap: balance;
+  }
+
+  h1 em { font-style: normal; color: var(--accent); }
+
+  .lead {
+    color: var(--muted);
+    font-size: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+    margin: 0 auto 36px;
+    max-width: 52ch;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: clamp(22px, 3.5vw, 32px);
+    text-align: left;
+  }
+
+  .card-label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+    color: var(--warm);
+    margin-bottom: 14px;
+  }
+
+  .card p { margin: 0 0 18px; color: var(--muted); font-size: 0.9375rem; }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    min-height: 46px;
+    padding: 13px 26px;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: var(--ink);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color .2s cubic-bezier(.785,.135,.15,.86),
+                color .2s cubic-bezier(.785,.135,.15,.86);
+  }
+
+  .btn:hover, .btn:focus-visible { background: transparent; color: var(--accent); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--muted);
+    border-color: var(--border);
+  }
+
+  .btn-ghost:hover, .btn-ghost:focus-visible { color: var(--text); border-color: var(--text); }
+
+  footer {
+    margin-top: clamp(32px, 6vw, 52px);
+    font-size: 0.8125rem;
+    color: var(--dim);
+  }
+
+  footer a { color: var(--dim); }
+  footer a:hover { color: var(--accent); }
+
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: .01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+<main>
+  <div class="brand">Tobias Meixner</div>
+
+  <div class="badge"><span class="dot" aria-hidden="true"></span>Umbau läuft</div>
+
+  <h1>Die Seite wird gerade <em>komplett neu gebaut.</em></h1>
+
+  <p class="lead">
+    Ich gestalte meine Website von Grund auf neu — Aufbau, Gestaltung und Technik.
+    In Kürze ist sie wieder da.
+  </p>
+
+  <div class="card">
+    <div class="card-label">In der Zwischenzeit</div>
+    <p>
+      Anfragen laufen ganz normal weiter. Schreib mir kurz was du brauchst,
+      bis wann ungefähr und welches Budget du im Kopf hast — ich melde mich
+      in der Regel am selben Tag.
+    </p>
+    <div class="actions">
+      <a class="btn" href="mailto:contact@meixner-tobias.com">contact@meixner-tobias.com</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/meixner-tobias" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+
+  <footer>
+    Tobias Meixner · Würzburg · Tracking &amp; Web-Freelancer
+  </footer>
+</main>
+</body>
+</html>
