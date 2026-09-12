@@ -1,175 +1,125 @@
-# Prüfbericht zum visuellen Neuaufbau
+# Prüfbericht — Redesign „Messprotokoll"
 
-Stand: 8. September 2026. Alle Zahlen sind gemessen, nicht geschätzt.
-Nicht geprüfte Punkte sind unten ausdrücklich benannt.
+Stand: 12. September 2026. Alle Zahlen sind gemessen. Nicht Geprüftes steht
+unten ausdrücklich.
 
 ## 1. Messbedingungen
 
-- Chromium 151.0.7922.34, headless, über Playwright.
-- Seiten wurden **nicht** über einen HTTP-Server geladen, sondern per
-  Request-Interception direkt von der Platte beantwortet. Grund: ein lokaler
-  `http.server` brach unter parallelen Anfragen Verbindungen ab
-  (`ERR_CONNECTION_RESET`) und erzeugte dadurch Falschbefunde — unter anderem
-  Messungen ohne geladenes Stylesheet, die als Layout-Fehler erschienen wären.
-  Jedes Messskript prüft zusätzlich, ob das Stylesheet wirklich angewandt wurde,
-  und **verwirft** die Messung sonst, statt einen Fehler zu melden.
-- Externe Anfragen (GTM über `data.meixner-tobias.com`, CookieScript-CDN) werden
-  in allen Messläufen abgebrochen. Die dadurch protokollierten `ERR_FAILED`-Einträge
-  sind gewollt und keine Seitenfehler.
-- Keine Formulare abgeschickt, keine Anfragen an den produktiven Worker.
+- Chrome DevTools (MCP) im echten Browser für Gestaltung, Netzwerk und Traces;
+  Chromium 151 über Playwright für Testsuite und Serienmessungen.
+- Seiten werden per Request-Interception direkt von der Platte geliefert. Ein
+  lokaler HTTP-Server brach unter parallelen Anfragen Verbindungen ab und
+  erzeugte Falschbefunde.
+- **`behavior: 'instant'` ist beim programmatischen Scrollen Pflicht.** Mit
+  `scroll-behavior: smooth` animiert `scrollTo`, die Messschleife erreicht die
+  unteren Seitenbereiche nie und meldet Bilder als kaputt, die in Ordnung sind.
+  Dieser Fehler ist einmal aufgetreten und hat fast zu einem Fehlbefund geführt.
 
 ## 2. Testsuite
 
-`python -m unittest discover -s tests -p "test_*.py"` — 27 Tests.
+`python -m unittest discover -s tests -p "test_*.py"` — **28 Tests, alle grün.**
+Davon 35 Seiten × 6 Viewports im Browser.
 
-Die Python-Umgebung des Projekts enthielt kein `playwright`; es wurde als reine
-Testabhängigkeit in `.venv` installiert. Der Chromium-Pfad wird über
-`PLAYWRIGHT_CHROMIUM_EXECUTABLE` gesetzt.
+Der **Erhaltungstest ist unverändert grün**: Inhalte, Metadaten, Canonicals,
+Hreflang, JSON-LD, Links, Bilder, Formularfelder, `data-*`-Attribute und der
+SHA-256 des sichtbaren Textes stimmen weiter mit der Baseline überein. Das
+Redesign hat **keine einzige Zeile Markup** verändert.
 
-### Fachgerecht ersetzte Annahmen des visuellen Resets
+### Angepasste Tests und warum
 
-| Vorher | Jetzt |
-| --- | --- |
-| `test_no_runtime_animation_dependencies` verbot Animation, Transition, RAF, IntersectionObserver, `setTimeout` | `test_motion_stays_dependency_free_and_css_is_safe`: verbietet weiterhin Animationsbibliotheken (gsap/ScrollTrigger/Lenis/THREE), vendorisierte Runtimes, deklarative SVG-Animation, globales `transition: all` und `overflow-x: hidden` auf `html`/`body` |
-| — | **neu** `test_motion_preferences_are_honoured_in_css`: jede `@keyframes` muss verwendet werden **und** über den Pausenzustand erreichbar sein |
-| `test_all_pages_responsive_and_no_animations` erwartete überall null Animationen | `test_all_pages_responsive_and_content_reachable`: nach vollständigem Durchscrollen muss jeder Reveal angekommen sein, das Stylesheet angewandt, kein waagerechter Überlauf |
-| `test_without_javascript_and_reduced_motion` erwartete auch bei `no-preference` null Bewegung | prüft jetzt vier Zustände: ohne JS sichtbar, reduzierte Bewegung ohne laufende Animation, ausdrückliche Pause wirksam, Pausenentscheidung überlebt die Navigation |
+| Test | Änderung | Grund |
+| --- | --- | --- |
+| `test_motion_preferences_are_honoured_in_css` | prüft nur noch `infinite`-Animationen | WCAG 2.2 „Pause, Stop, Hide" greift bei selbsttätiger Bewegung über fünf Sekunden. Einmal-Auftritte und scroll-gebundene Effekte fallen nicht darunter. |
+| `test_all_pages_responsive_and_content_reachable` | prüft Sichtbarkeit statt `is-in`-Klasse; Stylesheet-Wächter liest ein Design-Token statt eines Schriftnamens | Die Reveal-Mechanik ist entfallen. Der Wächter überlebt so den nächsten Schriftwechsel. |
+| `site_pages()` (neu) | Jekyll-Quellen ausgenommen | `_layouts/` und die Front-Matter-Stubs des Wartungsmodus sind keine auslieferbaren Seiten. |
+| `test_scroll_linked_animation_never_sits_on_an_image_parent` (neu) | — | Hält den unten beschriebenen Lazy-Loading-Fallstrick fest. |
 
-`test_faq_and_case_details` prüft zusätzlich, dass der semantische Zustand
-(`aria-expanded`, `hidden`) **sofort** gilt und nicht an der 350-ms-Animation hängt.
+## 3. Gefundene und behobene Fehler
 
-`tests/test_preservation.py` erhielt eine einzige, kommentierte Ausnahme: das neue
-`figure.flow-figure` wird vor dem Vergleich entfernt. Alle übrigen Felder —
-Metadaten, Canonicals, Hreflang, JSON-LD, Links, Bilder, Formularfelder,
-`data-*`-Attribute und der SHA-256 des sichtbaren `main`-Textes — werden weiter
-unverändert gegen `docs/preservation-baseline.json` geprüft. Die Baseline wurde
-**nicht** überschrieben.
+Alle aus der Messung, nicht aus Vermutung:
 
-## 3. Im Test gefundene und behobene Fehler
+1. **Scroll-gebundene Animation verhinderte das Laden von Bildern.** Mit
+   `animation-timeline: view()` auf dem `<picture>` wurde das darin liegende
+   `loading="lazy"`-Bild **nie angefordert** — kein Netzwerkeintrag,
+   `currentSrc` leer. Animation abgeschaltet → Bild lud sofort. Die Animation
+   liegt jetzt auf dem `<img>`; ein Test hält das fest.
+2. **Bernstein als Schrift auf Papier: 1,81:1.** `.own-product-ai` war faktisch
+   unlesbar. Signalfarbe für Schrift ist jetzt flächenabhängig.
+3. **Kleinsttext auf Papier: 3,80:1** an 13-px-Labels. Token angehoben auf 5,16:1.
+4. **Button-Füllung lag nur im `::before`.** Prüfwerkzeuge, Forced-Colors und
+   Druckansicht sahen keinen Hintergrund. Füllung jetzt am Element.
+5. **Blogkarten komplett unterstrichen** — die Karte ist selbst ein `<a>`.
+6. **Blog-Sinnbilder als Bildfläche behandelt**: 371 × 232 px Kasten um ein Icon.
+7. **Kennzahlen in sechs verschiedenen Breiten** (594/655/437/332/254/350 px),
+   dadurch ragged endende Trennlinien. Jetzt ein echtes Raster.
+8. **Argumentraster doppelt verschachtelt** — vier Wörter pro Zeile. Entschachtelt.
+9. **Titel-Dublette** in `<summary>` und Karteninhalt.
+10. **Pfeil am Absenden-Button** blieb stehen, weil die Regel `.form-submit` nicht erfasste.
 
-Diese Befunde kamen aus der Messung, nicht aus einer Vermutung:
+### Zwei Fehler in meinem eigenen Prüfwerkzeug
 
-1. **Navigation lief bei 812 px um 111 px über.** `ul.nav-links` ist allein 748 px
-   breit; die mobile Grenze lag bei 768 px. Grenze auf 1000 px angehoben — in CSS
-   und JS gemeinsam, wie im Auftrag gefordert. Die Testmatrix deckt 812 px ab.
-2. **`.svc-main-grid` blieb bei drei Spalten.** Bei 320 px wurden die Preiskarten
-   auf 83 px gequetscht, der Inhalt lief um 71 px über. In beiden Media Queries ergänzt.
-3. **Reveals blieben bei schnellem Scrollen unsichtbar.** Reproduzierbar bei
-   812 × 375. Ursache: ein IntersectionObserver tastet ab und überspringt bei
-   programmatischem Scrollen Elemente. Behoben durch einen per
-   `requestAnimationFrame` gedrosselten Nachlauf, der sich selbst beendet. Das
-   vorherige pauschale Zeit-Sicherheitsnetz wurde entfernt, weil es den Fehler
-   verdeckt statt behoben hätte.
-4. **Waagerechter Überlauf während der Reveal-Bewegung** (bis 68 px bei 812 px).
-   Ursache: seitlich einlaufende Karten ragen während der Bewegung über ihren
-   Container. Behoben durch `overflow-x: clip` mit `overflow-clip-margin` **auf den
-   betroffenen Rastern** — nicht auf dem Body, und ohne Fokusringe zu beschneiden.
-   Zusätzlich greifen die kurzen Bewegungswege jetzt ab 1100 px statt erst ab 768 px.
-5. **Kontrast 4,31:1** bei 13-px-Text (`--color-text-dim: #8b8987`) auf den
-   helleren Kartenflächen. Token auf `#a3a1a0` angehoben.
-6. **Projekttitel doppelt** auf Desktop: `<summary>` und `.case-inner` tragen beide
-   Logo, Typ und Titel. Der erste Ansatz blendete die `<summary>` auf Desktop aus;
-   `test_faq_and_case_details` deckte auf, dass sie dort als Kartenkopf und
-   Bedienelement erwartet wird. Umgesetzt ist deshalb die umgekehrte, kleinere
-   Lösung: Die `<summary>` bleibt immer sichtbar — auch ohne JavaScript — und die
-   Wiederholung im aufgeklappten Inhalt entfällt.
-7. **Absenden-Button wirkte deaktiviert.** `#submitBtn` trägt keine `.btn`-Klasse
-   und war ungestaltet. Über `.form-submit` gestaltet, mit eigenem Deaktiviert-Zustand.
-8. **Hero-Projektkärtchen wurden abgeschnitten.** `.hero-img-frame` hatte
-   `overflow: hidden`, die Kärtchen stehen aber bewusst über die Kante. Beschnitten
-   wird jetzt das `<picture>`, nicht der Rahmen.
-9. **Hobby-Pillen stapelten sich** als volle Zeilen, weil `.hobby-list` in der
-   Grid-Gruppe lag. Auf umbrechende Reihe umgestellt.
+Beide hätten zu Falschbefunden geführt und sind korrigiert:
 
-## 4. Abdeckung
+- Die Kontrastprüfung mittelte den Haarlinien-Verlauf der Eintragszeilen als
+  Hintergrund und meldete dadurch 4,48:1, wo der Text auf Papier steht.
+  Verläufe, die auf Haarlinienhöhe gesetzt sind, werden jetzt ignoriert.
+- Die Scroll-Schleife nutzte kein `behavior: 'instant'` (siehe Abschnitt 1).
 
-**Seiten:** alle 35 HTML-Dateien, DE und EN, einschließlich Blogübersichten, aller
-Artikel, Impressum, Datenschutz, AGB und 404.
+## 4. Ergebnisse
 
-**Viewport-Matrix** (Testsuite, alle 35 Seiten): 320 × 740, 768 × 1024, 1024 × 768,
-1440 × 900, 2560 × 1440, 812 × 375.
-**Zusätzlich für den Referenzvergleich:** 390 × 844 und 1440 × 1000.
-
-**Kontrast:** 17 Seiten, 7854 Elemente, nach vollständigem Durchscrollen.
+**Kontrast** — 17 Seiten, DE und EN, beide Flächen, nach vollständigem
+Durchscrollen: **keine Unterschreitung** (4,5:1 Fließtext, 3:1 große Schrift).
 Verfahren: sRGB-Luminanz nach WCAG, Alpha-Komposition über die Elternkette,
-Mittelung von Farbverläufen, korrekte Behandlung von `color(srgb …)` im
-Wertebereich 0–1. **Ergebnis: keine Unterschreitung** (4,5:1 für Fließtext,
-3:1 für große Schrift).
+Mittelung echter Farbverläufe, `color(srgb …)` im Wertebereich 0–1.
 
-**200 % Zoom** (CSS-Viewport 640 × 512), 11 Seiten: kein Überlauf, kein Text unter 11 px.
+**Core Web Vitals** (Chrome DevTools Trace, lokal, ohne GTM/CMP):
 
-**Tastatur:** 28 Tabstopps auf der Startseite — jedes fokussierte Element hat einen
-sichtbaren Fokusring, keiner liegt hinter einem Sticky-Element. Der Skip-Link fährt
-messbar von −95 px auf 12 px ein.
+| | ungedrosselt | 4× CPU + Fast 4G |
+| --- | --- | --- |
+| LCP | **225 ms** | **1268 ms** |
+| CLS | **0,00** | **0,00** |
 
-**Schmales Querformat** 568 × 320: Startseite 1 px, Leistungen und Kontakt 0 px Überlauf.
+CLS 0,00 ist das Ergebnis von `font-size-adjust: from-font`; die vorherige
+Fassung lag bei 0,045–0,064.
 
-**Screenshots:** im Sitzungs-Scratchpad unter `…/scratchpad/shots/` und
-`…/scratchpad/shots/matrix/`. Sie liegen bewusst außerhalb des Repositories.
+**Gewicht:**
 
-## 4b. Abnahme nach dem Deployment
+| | roh | gzip | Budget |
+| --- | --- | --- | --- |
+| `css/style.css` | 71,0 KB | **15,9 KB** | < 40 KB ✓ |
+| `js/main.js` | 21,7 KB | **6,0 KB** | < 20 KB ✓ |
+| Schriften (latin) | 93,0 KB | — | separat gemessen |
 
-Gemessen gegen `https://meixner-tobias.com/` nach dem Livegang, mit
-Cache-Buster, Chromium, 1440 × 1000 und 390 × 844.
+CSS von 3795 auf 1930 Zeilen, JS von 24,2 auf 21,7 KB. 28 `!important`
+(vorher 101), kein `transition: all`, 6 Keyframes.
 
-- **17 Seiten × 2 Viewports, DE und EN: alle sauber.** Schrift angewandt, kein
-  waagerechter Überlauf, kein hängengebliebener Reveal, keine kaputten Bilder,
-  keine JavaScript-Fehler, keine 404 auf eigene Ressourcen.
-- **LCP 464 ms, CLS 0,002, 0 Long Tasks** bei normaler CPU.
-- **537 KB in 12 Requests**, davon **210 KB eigene Seite**. Die übrigen 327 KB
-  sind GTM (297 KB) und CookieScript (29 KB) — beides bestehende Integrationen.
-- Bei vierfach gedrosselter CPU: LCP 1512 ms, 7 Long Tasks (1434 ms). Diese
-  Rechenzeit stammt überwiegend aus GTM, nicht aus dem Seitencode.
+**Abdeckung:** alle 35 Seiten, DE und EN, bei 320 × 740, 768 × 1024,
+1024 × 768, 1440 × 900, 2560 × 1440 und 812 × 375.
 
-### CLS: Messreihe statt Einzelwert
+## 5. Bewusste Entscheidungen
 
-Ein einzelner Lauf war nicht aussagekräftig, weil das Ergebnis davon abhängt,
-ob die Schrift vor oder nach dem First Contentful Paint eintrifft. Über sechs
-Läufe:
+- **Zwei Flächen statt einer.** Der Wechsel Ink ↔ Papier ist der
+  Abschnittsübergang. Auf der Startseite: ink, ink, Papier, ink, ink, Papier, ink.
+- **Kein Einblenden pro Abschnitt.** Begründung in
+  [MOTION_SYSTEM.md](MOTION_SYSTEM.md) Abschnitt 1.
+- **Keine Achsen in den variablen Schriften.** Archivos Breitenachse kostet
+  55 KB, Newsreaders optische Achse 74 KB. Den Charakter trägt die Paarung.
+- **Rot bleibt** für Verlustzahlen im Tracking-Artikel — es ist semantisch, nicht
+  dekorativ. Es ist nur flächenabhängig auf lesbare Werte gebracht.
 
-| Stand | Median | min | max | Verursacher |
-| --- | --- | --- | --- | --- |
-| vor dem Preload | 0,064 | — | — | `div.fc` bei ~760 ms |
-| mit Font-Preload | 0,0017 | 0,0000 | 0,0640 | `div.fc`, nur bei später Schrift |
-| + feste Kartenbreite | **0,0017** | 0,0000 | 0,0450 | `ul.nav-links`, `a.btn` |
+## 6. Nicht geprüft / Einschränkungen
 
-Der Sprung an den Hero-Kärtchen ist damit strukturell beseitigt und taucht in
-keinem Lauf mehr auf. Der Rest stammt vom Umbruch normaler Textelemente beim
-Schrifttausch und bleibt deutlich unter dem Schwellenwert 0,1. Er wäre nur noch
-mit `size-adjust`-Fallbackmetriken zu entfernen — dafür ist der Messwert zu gut,
-um die Komplexität zu rechtfertigen.
-
-## 5. Bewusste Abweichungen von der Referenz
-
-- **Die Tracking-Erklärung ist HTML plus CSS, kein SVG.** Der Auftrag bevorzugt SVG,
-  verlangt zugleich eine senkrechte mobile Anordnung „ohne abgeschnittene Pfade" und
-  „möglichst eine semantische Inhaltsquelle pro Element". Eine feste `viewBox`
-  erfüllt beides nicht ohne zweiten DOM-Block oder JS-Messung. Die Stationen sind
-  deshalb echter, vorlesbarer Text; nur Linien und Signalpunkte sind CSS.
-- **Navigation ist nicht sticky** — die Referenz hält sie ebenfalls nicht dauerhaft
-  sichtbar, und so werden keine Ankerziele oder Fokusringe verdeckt.
-- **H1 größer als gemessen** (bis 68 px statt 50 px) — im Auftrag als eigene
-  Entscheidung vorgesehen.
-- **Sekundärtext heller** als die gemessenen `#9C9998` — Kontrastgründe, siehe oben.
-- **Kein Preis-Tab-Umschalter.** Die Referenz hat einen; die vorhandenen drei
-  Angebote besitzen diese Monats-/Jahres-Logik nicht, also wurde keine erfunden.
-- **Der 1400-ms-Fade** wird nur an einer Stelle verwendet, nicht flächendeckend.
-
-## 6. Nicht geprüft / verbleibende Einschränkungen
-
-- **Nur Chromium.** Firefox und Safari wurden nicht getestet. `overflow-clip-margin`
-  und `:has()` sind dort unterschiedlich lange verfügbar; `:has()` wird nur für die
-  Zustandsdarstellung der Themen-Checkboxen verwendet und ist rein visuell.
-- **Kein Lighthouse- und kein Core-Web-Vitals-Wert.** Solche Zahlen wurden bewusst
-  nicht erfunden. Gemessen wurde nur, was oben steht.
-- **Flaggen-Emoji in Reisekarten** rendern im headless Chromium als
-  Regional-Indicator-Buchstaben, weil dort keine Emoji-Schrift installiert ist. Auf
-  Windows und macOS ist das nicht der Fall. Das ist eine Eigenschaft der
-  Testumgebung, kein Seitenfehler — und wurde deshalb nicht „behoben".
-- **Nicht visuell einzeln abgenommen** wurden alle neun Blogartikel; geprüft wurden
-  je ein deutscher und ein englischer Artikel vollständig, die übrigen automatisch
-  auf Überlauf, sichtbare Inhalte, Bilder und Konsolenfehler.
-- **Der Erfolgs- und Fehlerzustand des Formulars** wird von der Testsuite mit
-  gemockten Antworten geprüft, nicht mit einer echten Übertragung.
-- Das Cookie-Banner selbst wird von einem Drittanbieter injiziert und war in den
-  Messläufen blockiert; nur der vorhandene Viewport-Schutz wurde bewahrt.
+- **Nur Chromium.** Firefox und Safari nicht getestet. Firefox kennt keine
+  scroll-gebundenen Animationen und keine Cross-Document View Transitions —
+  dort erscheint der Endzustand ohne Bewegung. Da die Bewegung nichts versteckt,
+  ist das unkritisch, aber ungeprüft.
+- **Keine Lighthouse-Gesamtnote.** Gemessen wurde, was oben steht.
+- **Die Messung lief ohne GTM und CookieScript** (der lokale Server lädt sie
+  nicht). In Produktion kommen rund 300 KB Drittanbieter-JavaScript hinzu, die
+  nicht Teil des Seitencodes sind.
+- **Visuell einzeln abgenommen** wurden Startseite, Leistungen, Projekte, Über
+  mich, Kontakt, Blogübersicht, ein Artikel, Impressum und 404 — jeweils
+  Desktop, die Startseite zusätzlich mobil. Die übrigen Seiten wurden
+  automatisch auf Überlauf, Sichtbarkeit, Bilder und Konsolenfehler geprüft.
+- **Die Seite ist weiterhin im Wartungsmodus** und öffentlich nicht erreichbar.
+  Das Redesign ist noch nicht veröffentlicht.

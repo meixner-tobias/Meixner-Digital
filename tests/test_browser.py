@@ -23,6 +23,21 @@ from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def site_pages():
+    """Auslieferbare Seiten. Jekyll-Quellen zaehlen nicht dazu: Verzeichnisse
+    mit Unterstrich werden nicht veroeffentlicht, und die Stubs mit reinem
+    Front Matter erhalten ihr Markup erst aus dem Layout."""
+    out = []
+    for path in sorted(ROOT.rglob("*.html")):
+        parts = path.relative_to(ROOT).parts
+        if any(part.startswith((".", "_")) or part in {"node_modules", "tests"} for part in parts):
+            continue
+        if path.read_text(encoding="utf-8").lstrip().startswith("---"):
+            continue
+        out.append(path)
+    return out
+
+
 class QuietHandler(http.server.SimpleHTTPRequestHandler):
     def log_message(self, *args):
         pass
@@ -141,9 +156,7 @@ class BrowserTests(unittest.TestCase):
         print(f"HTTP: {len(files)} exact file responses; {transport_retries} transient transport retries")
 
     def test_all_pages_responsive_and_content_reachable(self):
-        files = sorted(p for p in ROOT.rglob("*.html")
-                       if not any(part.startswith(".") or part in {"node_modules", "tests"}
-                                  for part in p.relative_to(ROOT).parts))
+        files = site_pages()
         sizes = [(320, 740), (768, 1024), (1024, 768), (1440, 900), (2560, 1440), (812, 375)]
         for width, height in sizes:
             self.page.set_viewport_size({"width": width, "height": height})
@@ -168,28 +181,24 @@ class BrowserTests(unittest.TestCase):
                       }
                       window.scrollTo(0, 0);
                     }""")
-                    # Jeder Reveal muss angekommen sein. Danach einpendeln
-                    # lassen: Delay plus Dauer koennen bis 1,4 s brauchen, und
-                    # blindes Warten waere hier langsam und trotzdem unsicher.
-                    self.page.wait_for_timeout(200)
-                    not_arrived = self.page.evaluate(
-                        """() => [...document.querySelectorAll('.reveal')]
-                             .filter(el => !el.classList.contains('is-in'))
-                             .map(el => el.tagName + '.' + el.className)""")
-                    self.assertEqual([], not_arrived,
-                                     "Reveal never arrived after scrolling through the page")
-                    self.page.wait_for_function(
-                        """() => ![...document.querySelectorAll('.reveal, [data-intro]')]
-                             .some(el => {
-                               const s = getComputedStyle(el);
-                               return s.opacity === '0' || s.visibility === 'hidden';
-                             })""",
-                        timeout=4000)
+                    # Kein Inhalt darf unsichtbar bleiben. Die Seite blendet
+                    # nichts mehr ein - sie ist von Anfang an sichtbar - also
+                    # wird genau das geprueft statt eines Klassenzustands.
+                    self.page.wait_for_timeout(250)
                     state = self.page.evaluate("""() => ({
                       overflow: document.documentElement.scrollWidth - innerWidth,
-                      styled: getComputedStyle(document.body).fontFamily.includes('Jakarta')
+                      styled: !!getComputedStyle(document.documentElement)
+                                 .getPropertyValue('--signal').trim(),
+                      invisible: [...document.querySelectorAll('.reveal, [data-intro]')]
+                        .filter(el => {
+                          const s = getComputedStyle(el);
+                          return s.opacity === '0' || s.visibility === 'hidden';
+                        })
+                        .map(el => el.tagName + '.' + el.className)
                     })""")
                     self.assertTrue(state["styled"], "Stylesheet did not apply")
+                    self.assertEqual([], state["invisible"],
+                                     "Content is not visible without scrolling to it")
                     self.assertLessEqual(state["overflow"], 1)
         print(f"Validated {len(files)} pages at {len(sizes)} viewport sizes")
 

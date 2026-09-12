@@ -184,10 +184,10 @@
   }
 
   /* ==========================================================================
-     Motion. Vertrag je Effekt: docs/MOTION_SYSTEM.md
-     Funktion und Animation sind getrennt: Ohne diese Schicht bleibt jede Seite
-     vollstaendig sichtbar und bedienbar. Der vorbereitete Reveal-Zustand wird
-     erst hier gesetzt und bei Abbruch zuverlaessig wieder entfernt.
+     Bewegung. Vertrag je Effekt: docs/MOTION_SYSTEM.md
+     Die Seite versteckt keine Inhalte mehr, um sie spaeter einzublenden - die
+     Bewegung liegt vollstaendig in CSS und haengt am Scroll. JavaScript steuert
+     hier nur noch die ausdrueckliche Pause.
      ========================================================================== */
   var MOTION_KEY = "motion-preference";
   var reduceMotionMQL = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -214,87 +214,9 @@
   }
 
   function initMotion() {
-    var revealed = safeQueryAll(".reveal");
-
-    // Alles sofort sichtbar lassen und keinen vorbereiteten Zustand setzen.
-    function showEverything() {
-      root.classList.remove("js-motion");
-      revealed.forEach(function (el) { el.classList.add("is-in"); });
-    }
-
-    if (!("IntersectionObserver" in window)) {
-      showEverything();
-      return;
-    }
-
-    if (decorativeMotionOff()) {
-      showEverything();
-    } else if (revealed.length) {
-      root.classList.add("js-motion");
-
-      var pending = revealed.slice();
-      function arrive(el) {
-        el.classList.add("is-in"); // einmal pro Seitenaufruf, kein Zurueckfallen
-        var i = pending.indexOf(el);
-        if (i > -1) pending.splice(i, 1);
-      }
-
-      var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          observer.unobserve(entry.target);
-          arrive(entry.target);
-        });
-      }, { rootMargin: "0px 0px -10% 0px", threshold: 0 });
-
-      revealed.forEach(function (el) {
-        // Sehr hohe Elemente warten nie auf eine unerreichbare Sichtbarkeit.
-        if (el.getBoundingClientRect().top < window.innerHeight) arrive(el);
-        else observer.observe(el);
-      });
-
-      // Der Observer tastet ab und kann bei sehr schnellem oder programmatischem
-      // Scrollen Elemente ueberspringen. Dieser Nachlauf holt sie zuverlaessig
-      // ein und haengt sich selbst wieder aus, sobald alles angekommen ist.
-      var ticking = false;
-      function sweep() {
-        ticking = false;
-        pending.slice().forEach(function (el) {
-          if (el.getBoundingClientRect().top < window.innerHeight) {
-            observer.unobserve(el);
-            arrive(el);
-          }
-        });
-        if (!pending.length) {
-          window.removeEventListener("scroll", schedule);
-          window.removeEventListener("resize", schedule);
-          observer.disconnect();
-        }
-      }
-      function schedule() {
-        if (ticking) return;
-        ticking = true;
-        window.requestAnimationFrame(sweep);
-      }
-      window.addEventListener("scroll", schedule, { passive: true });
-      window.addEventListener("resize", schedule);
-    }
-
-    // Hintergrundwechsel: aktive Sektion ueber eine Zone um die Viewportmitte.
-    // Deterministisch, damit schnelles Vor-/Zurueckscrollen nicht flackert.
-    var blueZones = safeQueryAll(".about-strip, .why-box");
-    if (blueZones.length && !decorativeMotionOff()) {
-      var active = 0;
-      var zoneObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          active += entry.isIntersecting ? 1 : -1;
-        });
-        active = Math.max(0, active);
-        document.body.classList.toggle("bg-blue", active > 0);
-      }, { rootMargin: "-45% 0px -45% 0px", threshold: 0 });
-      blueZones.forEach(function (zone) { zoneObserver.observe(zone); });
-    }
-
+    // Inhalte werden nicht mehr versteckt und wieder eingeblendet: Die
+    // Bewegung liegt in CSS an Bildern und Trennlinien, scroll-gebunden.
+    // Hier bleibt nur, was JavaScript wirklich braucht - der Pausenschalter.
     initMotionToggle();
   }
 
@@ -328,8 +250,6 @@
       root.classList.toggle("motion-paused", paused);
       storeMotionPreference(paused);
       if (paused) {
-        safeQueryAll(".reveal").forEach(function (el) { el.classList.add("is-in"); });
-        document.body.classList.remove("bg-blue");
       }
       render();
     });
@@ -341,9 +261,6 @@
   // sofort beenden und jeden Inhalt in seinem sichtbaren Endzustand lassen.
   function handleReduceMotionChange(event) {
     if (!event.matches) return;
-    root.classList.remove("js-motion");
-    safeQueryAll(".reveal").forEach(function (el) { el.classList.add("is-in"); });
-    document.body.classList.remove("bg-blue");
     var toggle = document.querySelector(".motion-toggle");
     if (toggle) toggle.remove();
   }

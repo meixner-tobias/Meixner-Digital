@@ -96,7 +96,10 @@ class Page(HTMLParser):
 class StaticTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.pages = {path.resolve(): Page(path) for path in files(".html")}
+        # Jekyll-Quelldateien sind keine eigenstaendigen Seiten: Die Stubs mit
+        # reinem Front Matter erhalten ihr <main> erst aus dem Layout.
+        cls.pages = {path.resolve(): Page(path) for path in files(".html")
+                     if not path.read_text(encoding="utf-8").lstrip().startswith("---")}
 
     def local_target(self, value, source):
         parsed = urlsplit(value)
@@ -273,19 +276,42 @@ class StaticTests(unittest.TestCase):
                                   "Do not hide overflow on html/body; contain decorative motion instead")
 
     def test_motion_preferences_are_honoured_in_css(self):
-        """Reduced motion and the explicit pause must both neutralise decoration."""
+        """Reduced motion and the explicit pause must both neutralise decoration.
+
+        WCAG 2.2 "Pause, Stop, Hide" covers motion that starts on its own, runs
+        longer than five seconds and sits next to other content. That is exactly
+        the set of `infinite` animations. One-shot entrances end by themselves,
+        and scroll-linked animations only advance while the reader scrolls, so
+        neither needs a pause control. The check is scoped accordingly.
+        """
         css = (ROOT / "css" / "style.css").read_text(encoding="utf-8")
         self.assertIn("prefers-reduced-motion", css, "Reduced-motion handling is missing")
         self.assertIn(".motion-paused", css, "Explicit pause state is missing")
-        # Every keyframe loop has to be reachable by the pause state.
         for name in re.findall(r"@keyframes\s+([\w-]+)", css):
             with self.subTest(keyframes=name):
-                users = re.findall(r"animation:[^;]*\b" + re.escape(name) + r"\b[^;]*;", css)
-                self.assertTrue(users, f"@keyframes {name} is declared but never used")
-                for rule in re.findall(r"([^{}]+)\{[^{}]*animation:[^;]*\b"
-                                       + re.escape(name) + r"\b", css):
-                    self.assertIn("motion-paused", rule,
+                uses = re.findall(r"([^{}]*)\{[^{}]*animation:([^;]*\b"
+                                  + re.escape(name) + r"\b[^;]*);", css)
+                self.assertTrue(uses, f"@keyframes {name} is declared but never used")
+                for selector, shorthand in uses:
+                    if "infinite" not in shorthand:
+                        continue
+                    self.assertIn("motion-paused", selector,
                                   f"Loop {name} keeps running when the user pauses motion")
+
+    def test_scroll_linked_animation_never_sits_on_an_image_parent(self):
+        """A scroll-driven animation on an image's parent stops lazy loading.
+
+        Measured in Chrome: with `animation-timeline: view()` on the <picture>
+        wrapping a `loading="lazy"` image, the image is never requested at all.
+        The animation therefore belongs on the <img> itself.
+        """
+        css = (ROOT / "css" / "style.css").read_text(encoding="utf-8")
+        for block in re.findall(r"([^{}]+)\{([^{}]*animation-timeline:\s*view\(\)[^{}]*)\}", css):
+            selector = " ".join(block[0].split())
+            with self.subTest(selector=selector[:70]):
+                self.assertFalse(
+                    re.search(r"\bpicture\s*(?:,|$)", selector),
+                    "Scroll-driven animation on <picture> prevents lazy images from loading")
 
 
 if __name__ == "__main__":

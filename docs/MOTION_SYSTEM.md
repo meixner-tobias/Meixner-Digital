@@ -1,102 +1,100 @@
 # Bewegungssystem — Meixner Digital
 
-Stand: 8. September 2026. Umgesetzt in `css/style.css` (Abschnitt 13) und
-`js/main.js` (`initMotion`). Referenz-IDs M01–M13 verweisen auf
-[GASTVERTRAUEN_REFERENCE_ANALYSIS.md](GASTVERTRAUEN_REFERENCE_ANALYSIS.md).
+Stand: 12. September 2026. Umgesetzt in `css/style.css` (Abschnitt 17) und
+`js/main.js` (`initMotionToggle`).
 
 **Keine Animationsbibliothek.** Kein GSAP, kein ScrollTrigger, kein Lenis, kein
-three.js. Die Bewegung besteht aus CSS-Transitions, wenigen Keyframes, einem
-IntersectionObserver und der Web Animations API für die FAQ-Höhe. Das erzwingt
-`tests/test_static.py::test_motion_stays_dependency_free_and_css_is_safe`.
+three.js. Die Bewegung besteht aus scroll-gebundenen CSS-Animationen, wenigen
+Keyframes, View Transitions und der Web Animations API für die FAQ-Höhe. Das
+erzwingt `tests/test_static.py`.
 
-## 1. Trennung von Funktion und Animation
+## 1. Grundsatz: Bewegung versteckt nichts
 
-Das HTML ist standardmäßig sichtbar. Der vorbereitete Reveal-Zustand hängt an
-`html.js-motion`, und diese Klasse setzt **nur JavaScript** — und nur, wenn die
-Initialisierung erfolgreich war und Bewegung erwünscht ist.
+Die vorherige Fassung blendete jeden Abschnitt beim Scrollen ein. Das ist aus
+zwei Gründen abgeräumt:
 
-Daraus folgt: ohne JS, bei blockiertem Skript, bei fehlendem
-`IntersectionObserver`, bei reduzierter Bewegung oder bei ausdrücklicher Pause ist
-jeder Inhalt sofort sichtbar. Geprüft in
-`test_without_javascript_and_reduced_motion`.
+1. Es ist das Muster, das jede zweite erzeugte Seite benutzt.
+2. Es versteckt Inhalt. Wer nicht scrollt oder wessen Browser den Effekt nicht
+   auslöst, sieht eine leere Seite. Genau das trat in der Messung auf.
 
-`data-ui-ready` bleibt das Signal der UI-Initialisierung. Bewegung nutzt einen
-eigenen Zustand und mischt sich dort nicht ein.
+Die Bewegung liegt jetzt dort, wo sie nichts verdeckt: **an den Bildern und an
+den Trennlinien**. Jeder Inhalt ist von der ersten Millisekunde an sichtbar,
+mit und ohne JavaScript.
 
 ## 2. Effekte
 
-| Effekt | Auslöser | Weg | Dauer | Easing | Delay | Wiederholung | Mobil | Reduziert / Pause |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Reveal Vergleichskarten (M01) | Eintritt in den Viewport | X +100 → 0, Opacity 0 → 1 | 600 ms | `ease` | 100/200/300/400 ms über `data-d` | einmal pro Aufruf | X auf 24 px, Delays 60–240 ms | sofort sichtbar |
-| Reveal Preis-/Servicekarten (M03) | wie oben | X −100 → 0 | 600 ms | `ease` | wie oben | einmal | wie oben | sofort sichtbar |
-| Reveal Überschriften, Panels (M02) | wie oben | Y −32 → 0 | 600 ms | `ease` | wie oben | einmal | Y −19 px | sofort sichtbar |
-| Langsamer Projektbeleg (M04) | wie oben | nur Opacity | **1400 ms** | `ease` | wie oben | einmal | auf 600 ms verkürzt | sofort sichtbar |
-| Gegenläufige Spalten (M05) | wie oben | erste Spalte von links, letzte von rechts | 600 ms | `ease` | — | einmal | 24 px | sofort sichtbar |
-| Hintergrundwechsel (M07) | aktive Sektion | Schwarz ↔ `#0d151d` | 1000 ms | `cubic-bezier(.25,1,.5,1)` | — | beidseitig | wie Desktop | aus |
-| Organische Verlaufsflächen (M06) | dauerhaft im Prozesspanel | Transform + Scale | 19 s / 23 s | `--ease-background` | — | `infinite alternate` | wie Desktop | aus |
-| Button-Hover (M08) | Hover, Fokus | Farbe, Rahmen | 200 ms | `cubic-bezier(.785,.135,.15,.86)` | — | — | wie Desktop | bleibt (funktionales Feedback) |
-| FAQ öffnen (M09) | Klick, Enter | Höhe 0 → natürlich | 350 ms | `ease` | — | pro Öffnung | wie Desktop | ohne Animation, Zustand identisch |
-| Mobiles Menü / Burger | Klick | Striche zu Kreuz | 300 ms | `--ease-ui` | — | — | — | bleibt (funktionales Feedback) |
-| Tracking-Signale | dauerhaft, sichtbar | Punkt entlang der Verbindung | 7 s Zyklus | `linear` | 0 / 1,4 / 2,8 s | `infinite` | senkrecht statt waagerecht | aus |
+| Effekt | Auslöser | Was | Dauer | Wiederholung | Reduziert / Pause |
+| --- | --- | --- | --- | --- | --- |
+| Hero-Auftritt | Seitenaufbau | Opacity 0→1, 18 px aufwärts, gestaffelt 0–300 ms | 900 ms | einmal | aus |
+| Bildplatten | Scroll | Maßstab 1.06 → 1.0 über den Sichtbereich | scroll-gebunden | stetig | aus |
+| Trennlinien | Scroll | Haarlinie zeichnet sich von 0 auf volle Breite | scroll-gebunden | stetig | aus |
+| Seitenwechsel | Navigation | Cross-Document View Transition, weicher Übergang | 220/320 ms | je Wechsel | aus |
+| Nav-Unterstreichung | Hover | Linie fährt von links ein | 280 ms | — | bleibt |
+| Button-Füllung | Hover, Fokus | Füllung fährt nach unten weg | 280 ms | — | bleibt |
+| FAQ öffnen | Klick, Enter | Höhe 0 → natürliche Höhe | 350 ms | je Öffnung | ohne Animation |
+| Tracking-Signale | dauerhaft | Punkt entlang der Messkette | 7 s Zyklus | **endlos** | aus |
 
-**Der 1400-ms-Fade wird bewusst nur einmal verwendet** — für die Projektkarten der
-Startseite, den einzigen echten Vertrauensabschnitt. Auf Mobilgeräten fällt er auf
-600 ms zurück, damit der Inhalt früh lesbar ist.
+**Genau ein orchestrierter Moment**: der Hero-Auftritt. Kein Einblenden pro
+Abschnitt.
 
-**Richtungen ohne neue Attribute.** Die Referenz unterscheidet Einlaufrichtungen je
-Komponente. Da das Markup nur `reveal` und `data-d` kennt und `data-*`-Attribute
-vom Erhaltungstest exakt geprüft werden, ergibt sich die Richtung aus dem
-**Kontextselektor** (`.pain-card.reveal`, `.svc-main-card.reveal`, …).
+## 3. Scroll-gebunden statt zeitgesteuert
 
-## 3. Trigger-Vorgabe (Entwurf)
+Wo der Browser es nativ kann, hängt der Fortschritt am Scroll statt an einem
+Zeitgeber — flüssiger und auf dem Compositor:
 
-`rootMargin: 0px 0px -10% 0px`, `threshold: 0`. Elemente, die beim Laden bereits im
-oder über dem Viewport liegen, gelten sofort als angekommen — sehr hohe Elemente
-warten damit nie auf eine unerreichbare Sichtbarkeitsquote.
+```css
+@supports ((animation-timeline: view()) and (animation-range: entry)) { … }
+```
 
-**Nachlauf gegen verpasste Elemente.** Ein IntersectionObserver tastet ab und kann
-bei sehr schnellem oder programmatischem Scrollen Elemente überspringen. Das war
-kein theoretisches Risiko: die Testmatrix hat es bei 812 × 375 reproduzierbar
-ausgelöst, Inhalte blieben unsichtbar. Deshalb läuft zusätzlich ein per
-`requestAnimationFrame` gedrosselter Scroll-/Resize-Nachlauf, der ausstehende
-Elemente einholt. Er hängt sich selbst aus, sobald nichts mehr aussteht.
+Browser ohne Unterstützung (derzeit Firefox) zeigen schlicht den Endzustand.
+Das ist unbedenklich, weil die Animation nichts versteckt — deshalb gibt es
+hier bewusst **keinen** JavaScript-Fallback.
 
-Ein pauschales Zeit-Sicherheitsnetz gibt es bewusst **nicht** mehr — es hätte den
-eigentlichen Fehler nur verdeckt.
+### Ein gemessener Fallstrick
 
-Reveals laufen einmal pro Seitenaufruf. Beim Zurückscrollen verschwindet nichts.
+Eine scroll-gebundene Animation **direkt am Elternelement eines Bildes**
+verhindert, dass `loading="lazy"` auslöst — das Bild wird dann nie angefordert.
+Gemessen in Chrome: mit `animation-timeline: view()` auf dem `<picture>` blieb
+das Porträt dauerhaft ungeladen; ohne die Animation lud es sofort.
 
-## 4. Hintergrundwechsel
+Die Animation liegt deshalb immer auf dem `<img>` selbst, der Wrapper clippt.
+`tests/test_static.py::test_scroll_linked_animation_never_sits_on_an_image_parent`
+hält das fest.
 
-Die aktive Sektion wird über eine Zone um die Viewportmitte bestimmt
-(`rootMargin: -45% 0px -45% 0px`) und über einen Zähler aktiver Zonen gehalten.
-Dadurch flackert die Farbe bei schnellem Vor- und Zurückscrollen nicht. Betroffen
-sind `.about-strip` und `.why-box`. Lange Blogtexte bleiben optisch stabil.
+## 4. Seitenwechsel
+
+`@view-transition { navigation: auto; }` — Cross-Document View Transitions. Die
+alte Seite blendet aus, die neue kommt mit 8 px Versatz herein. Fortschrittliche
+Verbesserung: Browser ohne Unterstützung navigieren wie gewohnt.
 
 ## 5. Reduzierte Bewegung und ausdrückliche Pause
 
-Bei `prefers-reduced-motion: reduce` entfallen alle dekorativen Translationen,
-Skalierungen, Loops und der Hintergrundwechsel; Inhalte sind unmittelbar sichtbar.
-Wechselt die Präferenz **mitten in der Sitzung**, räumt `handleReduceMotionChange`
-auf: `js-motion` fällt weg, alle Reveals gehen in ihren sichtbaren Endzustand, der
-Hintergrund wird zurückgesetzt, der Pause-Schalter entfernt.
+Bei `prefers-reduced-motion: reduce` entfallen alle dekorativen Animationen;
+Inhalte sind unmittelbar sichtbar. Wechselt die Präferenz mitten in der Sitzung,
+räumt `handleReduceMotionChange` auf und entfernt den Pause-Schalter.
 
-Zusätzlich gibt es einen sichtbaren **Pause-/Fortsetzen-Schalter** (WCAG 2.2
-„Pause, Stop, Hide"; Entwurf). Er wird von `js/main.js` erzeugt und liegt außerhalb
-von `<main>`, damit dafür kein Seitenmarkup geändert werden musste. Beschriftung
-DE/EN, `aria-pressed`, Entscheidung in `localStorage` unter `motion-preference`.
-Fehlender Speicherzugriff wird abgefangen und beschädigt nichts — die Entscheidung
-gilt dann nur für die aktuelle Seite. Wenn das System bereits reduzierte Bewegung
-meldet, erscheint der Schalter nicht.
+Zusätzlich gibt es einen sichtbaren **Pause-Schalter** (WCAG 2.2 „Pause, Stop,
+Hide"). Er wird von `js/main.js` erzeugt, liegt außerhalb von `<main>`, trägt
+`aria-pressed` und speichert die Entscheidung in `localStorage`. Fehlender
+Speicherzugriff wird abgefangen. Meldet das System bereits reduzierte Bewegung,
+erscheint der Schalter nicht.
+
+Die Pause hält **jede** dekorative Bewegung an — auch die scroll-gebundene und
+einen noch laufenden Hero-Auftritt.
+
+### Was zwingend pausierbar sein muss
+
+WCAG 2.2 „Pause, Stop, Hide" greift bei Bewegung, die selbsttätig startet,
+länger als fünf Sekunden läuft und neben anderem Inhalt steht. Das ist genau
+die Menge der `infinite`-Animationen — hier einzig die Tracking-Signale.
+Einmal-Auftritte enden von selbst, scroll-gebundene Animationen laufen nur,
+solange gescrollt wird. `tests/test_static.py` prüft entsprechend eng.
 
 ## 6. Robustheit
 
-- FAQ: `hidden`, `aria-expanded` und die Klasse gelten **sofort**; die Höhenanimation
-  ist reine Dekoration. Beim Schließen greift `hidden` unmittelbar, es bleibt keine
-  unsichtbare, weiter fokussierbare Fläche stehen. Mehrfaches schnelles Betätigen
-  bricht die laufende Animation sauber ab (`cancel`), Höhenreste werden entfernt.
-- Keine ungebremste RAF-Schleife: Der einzige RAF-Einsatz ist der gedrosselte
-  Reveal-Nachlauf, der sich beendet.
-- Kein Canvas, kein Scroll-Hijacking, keine magnetischen Buttons, kein
-  Cursor-Follower, kein Buchstaben-Splitting — alles Effekte, die die Referenzanalyse
-  ausdrücklich **nicht** belegen konnte.
+- FAQ: `hidden` und `aria-expanded` gelten **sofort**; die Höhenanimation ist
+  reine Dekoration und darf abbrechen. Beim Schließen bleibt keine unsichtbare,
+  weiter fokussierbare Fläche stehen.
+- Keine RAF-Schleife, kein Canvas, kein Scroll-Hijacking.
+- JavaScript steuert nur noch die Pause. Fällt es aus, ist die Seite
+  vollständig sichtbar und bedienbar.
