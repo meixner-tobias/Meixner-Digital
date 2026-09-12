@@ -418,11 +418,16 @@ main > section:has(#whyme-heading) {
   color: var(--on-ink);
   white-space: nowrap;
 }
+/* Marineblau und Cyan sind die Markenfarben. Auf dunklem Grund waeren sie
+   nicht zu sehen, deshalb sitzt die Marke auf einer hellen Flaeche - so wie
+   im App-Icon. */
 .nav-mark {
-  height: 27px;
-  width: auto;
+  height: 30px;
+  width: 30px;
   flex: none;
-  overflow: visible;
+  background: #f5f3ef;
+  border-radius: 8px;
+  padding: 3px;
 }
 .nav-wordmark {
   font-family: var(--sans);
@@ -575,6 +580,14 @@ main > section:has(#whyme-heading) {
 .lang-btn:hover { color: var(--on-ink); border-color: var(--on-ink-soft); }
 .lang-arrow { font-size: 0.7rem; transition: rotate var(--dur) var(--ease); }
 .lang-btn.is-open .lang-arrow { rotate: 180deg; }
+
+/* Im Markup ist der Sprachbutton hidden und das Menue offen - das ist der
+   Fallback ohne JavaScript. Bis JS uebernimmt, wuerde das Menue aber kurz
+   aufgeklappt erscheinen und die Navigation verschieben. Deshalb bleibt es
+   bis data-ui-ready zu; das <noscript> im Kopf hebt das wieder auf. */
+html:not([data-ui-ready]) .lang-dropdown { display: none; }
+/* Platz fuer den Button freihalten, damit beim Erscheinen nichts springt. */
+html:not([data-ui-ready]) .lang-switch { min-width: 66px; min-height: 34px; }
 
 .lang-dropdown {
   position: absolute; top: calc(100% + 6px); right: 0;
@@ -881,13 +894,31 @@ main > section:has(#whyme-heading) {
 }
 .fc:first-of-type { border-top: var(--hair) solid var(--ink-line); margin-top: 16px; }
 .fi { display: none; }
-.fc-lbl { font-size: var(--t-meta); font-weight: 600; color: var(--on-ink); grid-column: 1; }
-.fc-meta { font-size: var(--t-meta); color: var(--on-ink-faint); grid-column: 2; text-align: right; }
+
+/* Name und Leistung liegen zusammen in einem klassenlosen <div>: das Raster
+   von `.fc` erreichte sie nie, `grid-column` lief ins Leere und
+   `text-align: right` schob jede Zeile um ihre eigene Textbreite ein. Das
+   Raster gehoert deshalb auf diesen Wrapper. */
+.fc > div:not(.fi) {
+  display: grid;
+  grid-template-columns: 132px minmax(0, 1fr);
+  gap: 2px 14px;
+  align-items: baseline;
+}
+.fc-lbl { font-size: var(--t-meta); font-weight: 600; color: var(--on-ink); }
+.fc-meta { font-size: var(--t-meta); color: var(--on-ink-faint); }
+
+@media (max-width: 420px) {
+  .fc > div:not(.fi) { grid-template-columns: minmax(0, 1fr); }
+}
 
 @media (min-width: 900px) {
+  /* Das Foto liegt in 1231 x 1200 vor und wurde auf 550 x 708 aufgeblasen -
+     auf einem 2x-Bildschirm braeuchte das 1452 px Quellbreite und wirkte
+     dadurch weich. Bei 407 px Anzeigebreite reicht die Vorlage auch fuer 2x. */
   .hero-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+    grid-template-columns: minmax(0, 1.28fr) minmax(0, 0.72fr);
     gap: clamp(36px, 4.5vw, 72px);
     align-items: start;
   }
@@ -973,7 +1004,9 @@ main > section:has(#whyme-heading) {
 
 .svc-tag, .about-fact-pill, .tech-tag, .approach-tag, .tag-pro, .own-tag,
 .hobby-pill, .tag-con {
-  display: inline-flex; align-items: center;
+  /* Mehrere dieser Marken tragen ein Sinnbild direkt vor dem Text - ohne
+     Abstand klebte es daran ("(Globus)3 Kontinente bereist"). */
+  display: inline-flex; align-items: center; gap: 7px;
   font-family: var(--sans);
   font-size: var(--t-meta);
   font-weight: 480;
@@ -1093,6 +1126,9 @@ main > section:has(#whyme-heading) {
     grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
     gap: clamp(40px, 5.5vw, 88px);
   }
+  /* Nur auf der Startseite: das Portraet stand mit 510 x 637 px so gross wie
+     eine Fotoplatte neben nur zwei Absaetzen Text. */
+  .about-grid { grid-template-columns: minmax(0, 1.32fr) minmax(0, 0.68fr); }
 }
 
 .about-p, .story-p, .own-product-desc, .personal-content p {
@@ -1180,8 +1216,12 @@ footer {
   font-family: var(--sans);
 }
 
+/* Gemessen: Copyright endete bei x=233, die Verweise begannen erst bei x=897 -
+   660 px Loch in der Mitte, alles an die Aussenkanten gequetscht. Der Fuss
+   traegt nur Kleinkram und steht deshalb mittig. */
 .footer-cluster {
-  display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 18px;
+  display: flex; flex-wrap: wrap; align-items: baseline;
+  justify-content: center; gap: 8px 18px;
   font-size: var(--t-meta);
   color: var(--on-ink-faint);
   padding-bottom: 22px; margin-bottom: 22px;
@@ -1192,7 +1232,7 @@ footer {
 
 .footer-row {
   display: flex; flex-wrap: wrap; align-items: center;
-  justify-content: space-between; gap: 16px;
+  justify-content: center; gap: 10px 28px;
 }
 .footer-copy { font-size: var(--t-meta); color: var(--on-ink-faint); }
 .footer-links {
@@ -1388,9 +1428,18 @@ blockquote {
   gap: clamp(20px, 2.6vw, 40px);
   align-items: start;
 }
-.svc-detail-grid:has(> :nth-child(4)):not(:has(> :nth-child(5))),
 .skills-grid:has(> :nth-child(4)):not(:has(> :nth-child(5))) {
   grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* Die drei Umsetzungsbloecke hatten 6, 4 und 4 Karten und dadurch 3 bzw. 4
+   Spalten: gemessen 371 px gegen 269 px Kartenbreite, Hoehen 226 bis 350 px.
+   Ueber alle Bloecke hinweg dieselbe Spaltenzahl, und `1fr` als Zeilenhoehe
+   macht jede Karte gleich hoch - auch ueber Zeilengrenzen. */
+.svc-detail-grid {
+  align-items: stretch;
+  grid-auto-rows: 1fr;
+  gap: clamp(14px, 1.6vw, 22px);
 }
 
 @media (max-width: 980px) {
@@ -1406,6 +1455,11 @@ blockquote {
   .skills-grid:has(> :nth-child(4)):not(:has(> :nth-child(5))) {
     grid-template-columns: minmax(0, 1fr);
   }
+  /* Einspaltig steht nichts nebeneinander, das ausgeglichen werden muesste -
+     gleiche Hoehen blaehten die kurzen Kaesten nur auf (gemessen 247 statt
+     rund 190 px). */
+  .svc-detail-grid { grid-auto-rows: auto; }
+  .svc-detail-card .svc-tags { margin-top: 14px; }
 }
 
 /* Vier Themen im Formular stehen als 2x2 ruhiger als vier schmale Spalten. */
@@ -1456,6 +1510,16 @@ blockquote {
 @media (max-width: 1000px) { .process-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px)  { .process-grid { grid-template-columns: minmax(0, 1fr); } }
 
+/* Einzige Papierflaeche, die als Kasten *im* Container sitzt statt als
+   Vollbreiten-Abschnitt. Der Container liefert ihr deshalb keinen
+   Innenabstand — gemessen: Text stand auf x=126, Flaechenkante ebenfalls
+   auf x=126. Sie braucht einen eigenen. */
+.svc-scope { padding-inline: clamp(24px, 3.4vw, 52px); }
+
+/* Abschnittskoepfe im Kasten hatten nur `padding: 22px 0 0` und klebten
+   dadurch am folgenden Block. */
+.svc-scope-head, .svc-extensions-head { margin-bottom: var(--stack); }
+
 /* Der Vergleich ist eine Liste von Zeilen, keine Spaltenreihe. */
 .svc-compare-grid { display: block; }
 .svc-compare-head { border-top: 2px solid var(--line-strong); }
@@ -1474,6 +1538,14 @@ blockquote {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
   gap: clamp(16px, 2vw, 30px);
+}
+/* Der Absatz darunter ist eine Quellenangabe, stand aber in Fliesstextgroesse
+   ueber die volle Breite - gemessen 141 Zeichen je Zeile. */
+.metrics + p {
+  font-family: var(--sans);
+  font-size: var(--t-meta);
+  color: var(--text-faint);
+  margin-top: 14px;
 }
 
 /* Drei Leistungen nebeneinander, jede in ihrem Kasten. Die Hoehen sind sehr
@@ -1547,6 +1619,9 @@ blockquote {
 }
 .blog-card-title, .case-summary-title { font-size: 1.25rem; }
 
+/* Ohne Messlinie liefen diese Absaetze ueber die volle Kastenbreite -
+   gemessen bis 183 Zeichen je Zeile. In schmalen Kaesten greift die Grenze
+   ohnehin nicht. */
 .svc-main-tagline, .svc-block-desc, .svc-detail-text, .svc-compare-sub,
 .svc-scope-sub, .svc-extensions-sub, .skill-desc, .travel-card-text,
 .why-freelance-text, .blog-card-excerpt, .step-desc, .tl-desc,
@@ -1555,10 +1630,25 @@ blockquote {
 .form-subtitle, .success-desc {
   color: var(--text-soft);
   font-size: var(--t-body);
+  max-width: var(--measure);
 }
 .svc-vat-note, .scope-note, .svc-compare-note, .svc-extensions-note {
   font-family: var(--sans); font-size: var(--t-meta); color: var(--text-faint);
 }
+
+/* Die Detailkarten sind dem Blocktitel untergeordnet, standen aber in
+   derselben Groesse (21 px) da. Eine Stufe kleiner stellt die Rangfolge her
+   und macht die Kaesten kompakter. */
+.svc-detail-card {
+  padding: clamp(16px, 1.5vw, 22px);
+  /* Gleich hohe Kaesten, aber unterschiedlich lange Texte: ohne Grundlinie
+     unten schwebten die Schlagwortreihen auf verschiedenen Hoehen. */
+  display: flex;
+  flex-direction: column;
+}
+.svc-detail-card .svc-tags { margin-top: auto; padding-top: 12px; }
+.svc-detail-title { font-size: var(--t-h4); margin-bottom: 6px; }
+.svc-detail-text { font-size: var(--t-ui); }
 
 .svc-divider { height: var(--hair); background: var(--line); margin-block: 20px; }
 
@@ -1732,9 +1822,25 @@ blockquote {
   padding-block: clamp(16px, 3vw, 40px);
 }
 
+/* Die Klassen sitzen auf den <img>, die Flex-Items sind aber die <picture>.
+   `width: 66%` bezog sich deshalb auf die intrinsische Bildbreite (280 px)
+   statt auf den Container - gemessen 154 und 167 px in einem 510-px-Feld,
+   also 160 px tote Flaeche rechts. Die Breite gehoert ans <picture>. */
+.own-product-devices > picture {
+  display: block;
+  flex: 0 0 auto;
+  min-width: 0;
+}
+.own-product-devices > picture:first-of-type { width: 54%; }
+.own-product-devices > picture:last-of-type {
+  width: 58%;
+  margin-left: -12%;
+  z-index: 2;
+}
+
 .own-product-device {
-  width: 66%;
-  max-width: 340px;
+  width: 100%;
+  display: block;
   height: auto;
   border-radius: 22px;
   border: var(--hair) solid rgba(255, 255, 255, 0.14);
@@ -1749,8 +1855,6 @@ blockquote {
 }
 
 .own-product-device-front {
-  margin-left: -28%;
-  z-index: 2;
   transform: rotateY(-11deg) rotateX(2deg);
   transform-origin: left center;
 }
@@ -1764,10 +1868,40 @@ blockquote {
 }
 
 @media (max-width: 560px) {
-  .own-product-device { width: 70%; }
-  .own-product-device-front { margin-left: -32%; }
+  .own-product-devices > picture:first-of-type { width: 58%; }
+  .own-product-devices > picture:last-of-type { width: 60%; margin-left: -18%; }
 }
 .own-product-ai { display: inline-flex; align-items: center; gap: 8px; color: var(--signal-text); font-family: var(--sans); font-size: var(--t-ui); font-weight: 600; }
+
+/* Die Store-Verweise hatten gar keine Regel: die beiden Zeilen liefen als
+   ein Fliesstext zusammen ("Laden imApp Store") und der Verweis war
+   unterstrichen. Zwei Zeilen im Kasten, wie die Badges es vorgeben. */
+.own-product-store {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 15px;
+  border: var(--hair) solid var(--line-strong);
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+}
+.own-product-store:hover,
+.own-product-store:focus-visible { border-color: var(--text); background-color: var(--surface-raised); }
+.own-product-store-icon { flex: none; }
+.own-product-store-text { display: grid; line-height: 1.18; font-family: var(--sans); }
+.own-product-store-small { font-size: 0.6875rem; color: var(--text-soft); }
+.own-product-store-big { font-size: var(--t-ui); font-weight: 600; }
+
+/* Ebenfalls ohne Regel: die drei Kennwerte unter den Geraeten standen in der
+   Serife des Fliesstextes und lasen sich als zerbrochener Satz. */
+.own-product-facts { gap: 0; border-top: var(--hair) solid var(--line); margin-top: 22px; }
+.own-product-fact { flex: 1 1 0; min-width: 120px; padding: 14px 16px 0 0; }
+.own-product-fact-n {
+  font-family: var(--sans); font-weight: 600; font-size: var(--t-ui);
+  color: var(--text); margin-bottom: 2px;
+}
+.own-product-fact-l { font-family: var(--sans); font-size: var(--t-meta); color: var(--text-faint); }
 
 /* Ueber mich */
 .personal-quote-text { font-family: var(--serif); font-style: italic; font-size: 1.2rem; color: var(--text); margin-bottom: 10px; }
