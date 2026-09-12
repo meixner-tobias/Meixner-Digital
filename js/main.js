@@ -117,11 +117,9 @@
   function initCaseAccordion() {
     var cards = safeQueryAll("details.case-card-collapsible");
     if (!cards.length) return;
-    function sync() {
-      cards.forEach(function (card) { card.open = !mobileViewport.matches; });
-    }
-    sync();
-    mobileViewport.addEventListener("change", sync);
+    // Projekte sind zugeklappt und werden auf Wunsch geoeffnet - auf jeder
+    // Bildschirmbreite gleich. Vorher riss der lange Inhalt die Seite auf.
+    cards.forEach(function (card) { card.open = false; });
   }
 
   function initFaqAccordion() {

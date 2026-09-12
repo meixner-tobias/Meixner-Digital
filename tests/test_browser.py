@@ -277,12 +277,17 @@ class BrowserTests(unittest.TestCase):
             self.goto(path)
             cards = self.page.locator("details.case-card-collapsible")
             self.assertGreater(cards.count(), 0)
-            self.assertTrue(cards.first.evaluate("el => el.open"))
-            self.assertTrue(cards.first.locator("summary").is_visible())
-            self.page.set_viewport_size({"width": 390, "height": 844})
-            self.assertFalse(cards.first.evaluate("el => el.open"))
-            cards.first.locator("summary").click()
-            self.assertTrue(cards.first.evaluate("el => el.open"))
+            # Projekte sind auf jeder Breite zugeklappt und werden auf Wunsch
+            # geoeffnet - vorher riss der lange Inhalt die Seite auf.
+            for width, height in ((1280, 900), (390, 844)):
+                self.page.set_viewport_size({"width": width, "height": height})
+                self.assertFalse(cards.first.evaluate("el => el.open"),
+                                 f"Projekt ist bei {width}px nicht zugeklappt")
+                self.assertTrue(cards.first.locator("summary").is_visible())
+                cards.first.locator("summary").click()
+                self.assertTrue(cards.first.evaluate("el => el.open"))
+                cards.first.locator("summary").click()
+                self.assertFalse(cards.first.evaluate("el => el.open"))
             self.page.set_viewport_size({"width": 1280, "height": 900})
 
     def fill_valid_form(self):

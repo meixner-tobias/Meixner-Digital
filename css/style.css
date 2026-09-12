@@ -68,10 +68,10 @@
   --ink-raised: #121a1c;
   --ink-line: #1e292c;
   --ink-line-strong: #334347;
-  --paper: #ede8e0;
-  --paper-shade: #e3ddd3;
-  --paper-line: #cfc7ba;
-  --paper-line-strong: #b3a99a;
+  --paper: #e4ded3;        /* gedaempft: Sprung zu Ink von 15,38 auf 14,01 */
+  --paper-shade: #dbd4c7;
+  --paper-line: #c6bdad;
+  --paper-line-strong: #a99e8c;
 
   /* Signal — Bernstein, die Leuchtfarbe eines Messgeraets. */
   --signal: #e2a33c;        /* Fuellungen, Linien, Marken */
@@ -115,15 +115,16 @@
   --gutter: clamp(20px, 4.6vw, 72px);
   --margin-col: clamp(120px, 13vw, 196px);
   --gap-col: clamp(28px, 3.6vw, 64px);
-  --band: clamp(72px, 9vw, 152px);
-  --stack: clamp(28px, 3.4vw, 56px);
+  --band: clamp(40px, 4.6vw, 72px);   /* gemessen: 130 px ergaben 260 px Luecke */
+  --card-pad: clamp(20px, 1.9vw, 28px);
+  --stack: clamp(20px, 2.4vw, 38px);
 
   /* Typografie */
   --sans: "Archivo", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
     Roboto, Arial, sans-serif;
   --serif: "Newsreader", ui-serif, Georgia, "Times New Roman", serif;
 
-  --t-display: clamp(2.5rem, 1.3rem + 4.6vw, 5rem);
+  --t-display: clamp(2.2rem, 1.5rem + 2.6vw, 3.9rem);
   --t-h2: clamp(1.8rem, 1.2rem + 2.2vw, 3rem);
   --t-h3: clamp(1.35rem, 1.12rem + 0.9vw, 1.9rem);
   --t-lead: clamp(1.1rem, 1.02rem + 0.4vw, 1.35rem);
@@ -259,7 +260,7 @@ pre, .table-wrap { overflow-x: auto; }
 }
 
 .section,
-.pain-section, .about-strip, .svc-section, .case-section, .own-section,
+.pain-section, .about-strip, .svc-main, .svc-section, .case-section, .own-section,
 .personal-section, .story-section, .why-section, .timeline-section,
 .faq-section, .contact-section, .process-section, .svc-compare, .svc-scope,
 .svc-extensions, .own-product-section, .skills-strip, .trust-strip,
@@ -852,67 +853,48 @@ main > section:has(#whyme-heading) {
 .trust-chip-founder a { color: var(--signal-text); font-weight: 600; }
 .trust-div { display: none; }
 
-/* Fotoplatte: randlos, ohne Rundung, mit Bildunterschrift statt Schwebekarten */
-.hero-img-wrap {
-  margin-top: clamp(32px, 4.5vw, 64px);
-  margin-inline: calc(var(--gutter) * -1);
-  position: relative;
-}
+/* Fotoplatte steht rechts neben dem Text - sofort sichtbar, nicht erst
+   beim Scrollen. */
+.hero-img-wrap { position: relative; min-width: 0; }
 .hero-img-frame { position: relative; }
 .hero-img-frame picture { display: block; }
 .hero-img-frame img {
   width: 100%;
-  /* Band statt Vollbild: Das Foto ist ein Schnappschuss mit viel Himmel -
-     ueber die ganze Viewporthoehe wirkt es beliebig. */
-  height: clamp(260px, 42vh, 460px);
+  aspect-ratio: 4 / 5;
   object-fit: cover;
-  object-position: 50% 38%;
-  filter: saturate(0.92) contrast(1.04);
+  object-position: 50% 32%;
+  filter: saturate(0.94) contrast(1.03);
 }
-.hero-img-frame::after {
-  content: "";
-  position: absolute; inset-inline: 0; bottom: 0; height: 45%;
-  background: linear-gradient(to bottom, transparent, rgba(12, 19, 21, 0.9));
-  pointer-events: none;
-}
+.hero-img-frame::after { display: none; }
 .img-blob { display: none; }
 
-/* Die vier Kundenhinweise werden zur gesetzten Bildlegende. */
+/* Die vier Kundenhinweise stehen als Bildlegende unter dem Foto. */
 .fc {
-  display: grid; gap: 3px;
-  padding: 14px 0 0;
-  border-top: var(--hair) solid var(--ink-line);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px 12px;
+  padding: 9px 0;
+  border-bottom: var(--hair) solid var(--ink-line);
   font-family: var(--sans);
   min-width: 0;
 }
+.fc:first-of-type { border-top: var(--hair) solid var(--ink-line); margin-top: 16px; }
 .fi { display: none; }
-.fc-lbl { font-size: var(--t-meta); font-weight: 600; color: var(--on-ink); }
-.fc-meta { font-size: var(--t-meta); color: var(--on-ink-faint); }
-
-/* Das Foto laeuft ueber die volle Breite, die Kundenhinweise stehen als
-   gesetzte Legendenzeile darunter - nicht als Spalte daneben, die ans untere
-   Bildende rutscht. */
-.hero-img-frame { display: block; }
-.hero-img-frame picture { display: block; }
-
-@media (min-width: 760px) {
-  .hero-img-frame {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    column-gap: var(--gap-col);
-  }
-  .hero-img-frame picture { grid-column: 1 / -1; }
-  .hero-img-frame::after { display: none; }
-  .hero-img-frame > .fc {
-    padding-inline: var(--gutter) 0;
-    border-right: var(--hair) solid var(--ink-line);
-  }
-  .hero-img-frame > .fc:last-of-type { border-right: 0; }
-  .hero-img-frame > .fc + .fc { padding-inline: 0; }
-}
+.fc-lbl { font-size: var(--t-meta); font-weight: 600; color: var(--on-ink); grid-column: 1; }
+.fc-meta { font-size: var(--t-meta); color: var(--on-ink-faint); grid-column: 2; text-align: right; }
 
 @media (min-width: 900px) {
-  .hero-grid { display: block; }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+    gap: clamp(36px, 4.5vw, 72px);
+    align-items: start;
+  }
+}
+
+@media (max-width: 899px) {
+  .hero-img-wrap { margin-top: clamp(28px, 5vw, 44px); }
+  .hero-img-frame img { aspect-ratio: 4 / 3; }
 }
 
 /* ============================================================================
@@ -921,17 +903,28 @@ main > section:has(#whyme-heading) {
    Aussage gross, Kennwert rechts.
    ========================================================================== */
 .pain-grid, .svc-grid {
-  display: block;
-  border-top: var(--hair) solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 1.8vw, 26px);
+  align-items: stretch;
 }
 
 .pain-card, .svc-card {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 14px;
-  padding-block: clamp(28px, 3.6vw, 48px);
-  border-bottom: var(--hair) solid var(--line);
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: var(--card-pad);
+  border: var(--hair) solid var(--line);
+  background: var(--surface-raised);
+  min-width: 0;
+}
+.pain-card.featured { border-color: var(--signal); }
+
+@media (max-width: 1000px) {
+  .pain-grid, .svc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 680px) {
+  .pain-grid, .svc-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
 .pain-icon, .svc-icon { display: none; }
@@ -964,7 +957,9 @@ main > section:has(#whyme-heading) {
   font-size: var(--t-ui);
   font-weight: 600;
   color: var(--text);
-  margin: 0;
+  margin: auto 0 0;
+  padding-top: 16px;
+  border-top: var(--hair) solid var(--line);
   display: flex; align-items: baseline; gap: 10px;
 }
 .pain-solution > svg { display: none; }
@@ -991,28 +986,10 @@ main > section:has(#whyme-heading) {
   border-left: var(--hair) solid var(--line);
 }
 
-@media (min-width: 900px) {
-  .pain-card, .svc-card {
-    grid-template-columns: var(--margin-col) minmax(0, 1fr) clamp(180px, 19vw, 260px);
-    gap: 0 var(--gap-col);
-    align-items: start;
-  }
-  .pain-situation { grid-column: 1; grid-row: 1; }
-  .pain-h, .svc-h { grid-column: 2; grid-row: 1; margin-bottom: 14px; }
-  .pain-p, .svc-p { grid-column: 2; grid-row: 2; }
-  .pain-solution, .svc-price-tag {
-    grid-column: 3; grid-row: 1;
-    justify-content: flex-end; text-align: right;
-    font-size: 1.0625rem; font-weight: 600; line-height: 1.35;
-    letter-spacing: -0.01em; padding-top: 0.3em;
-    border-top: var(--hair) solid var(--signal);
-  }
-  .pain-card .btn, .svc-tags { grid-column: 2; grid-row: 3; margin-top: 18px; }
-  .pain-card .btn { justify-self: start; }
-  .svc-card .svc-tags { grid-row: 3; }
-  /* Ohne Randspaltentext ruecken Titel und Text trotzdem in die Inhaltsspalte. */
-  .svc-h, .svc-p, .svc-tags { grid-column: 2; }
-}
+/* Die Aussage traegt die Karte - der Text darunter bleibt schmal genug. */
+.pain-p, .svc-p { flex: 1; }
+.pain-card .btn, .svc-card .btn { align-self: flex-start; margin-top: 14px; }
+.svc-tags { margin-top: 4px; }
 
 .svc-foot, .proj-foot {
   display: flex; justify-content: flex-start;
@@ -1367,8 +1344,21 @@ blockquote {
 }
 
 /* Leistungen */
+/* Einzeilige Stichpunkte - ein 40-px-Zeilenabstand reisst sie auseinander. */
+.task-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: 0 clamp(20px, 2.6vw, 40px);
+  align-items: start;
+}
+.task-item { padding-block: 5px; }
+
+/* Datenbeschriftungen gehoeren in die Grotesk, nicht in den Fliesstextgrad. */
+.ico-label { font-family: var(--sans); font-weight: 600; font-size: var(--t-ui); line-height: 1.3; }
+.ico-sub   { font-family: var(--sans); font-size: var(--t-meta); color: var(--text-faint); }
+
 .includes-grid, .faq-grid, .why-freelance-grid, .own-grid, .travel-cards,
-.scope-tier-grid, .blog-grid, .task-grid {
+.scope-tier-grid, .blog-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: clamp(20px, 2.6vw, 40px);
@@ -1414,6 +1404,28 @@ blockquote {
 @media (max-width: 560px) { .topic-checks { grid-template-columns: minmax(0, 1fr); } }
 .scope-tier-grid--two { grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); }
 
+/* Die Preisstufen sind in Gruppen geteilt ("GTM & GA4 Setup",
+   "Website-Umsetzung"). Ohne eigene Regeln klebten deren Ueberschriften
+   direkt am Absatz darueber. */
+.scope-block + .scope-block { margin-top: clamp(28px, 3.4vw, 52px); }
+.scope-block-head { margin-bottom: clamp(16px, 1.8vw, 24px); }
+.scope-block-title {
+  font-family: var(--sans);
+  font-size: var(--t-h3);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 4px;
+}
+.scope-block-sub {
+  color: var(--text-soft);
+  font-size: var(--t-ui);
+  font-family: var(--sans);
+  margin: 0;
+}
+/* Alle Stufen einer Gruppe beginnen auf derselben Linie. */
+.scope-tier-grid { align-items: stretch; }
+.scope-tier { border-top: 2px solid var(--line); padding-top: 16px; }
+
 /* Vier Schritte gehoeren in vier Spalten - sonst bricht der letzte allein um. */
 .process-grid {
   display: grid;
@@ -1444,54 +1456,33 @@ blockquote {
   gap: clamp(16px, 2vw, 30px);
 }
 
-/* Drei Karten mit 924 / 592 / 825 px Hoehe und einer ohne Preis lassen sich
-   nebeneinander nicht ausrichten. Als gestapelte Eintraege stimmt die
-   Ordnung von selbst - und es ist dieselbe Sprache wie auf der Startseite. */
-.svc-main-grid { grid-template-columns: minmax(0, 1fr); gap: 0; }
+/* Drei Leistungen nebeneinander, jede in ihrem Kasten. Die Hoehen sind sehr
+   unterschiedlich - deshalb wird der Handlungsknopf unten buendig gehalten,
+   statt die Inhalte kuenstlich auszurichten. */
+.svc-main-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 1.8vw, 26px);
+  align-items: stretch;
+}
 
 .svc-main-card {
-  display: grid;
-  gap: 10px;
-  padding: clamp(26px, 3.2vw, 44px) 0;
-  border-top: var(--hair) solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: var(--card-pad);
+  border: var(--hair) solid var(--line);
+  background: var(--surface-raised);
+  min-width: 0;
 }
-.svc-main-card:last-child { border-bottom: var(--hair) solid var(--line); }
-.svc-main-card.featured { border-top: 2px solid var(--signal); }
+.svc-main-card.featured { border-color: var(--signal); }
+.svc-main-card > .btn { margin-top: auto; align-self: stretch; }
+.svc-main-card .svc-main-name { margin-top: 10px; }
+.svc-main-card .svc-feat-list { margin-bottom: 18px; }
+.svc-main-card .svc-divider { margin-block: 16px; }
 
-@media (min-width: 900px) {
-  .svc-main-card {
-    grid-template-columns: var(--margin-col) minmax(0, 1.15fr) minmax(0, 0.85fr);
-    gap: 4px var(--gap-col);
-    align-items: start;
-  }
-  /* Jede Zeile eindeutig belegt - sonst dehnt ein hoher Nachbar die Zeile
-     und zwischen Titel und Text klafft ein Loch. */
-  .svc-badge, .svc-badge-placeholder { grid-column: 1; grid-row: 1; margin: 0; }
-  .svc-price        { grid-column: 1; grid-row: 2; }
-  .svc-price-sub    { grid-column: 1; grid-row: 3; margin: 0; }
-  .svc-main-name    { grid-column: 2; grid-row: 1; margin: 0 0 8px; }
-  .svc-main-tagline { grid-column: 2; grid-row: 2; }
-  .svc-website-note { grid-column: 2; grid-row: 3; }
-  .addon-box        { grid-column: 2; grid-row: 4; }
-  .svc-divider      { display: none; }
-  .svc-feat-list    { grid-column: 3; grid-row: 1 / -1; margin: 0; }
-  .svc-main-card > .btn { grid-column: 2; grid-row: 5; justify-self: start; margin-top: 14px; }
-
-  /* Die Betreuung hat keinen Einstiegspreis, sondern zwei Tarife. Sie bekommt
-     deshalb ein eigenes Raster: Titel und Text ueber die volle Breite,
-     die Tarife nebeneinander darunter. */
-  .svc-main-card--tiered {
-    grid-template-columns: var(--margin-col) minmax(0, 1fr) minmax(0, 1fr);
-  }
-  .svc-main-card--tiered > .svc-main-name    { grid-column: 2 / -1; grid-row: 1; }
-  .svc-main-card--tiered > .svc-main-tagline { grid-column: 2 / -1; grid-row: 2; max-width: var(--measure); }
-  /* :nth-of-type zaehlt nach Elementtyp, nicht nach Klasse - die Tarife sind
-     div unter vielen divs. Der Geschwisterselektor trifft zuverlaessig den
-     zweiten Tarif. */
-  .svc-main-card--tiered > .svc-tier { grid-column: 2; grid-row: 3; }
-  .svc-main-card--tiered > .svc-tier ~ .svc-tier { grid-column: 3; }
-  .svc-main-card--tiered > .btn { grid-column: 2; grid-row: 4; }
-}
+@media (max-width: 1000px) { .svc-main-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 680px)  { .svc-main-grid { grid-template-columns: minmax(0, 1fr); } }
 
 .svc-tier { display: grid; gap: 2px; align-content: start; }
 .svc-tier + .svc-tier { margin-top: 0; }
@@ -1600,14 +1591,25 @@ blockquote {
 }
 
 /* Projekte */
-.case-card { border-top: 2px solid var(--line-strong); margin-bottom: clamp(24px, 3vw, 44px); }
+/* Zugeklappt ist das eine Liste - deshalb trennen Linien, nicht Abstaende. */
+.case-card { border-top: var(--hair) solid var(--line); margin-bottom: 0; }
+.case-card:last-of-type { border-bottom: var(--hair) solid var(--line); }
+.case-card[open] { border-top-width: 2px; border-top-color: var(--line-strong); }
+
 .case-summary {
-  display: flex; align-items: baseline; gap: 18px;
-  padding: 20px 0; cursor: pointer; list-style: none;
+  display: flex; align-items: center; gap: 20px;
+  padding: 16px 0; cursor: pointer; list-style: none;
+  transition: color var(--dur-fast) var(--ease);
+}
+.case-summary:hover { color: var(--signal-text); }
+/* Gleich grosse Logoflaeche, sonst springt der Titel von Zeile zu Zeile. */
+.case-summary-logo {
+  width: 84px; height: 26px;
+  object-fit: contain; object-position: left center;
+  flex: none;
 }
 .case-summary::-webkit-details-marker { display: none; }
 .case-summary-body { min-width: 0; margin-right: auto; }
-.case-summary-logo { height: 24px; width: auto; object-fit: contain; flex: none; opacity: 0.9; align-self: center; }
 .case-summary-chevron { flex: none; color: var(--text-faint); transition: rotate var(--dur) var(--ease); align-self: center; }
 .case-card[open] > .case-summary .case-summary-chevron { rotate: 180deg; }
 .case-inner { padding-bottom: 26px; }
@@ -1640,8 +1642,54 @@ blockquote {
 .own-product-section { }
 .own-product-logo { height: 30px; width: auto; margin-bottom: 16px; }
 .own-product-dot { width: 6px; height: 6px; background: var(--signal); flex: none; }
-.own-product-devices { position: relative; min-width: 0; }
-.own-product-device-front, .own-product-device-back { border: var(--hair) solid var(--line); }
+/* Zwei Geraete, leicht gegeneinander gedreht und ueberlappend - das liest
+   sich als Produkt, nicht als zwei gestapelte Screenshots. */
+.own-product-devices {
+  position: relative;
+  min-width: 0;
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  perspective: 1600px;
+  padding-block: clamp(16px, 3vw, 40px);
+}
+
+.own-product-device {
+  width: 66%;
+  max-width: 340px;
+  height: auto;
+  border-radius: 22px;
+  border: var(--hair) solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 40px 70px -34px rgba(0, 0, 0, 0.75),
+              0 8px 20px -10px rgba(0, 0, 0, 0.5);
+  transition: transform var(--dur-slow) var(--ease);
+}
+
+.own-product-device-back {
+  transform: rotateY(17deg) rotateX(3deg) scale(0.93) translateZ(-30px);
+  transform-origin: right center;
+}
+
+.own-product-device-front {
+  margin-left: -28%;
+  z-index: 2;
+  transform: rotateY(-11deg) rotateX(2deg);
+  transform-origin: left center;
+}
+
+/* Beim Ueberfahren richten sich beide leicht auf. */
+.own-product-devices:hover .own-product-device-back {
+  transform: rotateY(12deg) rotateX(2deg) scale(0.95) translateZ(-20px);
+}
+.own-product-devices:hover .own-product-device-front {
+  transform: rotateY(-7deg) rotateX(1deg) translateY(-6px);
+}
+
+@media (max-width: 560px) {
+  .own-product-device { width: 70%; }
+  .own-product-device-front { margin-left: -32%; }
+}
 .own-product-ai { display: inline-flex; align-items: center; gap: 8px; color: var(--signal-text); font-family: var(--sans); font-size: var(--t-ui); font-weight: 600; }
 
 /* Ueber mich */
@@ -1678,8 +1726,8 @@ blockquote {
   font-family: var(--sans); font-size: var(--t-meta); font-weight: 600;
   color: var(--signal-text); margin-bottom: 10px;
 }
-.cat-marketing { color: var(--signal-deep); }
-.paper .cat-marketing { color: var(--signal-deep); }
+.cat-marketing { color: var(--signal-text); }
+.paper .cat-marketing { color: var(--signal-text); }
 .blog-card-meta { font-family: var(--sans); font-size: var(--t-meta); color: var(--text-faint); margin-bottom: 10px; }
 .blog-card-excerpt { margin-bottom: 18px; }
 
@@ -1972,7 +2020,6 @@ html:not(.motion-paused) .flow-link:nth-of-type(6) .flow-signal { animation-dela
 
 @media (max-width: 900px) {
   .nav-inner { min-height: 64px; }
-  .hero-img-frame img { height: clamp(280px, 52vh, 420px); }
   .why-item { gap: 6px; }
 }
 
