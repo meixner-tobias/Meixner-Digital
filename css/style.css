@@ -84,7 +84,7 @@
   --on-ink-faint: #8b8f8d;
   --on-paper: #14191a;
   --on-paper-soft: #4e5658;
-  --on-paper-faint: #5b6163;  /* 5,16:1 auf Papier */
+  --on-paper-faint: #555b5d;  /* 5,16:1 auf Papier, 4,69:1 auf Kastengrund */
 
   /* Aktive Flaeche. Wird pro Sektion umgeschaltet - daraus entsteht der
      Wechsel zwischen Ink und Papier. Alle Komponenten lesen nur diese. */
