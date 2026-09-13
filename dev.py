@@ -7,7 +7,7 @@ Lokaler Vorschau-Server mit Auto-Reload.
     python dev.py --no-open       -> Browser nicht automatisch oeffnen
 
 Zeigt immer die ECHTE Website von der Platte, unabhaengig vom Wartungsmodus
-auf der Live-Seite. Die Wartungsseite selbst laesst sich unter /wartung ansehen.
+auf der Live-Seite.
 
 Was der Server macht:
   * saubere Adressen wie im Netz: /leistungen/ laedt leistungen/index.html
@@ -107,8 +107,6 @@ class Handler(http.server.BaseHTTPRequestHandler):
 
     def resolve(self, url_path):
         """Adresse -> Datei auf der Platte, mit denselben Regeln wie GitHub Pages."""
-        if url_path == "/wartung" or url_path == "/wartung/":
-            return ROOT / "_layouts" / "maintenance.html", 200
         rel = unquote(url_path).lstrip("/")
         candidate = (ROOT / rel).resolve()
         # Nie ausserhalb des Projektordners ausliefern.
@@ -184,7 +182,6 @@ def main():
 
     url = f"http://127.0.0.1:{args.port}/"
     print(f"\n  Vorschau laeuft:  {url}")
-    print(f"  Wartungsseite:    {url}wartung")
     print("  Aenderungen laden automatisch nach. Beenden mit Strg+C.\n")
     if not args.no_open:
         threading.Timer(0.5, lambda: webbrowser.open(url)).start()

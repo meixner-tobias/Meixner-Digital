@@ -278,6 +278,10 @@ pre, .table-wrap { overflow-x: auto; }
 
 /* Abschnittskopf: Ordnungsangabe steht in der Randspalte, nicht als
    Versal-Etikett ueber der Ueberschrift. */
+/* Ein zweiter Abschnittskopf mitten auf der Seite braucht Luft nach oben,
+   sonst klebt er am letzten Eintrag des vorigen Blocks. */
+.blog-section-head--later { margin-top: clamp(44px, 5vw, 80px); }
+
 .sec-head, .blog-section-head {
   margin-bottom: var(--stack);
   max-width: none;
@@ -1718,7 +1722,7 @@ blockquote {
 
 .svc-main-name, .svc-block-title, .svc-detail-title, .svc-compare-title,
 .svc-scope-title, .svc-extensions-title, .svc-includes-title, .faq-card-title,
-.info-title, .skill-title, .travel-card-title, .why-freelance-title,
+.info-title, .skill-title, .why-freelance-title,
 .blog-card-title, .tl-title, .approach-title, .toc-card-title,
 .fact-box-title, .warn-box-title, .case-title-visual, .case-summary-title,
 .own-product-headline, .form-title, .success-title, .toc-title {
@@ -1743,6 +1747,22 @@ blockquote {
 }
 .svc-vat-note, .scope-note, .svc-compare-note, .svc-extensions-note {
   font-family: var(--sans); font-size: var(--t-meta); color: var(--text-faint);
+}
+
+/* Die Erlaeuterung stand ohne Zuordnung unter dem letzten Preiskasten, die
+   Frage lief im selben Absatz weiter. Haarlinie davor, Frage auf eigener
+   Zeile - dann liest sie sich als Nachsatz zu den Stufen, nicht als
+   vergessener Rest. */
+.scope-note {
+  border-top: var(--hair) solid var(--line);
+  padding-top: 16px;
+  margin-top: clamp(24px, 2.8vw, 36px);
+}
+.scope-note strong {
+  display: block;
+  font-size: var(--t-ui);
+  color: var(--text);
+  margin-bottom: 5px;
 }
 
 /* Die Detailkarten sind dem Blocktitel untergeordnet, standen aber in
@@ -2346,6 +2366,17 @@ a.cluster-card-pillar:hover { border-color: var(--signal); }
 .cta-card > p { margin-bottom: 0; }
 .cta-card > p + p { color: var(--text-soft); margin-bottom: 0; }
 
+/* Der Rueckverweis stand direkt unter der Abschlusskarte. */
+.cta-card + div { margin-top: clamp(26px, 3vw, 40px); }
+.cta-card + div > a {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--sans); font-size: var(--t-ui); font-weight: 600;
+  color: var(--text-soft); text-decoration: none;
+  transition: color var(--dur-fast) var(--ease);
+}
+.cta-card + div > a:hover { color: var(--signal-text); }
+.cta-card + div > a > svg { width: 14px; height: 14px; flex: none; }
+
 /* Codebeispiele: Kopfleiste mit Bezeichnung, darunter der Block. Die drei
    Punkte im Markup sind eine Fensterandeutung - sie bleiben weg. */
 .code-wrap {
@@ -2773,6 +2804,14 @@ a.cluster-card-pillar:hover { border-color: var(--signal); }
 /* Richtungen. Die Vorlage benutzt vier; hier sind sie den Bausteinen
    zugeordnet, die inhaltlich dasselbe tun. */
 /* Versatz und Dauer wie an der Vorlage gemessen: 100 px, 0,6 s, `ease`. */
+/* Waehrend ein Kasten von rechts hereinfaehrt, steht er 100 px weiter
+   aussen - gemessen auf der Kontaktseite bei 1024 px: die Randspalte ragte
+   ueber den Rand und erzeugte eine waagerechte Bildlaufleiste. `clip`
+   schneidet das ab, ohne einen Scrollbereich zu erzeugen: `position: sticky`
+   in der Artikel-Randspalte bleibt dadurch erhalten (anders als bei
+   `overflow: hidden`). Auf html/body waere beides verboten. */
+main { overflow-x: clip; }
+
 @keyframes rev-from-bottom { from { opacity: 0; translate: 0 100px; } }
 @keyframes rev-from-top    { from { opacity: 0; translate: 0 -100px; } }
 @keyframes rev-from-right  { from { opacity: 0; translate: 100px 0; } }
