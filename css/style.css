@@ -2723,11 +2723,108 @@ a.cluster-card-pillar:hover { border-color: var(--signal); }
   from { opacity: 0; translate: 0 18px; }
 }
 
-/* Inhalte sind immer sichtbar. Kein Einblenden pro Abschnitt - das versteckt
-   Inhalt, haengt an JavaScript und ist genau das Muster, das jede zweite
-   Seite benutzt. Die Bewegung liegt stattdessen dort, wo sie nichts
-   verdeckt: an den Bildern und an den Trennlinien. */
+/* --------------------------------------------------------------------------
+   Auftritt beim Hereinscrollen
+
+   Nachgebaut nach der Vorlage gastvertrauen.com, dort gemessen:
+   0,6 s, Kurve `ease`, 100 px Versatz, Staffelung 100/200/300 ms, und die
+   Richtung wechselt je Abschnitt (Merkmalskaesten von rechts, Preisblocks von
+   links, nummerierte Schritte von oben).
+
+   Ein Unterschied zur Vorlage, mit Absicht: dort ist `opacity: 0` der
+   Grundzustand des Markups. Faellt das Skript aus, bleibt die Seite leer.
+   Hier haengt der versteckte Zustand an html[data-ui-ready] - ohne
+   JavaScript ist alles sofort da.
+   ------------------------------------------------------------------------ */
 .reveal { opacity: 1; }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Nur der innerste Traeger bewegt sich. Sonst faehrt erst die Flaeche ein
+     und darin noch einmal jede Karte. */
+  html[data-ui-ready] .reveal:not(:has(.reveal)):not(.is-in) {
+    opacity: 0;
+    will-change: opacity, translate;
+  }
+  html[data-ui-ready] .reveal:not(:has(.reveal)).is-in {
+    animation: rev-from-bottom var(--rev-dur, 600ms) ease backwards;
+    animation-delay: calc(var(--d, 0) * 100ms);
+  }
+
+  /* Staffelung: das Markup traegt data-d bereits als Reihenfolge. */
+  [data-d="1"] { --d: 1; } [data-d="2"] { --d: 2; } [data-d="3"] { --d: 3; }
+  [data-d="4"] { --d: 4; } [data-d="5"] { --d: 5; } [data-d="6"] { --d: 6; }
+  [data-d="7"] { --d: 7; } [data-d="8"] { --d: 8; } [data-d="9"] { --d: 9; }
+  [data-d="10"] { --d: 10; }
+  /* Ueber sechs Schritten wird das Warten laenger als die Bewegung. */
+  [data-d="7"], [data-d="8"], [data-d="9"], [data-d="10"] { --d: 6; }
+
+  /* Reihen ohne data-d staffeln sich ueber ihre Stellung. */
+  html[data-ui-ready] :is(.svc-detail-grid, .includes-grid, .case-icon-grid,
+    .metrics, .stats-grid, .own-grid, .travel-cards, .why-freelance-grid,
+    .skills-grid, .process-grid, .blog-grid, .scope-tier-grid) > .reveal:nth-child(1) { --d: 1; }
+  html[data-ui-ready] :is(.svc-detail-grid, .includes-grid, .case-icon-grid,
+    .metrics, .stats-grid, .own-grid, .travel-cards, .why-freelance-grid,
+    .skills-grid, .process-grid, .blog-grid, .scope-tier-grid) > .reveal:nth-child(2) { --d: 2; }
+  html[data-ui-ready] :is(.svc-detail-grid, .includes-grid, .case-icon-grid,
+    .metrics, .stats-grid, .own-grid, .travel-cards, .why-freelance-grid,
+    .skills-grid, .process-grid, .blog-grid, .scope-tier-grid) > .reveal:nth-child(n+3) { --d: 3; }
+}
+
+/* Richtungen. Die Vorlage benutzt vier; hier sind sie den Bausteinen
+   zugeordnet, die inhaltlich dasselbe tun. */
+/* Versatz und Dauer wie an der Vorlage gemessen: 100 px, 0,6 s, `ease`. */
+@keyframes rev-from-bottom { from { opacity: 0; translate: 0 100px; } }
+@keyframes rev-from-top    { from { opacity: 0; translate: 0 -100px; } }
+@keyframes rev-from-right  { from { opacity: 0; translate: 100px 0; } }
+@keyframes rev-from-left   { from { opacity: 0; translate: -100px 0; } }
+@keyframes rev-alpha       { from { opacity: 0; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Von rechts: Merkmals- und Eintragskaesten (Vorlage: die drei
+     Leistungsmerkmale und die Teamkarten). */
+  html[data-ui-ready] .reveal:not(:has(.reveal)).is-in:is(.pain-card, .svc-card, .svc-detail-card, .case-icon-card,
+    .skill-card, .travel-card, .why-freelance-card, .info-card, .inc-item,
+    .trust-item, .stat-card, .approach-card, .concept-card, .platform-card,
+    .budget-card, .faq-info-card, .avail-card) {
+    animation-name: rev-from-right;
+  }
+
+  /* Von links: Preisblocks und Projektkarten (Vorlage: Basis/Komfort/
+     Exklusiv). */
+  html[data-ui-ready] .reveal:not(:has(.reveal)).is-in:is(.svc-main-card, .scope-tier, .svc-tier, .proj-card,
+    .case-summary, .own-product-content, .case-card, .own-card, .timeline) {
+    animation-name: rev-from-left;
+  }
+
+  /* Von oben: nummerierte Ablaeufe (Vorlage: die drei Schritte). */
+  html[data-ui-ready] .reveal:not(:has(.reveal)).is-in:is(.step-card, .tl-item, .process-grid > .reveal) {
+    animation-name: rev-from-top;
+  }
+
+  /* Nur Deckkraft, laenger: Fotoplatten und Abschnittskoepfe. Bewegung an
+     einem grossen Bild wirkt schnell unruhig. */
+  /* Lange Listen bekommen nur Deckkraft: zehn Eintraege, die nacheinander
+     von unten einfahren, sind mehr Bewegung als Inhalt. */
+  html[data-ui-ready] .reveal:not(:has(.reveal)).is-in:is(.faq-item, .blog-card, .error-item, .tl-item) {
+    animation-name: rev-alpha;
+    --rev-dur: 500ms;
+  }
+
+  html[data-ui-ready] .reveal:not(:has(.reveal)).is-in:is(.sec-head, .hero-img-frame, .about-img-wrap,
+    .personal-img-wrap, .own-product-visual, .article-hero-inner,
+    .cta-box, .form-card, .flow-figure) {
+    animation-name: rev-alpha;
+    --rev-dur: 1000ms;
+  }
+}
+
+/* Der Pausenschalter und die Systemangabe halten alles an. */
+.motion-paused .reveal,
+.motion-paused .reveal.is-in {
+  opacity: 1 !important;
+  animation: none !important;
+  translate: none !important;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   @supports ((animation-timeline: view()) and (animation-range: entry)) {

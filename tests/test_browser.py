@@ -172,33 +172,44 @@ class BrowserTests(unittest.TestCase):
                     self.assertEqual([], broken)
                     self.assertEqual(1, self.page.locator("main").count())
                     self.assertEqual(1, self.page.locator("h1").count())
-                    # Nach dem Durchscrollen darf kein Inhalt unsichtbar
-                    # zurueckbleiben und die Seite nicht seitlich ueberlaufen.
+                    # Die Seite blendet Abschnitte beim Hereinscrollen ein.
+                    # Geprueft wird deshalb, dass beim Durchscrollen *jeder*
+                    # Traeger auch wirklich erscheint - kein Abschnitt darf
+                    # uebersprungen werden und dauerhaft verborgen bleiben.
+                    # Die 120 ms je Schritt entsprechen rund 5000 px/s; wer
+                    # schneller springt, wird vom Nachlauf in initReveal
+                    # aufgefangen, was `test_reveal_survives_a_jump` prueft.
+                    # `behavior: instant` ist Pflicht: mit dem geerbten
+                    # `scroll-behavior: smooth` animiert scrollTo, die Schleife
+                    # erreicht das Seitenende nie und meldet Abschnitte als
+                    # verborgen, die nur noch nicht erreicht waren.
                     self.page.evaluate("""async () => {
                       for (let y = 0; y < document.documentElement.scrollHeight; y += 600) {
-                        window.scrollTo(0, y);
-                        await new Promise(r => setTimeout(r, 30));
+                        window.scrollTo({top: y, behavior: 'instant'});
+                        await new Promise(r => setTimeout(r, 120));
                       }
-                      window.scrollTo(0, 0);
+                      window.scrollTo({top: document.documentElement.scrollHeight,
+                                       behavior: 'instant'});
                     }""")
-                    # Kein Inhalt darf unsichtbar bleiben. Die Seite blendet
-                    # nichts mehr ein - sie ist von Anfang an sichtbar - also
-                    # wird genau das geprueft statt eines Klassenzustands.
                     self.page.wait_for_timeout(250)
                     state = self.page.evaluate("""() => ({
                       overflow: document.documentElement.scrollWidth - innerWidth,
                       styled: !!getComputedStyle(document.documentElement)
                                  .getPropertyValue('--signal').trim(),
+                      // Ein Traeger mit `is-in` blendet gerade ein - seine
+                      // Deckkraft ist waehrend Verzoegerung und Ablauf noch 0.
+                      // Uebrig bleiben darf nur, was nie ausgeloest wurde.
                       invisible: [...document.querySelectorAll('.reveal, [data-intro]')]
                         .filter(el => {
                           const s = getComputedStyle(el);
+                          if (el.classList.contains('is-in')) return false;
                           return s.opacity === '0' || s.visibility === 'hidden';
                         })
                         .map(el => el.tagName + '.' + el.className)
                     })""")
                     self.assertTrue(state["styled"], "Stylesheet did not apply")
                     self.assertEqual([], state["invisible"],
-                                     "Content is not visible without scrolling to it")
+                                     "Content stayed hidden after scrolling past it")
                     self.assertLessEqual(state["overflow"], 1)
         print(f"Validated {len(files)} pages at {len(sizes)} viewport sizes")
 
@@ -362,6 +373,32 @@ class BrowserTests(unittest.TestCase):
         self.page.locator("#formErrorMsg").wait_for(state="visible")
         self.assertIn("too long", self.page.locator("#formErrorMsg").inner_text())
         self.assertTrue(self.page.locator("#submitBtn").is_enabled())
+
+    def test_reveal_survives_a_jump(self):
+        """Springt der Leser ueber einen Abschnitt, muss er trotzdem erscheinen.
+
+        Der IntersectionObserver meldet nichts, wenn ein Element den Sichtbereich
+        nie schneidet - etwa beim Sprung ans Seitenende oder ueber eine
+        Sprungmarke. Ohne den Nachlauf in initReveal blieben solche Abschnitte
+        dauerhaft unsichtbar.
+        """
+        for path in ["/", "/leistungen/", "/ueber-mich/", "/projekte/"]:
+            with self.subTest(path=path):
+                self.goto(path)
+                self.page.wait_for_timeout(300)
+                # In einem Satz ans Ende - kein Zwischenschritt.
+                self.page.evaluate("window.scrollTo({top: document.documentElement.scrollHeight, behavior: 'instant'})")
+                self.page.wait_for_timeout(600)
+                hidden = self.page.evaluate("""() => [...document.querySelectorAll('.reveal')]
+                    .filter(el => {
+                      const r = el.getBoundingClientRect();
+                      // Nur was der Sprung bereits passiert hat. Geprueft wird
+                      // der ausgeloeste Zustand, nicht die Deckkraft: die
+                      // Bewegung selbst laeuft danach noch bis zu 1,1 s.
+                      return r.top < innerHeight && !el.classList.contains('is-in');
+                    })
+                    .map(el => el.tagName + '.' + el.className)""")
+                self.assertEqual([], hidden, "A section stayed hidden after jumping past it")
 
     def test_without_javascript_and_reduced_motion(self):
         no_js = self.browser.new_context(java_script_enabled=False, viewport={"width": 320, "height": 740})

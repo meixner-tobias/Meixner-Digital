@@ -212,10 +212,88 @@
   }
 
   function initMotion() {
-    // Inhalte werden nicht mehr versteckt und wieder eingeblendet: Die
-    // Bewegung liegt in CSS an Bildern und Trennlinien, scroll-gebunden.
-    // Hier bleibt nur, was JavaScript wirklich braucht - der Pausenschalter.
+    initReveal();
     initMotionToggle();
+  }
+
+  // Auftritt beim Hereinscrollen. Nach dem Vorbild der Referenz: ein Wrapper
+  // bekommt eine Klasse, sobald er weit genug im Bild steht; die Bewegung
+  // selbst liegt vollstaendig in CSS.
+  //
+  // Der versteckte Ausgangszustand haengt an html[data-ui-ready] - faellt
+  // JavaScript aus, ist alles sofort sichtbar. Ohne diese Kopplung bliebe die
+  // Seite leer, und genau das ist der Fallstrick der Vorlage.
+  function initReveal() {
+    if (decorativeMotionOff()) return;
+
+    var items = document.querySelectorAll(".reveal");
+    if (!items.length || !("IntersectionObserver" in window)) return;
+
+    var pending = [];
+
+    function show(el) {
+      el.classList.add("is-in");
+      observer.unobserve(el);
+      var i = pending.indexOf(el);
+      if (i > -1) pending.splice(i, 1);
+    }
+
+    // Gemessen an der Referenz: der Auftritt startet, sobald rund ein Viertel
+    // der Fensterhoehe des Elements hereinragt.
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) show(entry.target);
+      });
+    }, { rootMargin: "0px 0px -22% 0px", threshold: 0 });
+
+    Array.prototype.forEach.call(items, function (el) {
+      // Traeger, die weitere Traeger enthalten, bewegen sich nicht selbst -
+      // sonst laeuft dieselbe Flaeche zweimal ein.
+      if (el.querySelector(".reveal")) {
+        el.classList.add("is-in");
+        return;
+      }
+      // Was beim Aufbau schon im Bild steht, erscheint ohne Verzoegerung.
+      if (el.getBoundingClientRect().top < window.innerHeight * 0.78) {
+        el.classList.add("is-in");
+        return;
+      }
+      pending.push(el);
+      observer.observe(el);
+    });
+
+    if (!pending.length) return;
+
+    // Sicherheitsnetz. Springt der Leser ueber einen Abschnitt hinweg - per
+    // Sprungmarke, Ende-Taste oder schnellem Rad - aendert sich der
+    // Schnittzustand nie und der Beobachter meldet nichts. Ohne diese Nachlese
+    // blieben solche Abschnitte dauerhaft unsichtbar. Gemessen trat das beim
+    // Durchscrollen in 600-px-Spruengen auf.
+    var ticking = false;
+    var settle = 0;
+    function sweep() {
+      ticking = false;
+      for (var i = pending.length - 1; i >= 0; i--) {
+        var el = pending[i];
+        if (el.getBoundingClientRect().top < window.innerHeight * 0.78) show(el);
+      }
+      if (!pending.length) {
+        window.removeEventListener("scroll", onScroll);
+        window.removeEventListener("resize", onScroll);
+        window.clearTimeout(settle);
+      }
+    }
+    function onScroll() {
+      // Sehr schnelles Scrollen kann die Einzelbilder ueberholen; der Nachlauf
+      // nach dem Anhalten holt nach, was dabei liegen geblieben ist.
+      window.clearTimeout(settle);
+      settle = window.setTimeout(sweep, 120);
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(sweep);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
   }
 
   // Pause-/Fortsetzen-Schalter fuer dekorative Bewegung (WCAG 2.2 Pause, Stop,

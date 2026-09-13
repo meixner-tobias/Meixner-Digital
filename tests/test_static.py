@@ -289,7 +289,8 @@ class StaticTests(unittest.TestCase):
         self.assertIn(".motion-paused", css, "Explicit pause state is missing")
         for name in re.findall(r"@keyframes\s+([\w-]+)", css):
             with self.subTest(keyframes=name):
-                uses = re.findall(r"([^{}]*)\{[^{}]*animation:([^;]*\b"
+                # Both spellings count: the shorthand and `animation-name`.
+                uses = re.findall(r"([^{}]*)\{[^{}]*animation(?:-name)?:([^;]*\b"
                                   + re.escape(name) + r"\b[^;]*);", css)
                 self.assertTrue(uses, f"@keyframes {name} is declared but never used")
                 for selector, shorthand in uses:
@@ -297,6 +298,12 @@ class StaticTests(unittest.TestCase):
                         continue
                     self.assertIn("motion-paused", selector,
                                   f"Loop {name} keeps running when the user pauses motion")
+        # A loop can also be set through `animation-iteration-count`; the pause
+        # control has to reach that one too.
+        for selector, _ in re.findall(
+                r"([^{}]*)\{([^{}]*animation-iteration-count:\s*infinite[^{}]*)\}", css):
+            self.assertIn("motion-paused", selector,
+                          "A loop set through animation-iteration-count must be pausable")
 
     def test_scroll_linked_animation_never_sits_on_an_image_parent(self):
         """A scroll-driven animation on an image's parent stops lazy loading.
