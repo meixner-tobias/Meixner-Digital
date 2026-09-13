@@ -38,6 +38,19 @@
 
     function setOpen(open, restoreFocus) {
       var wasOpen = !drawer.hidden;
+      // Das Schubfach darf die Leseposition nicht verlieren. Ausloeser dafuer
+      // gibt es mehrere - ein Fokuswechsel, das Verstecken des fokussierten
+      // Elements, ein Reflow beim Umschalten. Statt jeden einzeln zu jagen,
+      // wird die Position gemerkt und zurueckgesetzt, falls sie sich
+      // verschoben hat. Zweimal, weil der Sprung auch erst im naechsten
+      // Einzelbild kommen kann.
+      var y = window.scrollY;
+      function halten() {
+        if (Math.abs(window.scrollY - y) > 1) {
+          window.scrollTo({ top: y, behavior: "instant" });
+        }
+      }
+
       drawer.hidden = !open;
       drawer.toggleAttribute("inert", !open);
       drawer.classList.toggle("is-open", open);
@@ -49,8 +62,11 @@
         // Sichtbereich und die Seite springt beim Oeffnen nach oben.
         if (firstLink) firstLink.focus({ preventScroll: true });
       } else if (wasOpen && restoreFocus && !burger.hidden) {
-        burger.focus();
+        burger.focus({ preventScroll: true });
       }
+
+      halten();
+      window.requestAnimationFrame(halten);
     }
 
     function syncViewport() {
@@ -75,7 +91,15 @@
       setOpen(drawer.hidden, true);
     });
     safeQueryAll("a", drawer).forEach(function (link) {
-      link.addEventListener("click", function () { setOpen(false, false); });
+      link.addEventListener("click", function (event) {
+        // Tippt jemand im Menue auf die Seite, auf der er ohnehin steht, laedt
+        // der Browser sie neu und wirft ihn an den Seitenanfang zurueck. Hier
+        // wird nur das Menue geschlossen.
+        var istAktuell = link.getAttribute("aria-current") === "page"
+                      || link.classList.contains("active");
+        if (istAktuell) event.preventDefault();
+        setOpen(false, false);
+      });
     });
     document.addEventListener("click", function (event) {
       if (!drawer.contains(event.target) && !burger.contains(event.target)) {
