@@ -2818,6 +2818,74 @@ a.cluster-card-pillar:hover { border-color: var(--signal); }
   }
 }
 
+/* --------------------------------------------------------------------------
+   Reaktion beim Ueberfahren
+
+   Bewusst nicht der uebliche Kartenhub mit Schatten - den benutzt jede zweite
+   Seite. Stattdessen zeichnet sich an der oberen Kante eine Signallinie ein,
+   dieselbe Geste wie in der Navigation und an den Eintragszeilen. Sie greift
+   nur bei Zeigergeraeten; auf dem Handy loeste sie beim Tippen aus und blieb
+   danach stehen.
+   ------------------------------------------------------------------------ */
+@media (hover: hover) and (pointer: fine) {
+  :is(.svc-main-card, .svc-detail-card, .pain-card, .svc-card, .case-icon-card,
+      .skill-card, .travel-card, .why-freelance-card, .info-card, .approach-card,
+      .concept-card, .platform-card, .step-card, .scope-tier, .stat-card,
+      .faq-info-card, .toc-card, .cluster-card) {
+    position: relative;
+    transition: border-color var(--dur) var(--ease);
+  }
+  :is(.svc-main-card, .svc-detail-card, .pain-card, .svc-card, .case-icon-card,
+      .skill-card, .travel-card, .why-freelance-card, .info-card, .approach-card,
+      .concept-card, .platform-card, .step-card, .scope-tier, .stat-card,
+      .faq-info-card, .toc-card, .cluster-card)::after {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 2px;
+    background: var(--signal);
+    scale: 0 1;
+    transform-origin: left;
+    transition: scale var(--dur) var(--ease);
+    pointer-events: none;
+  }
+  :is(.svc-main-card, .svc-detail-card, .pain-card, .svc-card, .case-icon-card,
+      .skill-card, .travel-card, .why-freelance-card, .info-card, .approach-card,
+      .concept-card, .platform-card, .step-card, .scope-tier, .stat-card,
+      .faq-info-card, .toc-card, .cluster-card):hover::after {
+    scale: 1 1;
+  }
+  /* Die Signallinie sitzt oben - bei einer hohen Karte sieht man sie beim
+     Lesen im unteren Teil nicht. Deshalb faerbt sich zusaetzlich der ganze
+     Rahmen, gedaempft, damit es eine Andeutung bleibt. */
+  :is(.svc-main-card, .svc-detail-card, .concept-card, .platform-card,
+      .case-icon-card, .info-card, .faq-info-card, .travel-card):hover {
+    border-color: color-mix(in srgb, var(--signal) 42%, var(--line));
+  }
+
+  /* Projektzeilen und Blogkarten fuehren zu einer anderen Seite - dort wandert
+     zusaetzlich der Verweistext mit. */
+  .proj-card:hover .proj-link, .blog-card:hover .blog-card-link {
+    color: var(--signal-text);
+  }
+
+  /* Tabellenzeilen heben beim Lesen die Zeile hervor, nicht die Tabelle. */
+  .compare-table tbody tr { transition: background-color var(--dur-fast) var(--ease); }
+  .compare-table tbody tr:hover {
+    background-color: color-mix(in srgb, var(--text) 4%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Ohne Bewegung bleibt die Linie stehen statt zu wandern. */
+  @media (hover: hover) and (pointer: fine) {
+    :is(.svc-main-card, .svc-detail-card, .pain-card, .svc-card, .case-icon-card,
+        .skill-card, .travel-card, .why-freelance-card, .info-card, .approach-card,
+        .concept-card, .platform-card, .step-card, .scope-tier, .stat-card,
+        .faq-info-card, .toc-card, .cluster-card)::after { transition: none; }
+  }
+}
+
 /* Der Pausenschalter und die Systemangabe halten alles an. */
 .motion-paused .reveal,
 .motion-paused .reveal.is-in {
@@ -2833,13 +2901,16 @@ a.cluster-card-pillar:hover { border-color: var(--signal); }
        mit Bildkindern. Gemessen: eine scroll-gebundene Animation direkt am
        Bildelternteil verhindert, dass loading="lazy" ausloest - das Bild
        wird dann nie angefordert. */
+    /* Nur echte Fotoplatten. Kundenlogos und Sinnbilder bleiben ruhig. */
     .hero-img-frame > picture,
-    .about-img-wrap, .personal-img-wrap, .about-hero-img { overflow: clip; }
+    .about-img-wrap, .personal-img-wrap, .about-hero-img,
+    .travel-card > picture { overflow: clip; }
 
     .hero-img-frame > picture > img,
     .about-img-wrap > picture > img,
     .personal-img-wrap > img,
-    .about-hero-img > img {
+    .about-hero-img > img,
+    .travel-card > picture > img {
       animation: plate auto linear both;
       animation-timeline: view();
       animation-range: entry 0% cover 100%;
@@ -2865,8 +2936,9 @@ a.cluster-card-pillar:hover { border-color: var(--signal); }
   to   { background-size: 100% var(--hair); }
 }
 
+/* 1,04 statt 1,06: der Weg soll zu sehen sein, nicht auffallen. */
 @keyframes plate {
-  from { scale: 1.06; }
+  from { scale: 1.04; }
   to   { scale: 1; }
 }
 

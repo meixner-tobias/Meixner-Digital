@@ -213,7 +213,109 @@
 
   function initMotion() {
     initReveal();
+    initCounters();
     initMotionToggle();
+  }
+
+  // Kennzahlen zaehlen beim Erscheinen hoch.
+  //
+  // Die Werte sind sehr unterschiedlich geschrieben: "30-40 %", ">2,5 Mrd.",
+  // "700.000+", "100<em>/100</em>", aber auch "v2", "3 Modelle" oder
+  // "Token fuer Token". Deshalb wird nicht der Text ersetzt, sondern es werden
+  // nur die Ziffernfolgen in den Textknoten hochgezaehlt - Markup, Vorzeichen,
+  // Einheiten und Trennzeichen bleiben unberuehrt. Einstellige Zahlen bleiben
+  // stehen: bei "v2" oder "4+" waere Hochzaehlen sinnlos.
+  //
+  // Am Ende wird immer der Originaltext zurueckgeschrieben, damit keine
+  // Rundung und keine Zahlenformatierung stehen bleibt.
+  function initCounters() {
+    if (decorativeMotionOff()) return;
+    if (!("IntersectionObserver" in window)) return;
+
+    var cells = document.querySelectorAll(".stat-card-val, .metric-n");
+    if (!cells.length) return;
+
+    var ZAHL = /\d[\d.,]*/g;
+
+    function zerlegen(el) {
+      // Textknoten einsammeln, in denen mindestens eine mehrstellige Zahl steht.
+      var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+      var teile = [];
+      var node;
+      while ((node = walker.nextNode())) {
+        var text = node.nodeValue;
+        var treffer = text.match(ZAHL);
+        if (!treffer) continue;
+        var zahlen = [];
+        treffer.forEach(function (roh) {
+          var sauber = roh.replace(/[.,]+$/, "");
+          var ziffern = sauber.replace(/[^\d]/g, "");
+          if (ziffern.length < 2) return;            // "v2", "4+" bleiben stehen
+          var gruppiert = /\d\.\d{3}/.test(sauber);
+          var dezimal = sauber.indexOf(",") > -1 ? sauber.split(",")[1].length : 0;
+          var wert = parseFloat(sauber.replace(/\./g, "").replace(",", "."));
+          if (!isFinite(wert)) return;
+          zahlen.push({ roh: sauber, wert: wert, dezimal: dezimal, gruppiert: gruppiert });
+        });
+        if (zahlen.length) teile.push({ node: node, text: text, zahlen: zahlen });
+      }
+      return teile;
+    }
+
+    function formatieren(wert, dezimal, gruppiert) {
+      return wert.toLocaleString("de-DE", {
+        minimumFractionDigits: dezimal,
+        maximumFractionDigits: dezimal,
+        useGrouping: gruppiert
+      });
+    }
+
+    function zaehlen(el) {
+      var teile = zerlegen(el);
+      if (!teile.length) return;
+
+      // Breite festhalten, damit die Zeile beim Zaehlen nicht springt.
+      var breite = el.getBoundingClientRect().width;
+      if (breite) el.style.minWidth = Math.ceil(breite) + "px";
+
+      var DAUER = 900;
+      var start = 0;
+
+      function schritt(zeit) {
+        if (!start) start = zeit;
+        var p = Math.min(1, (zeit - start) / DAUER);
+        var e = 1 - Math.pow(1 - p, 3);         // weich auslaufend
+        teile.forEach(function (teil) {
+          var i = 0;
+          teil.node.nodeValue = teil.text.replace(ZAHL, function (roh) {
+            var z = teil.zahlen[i];
+            var passt = z && roh.replace(/[.,]+$/, "") === z.roh;
+            if (!passt) return roh;
+            i++;
+            return formatieren(z.wert * e, z.dezimal, z.gruppiert)
+                 + roh.slice(z.roh.length);
+          });
+        });
+        if (p < 1) {
+          window.requestAnimationFrame(schritt);
+        } else {
+          // Originaltext zuruecksetzen - nichts Gerundetes bleibt stehen.
+          teile.forEach(function (teil) { teil.node.nodeValue = teil.text; });
+          el.style.minWidth = "";
+        }
+      }
+      window.requestAnimationFrame(schritt);
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        observer.unobserve(entry.target);
+        zaehlen(entry.target);
+      });
+    }, { rootMargin: "0px 0px -15% 0px", threshold: 0 });
+
+    Array.prototype.forEach.call(cells, function (el) { observer.observe(el); });
   }
 
   // Auftritt beim Hereinscrollen. Nach dem Vorbild der Referenz: ein Wrapper

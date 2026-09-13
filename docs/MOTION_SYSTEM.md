@@ -56,7 +56,35 @@ Seite besteht aus Blöcken mit festen Flächen (schwarz, `#1a2835`, `#f7f7f7`,
 weiß), die beim Durchscrollen aufeinander folgen — dasselbe Prinzip wie unser
 Wechsel zwischen Ink und Papier.
 
-## 2. Grundsatz: Bewegung versteckt nichts
+## 2. Bilder, Reaktion und Kennzahlen
+
+**Fotoplatten** fahren scroll-gebunden von Maßstab 1,04 auf 1 (vorher 1,06 —
+der Weg soll zu sehen sein, nicht auffallen). Betroffen sind nur echte
+Fotoplatten: Hero, Porträts und die Reisebilder. Kundenlogos und Sinnbilder
+bleiben ruhig.
+
+**Reaktion beim Überfahren** — bewusst nicht der übliche Kartenhub mit
+Schatten, den jede zweite Seite benutzt. An der oberen Kante zeichnet sich
+eine Signallinie ein, dieselbe Geste wie in der Navigation. Weil die bei einer
+hohen Karte beim Lesen im unteren Teil nicht zu sehen ist, färbt sich
+zusätzlich der Rahmen gedämpft mit. Gilt nur bei Zeigergeräten
+(`hover: hover` und `pointer: fine`) — auf dem Handy löste der Effekt beim
+Tippen aus und blieb danach stehen.
+
+**Kennzahlen** zählen beim Erscheinen hoch. Die Werte sind sehr unterschiedlich
+geschrieben: `30-40 %`, `>2,5 Mrd.`, `700.000+`, `100<em>/100</em>`, aber auch
+`v2`, `3 Modelle` oder `Token für Token`. Deshalb wird nicht der Text ersetzt,
+sondern es werden nur die Ziffernfolgen **in den Textknoten** hochgezählt —
+Markup, Vorzeichen, Einheiten und Trennzeichen bleiben unberührt. Einstellige
+Zahlen bleiben stehen (bei `v2` oder `4+` wäre Hochzählen sinnlos), und am Ende
+wird immer der Originaltext zurückgeschrieben, damit keine Rundung stehen
+bleibt. Gemessen: 39 Zellen über fünf Seiten, **null Abweichungen** gegen den
+Wert im Markup.
+
+Die Breite wird für die Dauer des Zählens festgehalten, sonst springt die
+Zeile.
+
+## 3. Grundsatz: Bewegung versteckt nichts
 
 Die vorherige Fassung blendete jeden Abschnitt beim Scrollen ein. Das ist aus
 zwei Gründen abgeräumt:
@@ -69,7 +97,7 @@ Die Bewegung liegt jetzt dort, wo sie nichts verdeckt: **an den Bildern und an
 den Trennlinien**. Jeder Inhalt ist von der ersten Millisekunde an sichtbar,
 mit und ohne JavaScript.
 
-## 3. Effekte
+## 4. Effekte
 
 | Effekt | Auslöser | Was | Dauer | Wiederholung | Reduziert / Pause |
 | --- | --- | --- | --- | --- | --- |
@@ -85,7 +113,7 @@ mit und ohne JavaScript.
 **Genau ein orchestrierter Moment**: der Hero-Auftritt. Kein Einblenden pro
 Abschnitt.
 
-## 4. Scroll-gebunden statt zeitgesteuert
+## 5. Scroll-gebunden statt zeitgesteuert
 
 Wo der Browser es nativ kann, hängt der Fortschritt am Scroll statt an einem
 Zeitgeber — flüssiger und auf dem Compositor:
@@ -109,13 +137,13 @@ Die Animation liegt deshalb immer auf dem `<img>` selbst, der Wrapper clippt.
 `tests/test_static.py::test_scroll_linked_animation_never_sits_on_an_image_parent`
 hält das fest.
 
-## 5. Seitenwechsel
+## 6. Seitenwechsel
 
 `@view-transition { navigation: auto; }` — Cross-Document View Transitions. Die
 alte Seite blendet aus, die neue kommt mit 8 px Versatz herein. Fortschrittliche
 Verbesserung: Browser ohne Unterstützung navigieren wie gewohnt.
 
-## 6. Reduzierte Bewegung und ausdrückliche Pause
+## 7. Reduzierte Bewegung und ausdrückliche Pause
 
 Bei `prefers-reduced-motion: reduce` entfallen alle dekorativen Animationen;
 Inhalte sind unmittelbar sichtbar. Wechselt die Präferenz mitten in der Sitzung,
@@ -138,7 +166,7 @@ die Menge der `infinite`-Animationen — hier einzig die Tracking-Signale.
 Einmal-Auftritte enden von selbst, scroll-gebundene Animationen laufen nur,
 solange gescrollt wird. `tests/test_static.py` prüft entsprechend eng.
 
-## 7. Robustheit
+## 8. Robustheit
 
 - FAQ: `hidden` und `aria-expanded` gelten **sofort**; die Höhenanimation ist
   reine Dekoration und darf abbrechen. Beim Schließen bleibt keine unsichtbare,
