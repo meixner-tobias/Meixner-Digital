@@ -5896,8 +5896,8 @@
       ],
       "language": "en",
       "title": "About - Tobias Meixner | Freelancer from Würzburg",
-      "main_text_sha256": "79781768a6717673b5b63cf40cfdeb19975cc982d786e6a4e4719c371864bdf2",
-      "main_text_characters": 4163,
+      "main_text_sha256": "566b837c113acf5266fc3dde53e1b5a655f2ce7a932c822bf1e8532a336f5b5d",
+      "main_text_characters": 4156,
       "ids": [
         "about-hero-heading",
         "burger",
@@ -11070,8 +11070,8 @@
       ],
       "language": "en",
       "title": "Contact - Get a free quote | Tobias Meixner Würzburg",
-      "main_text_sha256": "80d9bc0336b4a2dd25516c2db1d83ae150d00fde636d411ac2abbe570d3d4385",
-      "main_text_characters": 2801,
+      "main_text_sha256": "f1c8e0702911e7fa61a7ce93be947c2cd528c24525b3bda5b0ecc9226ad6e649",
+      "main_text_characters": 2794,
       "ids": [
         "addonBox",
         "addonBoxBetreuung",
@@ -11671,8 +11671,8 @@
       ],
       "language": "en",
       "title": "Tracking Specialist Würzburg | GTM, GA4, Server-Side | Tobias Meixner",
-      "main_text_sha256": "64b04334303859a86302f9fea00695bd3a60bd7a5d8471f28ec724cbc2d7d599",
-      "main_text_characters": 4789,
+      "main_text_sha256": "6fb39d2a159588d4e6bc4211d0e36cda14d103d37aa8baed922e83327167faba",
+      "main_text_characters": 4775,
       "ids": [
         "about-heading",
         "burger",
@@ -13514,8 +13514,8 @@
       ],
       "language": "en",
       "title": "Tracking Freelancer Germany: GTM, GA4 & Server-Side from €390 | Tobias Meixner",
-      "main_text_sha256": "f53c5af8cc04b8ae31c6cffbdb1eb4344d88cc0ca088b071e903825abfac058c",
-      "main_text_characters": 13294,
+      "main_text_sha256": "2f6b335dd99d7448a063aa198180723b03a94ebdbc1c5ef460a83c35701592c9",
+      "main_text_characters": 12999,
       "ids": [
         "burger",
         "drawer",
@@ -14720,8 +14720,8 @@
       ],
       "language": "de",
       "title": "Websites & Tracking Freelancer Würzburg | GTM - GA4 - Ads | Tobias Meixner",
-      "main_text_sha256": "6c9572e61f81307549a938806329552c8f2414449061a2aba3aabbceff5a0c0f",
-      "main_text_characters": 4914,
+      "main_text_sha256": "c1fd16384a882a885336ca2f2b893a22e208864634828d70b4546d716b9f8493",
+      "main_text_characters": 4900,
       "ids": [
         "about-heading",
         "burger",
@@ -15260,8 +15260,8 @@
       ],
       "language": "de",
       "title": "Kontakt - Unverbindlich anfragen | Tobias Meixner Würzburg",
-      "main_text_sha256": "733a8dadf447299cba1131c8c6bae7497e23bd3acdc435cfaa1187b18fb59c73",
-      "main_text_characters": 3021,
+      "main_text_sha256": "0c6ec54ba477ff263ced1e521f5bb2d308dc01800270753c4b7bbbd1ea77ade4",
+      "main_text_characters": 3020,
       "ids": [
         "addonBox",
         "addonBoxBetreuung",
@@ -15924,8 +15924,8 @@
       ],
       "language": "de",
       "title": "Tracking-Freelancer Würzburg: GTM, GA4 & Server-Side ab 390 € | Tobias Meixner",
-      "main_text_sha256": "fa5c2c5b89e01df4a2a18b52d89a597f4bf8edce84d1004d3ce4f621089679eb",
-      "main_text_characters": 13991,
+      "main_text_sha256": "15e37c7ac9236dee62e35b07227dbcd91d524e6b53bdafdb7de0385573c87922",
+      "main_text_characters": 13675,
       "ids": [
         "burger",
         "drawer",
@@ -17265,8 +17265,8 @@
       ],
       "language": "de",
       "title": "Über mich - Tobias Meixner | Freelancer aus Würzburg",
-      "main_text_sha256": "874862042c542447b3acde8fcd9c2e4f12425f35ad7c3e6c7d7efe256bc3a558",
-      "main_text_characters": 4560,
+      "main_text_sha256": "b44c4db09160a782e8989a44c42928c26b25ba980e297235e77d08ba9f75c57f",
+      "main_text_characters": 4553,
       "ids": [
         "about-hero-heading",
         "burger",
@@ -17380,5 +17380,27 @@
         "why-section"
       ]
     }
-  }
+  },
+  "text_revisions": [
+    {
+      "date": "2026-09-13",
+      "reason": "Vom Auftraggeber freigegebene Inhaltsaenderungen",
+      "pages": [
+        "index.html",
+        "en/index.html",
+        "ueber-mich/index.html",
+        "en/about/index.html",
+        "kontakt/index.html",
+        "en/contact/index.html",
+        "leistungen/index.html",
+        "en/services/index.html"
+      ],
+      "changes": [
+        "Verfuegbarkeit: 'Verfuegbar fuer neue Projekte' -> 'Projekte auf Anfrage' (EN: 'Projects on request'); auf der Kontaktseite entsprechend 'Aktuell verfuegbar / Neue Projekte ab sofort moeglich' -> 'Projekte auf Anfrage / Zeitfenster klaeren wir im Gespraech'",
+        "Alter 21 -> 22",
+        "Leistungen: zwei inhaltlich doppelte Detailkarten entfernt ('Laufende Pflege' aus dem Website-Block, 'Hosting & SSL' aus dem Betreuungs-Block) - beide Aussagen stehen weiterhin im jeweils anderen Block"
+      ],
+      "unveraendert": "Metadaten, Canonicals, Hreflang, JSON-LD, Links, Bilder, Formularfelder, data-*-Attribute sowie saemtliche ids und classes werden weiter gegen die urspruengliche Baseline geprueft; keine ist entfallen."
+    }
+  ]
 }

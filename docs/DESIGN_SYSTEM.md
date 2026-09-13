@@ -39,8 +39,8 @@ Die Seite hat zwei gleichwertige Flächen. Der Wechsel zwischen ihnen ist der
 | `--ink` | `#0c1315` | Gerätegehäuse-Dunkel, grün-blauer Stich |
 | `--ink-raised` | `#121a1c` | Menüs, erhöhte Flächen |
 | `--ink-line` | `#1e292c` | Haarlinien im Dunkeln |
-| `--paper` | `#ede8e0` | zweite echte Fläche, warm |
-| `--paper-line` | `#cfc7ba` | Haarlinien auf Papier |
+| `--paper` | `#e4ded3` | zweite echte Fläche, warm |
+| `--paper-line` | `#c6bdad` | Haarlinien auf Papier |
 | `--signal` | `#e2a33c` | Bernstein — Füllungen, Linien, Marken |
 
 Komponenten lesen **nie** die Grundfarben, sondern nur die neutralen Tokens
@@ -57,7 +57,7 @@ Ink **und** Papier nicht gleichzeitig 4,5:1 erreicht. Alle Werte gemessen:
 | --- | --- | --- |
 | Signal als **Schrift** (`--signal-text`) | `#e2a33c` — 8,52:1 | `#7d5310` — 5,52:1 |
 | Warnrot (`--danger`) | `#e8735c` — 6,29:1 | `#a8341f` — 5,42:1 |
-| Kleinsttext (`--text-faint`) | `#8b8f8d` — 5,73:1 | `#5b6163` — 5,16:1 |
+| Kleinsttext (`--text-faint`) | `#8b8f8d` — 5,73:1 | `#555b5d` — 5,16:1 |
 
 `--signal` (Füllung, Linie) und `--signal-text` (Schrift) sind bewusst getrennt:
 für Flächen gilt ein anderer Kontrastmaßstab als für Schrift.
@@ -86,12 +86,11 @@ stabil, während die Webfonts tauschen. Messbares Ergebnis: **CLS 0,00** (vorher
 
 | Rolle | Token | Wert |
 | --- | --- | --- |
-| Hero | `--t-display` | `clamp(2.5rem, 1.3rem + 4.6vw, 5rem)` |
-| Abschnittstitel | `--t-h2` | `clamp(1.8rem, 1.2rem + 2.2vw, 3rem)` |
-| Fließtext | `--t-body` | `clamp(1rem, 0.97rem + 0.16vw, 1.0938rem)` |
+| Hero | `--t-display` | `clamp(2rem, 1.55rem + 1.5vw, 2.875rem)` — 46 px bei 1440 |
+| Abschnittstitel | `--t-h2` | `clamp(1.55rem, 1.3rem + 0.85vw, 2rem)` — 32 px |
+| Fließtext | `--t-body` | `clamp(1rem, 0.96rem + 0.1vw, 1.0625rem)` — 17 px |
 
-Zeilenlänge über `--measure: 68ch`. Überschriften Gewicht 620,
-`letter-spacing: -0.032em`, `line-height: 1.06`.
+Zeilenlänge über `--measure: 68ch`. Überschriften Gewicht 580.
 
 ## 4. Raster: das Dokument
 
@@ -105,7 +104,9 @@ Zeilenlänge über `--measure: 68ch`. Überschriften Gewicht 620,
 
 - `--page: 1320px`, `--gutter: clamp(20px, 4.6vw, 72px)`
 - `--margin-col: clamp(120px, 13vw, 196px)` — die Randspalte
-- `--band: clamp(72px, 9vw, 152px)` — Abschnittshöhe
+- `--band: clamp(34px, 3.8vw, 58px)` — Abschnittshöhe
+- `--btn-lead: clamp(22px, 2.2vw, 30px)` — Vorlauf über jedem Knopf
+- `--nav-h: 76px` — Höhe der stehenden Navigationsleiste
 
 Ab 900 px bekommen Abschnittsköpfe und Einträge die Randspalte; darunter
 stapelt alles einspaltig.
@@ -130,7 +131,19 @@ JS (`mobileViewport` in `js/main.js`) teilen diese Grenze.
   unterstreicht der Browser die gesamte Karte. Das Sinnbild ist ein Zeichen in
   Zeilenhöhe, keine Bildfläche.
 
-## 6. Erhaltene Verträge
+## 6. Stehende Navigation
+
+Die Leiste ist `position: sticky; top: 0`. Damit Sprungziele nicht darunter
+verschwinden, trägt `html` ein `scroll-padding-top: calc(var(--nav-h) + 12px)`.
+
+Der Sprachumschalter liegt im Markup andersherum vor als im Endzustand: der
+Knopf trägt `hidden`, die Liste ist offen — das ist der Fallback ohne
+JavaScript. Bis `data-ui-ready` gesetzt ist, dreht CSS das um (Knopf sichtbar,
+Liste zu), und das `<noscript>` im Kopf dreht es für Browser ohne JavaScript
+zurück. Ohne diese Umkehr verschwand die Sprachauswahl bei jedem Seitenwechsel
+sichtbar und tauchte danach wieder auf.
+
+## 7. Erhaltene Verträge
 
 `[hidden] { display: none !important; }`, `.sr-only`, `pre`/`.table-wrap` mit
 `overflow-x: auto`, der Viewport-Schutz des Cookie-Banners und die sichtbare
