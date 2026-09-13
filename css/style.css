@@ -697,13 +697,19 @@ html:not([data-ui-ready]) .lang-switch { min-width: 66px; min-height: 34px; }
 .burger.is-open::after { translate: 0 -3.5px; rotate: -45deg; }
 .burger:hover { border-color: var(--on-ink-soft); }
 
+/* Das Schubfach haengt unter der Leiste statt im Textfluss zu stehen.
+   Im Fluss schob es beim Oeffnen den gesamten Inhalt um seine eigene Hoehe
+   nach unten - gemessen sprang die Seite dabei um 428 px. */
 .drawer {
-  position: relative; z-index: 110;
+  position: fixed;
+  top: var(--nav-h); left: 0; right: 0;
+  z-index: 110;
   background: var(--ink-raised);
   border-bottom: var(--hair) solid var(--ink-line-strong);
   padding: 4px var(--gutter) 26px;
-  max-height: calc(100svh - 76px);
+  max-height: calc(100svh - var(--nav-h));
   overflow-y: auto;
+  overscroll-behavior: contain;
 }
 .drawer ul { list-style: none; margin: 0; padding: 0; }
 .drawer a, .drawer summary {
@@ -726,6 +732,15 @@ html:not([data-ui-ready]) .lang-switch { min-width: 66px; min-height: 34px; }
   color: var(--on-ink-soft) !important;
 }
 .drawer-lang-btn.active { color: var(--on-ink) !important; border-color: var(--signal) !important; }
+
+/* Auf welcher Seite man steht, war im Schubfach nicht zu sehen: das Markup
+   traegt die Markierung, es fehlte nur die Gestaltung. */
+.drawer a.active, .drawer a[aria-current="page"] {
+  color: var(--on-ink);
+  box-shadow: inset 2px 0 0 var(--signal);
+  padding-left: 12px;
+}
+.drawer .drawer-lang-btn.active { box-shadow: none; padding-left: 12px; }
 
 .drawer-submenu, .drawer-submenu-nested {
   padding-left: 14px !important; margin-left: 2px;

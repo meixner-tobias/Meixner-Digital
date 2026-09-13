@@ -45,7 +45,9 @@
       burger.setAttribute("aria-expanded", String(open));
       if (open) {
         var firstLink = drawer.querySelector("a");
-        if (firstLink) firstLink.focus();
+        // preventScroll: sonst holt der Browser den Verweis in den
+        // Sichtbereich und die Seite springt beim Oeffnen nach oben.
+        if (firstLink) firstLink.focus({ preventScroll: true });
       } else if (wasOpen && restoreFocus && !burger.hidden) {
         burger.focus();
       }
