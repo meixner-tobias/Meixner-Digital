@@ -12768,9 +12768,10 @@
           "alt": "BikeCare Dashboard - overview of all bikes and upcoming maintenance",
           "class": "own-product-device own-product-device-back",
           "data-float": "8",
+          "fetchpriority": "high",
           "width": "280",
           "height": "600",
-          "loading": "lazy",
+          "loading": "eager",
           "decoding": "async"
         },
         {
@@ -12780,7 +12781,7 @@
           "data-float": "10",
           "width": "280",
           "height": "600",
-          "loading": "lazy",
+          "loading": "eager",
           "decoding": "async"
         },
         {
@@ -12855,11 +12856,13 @@
         },
         {
           "type": "image/webp",
-          "srcset": "/assets/bikecare/screenshot-1-dashboard.webp"
+          "srcset": "/assets/bikecare/screenshot-1-dashboard-320.webp 320w, /assets/bikecare/screenshot-1-dashboard-640.webp 640w",
+          "sizes": "(max-width: 899px) 46vw, 260px"
         },
         {
           "type": "image/webp",
-          "srcset": "/assets/bikecare/screenshot-4-copilot.webp"
+          "srcset": "/assets/bikecare/screenshot-4-copilot-320.webp 320w, /assets/bikecare/screenshot-4-copilot-640.webp 640w",
+          "sizes": "(max-width: 899px) 52vw, 300px"
         }
       ],
       "forms": [],
@@ -16581,9 +16584,10 @@
           "alt": "BikeCare Dashboard — Übersicht aller Bikes und fälliger Wartungen",
           "class": "own-product-device own-product-device-back",
           "data-float": "8",
+          "fetchpriority": "high",
           "width": "280",
           "height": "600",
-          "loading": "lazy",
+          "loading": "eager",
           "decoding": "async"
         },
         {
@@ -16593,7 +16597,7 @@
           "data-float": "10",
           "width": "280",
           "height": "600",
-          "loading": "lazy",
+          "loading": "eager",
           "decoding": "async"
         },
         {
@@ -16668,11 +16672,13 @@
         },
         {
           "type": "image/webp",
-          "srcset": "/assets/bikecare/screenshot-1-dashboard.webp"
+          "srcset": "/assets/bikecare/screenshot-1-dashboard-320.webp 320w, /assets/bikecare/screenshot-1-dashboard-640.webp 640w",
+          "sizes": "(max-width: 899px) 46vw, 260px"
         },
         {
           "type": "image/webp",
-          "srcset": "/assets/bikecare/screenshot-4-copilot.webp"
+          "srcset": "/assets/bikecare/screenshot-4-copilot-320.webp 320w, /assets/bikecare/screenshot-4-copilot-640.webp 640w",
+          "sizes": "(max-width: 899px) 52vw, 300px"
         }
       ],
       "forms": [],
@@ -17570,6 +17576,19 @@
         "Auf den beiden Datenschutzseiten steht jetzt datenschutz@meixner-tobias.com statt contact@meixner-tobias.com - je drei Stellen: Kontakt des Verantwortlichen, Ausuebung der Betroffenenrechte und Widerruf von Einwilligungen. Auf allen anderen Seiten bleibt contact@ unveraendert."
       ],
       "unveraendert": "Keine id und keine Klasse entfallen; ausser der ersetzten mailto-Adresse kein Verweis."
+    },
+    {
+      "date": "2026-09-13",
+      "reason": "Ladeverhalten der BikeCare-Bilder",
+      "pages": [
+        "projekte/index.html",
+        "en/projects/index.html"
+      ],
+      "changes": [
+        "Die beiden Geraetebilder standen auf dem Desktop im ersten Bildschirm (Oberkante y=616 und y=635 bei 900 px Fensterhoehe), trugen aber loading=lazy und wurden deshalb verzoegert geholt. Jetzt loading=eager, das vordere zusaetzlich fetchpriority=high.",
+        "Die Quellen sind 1080 px breit, angezeigt werden 252 und 294 px. Neue Varianten 320w/640w mit sizes: zusammen 81 statt 177 KB."
+      ],
+      "unveraendert": "Nur source- und img-Attribute; Text, Verweise, ids und Klassen stehen unveraendert."
     }
   ]
 }
