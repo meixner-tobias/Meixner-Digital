@@ -485,11 +485,25 @@ main > section:has(#whyme-heading) {
   transition: scale var(--dur) var(--ease);
 }
 
+/* Beim <summary> ist ::after schon der Pfeil - die Unterstreichung liegt
+   dort deshalb auf ::before und spart den Pfeil rechts aus. */
+.nav-dropdown > details > summary::before {
+  content: "";
+  position: absolute;
+  left: 12px; right: 24px; bottom: 2px;
+  height: var(--hair);
+  background: var(--signal);
+  scale: 0 1;
+  transform-origin: left;
+  transition: scale var(--dur) var(--ease);
+}
+
 .nav-links > li > a:hover,
 .nav-links summary:hover,
 .nav-links > li > a.active { color: var(--on-ink); }
 .nav-links > li > a:hover::after,
-.nav-links > li > a.active::after { scale: 1 1; }
+.nav-links > li > a.active::after,
+.nav-dropdown > details > summary:hover::before { scale: 1 1; }
 
 .nav-dropdown { position: relative; }
 .nav-dropdown summary { list-style: none; }
@@ -508,14 +522,26 @@ main > section:has(#whyme-heading) {
 }
 .nav-dropdown > details[open] > summary::after { rotate: 225deg; translate: 0 1px; }
 
-/* Blog-Direktlink bleibt fuer Tastatur und ohne JS erreichbar. */
-.nav-dropdown > details > a {
-  position: absolute; width: 1px; height: 1px;
-  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap;
+/* Der Verweis auf die Blogeuebersicht stand frueher versteckt zwischen
+   <summary> und Liste - mit der Maus war die Uebersicht damit ueberhaupt
+   nicht erreichbar. Er steht jetzt als erster Eintrag im Menue, so wie im
+   Schubfach auf schmalen Schirmen. */
+.nav-drop-all {
+  border-bottom: var(--hair) solid var(--ink-line);
+  margin-bottom: 4px;
+  font-weight: 600;
 }
-.nav-dropdown > details > a:focus-visible {
-  position: static; width: auto; height: auto; clip: auto;
-  display: block; padding: 10px 14px;
+
+/* Auf welcher Seite man steht, muss auch im Menue ablesbar sein: der
+   laufende Artikel traegt aria-current, der Kopfeintrag wird mitmarkiert. */
+.nav-drop-menu a[aria-current="page"],
+.nav-drop-submenu a[aria-current="page"] {
+  color: var(--on-ink);
+  box-shadow: inset 2px 0 0 var(--signal);
+}
+.nav-dropdown:has(a[aria-current="page"]) > details > summary { color: var(--on-ink); }
+.nav-dropdown:has(a[aria-current="page"]) > details > summary::before {
+  scale: 1 1;
 }
 
 .nav-drop-menu, .nav-drop-submenu { list-style: none; margin: 0; padding: 6px; }
@@ -757,18 +783,20 @@ html:not([data-ui-ready]) .lang-switch { min-width: 66px; min-height: 34px; }
   transition: scale var(--dur) var(--ease-inout);
 }
 
-.btn-primary, .form-submit {
+.btn-primary, .btn-indigo, .form-submit {
   color: #16110a;
   background: var(--signal);
   --fill: var(--signal);
   border-color: var(--signal);
 }
 .btn-primary:hover, .btn-primary:focus-visible,
+.btn-indigo:hover, .btn-indigo:focus-visible,
 .form-submit:hover:not(:disabled), .form-submit:focus-visible:not(:disabled) {
   color: var(--signal-text);
   background: transparent;
 }
 .btn-primary:hover::before, .btn-primary:focus-visible::before,
+.btn-indigo:hover::before, .btn-indigo:focus-visible::before,
 .form-submit:hover:not(:disabled)::before, .form-submit:focus-visible:not(:disabled)::before {
   scale: 1 0;
 }
@@ -806,15 +834,24 @@ html:not([data-ui-ready]) .lang-switch { min-width: 66px; min-height: 34px; }
 }
 .form-submit:disabled::before, .btn:disabled::before { scale: 1 0; }
 
-/* Textlinks im Fliesstext bleiben als Links erkennbar. */
-.article-body a, .legal-p a, .sec-desc a, .pain-p a, .about-p a, p a {
+/* Textlinks im Fliesstext bleiben als Links erkennbar. Die Regel greift
+   bewusst nur in echten Textabsaetzen und Listen, nicht im ganzen Artikel:
+   zuvor erfasste sie auch Knoepfe (gemessene 1,92:1 auf der gelben Flaeche),
+   das Inhaltsverzeichnis und die Randspalte. */
+:is(.article-content > p, .article-content > ul, .article-content > ol,
+    .legal-p, .sec-desc, .pain-p, .about-p) a:not(.btn),
+.intro-box a, .cta-card p a, .sources-box a {
   color: var(--text);
   text-decoration: underline;
   text-decoration-color: var(--signal);
   text-decoration-thickness: 1.5px;
   transition: color var(--dur-fast) var(--ease);
 }
-.article-body a:hover, .legal-p a:hover, p a:hover { color: var(--signal-text); }
+:is(.article-content > p, .article-content > ul, .article-content > ol,
+    .legal-p) a:not(.btn):hover,
+.intro-box a:hover, .cta-card p a:hover, .sources-box a:hover {
+  color: var(--signal-text);
+}
 
 /* ============================================================================
    7. HERO
@@ -939,6 +976,17 @@ html:not([data-ui-ready]) .lang-switch { min-width: 66px; min-height: 34px; }
   align-items: baseline;
 }
 .fc-lbl { font-size: var(--t-meta); font-weight: 600; color: var(--on-ink); }
+/* Die Namen verweisen auf die Seiten der Kunden. */
+.fc-lbl a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: var(--hair) solid var(--ink-line-strong);
+  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+}
+.fc-lbl a:hover, .fc-lbl a:focus-visible {
+  color: var(--signal-text);
+  border-bottom-color: var(--signal);
+}
 .fc-meta { font-size: var(--t-meta); color: var(--on-ink-faint); }
 
 @media (max-width: 420px) {
@@ -2030,12 +2078,447 @@ blockquote {
 
 .approach-header { display: flex; align-items: baseline; gap: 14px; margin-bottom: 12px; }
 
-/* Artikel und Rechtstexte */
-.article-body, .legal-p, .legal-content { max-width: var(--measure); }
-.article-body h2 { font-size: var(--t-h3); margin-top: 1.9em; scroll-margin-top: 24px; }
-.article-body h3 { font-size: 1.2rem; margin-top: 1.6em; scroll-margin-top: 24px; }
+/* ----------------------------------------------------------------------
+   Blogartikel
+   Aufbau bei allen acht Artikeln gleich: Kopf mit Brotkrumen, dann ein
+   zweispaltiger Rumpf aus Lesespalte und Randspalte. Vorher hatte der ganze
+   Aufbau keine einzige Regel: .article-body war auf die Messlinie begrenzt,
+   wodurch Lesespalte *und* Randspalte in 540 px links zusammengequetscht
+   wurden, waehrend rechts die halbe Seite leer blieb.
+   -------------------------------------------------------------------- */
+
+/* Kopf */
+.article-hero {
+  padding-block: clamp(28px, 3.4vw, 52px) clamp(26px, 3vw, 40px);
+  border-bottom: var(--hair) solid var(--line);
+}
+
+.breadcrumbs { margin-bottom: clamp(20px, 2.4vw, 32px); }
+.breadcrumb-list {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 10px;
+  list-style: none; margin: 0; padding: 0;
+  font-family: var(--sans); font-size: var(--t-meta);
+  color: var(--text-faint);
+}
+.breadcrumb-list li { display: flex; align-items: baseline; gap: 10px; }
+/* Trennzeichen aus dem CSS statt aus dem Markup - so bleibt der Vorlesetext
+   frei davon. */
+.breadcrumb-list li + li::before { content: "/"; color: var(--line-strong); }
+.breadcrumb-list a { color: var(--text-soft); text-decoration: none; }
+.breadcrumb-list a:hover { color: var(--signal-text); }
+.breadcrumb-list [aria-current] { color: var(--text); }
+
+
+
+.article-cat {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--sans); font-size: var(--t-meta); font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--signal-text);
+  margin-bottom: 14px;
+}
+.article-cat > svg { width: 14px; height: 14px; flex: none; }
+
+.article-title {
+  font-size: var(--t-display);
+  margin-bottom: clamp(14px, 1.6vw, 20px);
+}
+.article-excerpt {
+  font-family: var(--serif);
+  font-size: var(--t-lead);
+  line-height: 1.6;
+  color: var(--text-soft);
+  max-width: var(--measure);
+  margin-bottom: clamp(18px, 2vw, 26px);
+}
+
+.article-meta-row {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 0;
+  font-family: var(--sans); font-size: var(--t-meta);
+  color: var(--text-faint);
+}
+.article-meta-div { color: var(--line-strong); padding-inline: 10px; }
+
+/* Rumpf: Lesespalte und Randspalte */
+/* Lesespalte und Randspalte stehen zusammen mittig im Satzspiegel. Mit
+   `1fr` blieb zwischen beiden eine Luecke von rund 240 px stehen, weil die
+   Lesespalte ihre Messlinie nicht ueberschreitet. */
+.article-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(32px, 4vw, 56px);
+  padding-block: clamp(30px, 3.6vw, 54px) var(--band);
+  align-items: start;
+}
+@media (min-width: 1000px) {
+  .article-body {
+    grid-template-columns: minmax(0, 34rem) 17.5rem;
+    justify-content: center;
+    column-gap: clamp(40px, 4vw, 64px);
+  }
+}
+.article-content { min-width: 0; }
+
+/* Kopf und Rumpf fluchten auf derselben Breite. */
+.breadcrumbs, .article-hero-inner {
+  max-width: calc(34rem + 17.5rem + 64px);
+  margin-inline: auto;
+}
+
+.article-sidebar {
+  min-width: 0;
+  display: grid;
+  gap: clamp(18px, 2.2vw, 28px);
+  align-content: start;
+}
+@media (min-width: 1000px) {
+  /* Die Randspalte laeuft mit, damit Sprungmarken auf langen Seiten
+     erreichbar bleiben. Der Versatz haelt sie unter der stehenden Leiste. */
+  .article-sidebar { position: sticky; top: calc(var(--nav-h) + 20px); }
+}
+
+/* Fliesstext */
+.article-content > h2 {
+  font-size: var(--t-h2);
+  margin-top: 1.8em;
+  scroll-margin-top: calc(var(--nav-h) + 20px);
+}
+.article-content > h3 {
+  font-size: var(--t-h3);
+  margin-top: 1.5em;
+  scroll-margin-top: calc(var(--nav-h) + 20px);
+}
+.article-content > h2:first-child, .article-content > h3:first-child { margin-top: 0; }
 .article-body p, .article-body li, .legal-p { color: var(--text-soft); line-height: 1.68; }
-.article-meta-div { color: var(--text-faint); padding-inline: 8px; }
+.article-content > p { margin-bottom: 1.05em; }
+.article-content > ul, .article-content > ol { margin: 0 0 1.3em 1.15em; padding: 0; }
+.article-content > ul li, .article-content > ol li { margin-bottom: 0.5em; }
+.article-content > ul { list-style: none; margin-left: 0; }
+.article-content > ul > li { position: relative; padding-left: 22px; }
+.article-content > ul > li::before {
+  content: ""; position: absolute; left: 0; top: 0.72em;
+  width: 10px; height: var(--hair); background: var(--signal);
+}
+
+.legal-p, .legal-content { max-width: var(--measure); }
+
+/* Einleitung: die Kernaussage des Artikels in einem Satz. */
+.intro-box {
+  border-left: 2px solid var(--signal);
+  background: var(--surface-raised);
+  padding: clamp(16px, 1.8vw, 22px) clamp(16px, 1.8vw, 22px) clamp(16px, 1.8vw, 22px) clamp(18px, 2vw, 24px);
+  margin-bottom: clamp(24px, 2.8vw, 36px);
+}
+.intro-box p { margin: 0; }
+.intro-box p + p { margin-top: 0.85em; }
+.intro-box strong { color: var(--text); }
+
+/* Inhaltsverzeichnis im Fluss - auf breiten Schirmen uebernimmt das die
+   Randspalte, sonst staende dasselbe Verzeichnis zweimal auf der Seite. */
+.toc-box {
+  border: var(--hair) solid var(--line);
+  padding: clamp(16px, 1.8vw, 22px);
+  margin-bottom: clamp(24px, 2.8vw, 36px);
+}
+@media (min-width: 1000px) { .toc-box { display: none; } }
+@media (max-width: 999px) { .article-sidebar .toc-card { display: none; } }
+
+.toc-box-title, .toc-card-title {
+  font-family: var(--sans); font-weight: 600; font-size: var(--t-ui);
+  color: var(--text); margin-bottom: 12px;
+}
+.toc-box ol, .toc-card ol, .toc-links, .toc-list {
+  list-style: none; margin: 0; padding: 0;
+  counter-reset: toc;
+  display: grid; gap: 2px;
+}
+/* Nur das Verzeichnis im Fliesstext zaehlt selbst - in der Randspalte steht
+   die Nummer bereits im Verweistext. */
+.toc-box li { counter-increment: toc; }
+.toc-box a, .toc-card a, .toc-links a, .toc-list a {
+  display: flex; gap: 10px;
+  padding: 5px 0;
+  font-family: var(--sans); font-size: var(--t-meta);
+  color: var(--text-soft); text-decoration: none;
+  line-height: 1.45;
+  transition: color var(--dur-fast) var(--ease);
+}
+.toc-box li a::before {
+  content: counter(toc);
+  flex: none; min-width: 1.4em;
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+}
+.toc-box a:hover, .toc-card a:hover { color: var(--signal-text); }
+
+/* Randspalte: Karten mit Haarlinie oben, wie die Eintragszeilen der Seite. */
+.toc-card, .cluster-card, .author-card {
+  border-top: var(--hair) solid var(--line);
+  padding-top: 18px;
+}
+
+/* Themengruppe: zeigt, wo der Artikel in der Reihe steht. */
+.cluster-card-label {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--sans); font-size: var(--t-meta); font-weight: 600;
+  color: var(--signal-text); margin-bottom: 12px;
+}
+.cluster-card-label > svg { width: 14px; height: 14px; flex: none; }
+.cluster-card-pillar {
+  display: block;
+  border: var(--hair) solid var(--line);
+  padding: 12px; margin-bottom: 14px;
+  text-decoration: none;
+}
+a.cluster-card-pillar:hover { border-color: var(--signal); }
+.cluster-card-pillar-tag {
+  display: block;
+  font-family: var(--sans); font-size: 0.6875rem; font-weight: 600;
+  letter-spacing: 0.02em; color: var(--text-faint); margin-bottom: 4px;
+}
+.cluster-card-pillar-title {
+  display: block;
+  font-family: var(--sans); font-size: var(--t-ui); font-weight: 600;
+  color: var(--text); line-height: 1.3;
+}
+.cluster-card-list-title {
+  font-family: var(--sans); font-size: var(--t-meta); font-weight: 600;
+  color: var(--text); margin-bottom: 8px;
+}
+.cluster-card-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.cluster-card-list a {
+  display: block; padding: 5px 0;
+  font-family: var(--sans); font-size: var(--t-meta);
+  color: var(--text-soft); text-decoration: none; line-height: 1.45;
+}
+.cluster-card-list a:hover { color: var(--signal-text); }
+/* Der laufende Artikel ist kein Verweis, sondern die Marke der Position. */
+.cluster-card-item--current, .cluster-card-here {
+  color: var(--text); font-weight: 600;
+}
+.cluster-card-here {
+  font-family: var(--sans); font-size: 0.6875rem;
+  color: var(--signal-text); margin-left: 6px; font-weight: 600;
+}
+
+/* Autor */
+.author-card { display: grid; gap: 4px; }
+.author-card picture, .author-card img {
+  width: 48px; height: 48px; display: block;
+  object-fit: cover; margin-bottom: 8px;
+}
+.author-name { font-family: var(--sans); font-weight: 600; font-size: var(--t-ui); color: var(--text); }
+.author-role { font-family: var(--sans); font-size: var(--t-meta); color: var(--text-faint); }
+.author-bio {
+  font-family: var(--sans); font-size: var(--t-meta);
+  color: var(--text-soft); line-height: 1.55; margin: 6px 0 0;
+}
+
+/* Quellen */
+.sources-box {
+  border-top: var(--hair) solid var(--line);
+  padding-top: 18px;
+  margin-top: clamp(30px, 3.4vw, 48px);
+}
+.sources-box > strong, .sources-box-title {
+  display: block;
+  font-family: var(--sans); font-weight: 600; font-size: var(--t-ui);
+  color: var(--text); margin-bottom: 10px;
+}
+.sources-box a {
+  display: block; padding: 5px 0;
+  font-family: var(--sans); font-size: var(--t-meta);
+  color: var(--text-soft); line-height: 1.5;
+}
+
+/* Abschlusskarte im Artikel */
+.cta-card {
+  border: var(--hair) solid var(--line);
+  border-top: 2px solid var(--signal);
+  background: var(--surface-raised);
+  padding: clamp(20px, 2.2vw, 28px);
+  margin-top: clamp(30px, 3.4vw, 48px);
+}
+.cta-card > p:first-child {
+  font-family: var(--sans); font-weight: 600; font-size: var(--t-h3);
+  color: var(--text); margin-bottom: 8px; line-height: 1.25;
+}
+.cta-card > p { margin-bottom: 0; }
+.cta-card > p + p { color: var(--text-soft); margin-bottom: 0; }
+
+/* Codebeispiele: Kopfleiste mit Bezeichnung, darunter der Block. Die drei
+   Punkte im Markup sind eine Fensterandeutung - sie bleiben weg. */
+.code-wrap {
+  border: var(--hair) solid var(--line);
+  margin-bottom: clamp(20px, 2.4vw, 30px);
+  overflow: hidden;
+}
+.code-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 14px;
+  border-bottom: var(--hair) solid var(--line);
+  background: var(--surface-raised);
+  font-family: var(--sans); font-size: var(--t-meta); font-weight: 600;
+  color: var(--text-faint);
+}
+.code-header-dots { display: none; }
+.code-wrap pre {
+  margin: 0; padding: 16px;
+  background: var(--surface-raised);
+  border: 0;
+  font-size: 0.8125rem; line-height: 1.6;
+}
+/* Farbwerte der Syntaxauszeichnung, auf beiden Flaechen lesbar. */
+.c-key { color: var(--signal-text); }
+.c-str { color: var(--text); }
+.c-punct { color: var(--text-faint); }
+
+/* Vergleichstabellen */
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--sans); font-size: var(--t-ui);
+  margin-bottom: clamp(20px, 2.4vw, 30px);
+}
+.compare-table th, .compare-table td {
+  text-align: left; vertical-align: top;
+  padding: 11px 14px 11px 0;
+  border-bottom: var(--hair) solid var(--line);
+  line-height: 1.5;
+}
+.compare-table th {
+  font-weight: 600; color: var(--text);
+  border-bottom-color: var(--line-strong);
+}
+.compare-table td { color: var(--text-soft); }
+.compare-table tr:last-child td { border-bottom: 0; }
+
+/* Schrittfolgen */
+.step-content { min-width: 0; }
+.step-content h3 {
+  font-family: var(--sans); font-weight: 600; font-size: var(--t-h4);
+  color: var(--text); margin: 0 0 6px;
+}
+.step-content p { margin: 0; }
+
+/* Haeufige Fehler */
+.error-list { display: grid; gap: 0; margin-bottom: clamp(20px, 2.4vw, 30px); }
+.error-item {
+  border-top: var(--hair) solid var(--line);
+  padding: 16px 0;
+}
+.error-item:last-child { border-bottom: var(--hair) solid var(--line); }
+.error-title {
+  font-family: var(--sans); font-weight: 600; font-size: var(--t-ui);
+  color: var(--text); margin-bottom: 5px;
+}
+.error-text { margin: 0; }
+.error-badge, .platform-badge {
+  display: inline-block;
+  font-family: var(--sans); font-size: 0.6875rem; font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 3px 8px; margin-bottom: 8px;
+  border: var(--hair) solid var(--line-strong);
+  color: var(--text-faint);
+}
+/* Die Zuordnung zur Plattform ist Information, keine Verzierung. */
+.badge-google, .error-item-google { --badge-tone: var(--signal); }
+.badge-meta, .error-item-meta { --badge-tone: var(--line-strong); }
+.badge-both, .error-item-both { --badge-tone: var(--text-faint); }
+.error-badge, .platform-badge { border-color: var(--badge-tone, var(--line-strong)); }
+
+/* Fragenlisten im Artikel nutzen die Bausteine der uebrigen Seiten. */
+.faq-list { margin-bottom: clamp(20px, 2.4vw, 30px); }
+
+/* Budgetempfehlungen */
+.budget-card {
+  border-top: var(--hair) solid var(--line);
+  padding: 16px 0;
+}
+.budget-range {
+  font-family: var(--sans); font-weight: 600; font-size: var(--t-h4);
+  color: var(--text);
+}
+.budget-rec {
+  font-family: var(--sans); font-size: var(--t-meta); font-weight: 600;
+  color: var(--signal-text); margin-bottom: 8px;
+}
+.budget-card p { margin: 0; }
+
+/* Zwei gegenuebergestellte Ansaetze */
+.concept-split, .platform-split {
+  display: grid; gap: clamp(16px, 1.8vw, 24px);
+  grid-template-columns: minmax(0, 1fr);
+  margin-bottom: clamp(20px, 2.4vw, 30px);
+}
+@media (min-width: 720px) {
+  .concept-split, .platform-split { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.concept-card, .platform-card {
+  border: var(--hair) solid var(--line);
+  background: var(--surface-raised);
+  padding: clamp(16px, 1.8vw, 22px);
+  min-width: 0;
+}
+.concept-card-label {
+  font-family: var(--sans); font-size: var(--t-meta); font-weight: 600;
+  color: var(--text-faint); margin-bottom: 6px;
+}
+.concept-card-headline {
+  font-family: var(--sans); font-weight: 600; font-size: var(--t-h4);
+  color: var(--text); margin-bottom: 8px;
+}
+.concept-card p, .platform-card p { margin: 0; }
+.platform-card h3 {
+  font-family: var(--sans); font-weight: 600; font-size: var(--t-h4);
+  color: var(--text); margin: 0 0 10px;
+}
+.platform-card-header { margin-bottom: 4px; }
+
+.pro-con-list { display: grid; gap: 0; }
+.pro-item {
+  position: relative;
+  padding: 8px 0 8px 22px;
+  border-bottom: var(--hair) solid var(--line);
+  font-family: var(--sans); font-size: var(--t-ui);
+  color: var(--text-soft); line-height: 1.5;
+}
+.pro-item:last-child { border-bottom: 0; }
+.pro-item::before {
+  content: ""; position: absolute; left: 0; top: 1.05em;
+  width: 10px; height: var(--hair); background: var(--signal);
+}
+
+/* Kennzahlen-Raster mit vier Werten */
+/* In der Lesespalte sind vier Kennzahlen zu eng - "+11-15 %" brach mitten
+   im Wert um. Zwei Spalten, erst im breiten Fluss vier. */
+.stats-grid-4, .stats-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 560px) {
+  .stats-grid-4, .stats-grid-2 { grid-template-columns: minmax(0, 1fr); }
+}
+.stat-card-val.green { color: var(--ok, var(--signal-text)); }
+.stat-card-val.orange { color: var(--signal-text); }
+
+.footnote-hint {
+  font-family: var(--sans); font-size: var(--t-meta);
+  color: var(--text-faint); margin-top: 8px;
+}
+
+/* Im Plattformvergleich kennzeichnen .g und .m die Spalte (Google bzw. Meta).
+   Statt zweier Farben traegt die Google-Spalte eine Signallinie links - der
+   Vergleich bleibt so auch ohne Farbwahrnehmung lesbar. */
+.compare-table td.g { box-shadow: inset 2px 0 0 var(--signal); padding-left: 12px; }
+.compare-table td.m { padding-left: 12px; }
+
+/* Die Themenvarianten (--sst, --aeo, --pmax, --ai) bekommen bewusst keine
+   eigenen Farben: die Seite hat eine Signalfarbe, und vier Nebentoene haetten
+   nur den Eindruck erzeugt, es gaebe vier Produkte. Die Grundklassen tragen
+   die Gestaltung, die Varianten bleiben Haken fuer spaeter. */
+
+/* Die beiden Plattformkarten unterscheiden sich durch die Kante, nicht
+   durch die Flaeche. */
+.concept-card-google { border-left: 2px solid var(--signal); }
+.concept-card-meta { border-left: 2px solid var(--line-strong); }
 
 .legal-section { margin-bottom: var(--stack); scroll-margin-top: 24px; }
 .legal-h2 { font-family: var(--sans); font-size: var(--t-h3); display: flex; gap: 12px; align-items: baseline; margin-bottom: 0.55em; }

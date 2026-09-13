@@ -5476,7 +5476,7 @@
         },
         {
           "name": "description",
-          "content": "21, from Würzburg. Rode solo through Iceland by motorbike and spent two months in South America. Now I build clean tracking setups and lean websites."
+          "content": "22, from Würzburg. Rode solo through Iceland by motorbike and spent two months in South America. Now I build clean tracking setups and lean websites."
         },
         {
           "property": "og:type",
@@ -5492,7 +5492,7 @@
         },
         {
           "property": "og:description",
-          "content": "21, from Würzburg. Rode a motorcycle solo through Iceland, two months through South America - and now builds clean tracking setups and lean websites for small businesses as a freelancer."
+          "content": "22, from Würzburg. Rode a motorcycle solo through Iceland, two months through South America - and now builds clean tracking setups and lean websites for small businesses as a freelancer."
         },
         {
           "property": "og:image",
@@ -5528,7 +5528,7 @@
         },
         {
           "name": "twitter:description",
-          "content": "21, from Würzburg. Rode a motorcycle solo through Iceland, two months through South America - and now builds tracking setups and lean websites as a freelancer."
+          "content": "22, from Würzburg. Rode a motorcycle solo through Iceland, two months through South America - and now builds tracking setups and lean websites as a freelancer."
         },
         {
           "name": "twitter:image",
@@ -5896,7 +5896,7 @@
       ],
       "language": "en",
       "title": "About - Tobias Meixner | Freelancer from Würzburg",
-      "main_text_sha256": "566b837c113acf5266fc3dde53e1b5a655f2ce7a932c822bf1e8532a336f5b5d",
+      "main_text_sha256": "94aaa60cc6b8dd866485e8e6a7158bff83dadcfb3b19d0aeb611e52d93b7b3d2",
       "main_text_characters": 4156,
       "ids": [
         "about-hero-heading",
@@ -11544,6 +11544,10 @@
         "/en/projects/#own-product",
         "https://skillshop.credential.net/7c7f49fe-c3ff-481c-b22b-fb7470d94dd5",
         "https://skillshop.credential.net/61df521c-ab65-49c0-aa1b-6020be5c740c",
+        "https://gumb.app",
+        "https://www.stefaniemischka.com/",
+        "https://annette-hamburg.de",
+        "https://workshop.herzvollgold.de/medium",
         "/en/services/",
         "/en/services/",
         "/en/services/",
@@ -11671,7 +11675,7 @@
       ],
       "language": "en",
       "title": "Tracking Specialist Würzburg | GTM, GA4, Server-Side | Tobias Meixner",
-      "main_text_sha256": "6fb39d2a159588d4e6bc4211d0e36cda14d103d37aa8baed922e83327167faba",
+      "main_text_sha256": "70f0099e1da3e8f4730eb9cd59668aaa24c8936b74a202ea4537c7555a361099",
       "main_text_characters": 4775,
       "ids": [
         "about-heading",
@@ -14593,6 +14597,10 @@
         "/projekte/#own-product",
         "https://skillshop.credential.net/7c7f49fe-c3ff-481c-b22b-fb7470d94dd5",
         "https://skillshop.credential.net/61df521c-ab65-49c0-aa1b-6020be5c740c",
+        "https://gumb.app",
+        "https://www.stefaniemischka.com/",
+        "https://annette-hamburg.de",
+        "https://workshop.herzvollgold.de/medium",
         "/leistungen/",
         "/leistungen/",
         "/leistungen/",
@@ -16829,7 +16837,7 @@
         },
         {
           "name": "description",
-          "content": "21, aus Würzburg. War allein per Motorrad auf Island und zwei Monate durch Südamerika. Heute baue ich saubere Tracking-Setups und schlanke Websites."
+          "content": "22, aus Würzburg. War allein per Motorrad auf Island und zwei Monate durch Südamerika. Heute baue ich saubere Tracking-Setups und schlanke Websites."
         },
         {
           "property": "og:type",
@@ -16845,7 +16853,7 @@
         },
         {
           "property": "og:description",
-          "content": "21, aus Würzburg. War alleine mit dem Motorrad auf Island, zwei Monate durch Südamerika - und baue jetzt als Freelancer saubere Tracking-Setups und schlanke Websites für kleine Unternehmen."
+          "content": "22, aus Würzburg. War alleine mit dem Motorrad auf Island, zwei Monate durch Südamerika - und baue jetzt als Freelancer saubere Tracking-Setups und schlanke Websites für kleine Unternehmen."
         },
         {
           "property": "og:image",
@@ -16893,7 +16901,7 @@
         },
         {
           "name": "twitter:description",
-          "content": "21, aus Würzburg. War alleine mit dem Motorrad auf Island, zwei Monate durch Südamerika - und baue jetzt als Freelancer Tracking-Setups und schlanke Websites."
+          "content": "22, aus Würzburg. War alleine mit dem Motorrad auf Island, zwei Monate durch Südamerika - und baue jetzt als Freelancer Tracking-Setups und schlanke Websites."
         },
         {
           "name": "twitter:image",
@@ -17265,7 +17273,7 @@
       ],
       "language": "de",
       "title": "Über mich - Tobias Meixner | Freelancer aus Würzburg",
-      "main_text_sha256": "b44c4db09160a782e8989a44c42928c26b25ba980e297235e77d08ba9f75c57f",
+      "main_text_sha256": "378ef6831592ba9e611f10452ee30d264ad7a71101874b71e9a439085e3718e0",
       "main_text_characters": 4553,
       "ids": [
         "about-hero-heading",
@@ -17401,6 +17409,21 @@
         "Leistungen: zwei inhaltlich doppelte Detailkarten entfernt ('Laufende Pflege' aus dem Website-Block, 'Hosting & SSL' aus dem Betreuungs-Block) - beide Aussagen stehen weiterhin im jeweils anderen Block"
       ],
       "unveraendert": "Metadaten, Canonicals, Hreflang, JSON-LD, Links, Bilder, Formularfelder, data-*-Attribute sowie saemtliche ids und classes werden weiter gegen die urspruengliche Baseline geprueft; keine ist entfallen."
+    },
+    {
+      "date": "2026-09-13",
+      "reason": "Vom Auftraggeber beauftragte Ergaenzungen",
+      "pages": [
+        "index.html",
+        "en/index.html",
+        "ueber-mich/index.html",
+        "en/about/index.html"
+      ],
+      "changes": [
+        "Alter 21 -> 22 auch in den Meta-Beschreibungen von ueber-mich und en/about (im Fliesstext war es bereits geaendert)",
+        "Die vier Kundennamen unter dem Hero-Foto sind jetzt Verweise auf die Seiten der Kunden (gumb.app, stefaniemischka.com, annette-hamburg.de, workshop.herzvollgold.de). Die Zeilen trugen aria-hidden; das ist entfallen, weil fokussierbare Verweise sonst fuer Screenreader unerreichbar waeren."
+      ],
+      "unveraendert": "Kein Verweis, keine id und keine Klasse ist entfallen; Canonicals, Hreflang, JSON-LD, Bilder und Formularfelder stehen unveraendert gegen die urspruengliche Baseline."
     }
   ]
 }

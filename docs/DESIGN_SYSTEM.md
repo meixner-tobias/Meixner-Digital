@@ -131,7 +131,37 @@ JS (`mobileViewport` in `js/main.js`) teilen diese Grenze.
   unterstreicht der Browser die gesamte Karte. Das Sinnbild ist ein Zeichen in
   Zeilenhöhe, keine Bildfläche.
 
-## 6. Stehende Navigation
+## 6. Blogartikel
+
+Alle acht Artikel (je DE und EN) tragen denselben Aufbau: Kopf mit
+Brotkrumen, Kategorie, Titel, Auszug und Meta-Zeile, darunter ein
+zweispaltiger Rumpf aus Lesespalte (34rem) und Randspalte (17.5rem), beide
+über `justify-content: center` mittig im Satzspiegel. Der Kopf fluchtet auf
+dieselbe Gesamtbreite.
+
+Vorher hatte dieser Aufbau **keine einzige Regel**: `.article-body` war auf
+die Messlinie begrenzt, wodurch Lesespalte und Randspalte gemeinsam in 540 px
+am linken Rand standen und rechts die halbe Seite leer blieb. 79 Klassen im
+Artikelrumpf waren ohne Gestaltung.
+
+Zwei Dinge, die dabei doppelt auftraten und jetzt geregelt sind:
+
+- Das Inhaltsverzeichnis steht zweimal im Markup — als `.toc-box` im Fluss
+  und als `.toc-card` in der Randspalte. Ab 1000 px zeigt die Randspalte es,
+  darunter der Fluss; nie beide.
+- In der Randspalte steht die Nummer bereits im Verweistext, im Fluss nicht.
+  Der CSS-Zähler läuft deshalb nur im Fluss.
+
+Die Themenvarianten `--sst`, `--aeo`, `--pmax`, `--ai` bekommen bewusst keine
+eigenen Farben: die Seite hat eine Signalfarbe, vier Nebentöne hätten den
+Eindruck von vier Produkten erzeugt.
+
+Die Fließtext-Linkregel greift nur in `.article-content > p/ul/ol` und
+wenigen benannten Kästen. Zuvor erfasste sie den ganzen Artikelrumpf und
+überschrieb damit auch die Textfarbe der Knöpfe — auf der Signalfläche
+gemessene 1,92:1.
+
+## 7. Stehende Navigation
 
 Die Leiste ist `position: sticky; top: 0`. Damit Sprungziele nicht darunter
 verschwinden, trägt `html` ein `scroll-padding-top: calc(var(--nav-h) + 12px)`.
@@ -143,7 +173,7 @@ Liste zu), und das `<noscript>` im Kopf dreht es für Browser ohne JavaScript
 zurück. Ohne diese Umkehr verschwand die Sprachauswahl bei jedem Seitenwechsel
 sichtbar und tauchte danach wieder auf.
 
-## 7. Erhaltene Verträge
+## 8. Erhaltene Verträge
 
 `[hidden] { display: none !important; }`, `.sr-only`, `pre`/`.table-wrap` mit
 `overflow-x: auto`, der Viewport-Schutz des Cookie-Banners und die sichtbare
