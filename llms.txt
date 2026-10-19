@@ -34,6 +34,8 @@ transparent AI-assisted development). Live in early access since July 2026.
 App Store: apps.apple.com/de/app/bikecare-fahrrad-wartung/id6791298156.
 Google Play: play.google.com/store/apps/details?id=app.bikecare.
 
+Internship: Main Erfolg (six-month mandatory internship since 09/2026 as part of the E-Commerce degree, agency in Würzburg, main-erfolg.de): complete GTM tracking for several large agency clients, always server-side with Stape and a server container, for WordPress and Shopify; built WordPress websites; designed and developed custom WordPress plugins; improved GEO with structured data (Schema.org); created Google Ads campaigns; set up OpenAI Ads (ads in ChatGPT) end-to-end and created campaigns.
+
 Clients/Projects: Gumb AG (complete GTM/GA4 tracking ecosystem with server-side
 considerations, Meta Pixel, Google Ads conversions, Enhanced Conversions,
 Consent Mode v2), Stefanie Mischka (complete website rebuild as a sales
@@ -159,6 +161,11 @@ can take over the implementation cleanly.
   with Claude Code (2026 solo-founder playbook). App Store:
   https://apps.apple.com/de/app/bikecare-fahrrad-wartung/id6791298156 .
   Google Play: https://play.google.com/store/apps/details?id=app.bikecare .
+- [Main Erfolg Internship](/en/projects/#main-erfolg): Six-month mandatory
+  internship since 09/2026 at the Würzburg agency Main Erfolg - server-side
+  GTM tracking with Stape and server container for several large WordPress and
+  Shopify clients, WordPress websites and custom plugins, GEO with structured
+  data, Google Ads campaigns, OpenAI Ads setup and campaigns.
 - [Gumb AG Tracking](/en/projects/): Built a complete GTM/GA4 tracking
   ecosystem for the DACH market - GTM container, GA4 with server-side
   considerations, Meta Pixel, Google Ads conversions, Enhanced Conversions,

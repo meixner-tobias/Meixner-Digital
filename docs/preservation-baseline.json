@@ -5729,6 +5729,22 @@
                 },
                 {
                   "@type": "Thing",
+                  "name": "Google Ads"
+                },
+                {
+                  "@type": "Thing",
+                  "name": "OpenAI Ads (ChatGPT)"
+                },
+                {
+                  "@type": "Thing",
+                  "name": "Shopify Tracking"
+                },
+                {
+                  "@type": "Thing",
+                  "name": "WordPress Plugin Development"
+                },
+                {
+                  "@type": "Thing",
                   "name": "Web Analytics",
                   "sameAs": "https://en.wikipedia.org/wiki/Web_analytics"
                 },
@@ -5923,8 +5939,8 @@
       ],
       "language": "en",
       "title": "About - Tobias Meixner | Freelancer from Würzburg",
-      "main_text_sha256": "58e127189b3ee6247d276c64a0b4408bdced65abeb4de667d0e62e54ce8032cf",
-      "main_text_characters": 4083,
+      "main_text_sha256": "1e9670f8fb34088ff27babc806bfc04a235b853de04fab4dcd8a44c47dd9ce7d",
+      "main_text_characters": 4260,
       "ids": [
         "about-hero-heading",
         "burger",
@@ -11483,6 +11499,10 @@
                 "Cross-Domain Tracking",
                 "Schema.org JSON-LD",
                 "Generative Engine Optimization",
+                "Google Ads",
+                "OpenAI Ads (ChatGPT)",
+                "Shopify Tracking",
+                "WordPress Plugin Development",
                 "Website Implementation (template-based)",
                 "Performance Optimization (Core Web Vitals)"
               ],
@@ -11594,15 +11614,16 @@
         "/en/projects/#own-product",
         "https://skillshop.credential.net/7c7f49fe-c3ff-481c-b22b-fb7470d94dd5",
         "https://skillshop.credential.net/61df521c-ab65-49c0-aa1b-6020be5c740c",
-        "https://gumb.app",
-        "https://www.stefaniemischka.com/",
+        "https://main-erfolg.de/",
+        "https://bikecare.app",
         "https://annette-hamburg.de",
-        "https://workshop.herzvollgold.de/medium",
+        "https://gumb.app",
         "/en/services/",
         "/en/services/",
         "/en/services/",
         "/en/about/",
         "/en/services/",
+        "/en/projects/#main-erfolg",
         "/en/projects/",
         "https://annette-hamburg.de",
         "/en/projects/#own-product",
@@ -11649,6 +11670,14 @@
           "alt": "Tobias Meixner - Freelancer from Würzburg",
           "width": "340",
           "height": "453",
+          "loading": "lazy"
+        },
+        {
+          "src": "/assets/img/clients/main-erfolg.webp",
+          "alt": "Main Erfolg",
+          "class": "proj-logo",
+          "width": "51",
+          "height": "26",
           "loading": "lazy"
         },
         {
@@ -11722,12 +11751,15 @@
         },
         {
           "data-d": "3"
+        },
+        {
+          "data-d": "4"
         }
       ],
       "language": "en",
       "title": "Tracking Specialist Würzburg | GTM, GA4, Server-Side | Tobias Meixner",
-      "main_text_sha256": "70f0099e1da3e8f4730eb9cd59668aaa24c8936b74a202ea4537c7555a361099",
-      "main_text_characters": 4775,
+      "main_text_sha256": "523b198006572d8f199e90cf6c4bd4bc2308727748e0f40d15835c412bd426d9",
+      "main_text_characters": 5444,
       "ids": [
         "about-heading",
         "burger",
@@ -11754,6 +11786,10 @@
         "ac",
         "active",
         "bdot",
+        "brand-annette",
+        "brand-bikecare",
+        "brand-gumb",
+        "brand-mainerfolg",
         "btn",
         "btn-ghost",
         "btn-outline",
@@ -12502,7 +12538,7 @@
         },
         {
           "property": "og:description",
-          "content": "Real projects: tracking ecosystem for Gumb AG, full website rebuild with shop for Stefanie Mischka. Freelancer from Würzburg with hands-on experience."
+          "content": "Real projects: server-side tracking during my internship at Main Erfolg, tracking ecosystem for Gumb AG, full website rebuild with shop for Stefanie Mischka. Freelancer from Würzburg with hands-on experience."
         },
         {
           "property": "og:image",
@@ -12518,7 +12554,7 @@
         },
         {
           "property": "og:image:alt",
-          "content": "Projects — Gumb AG, ANNETTE § HAMBURG, BikeCare"
+          "content": "Projects — Main Erfolg, Gumb AG, ANNETTE § HAMBURG, BikeCare"
         },
         {
           "property": "og:locale",
@@ -12538,7 +12574,7 @@
         },
         {
           "name": "twitter:description",
-          "content": "Real projects: tracking ecosystem for Gumb AG, website rebuild with shop for Stefanie Mischka. Freelancer from Würzburg."
+          "content": "Real projects: server-side tracking at Main Erfolg, tracking ecosystem for Gumb AG, website rebuild with shop for Stefanie Mischka. Freelancer from Würzburg."
         },
         {
           "name": "twitter:image",
@@ -12733,6 +12769,8 @@
         "https://bikecare.app",
         "https://apps.apple.com/us/app/bikecare-fahrrad-wartung/id6791298156",
         "https://play.google.com/store/apps/details?id=app.bikecare",
+        "https://main-erfolg.de/",
+        "/en/contact/",
         "https://gumb.app",
         "/en/contact/",
         "https://annette-hamburg.de",
@@ -12783,6 +12821,22 @@
           "height": "600",
           "loading": "eager",
           "decoding": "async"
+        },
+        {
+          "src": "/assets/img/clients/main-erfolg.webp",
+          "alt": "Main Erfolg - consulting & implementation in Mainfranken",
+          "class": "case-summary-logo",
+          "width": "80",
+          "height": "40",
+          "loading": "lazy"
+        },
+        {
+          "src": "/assets/img/clients/main-erfolg.webp",
+          "alt": "Main Erfolg - consulting & implementation in Mainfranken",
+          "class": "case-logo",
+          "width": "51",
+          "height": "26",
+          "loading": "lazy"
         },
         {
           "src": "/assets/img/clients/gumb.webp",
@@ -12892,8 +12946,8 @@
       ],
       "language": "en",
       "title": "Projects - GTM, GA4 & Website Experience | Tobias Meixner",
-      "main_text_sha256": "0c8fb91d8acfc3bad0cb4cd4f0781e75f8abcf84d36c6b45c92fd0620ef887be",
-      "main_text_characters": 10505,
+      "main_text_sha256": "1af953ed8dbc22a7a76c245aa3914bc0b3749c1dedcaca9d7908ec6ff8dc720d",
+      "main_text_characters": 12059,
       "ids": [
         "burger",
         "cases-heading",
@@ -12906,6 +12960,7 @@
         "langBtn",
         "langDropdown",
         "main-content",
+        "main-erfolg",
         "nav",
         "own-heading",
         "own-product",
@@ -12915,6 +12970,11 @@
       ],
       "classes": [
         "active",
+        "badge-intern",
+        "brand-annette",
+        "brand-bikecare",
+        "brand-gumb",
+        "brand-mainerfolg",
         "btn",
         "btn-ghost",
         "btn-outline",
@@ -13584,8 +13644,8 @@
       ],
       "language": "en",
       "title": "Tracking Freelancer Germany: GTM, GA4 & Server-Side from €390 | Tobias Meixner",
-      "main_text_sha256": "2f6b335dd99d7448a063aa198180723b03a94ebdbc1c5ef460a83c35701592c9",
-      "main_text_characters": 12999,
+      "main_text_sha256": "6710da9d8f5f428ef8122fd32476eafd54b4b8564737bbce0daeb354e1e96c1c",
+      "main_text_characters": 13106,
       "ids": [
         "burger",
         "drawer",
@@ -14561,6 +14621,10 @@
                 "Cross-Domain Tracking",
                 "Schema.org JSON-LD",
                 "Generative Engine Optimization",
+                "Google Ads",
+                "OpenAI Ads (ChatGPT)",
+                "Shopify-Tracking",
+                "WordPress-Plugin-Entwicklung",
                 "Website-Umsetzung (Template-basiert)",
                 "Performance-Optimierung (Core Web Vitals)"
               ],
@@ -14672,15 +14736,16 @@
         "/projekte/#own-product",
         "https://skillshop.credential.net/7c7f49fe-c3ff-481c-b22b-fb7470d94dd5",
         "https://skillshop.credential.net/61df521c-ab65-49c0-aa1b-6020be5c740c",
-        "https://gumb.app",
-        "https://www.stefaniemischka.com/",
+        "https://main-erfolg.de/",
+        "https://bikecare.app",
         "https://annette-hamburg.de",
-        "https://workshop.herzvollgold.de/medium",
+        "https://gumb.app",
         "/leistungen/",
         "/leistungen/",
         "/leistungen/",
         "/ueber-mich/",
         "/leistungen/",
+        "/projekte/#main-erfolg",
         "/projekte/",
         "https://annette-hamburg.de",
         "/projekte/#own-product",
@@ -14727,6 +14792,14 @@
           "alt": "Tobias Meixner - Freelancer aus Würzburg",
           "width": "340",
           "height": "453",
+          "loading": "lazy"
+        },
+        {
+          "src": "/assets/img/clients/main-erfolg.webp",
+          "alt": "Main Erfolg",
+          "class": "proj-logo",
+          "width": "51",
+          "height": "26",
           "loading": "lazy"
         },
         {
@@ -14800,12 +14873,15 @@
         },
         {
           "data-d": "3"
+        },
+        {
+          "data-d": "4"
         }
       ],
       "language": "de",
       "title": "Websites & Tracking Freelancer Würzburg | GTM - GA4 - Ads | Tobias Meixner",
-      "main_text_sha256": "c1fd16384a882a885336ca2f2b893a22e208864634828d70b4546d716b9f8493",
-      "main_text_characters": 4900,
+      "main_text_sha256": "fb6617ac140449f55e484e54902f8e6db58a7f5debb140a933764923273125a3",
+      "main_text_characters": 5567,
       "ids": [
         "about-heading",
         "burger",
@@ -14832,6 +14908,10 @@
         "ac",
         "active",
         "bdot",
+        "brand-annette",
+        "brand-bikecare",
+        "brand-gumb",
+        "brand-mainerfolg",
         "btn",
         "btn-ghost",
         "btn-outline",
@@ -16014,8 +16094,8 @@
       ],
       "language": "de",
       "title": "Tracking-Freelancer Würzburg: GTM, GA4 & Server-Side ab 390 € | Tobias Meixner",
-      "main_text_sha256": "15e37c7ac9236dee62e35b07227dbcd91d524e6b53bdafdb7de0385573c87922",
-      "main_text_characters": 13675,
+      "main_text_sha256": "937e6d30ae13a2ebd6ee106a0353032d91e1b9506eb617bdbca49e937491f956",
+      "main_text_characters": 13786,
       "ids": [
         "burger",
         "drawer",
@@ -16237,7 +16317,7 @@
         },
         {
           "property": "og:description",
-          "content": "Echte Projekte: Tracking-Ecosystem für die Gumb AG, Website-Neubau mit Shop für Stefanie Mischka. Freelancer aus Würzburg mit echter Praxiserfahrung."
+          "content": "Echte Projekte: Server-Side Tracking im Praktikum bei Main Erfolg, Tracking-Ecosystem für die Gumb AG, Website-Neubau mit Shop für Stefanie Mischka. Freelancer aus Würzburg mit echter Praxiserfahrung."
         },
         {
           "property": "og:image",
@@ -16253,7 +16333,7 @@
         },
         {
           "property": "og:image:alt",
-          "content": "Projekte — Gumb AG, ANNETTE § HAMBURG, BikeCare"
+          "content": "Projekte — Main Erfolg, Gumb AG, ANNETTE § HAMBURG, BikeCare"
         },
         {
           "property": "og:locale",
@@ -16277,7 +16357,7 @@
         },
         {
           "name": "twitter:description",
-          "content": "Echte Projekte: Tracking-Ecosystem für Gumb AG, Website-Neubau mit Shop für Stefanie Mischka. Freelancer aus Würzburg."
+          "content": "Echte Projekte: Server-Side Tracking bei Main Erfolg, Tracking-Ecosystem für Gumb AG, Website-Neubau mit Shop für Stefanie Mischka. Freelancer aus Würzburg."
         },
         {
           "name": "twitter:image",
@@ -16427,11 +16507,24 @@
               "@type": "ItemList",
               "@id": "https://meixner-tobias.com/projekte/#projects",
               "name": "Projekte & Praxiserfahrung",
-              "description": "Übersicht der Freelance-Projekte von Tobias Meixner - eigenes SaaS-Produkt (BikeCare.app), Tracking-Setup, Website-Betreuung und Kampagnen-Management.",
+              "description": "Übersicht der Freelance-Projekte von Tobias Meixner - eigenes SaaS-Produkt (BikeCare.app), Pflichtpraktikum bei Main Erfolg, Tracking-Setup, Website-Betreuung und Kampagnen-Management.",
               "itemListElement": [
                 {
                   "@type": "ListItem",
                   "position": 1,
+                  "item": {
+                    "@type": "CreativeWork",
+                    "name": "Pflichtpraktikum Main Erfolg - Server-Side Tracking, WordPress & Ads",
+                    "description": "Sechsmonatiges Pflichtpraktikum (ab 09/2026) im E-Commerce-Studium bei der Agentur Main Erfolg in Würzburg: komplettes Tracking für mehrere große Kunden mit Google Tag Manager, Stape und Server-Container für WordPress und Shopify, Erstellung von WordPress-Websites, Konzeption und Entwicklung eigener WordPress-Plugins, GEO mit strukturierten Daten (Schema.org), Google-Ads-Kampagnen sowie Einrichtung von OpenAI Ads inklusive Kampagnen.",
+                    "url": "https://main-erfolg.de/",
+                    "author": {
+                      "@id": "https://meixner-tobias.com/#person"
+                    }
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
                   "item": {
                     "@type": "CreativeWork",
                     "name": "Tracking-Setup Gumb AG",
@@ -16444,7 +16537,7 @@
                 },
                 {
                   "@type": "ListItem",
-                  "position": 2,
+                  "position": 3,
                   "item": {
                     "@type": "CreativeWork",
                     "name": "Website ANNETTE § HAMBURG",
@@ -16457,7 +16550,7 @@
                 },
                 {
                   "@type": "ListItem",
-                  "position": 3,
+                  "position": 4,
                   "item": {
                     "@type": "CreativeWork",
                     "name": "HERZVOLLGOLD - Landing Page & Meta Ads",
@@ -16470,7 +16563,7 @@
                 },
                 {
                   "@type": "ListItem",
-                  "position": 4,
+                  "position": 5,
                   "item": {
                     "@type": "CreativeWork",
                     "name": "Website-Neubau mit Shop & E-Mail-System - Stefanie Mischka",
@@ -16483,7 +16576,7 @@
                 },
                 {
                   "@type": "ListItem",
-                  "position": 5,
+                  "position": 6,
                   "item": {
                     "@type": "CreativeWork",
                     "name": "Persönliche Website meixner-tobias.com",
@@ -16549,6 +16642,8 @@
         "https://bikecare.app",
         "https://apps.apple.com/de/app/bikecare-fahrrad-wartung/id6791298156",
         "https://play.google.com/store/apps/details?id=app.bikecare&hl=de",
+        "https://main-erfolg.de/",
+        "/kontakt/",
         "https://gumb.app",
         "/kontakt/",
         "https://annette-hamburg.de",
@@ -16599,6 +16694,22 @@
           "height": "600",
           "loading": "eager",
           "decoding": "async"
+        },
+        {
+          "src": "/assets/img/clients/main-erfolg.webp",
+          "alt": "Main Erfolg - Beratung & Umsetzung in Mainfranken",
+          "class": "case-summary-logo",
+          "width": "80",
+          "height": "40",
+          "loading": "lazy"
+        },
+        {
+          "src": "/assets/img/clients/main-erfolg.webp",
+          "alt": "Main Erfolg - Beratung & Umsetzung in Mainfranken",
+          "class": "case-logo",
+          "width": "51",
+          "height": "26",
+          "loading": "lazy"
         },
         {
           "src": "/assets/img/clients/gumb.webp",
@@ -16708,8 +16819,8 @@
       ],
       "language": "de",
       "title": "Projekte - GTM, GA4 & Website Praxiserfahrung | Tobias Meixner",
-      "main_text_sha256": "98ac58111b90aead7df8a4dec5988f230985fef375eacb78cddb67c22299265b",
-      "main_text_characters": 10863,
+      "main_text_sha256": "ded11ea5aab21adf8e302ab486c3bf95a121f049f1a764f791902dfe90178c67",
+      "main_text_characters": 12446,
       "ids": [
         "burger",
         "cases-heading",
@@ -16722,6 +16833,7 @@
         "langBtn",
         "langDropdown",
         "main-content",
+        "main-erfolg",
         "nav",
         "own-heading",
         "own-product",
@@ -16731,6 +16843,11 @@
       ],
       "classes": [
         "active",
+        "badge-intern",
+        "brand-annette",
+        "brand-bikecare",
+        "brand-gumb",
+        "brand-mainerfolg",
         "btn",
         "btn-ghost",
         "btn-outline",
@@ -17170,6 +17287,22 @@
                 },
                 {
                   "@type": "Thing",
+                  "name": "Google Ads"
+                },
+                {
+                  "@type": "Thing",
+                  "name": "OpenAI Ads (ChatGPT)"
+                },
+                {
+                  "@type": "Thing",
+                  "name": "Shopify-Tracking"
+                },
+                {
+                  "@type": "Thing",
+                  "name": "WordPress-Plugin-Entwicklung"
+                },
+                {
+                  "@type": "Thing",
                   "name": "Web Analytics",
                   "sameAs": "https://de.wikipedia.org/wiki/Web_Analytics"
                 },
@@ -17364,8 +17497,8 @@
       ],
       "language": "de",
       "title": "Über mich - Tobias Meixner | Freelancer aus Würzburg",
-      "main_text_sha256": "b342c0de417bc6bdee0777d6d8a3f62e76e2b291cdd48bef22f9781935567fba",
-      "main_text_characters": 4481,
+      "main_text_sha256": "dbbc2519889a99b97f21a5bb03c972c04fd9b375dd27d4c48fdbaf90a38cc59b",
+      "main_text_characters": 4660,
       "ids": [
         "about-hero-heading",
         "burger",
@@ -17589,6 +17722,27 @@
         "Die Quellen sind 1080 px breit, angezeigt werden 252 und 294 px. Neue Varianten 320w/640w mit sizes: zusammen 81 statt 177 KB."
       ],
       "unveraendert": "Nur source- und img-Attribute; Text, Verweise, ids und Klassen stehen unveraendert."
+    },
+    {
+      "date": "2026-10-19",
+      "reason": "Vom Auftraggeber beauftragte Ergaenzung: Pflichtpraktikum bei Main Erfolg (ab 01.09.2026, 6 Monate)",
+      "pages": [
+        "index.html",
+        "en/index.html",
+        "projekte/index.html",
+        "en/projects/index.html",
+        "ueber-mich/index.html",
+        "en/about/index.html",
+        "leistungen/index.html",
+        "en/services/index.html"
+      ],
+      "changes": [
+        "Hero-Legende unter dem Foto zeigt jetzt Main Erfolg, BikeCare, ANNETTE § HAMBURG und Gumb AG (statt Gumb, Stefanie Mischka, ANNETTE, HERZVOLLGOLD) mit Markenfarben-Punkt; Verweise auf stefaniemischka.com und workshop.herzvollgold.de entfallen dort, neu main-erfolg.de und bikecare.app",
+        "Startseite: neue Projektkarte Main Erfolg (Pflichtpraktikum) vor Gumb, Absatz im About-Strip, Satz in 'Echte Praxiserfahrung', knowsAbout um Google Ads, OpenAI Ads, Shopify-Tracking, WordPress-Plugin-Entwicklung ergaenzt",
+        "Projekte: neue Fallkarte #main-erfolg vor Gumb, Zeitstrahl-Eintrag 09/2026, ItemList-Eintrag Position 1 (Rest +1), og/twitter-Beschreibungen und Abschnittstext 'Fuenf Stationen'",
+        "Ueber mich / Leistungen: je ein Satz zum Praktikum, knowsAbout ergaenzt"
+      ],
+      "unveraendert": "Alle bisherigen ids und classes bleiben vorhanden; neue Klassen brand-*, badge-intern sowie id main-erfolg kommen hinzu."
     }
   ]
 }

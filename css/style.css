@@ -1012,6 +1012,29 @@ html:not([data-ui-ready]) .lang-switch { min-width: 66px; min-height: 34px; }
   .fc > div:not(.fi) { grid-template-columns: minmax(0, 1fr); }
 }
 
+/* Markenfarben der Kunden - nur als Akzent (Punkt, Linie), nie als
+   Flaeche. Alle Werte erreichen auf Ink mindestens 6:1. ANNETTE nutzt eine
+   aufgehellte Fassung ihres Petrols #00454f, das auf Ink nur 1,75:1 haette. */
+.brand-mainerfolg { --brand: #f1887d; }
+.brand-bikecare   { --brand: #f97316; }
+.brand-annette    { --brand: #4aa3ad; }
+.brand-gumb       { --brand: #1debe5; }
+
+/* Der Farbpunkt braucht 16 px - die Namensspalte waechst entsprechend mit,
+   sonst bricht "ANNETTE § HAMBURG" um. */
+.fc[class*="brand-"] > div:not(.fi) { grid-template-columns: 148px minmax(0, 1fr); }
+@media (max-width: 420px) {
+  .fc[class*="brand-"] > div:not(.fi) { grid-template-columns: minmax(0, 1fr); }
+}
+.fc[class*="brand-"] .fc-lbl { white-space: nowrap; }
+.fc[class*="brand-"] .fc-lbl::before {
+  content: ""; display: inline-block;
+  width: 7px; height: 7px; margin-right: 9px;
+  background: var(--brand); vertical-align: 0.08em;
+}
+.fc[class*="brand-"] .fc-lbl a:hover,
+.fc[class*="brand-"] .fc-lbl a:focus-visible { color: var(--brand); border-bottom-color: var(--brand); }
+
 @media (min-width: 900px) {
   /* Das Foto liegt in 1231 x 1200 vor und wurde auf 550 x 708 aufgeblasen -
      auf einem 2x-Bildschirm braeuchte das 1452 px Quellbreite und wirkte
@@ -1140,8 +1163,9 @@ html:not([data-ui-ready]) .lang-switch { min-width: 66px; min-height: 34px; }
 }
 
 @media (min-width: 1000px) {
-  /* Das eigene Produkt ist der staerkste Beleg und bekommt die volle Breite. */
-  .proj-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* Das eigene Produkt ist der staerkste Beleg und bekommt die volle Breite.
+     Darueber stehen die drei Kundenstationen in einer Reihe. */
+  .proj-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .proj-card-founder {
     grid-column: 1 / -1;
     display: grid;
@@ -1166,6 +1190,9 @@ html:not([data-ui-ready]) .lang-switch { min-width: 66px; min-height: 34px; }
   position: relative;
 }
 .proj-card-founder { border-top-color: var(--signal); }
+.proj-card[class*="brand-"] { border-top-color: var(--brand); }
+.proj-card[class*="brand-"] .proj-card-badge { color: var(--brand); }
+.proj-card[class*="brand-"] .proj-list li::before { background: var(--brand); }
 
 .proj-card-badge {
   font-family: var(--sans); font-size: var(--t-meta); font-weight: 600;
@@ -1947,6 +1974,16 @@ blockquote {
   display: grid; place-items: center;
 }
 .tl-dot-inner { display: none; }
+.tl-item[class*="brand-"] .tl-dot { background: var(--brand); }
+/* Kennzeichnung "Praktikum" in Summary, Zeitstrahl und Karten. */
+.badge-intern {
+  display: inline-block; margin-left: 8px; padding: 1px 8px;
+  border: var(--hair) solid var(--brand, var(--line-strong)); border-radius: var(--r-pill);
+  font-family: var(--sans); font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.04em;
+  color: var(--brand, var(--text-soft)); vertical-align: 0.2em; white-space: nowrap;
+}
+.case-card[class*="brand-"][open] { border-top-color: var(--brand); }
+.case-card[class*="brand-"] .task-dot { background: var(--brand); }
 .tl-date { font-family: var(--sans); font-size: var(--t-meta); color: var(--signal-text); font-weight: 600; margin-bottom: 4px; }
 .tl-body { min-width: 0; }
 
