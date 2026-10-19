@@ -1174,7 +1174,7 @@ html:not([data-ui-ready]) .lang-switch { min-width: 66px; min-height: 34px; }
     align-items: start;
   }
   .proj-card-founder > .proj-card-badge { grid-column: 1; grid-row: 1; }
-  .proj-card-founder > .proj-logo { grid-column: 1; grid-row: 2; }
+  .proj-card-founder > .proj-logo, .proj-card-founder > picture { grid-column: 1; grid-row: 2; }
   .proj-card-founder > .proj-h { grid-column: 2; grid-row: 1 / span 2; max-width: 20ch; }
   .proj-card-founder > .proj-p { grid-column: 2; grid-row: 3; }
   .proj-card-founder > .proj-list { grid-column: 2; grid-row: 4; }
@@ -1983,6 +1983,19 @@ blockquote {
   color: var(--brand, var(--text-soft)); vertical-align: 0.2em; white-space: nowrap;
 }
 .case-card[class*="brand-"][open] { border-top-color: var(--brand); }
+
+/* Die beiden Knoepfe einer Fallkarte stehen immer in einer Reihe - auf dem
+   Telefon teilen sie sich die Breite und duerfen notfalls zweizeilig werden,
+   statt untereinander zu rutschen. */
+.case-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+@media (max-width: 599px) {
+  .case-actions { flex-wrap: nowrap; }
+  .case-actions > .btn {
+    flex: 1 1 0; min-width: 0;
+    padding: 12px 10px;
+    font-size: var(--t-meta);
+  }
+}
 .case-card[class*="brand-"] .task-dot { background: var(--brand); }
 .tl-date { font-family: var(--sans); font-size: var(--t-meta); color: var(--signal-text); font-weight: 600; margin-bottom: 4px; }
 .tl-body { min-width: 0; }

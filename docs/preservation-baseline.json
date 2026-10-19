@@ -11697,7 +11697,7 @@
           "loading": "lazy"
         },
         {
-          "src": "/assets/img/clients/bikecare.png",
+          "src": "/assets/bikecare/logo-light.png",
           "alt": "BikeCare",
           "class": "proj-logo",
           "width": "80",
@@ -11714,6 +11714,10 @@
         {
           "srcset": "/assets/img/about/Profilbild2.webp",
           "type": "image/webp"
+        },
+        {
+          "type": "image/webp",
+          "srcset": "/assets/bikecare/logo-light.webp"
         }
       ],
       "forms": [],
@@ -11758,8 +11762,8 @@
       ],
       "language": "en",
       "title": "Tracking Specialist Würzburg | GTM, GA4, Server-Side | Tobias Meixner",
-      "main_text_sha256": "523b198006572d8f199e90cf6c4bd4bc2308727748e0f40d15835c412bd426d9",
-      "main_text_characters": 5444,
+      "main_text_sha256": "938d9d4bb41f828d9c539236d2542346cb852e19edbd04f4823c84fa4a078f5d",
+      "main_text_characters": 5576,
       "ids": [
         "about-heading",
         "burger",
@@ -12794,7 +12798,7 @@
       ],
       "images": [
         {
-          "src": "/assets/bikecare/logo-light.png",
+          "src": "/assets/bikecare/logo-dark.png",
           "alt": "BikeCare - Bike Maintenance",
           "class": "own-product-logo",
           "width": "180",
@@ -12906,7 +12910,7 @@
       "sources": [
         {
           "type": "image/webp",
-          "srcset": "/assets/bikecare/logo-light.webp"
+          "srcset": "/assets/bikecare/logo-dark.webp"
         },
         {
           "type": "image/webp",
@@ -12946,8 +12950,8 @@
       ],
       "language": "en",
       "title": "Projects - GTM, GA4 & Website Experience | Tobias Meixner",
-      "main_text_sha256": "1af953ed8dbc22a7a76c245aa3914bc0b3749c1dedcaca9d7908ec6ff8dc720d",
-      "main_text_characters": 12059,
+      "main_text_sha256": "31ce62bba09a6f2bad07704934f5895eabc673a58ac17ae39dcf84cd682678f1",
+      "main_text_characters": 12218,
       "ids": [
         "burger",
         "cases-heading",
@@ -14819,7 +14823,7 @@
           "loading": "lazy"
         },
         {
-          "src": "/assets/img/clients/bikecare.png",
+          "src": "/assets/bikecare/logo-light.png",
           "alt": "BikeCare",
           "class": "proj-logo",
           "width": "80",
@@ -14836,6 +14840,10 @@
         {
           "srcset": "/assets/img/about/Profilbild2.webp",
           "type": "image/webp"
+        },
+        {
+          "type": "image/webp",
+          "srcset": "/assets/bikecare/logo-light.webp"
         }
       ],
       "forms": [],
@@ -14880,8 +14888,8 @@
       ],
       "language": "de",
       "title": "Websites & Tracking Freelancer Würzburg | GTM - GA4 - Ads | Tobias Meixner",
-      "main_text_sha256": "fb6617ac140449f55e484e54902f8e6db58a7f5debb140a933764923273125a3",
-      "main_text_characters": 5567,
+      "main_text_sha256": "ca59951b22f27748eead6a1977ded275efca52d536e292e46a95567b47a9021d",
+      "main_text_characters": 5693,
       "ids": [
         "about-heading",
         "burger",
@@ -16515,7 +16523,7 @@
                   "item": {
                     "@type": "CreativeWork",
                     "name": "Pflichtpraktikum Main Erfolg - Server-Side Tracking, WordPress & Ads",
-                    "description": "Sechsmonatiges Pflichtpraktikum (ab 09/2026) im E-Commerce-Studium bei der Agentur Main Erfolg in Würzburg: komplettes Tracking für mehrere große Kunden mit Google Tag Manager, Stape und Server-Container für WordPress und Shopify, Erstellung von WordPress-Websites, Konzeption und Entwicklung eigener WordPress-Plugins, GEO mit strukturierten Daten (Schema.org), Google-Ads-Kampagnen sowie Einrichtung von OpenAI Ads inklusive Kampagnen.",
+                    "description": "Sechsmonatiges Pflichtpraktikum (09/2026 - 02/2027) im E-Commerce-Studium bei der Agentur Main Erfolg in Würzburg: komplettes Tracking für mehrere große Kunden (darunter große Möbelhäuser und ein großer Automobilhersteller) mit Google Tag Manager, Stape und Server-Container für WordPress und Shopify, Erstellung von WordPress-Websites, Konzeption und Entwicklung eigener WordPress-Plugins, GEO mit strukturierten Daten (Schema.org), Google-Ads-Kampagnen sowie Einrichtung von OpenAI Ads inklusive Kampagnen.",
                     "url": "https://main-erfolg.de/",
                     "author": {
                       "@id": "https://meixner-tobias.com/#person"
@@ -16667,7 +16675,7 @@
       ],
       "images": [
         {
-          "src": "/assets/bikecare/logo-light.png",
+          "src": "/assets/bikecare/logo-dark.png",
           "alt": "BikeCare - Fahrrad Wartung",
           "class": "own-product-logo",
           "width": "180",
@@ -16779,7 +16787,7 @@
       "sources": [
         {
           "type": "image/webp",
-          "srcset": "/assets/bikecare/logo-light.webp"
+          "srcset": "/assets/bikecare/logo-dark.webp"
         },
         {
           "type": "image/webp",
@@ -16819,8 +16827,8 @@
       ],
       "language": "de",
       "title": "Projekte - GTM, GA4 & Website Praxiserfahrung | Tobias Meixner",
-      "main_text_sha256": "ded11ea5aab21adf8e302ab486c3bf95a121f049f1a764f791902dfe90178c67",
-      "main_text_characters": 12446,
+      "main_text_sha256": "82887ee6c66d0384fbcd4a869b8be4db05b056fa447f17305d95f70e8bdbed5b",
+      "main_text_characters": 12607,
       "ids": [
         "burger",
         "cases-heading",
@@ -17743,6 +17751,22 @@
         "Ueber mich / Leistungen: je ein Satz zum Praktikum, knowsAbout ergaenzt"
       ],
       "unveraendert": "Alle bisherigen ids und classes bleiben vorhanden; neue Klassen brand-*, badge-intern sowie id main-erfolg kommen hinzu."
+    },
+    {
+      "date": "2026-10-19",
+      "reason": "Vom Auftraggeber beauftragte Nachbesserung zum Praktikum bei Main Erfolg",
+      "pages": [
+        "index.html",
+        "en/index.html",
+        "projekte/index.html",
+        "en/projects/index.html"
+      ],
+      "changes": [
+        "Praktikumszeitraum 09/2026 - 02/2027 statt 'heute'",
+        "Kunden des Praktikums anonym angeteasert: grosse Moebelhaeuser und ein grosser Automobilhersteller",
+        "BikeCare-Logo: Startseite (Ink) nutzt logo-light mit weissem 'Bike' in einem <picture> mit WebP, Projektseite (Papier) logo-dark mit dunklem 'Bike' (neue Datei logo-dark.webp)"
+      ],
+      "unveraendert": "Alle bisherigen ids und classes bleiben vorhanden."
     }
   ]
 }
